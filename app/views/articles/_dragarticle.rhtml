@@ -1,0 +1,45 @@
+<div class="searchblock">
+  <input type="text" id="searcharticles" name="searcharticles" size="25" />&nbsp;<img id="busyarticlesearch" src="/images/searching.gif" style="display:none" /> 
+</div>
+<div id="searchResultsArticles" style="overflow:visible">
+</div>
+
+<div id="searchResultsGalleries" style="overflow:visible">
+</div>
+
+<div id="searchResultsMedia"  style="overflow:visible">
+</div>
+
+<%= observe_field 'searcharticles', 
+    :frequency => 0.5, 
+    :update => 'searchResultsMedia', 
+    :url => { :controller => 'mediablocks', :action=> 'search' }, 
+    :with => "'criteria=' + escape(value)", 
+    :loading => "document.getElementById('busyarticlesearch').
+      style.display='inline'", 
+    :loaded => "document.getElementById('busyarticlesearch').
+      style.display='none'" %> 
+
+
+<%= observe_field 'searcharticles', 
+    :frequency => 0.5, 
+    :update => 'searchResultsArticles', 
+    :url => { :controller => 'articles', :action=> 'search' }, 
+    :with => "'criteria=' + escape(value)", 
+    :loading => "document.getElementById('busyarticlesearch').
+      style.display='inline'", 
+    :loaded => "document.getElementById('busyarticlesearch').
+      style.display='none'" %> 
+
+<%= observe_field 'searcharticles', 
+    :frequency => 0.5, 
+    :update => 'searchResultsGalleries', 
+    :url => { :controller => 'galleries', :action=> 'search' }, 
+    :with => "'criteria=' + escape(value)", 
+    :loading => "document.getElementById('busyarticlesearch').
+      style.display='inline'", 
+    :loaded => "document.getElementById('busyarticlesearch').
+      style.display='none'" %> 
+      
+<img src="/images/search-close.png" />
+      

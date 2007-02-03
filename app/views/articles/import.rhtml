@@ -1,0 +1,87 @@
+<div id="fdboptions">
+  <h1>Artikel importieren</h1> 
+  
+<!--  <div class="progress-container">          
+      <div style="width: 75%"></div>
+  </div>
+-->
+
+<% if !params[:importdir] %> 
+
+<table width="700px">
+  <tr>
+    <th class="even">Name:</th>
+    <th class="odd">Aktion:</th>
+  </tr>
+  
+  <%  importdir = Dir.new("#{RAILS_ROOT}/public/data/import/") 
+      importdir.each  do |directory| %>
+
+      <% if directory[0,1] != "." %>  
+
+      <tr class="<%= cycle("even", "odd") %>">
+        <td width="500px"><%=h directory %></td>
+        <td width="50px"><%= link_to 'importieren', :action => 'import', :importdir => directory %></td>
+      </tr>
+
+    <% end %>
+  <% end %>
+</table>
+
+<% else %>
+
+<table width="700px">
+  <tr>
+    <th>Datei:</th>
+    <th>Aktion:</th>
+  </tr>
+  
+  <%  importdir = Dir.new("#{RAILS_ROOT}/public/data/import/#{params[:importdir]}") 
+      importdir.each do |file| %>
+
+      <tr class="<%= cycle("even", "odd") %>">
+        
+      <% if file[0,1] != "." %>  
+        <td width="400px"><%=h file %></td>
+        
+        <% if file[-4..-1] == ".jpg" || file[-5..-1] == ".jpeg" %>
+        
+        <%  
+        
+        @importmediablock = Mediablock.new
+        @importmediablock.original_name = "#{@article.reference} - #{file}"
+        @importmediablock.importfile = "#{RAILS_ROOT}/public/data/import/#{params[:importdir]}/#{file}"
+		    @importmediablock.description = @article.title
+
+        @importmediablock.save!
+
+        @importmediablock.update
+
+        addLink = BlockLink.new
+        addLink.mediablock_id = @importmediablock.id
+
+	      @fragment = Fragment.find_by_article_id_and_position(@article.id, 1)
+
+        addLink.fragment_id = @fragment.id
+        addLink.save
+
+        %>
+        
+          <td width="150px">Bild importiert</td>
+        <% else %>
+          <td width="150px"><strong>Kein Bildformat</strong></td>
+        <% end %>
+          
+      <% end %>
+      </tr>
+
+  <% end %>
+</table>
+
+<% end %>
+  
+  <br />
+  <br />
+</div> 
+<div id="fdbheader">
+</div> 

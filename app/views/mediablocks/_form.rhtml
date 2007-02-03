@@ -1,0 +1,17 @@
+<%= error_messages_for 'mediablock' %>
+
+<!--[form:mediablock]-->
+
+<%  session[:current_gallery] = params[:gallery_id] %>  
+<%  session[:current_fragment] = params[:fragment_id] %>  
+<%  session[:current_article] = params[:article_id] %>  
+
+
+<p>Datei:<br/>
+<%= file_field 'mediablock', 'file'  %></p>
+
+<p>Beschreibung:<br/>
+<%= text_area 'mediablock', 'description', "cols" => 50, "rows" => 3  %>
+
+<!--[eoform:mediablock]-->
+

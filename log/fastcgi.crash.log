@@ -1,0 +1,97 @@
+# Logfile created on Mon Jul 31 06:01:03 CEST 2006 by logger.rb/1.5.2.7
+[31/Jul/2006:06:01:03 :: 2053] starting
+[31/Jul/2006:10:16:48 :: 390] starting
+[31/Jul/2006:10:16:48 :: 394] starting
+[31/Jul/2006:12:47:08 :: 394] asked to terminate immediately
+[31/Jul/2006:12:47:08 :: 394] frao handler working its magic!
+[31/Jul/2006:12:47:08 :: 394] asked to restart ASAP
+[31/Jul/2006:12:47:08 :: 390] asked to terminate immediately
+[31/Jul/2006:12:47:08 :: 390] frao handler working its magic!
+[31/Jul/2006:12:47:08 :: 390] asked to restart ASAP
+[31/Jul/2006:12:47:12 :: 500] starting
+[31/Jul/2006:12:47:12 :: 501] starting
+[02/Aug/2006:10:30:21 :: 2324] starting
+[02/Aug/2006:10:30:21 :: 2320] starting
+[02/Aug/2006:11:28:28 :: 2324] asked to terminate immediately
+[02/Aug/2006:11:28:28 :: 2324] frao handler working its magic!
+[02/Aug/2006:11:28:28 :: 2324] asked to restart ASAP
+[02/Aug/2006:11:28:29 :: 2320] asked to terminate immediately
+[02/Aug/2006:11:28:29 :: 2320] frao handler working its magic!
+[02/Aug/2006:11:28:29 :: 2320] asked to restart ASAP
+[02/Aug/2006:18:28:52 :: 494] starting
+[02/Aug/2006:18:28:53 :: 497] starting
+[04/Aug/2006:12:16:08 :: 1450] starting
+[04/Aug/2006:12:16:08 :: 1451] starting
+[05/Aug/2006:18:22:34 :: 448] starting
+[05/Aug/2006:18:22:34 :: 444] starting
+[11/Aug/2006:08:28:37 :: 402] starting
+[11/Aug/2006:08:28:37 :: 404] starting
+[13/Aug/2006:09:04:28 :: 1494] starting
+[13/Aug/2006:09:04:28 :: 1493] starting
+[17/Aug/2006:06:35:58 :: 2390] starting
+[17/Aug/2006:06:35:58 :: 2392] starting
+[17/Aug/2006:11:27:19 :: 2508] starting
+[17/Aug/2006:11:27:19 :: 2509] starting
+[17/Aug/2006:11:55:26 :: 2509] asked to terminate immediately
+[17/Aug/2006:11:55:26 :: 2508] asked to terminate immediately
+[17/Aug/2006:11:55:26 :: 2508] frao handler working its magic!
+[17/Aug/2006:11:55:26 :: 2509] frao handler working its magic!
+[17/Aug/2006:11:55:26 :: 2509] asked to restart ASAP
+[17/Aug/2006:11:55:26 :: 2508] asked to restart ASAP
+[17/Aug/2006:11:55:37 :: 2536] starting
+[17/Aug/2006:11:55:37 :: 2537] starting
+[17/Aug/2006:12:44:36 :: 2536] asked to terminate immediately
+[17/Aug/2006:12:44:36 :: 2536] frao handler working its magic!
+[17/Aug/2006:12:44:36 :: 2536] asked to restart ASAP
+[17/Aug/2006:12:44:36 :: 2537] asked to terminate immediately
+[17/Aug/2006:12:44:36 :: 2537] frao handler working its magic!
+[17/Aug/2006:12:44:36 :: 2537] asked to restart ASAP
+[18/Aug/2006:06:19:49 :: 511] starting
+[18/Aug/2006:06:19:49 :: 512] starting
+[19/Aug/2006:18:37:43 :: 416] starting
+[19/Aug/2006:18:37:43 :: 419] starting
+[19/Aug/2006:19:56:15 :: 419] asked to terminate immediately
+[19/Aug/2006:19:56:15 :: 416] asked to terminate immediately
+[19/Aug/2006:19:56:15 :: 419] frao handler working its magic!
+[19/Aug/2006:19:56:15 :: 416] frao handler working its magic!
+[19/Aug/2006:19:56:15 :: 419] asked to restart ASAP
+[19/Aug/2006:19:56:15 :: 416] asked to restart ASAP
+[20/Aug/2006:05:41:09 :: 349] starting
+[20/Aug/2006:05:41:09 :: 347] starting
+[22/Aug/2006:16:35:35 :: 665] starting
+[22/Aug/2006:16:35:35 :: 662] starting
+[23/Aug/2006:06:49:57 :: 354] starting
+[23/Aug/2006:06:49:57 :: 356] starting
+[24/Aug/2006:20:25:00 :: 465] starting
+[24/Aug/2006:20:25:00 :: 467] starting
+[29/Aug/2006:11:28:59 :: 1098] starting
+[29/Aug/2006:11:28:59 :: 1096] starting
+[10/Sep/2006:21:07:01 :: 870] starting
+[10/Sep/2006:21:07:01 :: 868] starting
+[10/Sep/2006:21:31:44 :: 870] asked to terminate immediately
+[10/Sep/2006:21:34:19 :: 984] starting
+[10/Sep/2006:21:34:19 :: 983] starting
+[10/Sep/2006:22:05:44 :: 984] asked to terminate immediately
+[10/Sep/2006:22:05:44 :: 983] asked to terminate immediately
+[10/Sep/2006:22:05:44 :: 984] frao handler working its magic!
+[10/Sep/2006:22:05:44 :: 983] frao handler working its magic!
+[10/Sep/2006:22:05:44 :: 984] asked to restart ASAP
+[10/Sep/2006:22:05:44 :: 983] asked to restart ASAP
+[18/Sep/2006:03:50:15 :: 412] starting
+[18/Sep/2006:03:50:16 :: 411] starting
+[18/Sep/2006:05:38:44 :: 571] starting
+[18/Sep/2006:05:38:44 :: 570] starting
+[18/Sep/2006:07:28:55 :: 571] asked to terminate immediately
+[18/Sep/2006:07:28:55 :: 571] frao handler working its magic!
+[18/Sep/2006:07:28:55 :: 571] asked to restart ASAP
+[18/Sep/2006:07:28:55 :: 570] asked to terminate immediately
+[18/Sep/2006:07:28:55 :: 570] frao handler working its magic!
+[18/Sep/2006:07:28:55 :: 570] asked to restart ASAP
+[05/Oct/2006:01:28:03 :: 501] starting
+[05/Oct/2006:01:28:03 :: 502] starting
+[05/Oct/2006:02:15:19 :: 502] asked to terminate immediately
+[05/Oct/2006:02:15:19 :: 502] frao handler working its magic!
+[05/Oct/2006:02:15:19 :: 502] asked to restart ASAP
+[05/Oct/2006:02:15:19 :: 501] asked to terminate immediately
+[05/Oct/2006:02:15:19 :: 501] frao handler working its magic!
+[05/Oct/2006:02:15:19 :: 501] asked to restart ASAP

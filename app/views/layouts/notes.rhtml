@@ -1,0 +1,71 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <title>Notes: <%= controller.action_name %></title>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag "prototype" %> 
+  <%= javascript_include_tag "lightbox" %> 
+  <%= stylesheet_link_tag 'lepilo' %>
+  <%= stylesheet_link_tag 'lightbox' %>
+</head>
+<body>
+    <!--<div id="fdbnotice" style="position:relative; margin-right:auto; margin-left:auto; top: 100px; z-index:2500; text-align:center">
+    <img src="/images/450noticebackg.png" />
+    </div>-->  
+  <div id="fdbcontent">
+  <div id="fdbcontainer">
+  <%= flash[:notice] %><br/>
+  <%= @content_for_layout %><br/><br/>
+  </div>
+  </div>
+
+  <div id="fdbfooter">
+    <h5>LEPILO Statistik</h5>
+      <h5 class="green">
+      <%
+        media_counter = 0
+        text_counter = 0
+        article_counter = 0
+        mediablocks = BlockLink.find_all() 
+        articles = Article.find_all() 
+
+        for block in mediablocks
+          if block.mediablock_id
+            media_counter = media_counter + 1
+          end
+
+          if block.textblock_id
+            text_counter = text_counter + 1
+          end
+        end    
+
+        for page in articles
+          article_counter = article_counter + 1
+        end    
+
+      %>  
+      <%= image_tag "/images/16article.png",
+          :alt => "anzahl der seiten", 
+          :title => "anzahl der seiten", 
+          :class => "icon16"  %>
+      <%= article_counter %>
+  	  <%= image_tag "/images/16image.png",
+          :alt => "anzahl der medienblocks", 
+          :title => "anzahl der medienblocks", 
+          :class => "icon16"  %>
+      <%= media_counter %>
+      <%= image_tag "/images/16text.png",
+          :alt => "anzahl der textblocks", 
+          :title => "anzahl der textblocks", 
+          :class => "icon16"  %>
+      <%= text_counter %>
+        </h5>
+        <% if @session['user'] %>
+        <h5>Angemeldet als</h5>
+        <h5 class="green"><%= @session['user'].login %></h5>
+        <% end %>
+    
+  </div>
+
+</body>
+</html>

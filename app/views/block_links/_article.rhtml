@@ -1,0 +1,25 @@
+
+  <div id="block-list"> 
+<% for link in @blocks %>
+  <%  if link.textblock_id != nil %>
+  <div id="item_<%= link.id %>" class="sortableblock"> 
+    <%= render_component(:controller => "textblocks", :action => "short", :params => {:block_id => link.textblock_id }) %>  
+  </div> 
+  <% end %>
+
+  <%  if link.mediablock_id != nil %>
+  <div id="item_<%= link.id %>" class="sortableblock"> 
+    <%= render_partial 'mediablocks/short', nil, 'mediablock_id' => link.mediablock_id, 'link_id' => link.id %>
+  </div> 
+  <% end %>
+
+  <%  if link.article_id != nil %>
+  <div id="item_<%= link.id %>" class="sortableblock"> 
+    <%= render_partial 'articles/short', nil, 'article_id' => link.article_id, 'link_id' => link.id %>
+  </div> 
+  <% end %>
+  
+<% end %>
+  </div> 
+  &nbsp;
+  

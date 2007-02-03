@@ -1,0 +1,22 @@
+<h1>Editing block_link</h1>
+
+<%
+  if params[:linktype] == "media" 
+    render_component(:controller => "mediablocks", :action => "selectmedia")  
+  end  
+  
+  if params[:linktype] == "text" 
+    render_component(:controller => "textblocks", :action => "selecttext")  
+  end
+
+  render_component(:controller => "textblocks", :action => "selecttext")  
+
+%>
+
+<%= start_form_tag :action => 'update', :id => @block_link %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Speichern' %>
+<%= end_form_tag %>
+
+<%= link_to 'Anzeigen', :action => 'show', :id => @block_link %> |
+<%= link_to 'Zur&uuml;ck', :action => 'list' %>

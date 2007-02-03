@@ -1,0 +1,8 @@
+<% # block.textblock_id %>
+<% textblock = Textblock.find_by_id (block_id) %>
+
+<div class="dhnblock">
+  <div class="dhn450"><%= textblock.title %></div>
+  <div class="block450"><%= textblock.content %></div>
+  <br/><br/>
+</div>

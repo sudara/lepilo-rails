@@ -1,0 +1,36 @@
+<div id="fdboptions">
+  <h1>Mediablockliste</h1> | <%= link_to 'Neuer mediablock', :action => 'new' %> | 
+  <%= link_to 'Vorherige Seite', { :page => @mediablock_pages.current.previous } if @mediablock_pages.current.previous %> |
+  Seite: <%= pagination_links(@mediablock_pages) %> |
+  <%= link_to 'N&auml;chste Seite', { :page => @mediablock_pages.current.next } if @mediablock_pages.current.next %> 
+  <br />
+  <br />
+</div> 
+<div id="fdbheader">
+</div> 
+
+<div id="fdbcontainer">
+
+  <% for mediablock in @mediablocks %>
+  <%
+    #Time.now.strftime('%d-%m-%y -%R') 
+  %>
+  <div class="block128x128">
+
+    <div class="previewblock">
+    	<div class="iconplastic"><div class="icontainer">
+      <%= link_to image_tag("/images/b24look.png", :alt => mediablock.filename),"/data/images/#{mediablock.filename}", {:rel => "lightbox", :title => mediablock.title, :class => "icon24" } %>
+      <%= link_to_image '/images/b24edit.png', { :action => 'edit', :id => mediablock, :page => params[:page] },  html_options = { :class => "icon24", :title => "bearbeiten",} %>
+      <%= link_to_image '/images/b24delete.png', { :action => 'destroy', :id => mediablock },  html_options = { :class => "icon24", :title => "löschen", :confirm => 'Artikel »' + mediablock.title + '« löschen — sind Sie sicher?'} %>
+      </div>
+      </div>
+      <img src="/data/thumbnails/<%= mediablock.filename %>" class="imagepreviewmini">
+      <div class="ipmtitle"><%= mediablock.title %></div>
+    </div>
+  </div>
+
+  <% end %>
+
+  <br style="clear:both" />
+
+</div>

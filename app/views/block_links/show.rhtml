@@ -1,0 +1,8 @@
+<% for column in BlockLink.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @block_link.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Bearbeiten', :action => 'edit', :id => @block_link %> |
+<%= link_to 'Zur&uuml;ck', :action => 'list' %>

@@ -1,0 +1,19 @@
+<h1>Neuer Artikel</h1>
+
+<div id="fdboptions">
+  <div id="entrySettings" >
+    <%= start_form_tag :action => 'create' %>
+      <%= render :partial => 'form' %>
+      <br style="clear:both;"/>
+      <%= submit_tag "Anlegen" %>
+    <%= end_form_tag %>
+  </div>
+</div>
+<div id="fdbheader">
+</div>
+
+
+<div id="fdbcontainer">
+
+<%= link_to 'Zur&uuml;ck', :action => 'list' %>
+</div>

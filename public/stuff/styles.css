@@ -1,0 +1,36 @@
+/* CSS Document */
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	color: #999999;
+	background-color: #F1F1F1;
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-left: 0;
+	margin-right: 0;
+}
+.detect {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+.head {
+	font-size: small;
+	font-weight: bold;
+	color: #FF9900;
+}
+.hier {
+	font-weight: bold;
+	color: #FF9900;
+}
+a {
+	text-decoration: none;
+	color: #999999;
+}
+table {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	color: #999999;
+	background-color: #F1F1F1;
+}

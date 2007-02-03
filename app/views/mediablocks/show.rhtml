@@ -1,0 +1,7 @@
+<%= @mediablock.filename %><br/>
+<%= @mediablock.title %><br/>
+<%= @mediablock.description %><br/>
+<%= render :partial => "view", :object => @mediablock %>
+
+<%= link_to 'Bearbeiten', :action => 'edit', :id => @mediablock %> |
+<%= link_to 'Zur&uuml;ck', :action => 'list' %>

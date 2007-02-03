@@ -1,0 +1,59 @@
+<h1>Artikel bearbeiten: <%= @article.title %></h1>
+
+<div id="fdboptions" style="display:none">
+  <div id="entrySettings" >
+      <%= start_form_tag :action => 'update', :id => @article %>
+        <%= render :partial => 'form' %>
+        <br style="clear:both;"/>
+        <%= submit_tag 'Speichern' %>
+      <%= end_form_tag %>
+  </div>
+</div>
+<div id="fdbheader">
+<%= content_tag 'DIV', '<img src="/images/closetray.png">', :style => 'width:80px;float:right',
+  :onclick => visual_effect(:slideUp, 'fdboptions') %>
+<%= content_tag 'DIV', '<img src="/images/opentray.png">', :style => 'width:63px;float:right',
+  :onclick => visual_effect(:slideDown, 'fdboptions')  %>
+</div>
+
+<div id="fdbcontainer">
+  <div class="editdata">
+
+  <%= link_to "Neuer Textblock", {  :controller => "textblocks",
+                                    :action => "new",
+                                    :article_id => @article.id, 
+                                    :fragment_id => @article.fragments.last.id }, 
+                                    :popup => ['new_window', 'height=600,width=600,scrollbars=1'] %> |
+
+  <%= link_to "Neuer Mediablock", { :controller => "mediablocks",
+                                    :action => "new", 
+                                    :article_id => @article.id, 
+                                    :fragment_id => @article.fragments.last.id }, 
+                                    :popup => ['new_window', 'height=600,width=600,scrollbars=1'] %> |
+
+  <% #link_to "Flash Vorschau", { :controller => "articles",
+    #                                :action => "showswf", 
+     #                               :id => @article.id }, 
+      #                              :popup => ['swf_preview', 'height=700,width=980,scrollbars=0'] 
+      %>
+  <%= link_to 'Zur&uuml;ck', :action => 'list', :page => params[:page] %>
+       
+  </div>
+  
+<%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.last.id }) -%>  
+
+<%= sortable_element 'block-list' ,
+  :tag => "div",
+  :constraint => false,
+  :url => { :action => "sort", :id => @article }, 
+  :complete => visual_effect(:highlight, 'block-list' ) 
+%> 
+
+<br style="clear:both"/>
+
+</div>
+
+<%= drop_receiving_element "fdbcontainer", 
+      :update => "fdbcontent", :url => { :action => "addblock" },
+      :accept => "dragblock", :hoverclass => "dropzone-active" %>
+

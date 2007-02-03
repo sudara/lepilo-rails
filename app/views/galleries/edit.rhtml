@@ -1,0 +1,51 @@
+<h1>Gallerie bearbeiten: <%= @gallery.title %></h1>
+
+<div id="fdboptions" style="display:none">
+  <div id="entrySettings" >
+    <%= start_form_tag :action => 'update', :id => @gallery %>
+      <%= render :partial => 'form' %>
+      <br style="clear:both;"/>
+      <%= submit_tag 'Speichern' %>
+    <%= end_form_tag %>
+  </div>
+</div>
+<div id="fdbheader">
+<%= content_tag 'DIV', '<img src="/images/closetray.png">', :style => 'width:80px;float:right',
+  :onclick => visual_effect(:slideUp, 'fdboptions') %>
+<%= content_tag 'DIV', '<img src="/images/opentray.png">', :style => 'width:63px;float:right',
+  :onclick => visual_effect(:slideDown, 'fdboptions')  %>
+</div>
+
+<div id="fdbcontainer">
+
+<div class="editdata">
+
+  <%= link_to "Neues Bild", { :controller => "mediablocks",
+                            :action => "new", 
+                            :rendersimple => "true",
+                            :gallery_id => @gallery.id }, 
+                            :popup => ['new_window', 'height=600,width=600,scrollbars=1'] %> |
+  <%= link_to 'Anzeigen', :action => 'show', :id => @gallery %> |
+  <%= link_to 'Zur&uuml;ck', :action => 'list' %>
+</div>
+
+<%= render_partial 'block_links/gallery', nil, 'gallery_id' => @gallery.id %>
+
+<%= sortable_element 'block-list' , 
+  :tag => "div",
+  :constraint => false,
+  :url => { :action => "sort", :id => @gallery }, 
+  :complete => visual_effect(:highlight, 'block-list' ) 
+%> 
+
+<br style="clear:both"/>
+
+</div>
+
+<%= drop_receiving_element "fdbcontainer", 
+      :update => "fdbcontent", :url => { :action => "addblock" },
+      :accept => "dragblock", :hoverclass => "dropzone-active" %>
+
+<%= drop_receiving_element "fdbcontainer", 
+      :update => "fdbcontent", :url => { :action => "addblock" },
+      :accept => "dragline", :hoverclass => "dropzone-active" %>

@@ -1,0 +1,19 @@
+<%= error_messages_for 'topic' %>
+
+<!--[form:topic]-->
+<p>Geh&ouml;rt zu<br/>
+<select id="topic_topic_id" name="topic[topic_id]">
+  <%= options_from_collection_for_select(
+   Topic.find(:all, :conditions => "id != #{@topic.id}", :order => "id"), "id", "title") 
+   %>
+</select>
+
+
+<p>Titel<br/>
+<%= text_field 'topic', 'title'  %></p>
+
+<p>Beschreibung<br/>
+<%= text_area 'topic', 'description', "cols" => 80, "rows" => 3  %><br/>
+
+<!--[eoform:topic]-->
+

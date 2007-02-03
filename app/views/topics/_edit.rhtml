@@ -1,0 +1,37 @@
+<h1>Navigationspunkt &raquo; <span class="gray"><%= @topic.title %></span> &laquo; bearbeiten</h1><br/>
+<%= error_messages_for 'topic' %>
+
+<!--[form:topic]-->
+
+<div class="fdbblock">
+  <div id="fdbtopic-list-top"><%= @topic.title %></div>
+    <ul id="fdbtopic-list"> 
+    <% @topic.topics.each do |subtopic| %> 
+    <li id="item_<%= subtopic.id %>"> 
+      <%= link_to subtopic.title, :action => 'edit', :id => subtopic.id %> 
+    </li> 
+    <% end %> 
+    </ul> 
+  <div id="fdbtopic-list-bottom"></div>
+
+</div>
+
+<div class="fdbblock">
+
+  Geh&ouml;rt zu<br/>
+  <select id="topic_topic_id" name="topic[topic_id]">
+    <%= options_from_collection_for_select(
+     Topic.find(:all, :conditions => "id != #{@topic.id}"), "id", "title", "topic_id") 
+     %>
+  </select>
+
+  <br/>Titel<br/>
+  <%= text_field 'topic', 'title'  %><br/>
+
+  <br/>Beschreibung<br/>
+  <%= text_area 'topic', 'description', "cols" => 60, "rows" => 5  %><br/>
+
+</div>
+
+<!--[eoform:topic]-->
+

@@ -1,0 +1,12 @@
+<div class="block">
+  <img src="/data/images/<%= @mediablock.filename %>" class="imagepreview"><br/>
+  <%= link_to 'Bearbeiten', {   :controller => "mediablocks",
+                                :action => "edit",
+                                :rendersimple => "true",
+                                :id => @mediablock.id }, 
+                                :popup => ['new_window', 'height=600,width=600'] %> |
+  <%= link_to 'L&ouml;schen', { :controller => "mediablocks",
+                                :action => "destroy", 
+                                :id => @mediablock.id }, 
+                                :confirm => 'Sind Sie sicher?' %>
+</div>

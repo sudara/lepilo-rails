@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dina4top10projekte><% 
+  @articleblocks = BlockLink.find_all_by_gallery_id(@gallery.id, :order => "position ASC")
+    
+    
+    for articlelink in @articleblocks
+      if articlelink.article_id != nil
+        @showarticle = Article.find(articlelink.article_id)
+    
+        @blocks = BlockLink.find_all_by_fragment_id(@showarticle.fragments.first.id, :order => "position ASC")
+        @images = Array.new
+        @text = Textblock.new
+
+        for link in @blocks
+          if link.textblock_id != nil
+            @text = Textblock.find_by_id(link.textblock_id) 
+          end
+    
+          if link.mediablock_id != nil
+            image = Mediablock.find_by_id(link.mediablock_id)
+            @images.push("./data/images/#{image.filename}")
+          end
+        end 
+  
+  thumbnail = Mediablock.find_by_id(@showarticle.thumbnail_id) 
+  if thumbnail 
+    @thumbfile = "./data/thumbnails/#{thumbnail.filename}"
+  else
+    @thumbfile = @images.first
+  end %><dina4projekt>
+		<id><%= @showarticle.id %></id>
+		<datum>2005-09-26 08:24:23</datum>
+		<freigabe>1</freigabe>
+		<farbe>#ff9900</farbe>
+		<typ>projekt</typ>
+		<fertigstellung><%= @showarticle.release_date %></fertigstellung>
+		<name><![CDATA[<b><%= @showarticle.title %></b>]]></name>
+		<auszeichnungen></auszeichnungen>
+		<bilder><% @images.each do |imagelink| %><%= imagelink %>|||<% end %></bilder>
+		<titel><%= @showarticle.title %></titel>
+		<info><%if @text.content %>
+		  <![CDATA[<%= textilize(@text.content) %>
+		  ]]> 
+		  <% end %></info>
+		<thumbnail><%= @thumbfile %></thumbnail>
+	</dina4projekt><% 
+  end
+end	 %>
+</dina4top10projekte>

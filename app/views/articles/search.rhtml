@@ -1,0 +1,24 @@
+<% if @items && @items.length > 0 %>
+
+  <img src="/images/search-articles.png" >
+
+  <% for dragarticle in @items %>
+  <div class="dragline" id="dragarticle_<%= dragarticle.id %>">
+    <%
+      current = Topic.find_by_id (dragarticle.topic_id)
+      parent = Topic.find_by_id (current.topic_id)
+    %>
+    <%= draggable_element "dragarticle_#{dragarticle.id}", :revert => true %>
+    <%= image_tag "/images/16article.png",
+        :title => "artikel", 
+        :class => "iconlist"  %>    
+    <strong><%= link_to dragarticle.title, :controller => 'articles',:action => 'edit', :id => dragarticle.id %></strong><br/>
+    <% if parent %>
+      <span style="font-size:10px"><%= dragarticle.reference %><span class="green">&nbsp;&nbsp;&raquo; <%= parent.title %></span></span>
+    <% end %>
+  </div>
+  <% end %>
+
+
+<% else %>
+<% end %>

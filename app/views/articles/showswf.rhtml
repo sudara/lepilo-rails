@@ -1,0 +1,8 @@
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="940" height="620" title="hoeretzeder grafische gestaltung">
+  <param name="movie" value='/hgg.swf?gettitle=<%= @article.title %>&loadtextblock=<%= render :partial => "block_links/show_article_swf", :object => "article" -%>
+  &loadgallery=BBB&loadimage=CCC&loadtype=DDD' />
+  <param name="quality" value="high" />
+  <embed src='/hgg.swf?gettitle=<%= @article.title %>&loadtextblock=<%= render :partial => "block_links/show_article_swf", :object => "article" -%>&loadgallery=BBB&loadimage=CCC&loadtype=DDD' width="940" height="620" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="4" textblock="1" gallery="2" image="3"></embed>
+</object>
+
+<% # &amp; %>

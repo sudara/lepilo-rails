@@ -1,0 +1,104 @@
+<%= error_messages_for 'article' %>
+
+<%  session[:current_article] = params[:id] %>  
+<%  
+  if params[:page]
+    session[:current_page] = params[:page] 
+  else
+    session[:current_page] = 1
+  end 
+%>
+
+<!--[form:article]-->
+<div style="float:left">
+
+  <div class="fdbblock" style="width:500px">
+    Derzeit unter:<br/> 
+    <h4>
+    <%= hidden_field 'article', 'topic_id', 'value'=>@article.topic_id %>
+
+    <% 
+      if metatopic = Topic.find_by_id (@article.topic_id) 
+    %>
+
+      <% if parent = Topic.find_by_id (metatopic.topic_id) %>
+        <% if parent_parent = Topic.find_by_id (parent.topic_id) %>
+          <% if parent_parent_parent = Topic.find_by_id (parent_parent.topic_id) %>
+              <% #parent_parent_parent.title %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% if parent_parent_parent %>
+        » <%= parent_parent_parent.title %> 
+      <% end %>
+
+      <% if parent_parent %>
+        » <%= parent_parent.title %> 
+      <% end %>
+
+      <% if parent %>
+        » <%= parent.title %> 
+      <% end %>
+
+      » <%= metatopic.title %> 
+
+    <% end %>
+    </h4><br/>
+
+    <div id="fdbtopic-selector">
+    Seite zuordnen unter:<br/>
+    <%= render_partial 'topics/selector' %>
+    </div><br/>
+    
+    <div style="width:100px;float:left">
+    Freigegeben?<br/>
+    <select id="article_released" name="article[released]">
+      <option value="false" <% if @article.released != true %> selected="selected" <% end %> >Nein</option>
+      <option value="true" <% if @article.released == true %> selected="selected" <% end %> >Ja</option>
+    </select><br/>
+    </div>
+    Interne Referenz<br/>
+    <%= text_field 'article', 'reference', "size" => 25  %><br/>
+  </div>
+    
+  <div class="fdbblock">
+  Titel<br/>
+  <%= text_field 'article', 'title', "size" => 45  %><br/>
+
+  Artikeltyp<br/>
+  <select id="article_type" name="article[type]"><option value="projekt">Projekt</option><option value="news">News</option></select><br/>
+
+  Beschreibung<br/>
+  <%= text_area 'article', 'description', "cols" => 45, "rows" => 4  %><br/>
+  </div>
+
+  <!--[eoform:article]-->
+
+</div>      
+
+<div id="dropzone">
+  Vorschaubild:<br/>
+  <%  thumbnail = Mediablock.find_by_id(@article.thumbnail_id) %>
+  <div id="thumbnaildrop" style="background-image:url(/images/gradientb.png)">
+  <% if thumbnail %>
+    <%= image_tag "/data/thumbnails/#{thumbnail.filename}",
+        :alt => thumbnail.title, 
+        :title => thumbnail.title, 
+        :class => "articlethumbnail"  %>
+  <% else %>
+    <%= image_tag "/images/rails.png",
+        :class => "articlethumbnail" %>
+  <% end %>
+  </div>
+
+<%#  <div class="articledescription" id="beschreibung" ><%=h @article.description % ></div> %>
+</div>
+
+<%= drop_receiving_element "dropzone", 
+      :update => "thumbnaildrop", :url => { :action => "thumbnail" },
+      :accept => "dragblock", :hoverclass => "dropzone-active" %>
+
+<%= drop_receiving_element "dropzone", 
+      :update => "thumbnaildrop", :url => { :action => "thumbnail" },
+      :accept => "sortableblock", :hoverclass => "dropzone-active" %>      

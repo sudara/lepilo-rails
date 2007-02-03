@@ -1,0 +1,16 @@
+<%=
+@subtopics = Topic.find_by_topic_id(topic_id)
+collection_select(:topic, :topic_id, @subtopics, :id, :title,
+    options = {:prompt => "- Unterpunkt -"},
+    html_options = 
+    {
+        :onChange => "new Ajax.Updater('lepilo_subsubtopics',
+        '/topics/subtopic_changed/' + this[this.selectedIndex].value,
+        {asynchronous:true, evalScripts:true}); $(article_topic_id).value = this[this.selectedIndex].value"
+    }
+    )
+%>
+<span id="lepilo_subsubtopics">
+<% #render :partial => "subsubtopics", :locals => { :topic_id => @subtopics[0].id} %>
+</span>
+

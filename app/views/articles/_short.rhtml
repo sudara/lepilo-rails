@@ -1,0 +1,48 @@
+<%  article = Article.find(article_id) %>
+<% # && @session['user'].role == "admin" 
+  if @session['user'] %>
+  <span class="smalltext">
+  <%= link_to 'Bearbeiten', {   :controller => "articles",
+                                :action => "edit",
+                                :rendersimple => "true",
+                                :id => article.id } %> |
+  <%= link_to 'L&ouml;schen', { :controller => "articles",
+                                :action => "destroy", 
+                                :id => article.id }, 
+                                :confirm => 'Sind Sie sicher?' %>
+  </span>
+<% end %><br/>
+
+<div class="listblock" id="<%= article.id %>">
+	<div class="iconplastic" id="plastic_<%= article.id %>">
+    <div class="icontainer">
+    <%= link_to_image '/images/b24edit.png', { :action => 'edit', :id => article },  html_options = { :class => "icon24", :title => "bearbeiten",} %>
+    <%= link_to_image '/images/b24delete.png', { :action => 'destroy', :id => article },  html_options = { :class => "icon24", :title => "löschen", :confirm => 'Artikel »' + article.title + '« löschen — sind Sie sicher?'} %>
+    </div>
+	  Projekt <strong><%= article.reference %></strong>,
+      <%= image_tag "/images/16image.png",
+          :alt => "anzahl der medienblocks", 
+          :title => "anzahl der medienblocks", 
+          :class => "icon16"  %>
+      <%= article.count_media %>    
+      <%= image_tag "/images/16text.png",
+          :alt => "anzahl der textblocks", 
+          :title => "anzahl der textblocks", 
+          :class => "icon16"  %>
+      <%= article.count_text %>
+	</div>
+  <h3><%= article.title %></h3><br/>
+  <%  thumbnail = Mediablock.find_by_id(article.thumbnail_id) %>
+  <% if thumbnail %>
+    <%= image_tag "/data/thumbnails/#{thumbnail.filename}",
+        :alt => thumbnail.title, 
+        :title => thumbnail.title, 
+        :class => "listthumbnail"  %>
+  <% else %>
+    <%= image_tag "/images/rails.png",
+        :class => "listthumbnail" %>
+  <% end %>
+  <div class="listdescription">
+<%=h article.description %></div>
+</div>
+<br style="clear:both" />

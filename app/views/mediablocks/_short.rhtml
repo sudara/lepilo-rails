@@ -1,0 +1,19 @@
+<%  mediablock = Mediablock.find(mediablock_id) %>
+<% # && @session['user'].role == "admin" 
+  if @session['user'] %>
+  <span class="smalltext">
+  <%= link_to 'Bearbeiten', {   :controller => "mediablocks",
+                                :action => "edit",
+                                :rendersimple => "true",
+                                :id => mediablock.id } %> |
+  <%= link_to 'Verknüpfung Löschen', {  :controller => "mediablocks",
+                                        :action => "destroylink", 
+                                        :id => link_id }, 
+                                        :confirm => 'Sind Sie sicher?' %> |
+  <%= link_to 'Löschen', { :controller => "mediablocks",
+                                :action => "destroy", 
+                                :id => mediablock.id }, 
+                                :confirm => 'Sind Sie sicher?' %>
+  </span>
+<% end %><br/>
+<img src="/data/images/<%= mediablock.filename %>" ><br/>

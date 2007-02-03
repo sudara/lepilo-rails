@@ -1,0 +1,27 @@
+<h1>Listing block_links</h1>
+
+<table>
+  <tr>
+  <% for column in BlockLink.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for block_link in @block_links %>
+  <tr>
+  <% for column in BlockLink.content_columns %>
+    <td><%=h block_link.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Anzeigen', :action => 'show', :id => block_link %></td>
+    <td><%= link_to 'Bearbeiten', :action => 'edit', :id => block_link %></td>
+    <td><%= link_to 'Entfernen', { :action => 'destroy', :id => block_link }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @block_link_pages.current.previous } if @block_link_pages.current.previous %>
+<%= link_to 'Next page', { :page => @block_link_pages.current.next } if @block_link_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New block_link', :action => 'new' %>

@@ -1,0 +1,3 @@
+<% @frontpage = Article.find_by_title("frontpage") %>
+
+<%= render_partial 'block_links/frontpage',  nil, "fragment_id" => @frontpage.fragments.last.id %>

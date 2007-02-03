@@ -1,0 +1,12 @@
+<% 
+  @article = Article.find(params[:id])
+  #@article.fragments.first.block_links.each do |block| 
+  fragmentno = @article.fragments.first.id
+  
+  textdata = BlockLink.find_by_fragment_id(fragmentno, :order => "position ASC")
+  
+%>
+
+<%  if textdata.textblock_id != nil %>
+   <%= render :partial => "textblocks/forswf", :locals => { :textblockid => textdata.textblock_id } %>
+<% end %>

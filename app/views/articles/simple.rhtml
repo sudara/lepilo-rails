@@ -1,0 +1,10 @@
+<%= @article.title %>:::<%= @article.description %>:::<%  mediablocks = BlockLink.find_all_by_fragment_id(@article.fragments.first.id) %>---<% for block in mediablocks %>
+<% if block.mediablock_id %>
+img:<% image = Mediablock.find_by_id(block.mediablock_id) %>/data/images/<%= image.filename %>
+<% end%>
+
+<% if block.textblock_id %>
+txt:<% text = Textblock.find_by_id(block.textblock_id) %><%= text.content %>
+<% end%>
+
+<% end %>+++

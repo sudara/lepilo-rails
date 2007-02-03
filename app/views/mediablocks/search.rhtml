@@ -1,0 +1,21 @@
+<% if @mediaitems && @mediaitems.length > 0 %>
+
+  <img src="/images/search-media.png" />
+
+  <% for dragmediablock in @mediaitems %>
+  <div class="dragblock" id="dragmediablock_<%= dragmediablock.id %>"> 
+    <%= link_to dragmediablock.title, :controller => 'mediablocks', :action => 'edit', :id => dragmediablock.id %> 
+    <%= image_tag "/data/thumbnails/#{dragmediablock.filename}",
+          :alt => dragmediablock.title, 
+          :title => dragmediablock.title, 
+          :class => "thumbnail"  %>
+    
+    <%= draggable_element "dragmediablock_#{dragmediablock.id}", :revert => true %>
+  </div>
+  
+  <% end %>
+
+<br style="clear:both"/>
+
+<% else %>
+<% end %>

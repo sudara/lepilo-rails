@@ -1,0 +1,9 @@
+<h1>Editing note</h1>
+
+<%= start_form_tag :action => 'update', :id => @note %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Speichern' %>
+<%= end_form_tag %>
+
+<%= link_to 'Anzeigen', :action => 'show', :id => @note %> |
+<%= link_to 'Zur&uuml;ck', :action => 'list' %>

@@ -1,0 +1,21 @@
+<div class="searchblock">
+  <input type="text" id="searchmedia" name="searchmedia" size="16" />&nbsp;<img id="busymediasearch" src="/images/searching.gif" style="display:none" /> 
+</div>
+<%
+  dragmediablocks = Mediablock.find(:all, :limit => 12) 
+%>
+<div id="searchResultsMedia">
+  <img src="/images/search-media.png" >
+
+  <% for dragmediablock in dragmediablocks %>
+  <div class="dragblock" id="mediablock_<%= dragmediablock.id %>"> 
+    <%= link_to dragmediablock.title, :controller => 'mediablocks', :action => 'edit', :id => dragmediablock.id %> 
+    <%= image_tag "/data/thumbnails/#{dragmediablock.filename}",
+          :alt => dragmediablock.title, 
+          :title => dragmediablock.title, 
+          :class => "thumbnail"  %>
+    <%= draggable_element "mediablock_#{dragmediablock.id}", :revert => true %>
+  </div>
+  <% end %>
+</div>
+

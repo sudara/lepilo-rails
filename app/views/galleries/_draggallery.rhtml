@@ -1,0 +1,34 @@
+<div class="searchblock">
+  <input type="text" id="searchgalleries" name="searchgalleries" size="20" />&nbsp;<img id="busyarticlesearch" src="/images/searching.gif" style="display:none" /> 
+</div>
+<%
+  draggalleries = Gallery.find(:all, :order => "updated_at DESC", :limit => 10) 
+%>
+<div id="searchResultsGalleries">
+
+  <% for draggallery in draggalleries %>
+  <div class="dragline" id="draggallery_<%= draggallery.id %>">
+    <%
+      current = Topic.find_by_id (draggallery.topic_id)
+      if current
+        parent = Topic.find_by_id (current.topic_id)
+      end
+    %>
+    <%= draggable_element "draggallery_#{draggallery.id}", :revert => true %>
+    <strong><%= link_to draggallery.title, :controller => 'galleries', :action => 'edit', :id => draggallery.id %></strong><br/>
+    <span class="green">
+      <span class="green"><span style="font-size:10px"><%= draggallery.description %></span></span>
+  </div>
+  <% end %>
+
+</div>
+
+<%= observe_field 'searchgalleries', 
+    :frequency => 0.5, 
+    :update => 'searchResultsGalleries', 
+    :url => { :controller => 'galleries', :action=> 'search' }, 
+    :with => "'criteria=' + escape(value)", 
+    :loading => "document.getElementById('busyarticlesearch').
+      style.display='inline'", 
+    :loaded => "document.getElementById('busyarticlesearch').
+      style.display='none'" %> 

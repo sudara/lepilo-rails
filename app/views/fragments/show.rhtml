@@ -1,0 +1,8 @@
+<% for column in Fragment.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @fragment.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Bearbeiten', :action => 'edit', :id => @fragment %> |
+<%= link_to 'Zur&uuml;ck', :action => 'list' %>

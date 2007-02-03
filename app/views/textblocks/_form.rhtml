@@ -1,0 +1,18 @@
+<%= error_messages_for 'textblock' %>
+
+<!--[form:textblock]-->
+  
+<%  session[:current_fragment] = params[:fragment_id] %>  
+<%  session[:current_article] = params[:article_id] %>  
+
+<%= hidden_field 'block_link', 'fragment_id', 'value'=>params[:fragment_id] %>
+<%= hidden_field 'fragment', 'article_id', 'value'=>params[:article_id] %>
+
+<p>Titel<br/>
+<%= text_field 'textblock', 'title' %></p>
+
+
+<p>Inhalt<br/>
+  <%= text_area 'textblock', 'content', "cols" => 60, "rows" => 25  %><br/>
+<!--[eoform:textblock]-->
+

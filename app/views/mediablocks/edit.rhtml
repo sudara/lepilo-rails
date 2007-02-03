@@ -1,0 +1,10 @@
+<h1>Editing mediablock</h1>
+
+<%= start_form_tag :action => 'update', :id => @mediablock %>
+  <%= render :partial => 'form' %>
+  <br class="clear:both"/>
+  <%= submit_tag 'Speichern' %>
+<%= end_form_tag %>
+
+<%= link_to 'Anzeigen', :action => 'show', :id => @mediablock %> |
+<%= link_to 'Zur&uuml;ck', :action => 'list' %>

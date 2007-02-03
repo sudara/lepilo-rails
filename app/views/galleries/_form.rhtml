@@ -1,0 +1,29 @@
+<%= error_messages_for 'gallery' %>
+
+<%  session[:current_gallery] = params[:id] %>  
+<%  
+  if params[:page]
+    session[:current_page] = params[:page] 
+  else
+    session[:current_page] = 1
+  end 
+%>
+
+<!--[form:gallery]-->
+<div class="fdbblock" style="width:500px">
+
+  <p>Name<br/>
+  <%= text_field 'gallery', 'title'  %></p>
+
+  <p>Freigegeben<br/>
+  <select id="gallery_released" name="gallery[released]"><option value="false">Nein</option><option value="true">Ja</option></select></p>
+
+</div>
+<div class="fdbblock">
+
+  <p>Beschreibung<br/>
+  <%= text_area 'gallery', 'description', "cols" => 45, "rows" => 4  %><br/>
+
+</div>
+<!--[eoform:gallery]-->
+

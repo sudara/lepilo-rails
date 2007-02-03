@@ -1,0 +1,50 @@
+<div id="fdboptions">
+  <h1>Gallerieliste</h1> | <%= link_to 'Neue Gallerie', :action => 'new' %> | 
+  <%= link_to 'Vorherige Seite', { :page => @gallery_pages.current.previous } if @gallery_pages.current.previous %> | 
+  <%= link_to 'N&auml;chste Seite', { :page => @gallery_pages.current.next } if @gallery_pages.current.next %> 
+  <br />
+  <br />
+</div> 
+<div id="fdbheader">
+</div> 
+
+<div id="fdbcontainer">
+ 
+  <% for gallery in @galleries %>
+  <div class="block256x128">
+  	<div class="listblock">
+    	<div class="iconplastic">
+        <div class="icontainer">
+        <%= link_to_image '/images/b24edit.png', { :action => 'edit', :id => gallery },  html_options = { :class => "icon24", :title => "bearbeiten",} %>
+        <%= link_to_image '/images/b24delete.png', { :action => 'destroy', :id => gallery },  html_options = { :class => "icon24", :title => "löschen", :confirm => 'Artikel »' + gallery.title + '« löschen — sind Sie sicher?'} %>
+        </div>
+  	  
+    	  Statistik:
+    	  <%= image_tag "/images/16article.png",
+            :alt => "anzahl der artikel", 
+            :title => "anzahl der artikel", 
+            :class => "icon16"  %>
+        <%= gallery.count_articles %>    
+    	  <%= image_tag "/images/16image.png",
+            :alt => "anzahl der medienblocks", 
+            :title => "anzahl der medienblocks", 
+            :class => "icon16"  %>
+        <%= gallery.count_media %>    
+      </div>
+      <h3><%= gallery.title %></h3><br/>
+      <%  thumbnail = Mediablock.find_by_id(gallery.thumbnail_id) %>
+      <% if thumbnail %>
+        <%= image_tag "/data/thumbnails/#{thumbnail.filename}",
+            :alt => thumbnail.title, 
+            :title => thumbnail.title, 
+            :class => "listthumbnail"  %>
+      <% else %>
+        <%= image_tag "/images/rails.png",
+            :class => "listthumbnail" %>
+      <% end %>
+  	  <div class="listdescription"><%=h gallery.description %></div>
+    </div>
+  </div>
+  <% end %>
+  <br style="clear:both" />
+</div>
