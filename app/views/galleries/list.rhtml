@@ -13,7 +13,7 @@
   <% for gallery in @galleries %>
   <div class="block256x128">
   	<div class="listblock">
-    	<div class="iconplastic">
+    	<div class="iconblack">
         <div class="icontainer">
         <%= link_to_image '/images/b24edit.png', { :action => 'edit', :id => gallery },  html_options = { :class => "icon24", :title => "bearbeiten",} %>
         <%= link_to_image '/images/b24delete.png', { :action => 'destroy', :id => gallery },  html_options = { :class => "icon24", :title => "löschen", :confirm => 'Artikel »' + gallery.title + '« löschen — sind Sie sicher?'} %>

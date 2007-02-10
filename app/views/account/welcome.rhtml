@@ -1,11 +1,12 @@
 
 <div class="memo">
-    <h1>Welcome</h1>
+    <h1>Wilkommen</h1>
 
-    <p>You are now logged into the system...</p>
+    <p>Sie sind nun im System angemeldet</p>
     <p>
-    Since you are here it's safe to assume the application never called store_location, otherwise
-    you would have been redirected somewhere else after a successful login.
+    Falls Sie diesen Schirm sehen, wußte lepilo nicht, auf welche Seite Sie zugreifen wollten. 
+     
+    Wir schlagen die <%= link_to 'Artikelliste', { :controller => "articles", :action => "list" } %> vor. 
     </p>
       
     <%= link_to "&#171; logout", :action=>"logout"%>  

@@ -15,6 +15,18 @@ pre {
   font-size:12px;
 }
 
+input, textarea, select {
+  margin:5px;
+  background-color:#fafafa;
+  border:2px solid #bfbfbf;  
+}
+
+input:focus, textarea:focus, select:focus {
+  margin:5px;
+  background-color:#fff;
+  border:2px solid #81bc00;  
+}
+
 a { 
   color:#000; 
   background-color:#fff;
@@ -47,6 +59,7 @@ a:hover {
 }
 
 a.icon24, a.icon24:visited, a.icon24:hover {
+  background-color:transparent;
   position: relative;
   float: left;
   margin:0px;
@@ -114,7 +127,7 @@ div.progressBar div.background {
 
 #navigation {
   margin:0px;
-  margin-left:20px;
+  margin-left:200px;
   margin-top:10px;
   margin-bottom:10px;
   overflow:auto;
@@ -122,13 +135,17 @@ div.progressBar div.background {
 }
 
 #navigation .lepilo {
+  position:absolute;
+  top:0px;
+  left:20px;
   float:left;
+  margin-right:25px;
 }
 
 
 #navigation a:link, #navigation a:visited {
   margin:0px;
-  margin-left:6px;
+  margin-left:16px;
   padding:0px;
   height:48px;
   float:left;
@@ -140,7 +157,7 @@ div.progressBar div.background {
   background-image:url(/images/48x48b.png); 
   background-repeat:no-repeat;
   margin:0px;
-  margin-left:6px;
+  margin-left:16px;
   padding:0px;
   float:left;
   border-bottom:0px;
@@ -150,7 +167,7 @@ div.progressBar div.background {
   background-image:url(/images/48x48b.png); 
   background-repeat:no-repeat;
   margin:0px;
-  margin-left:6px;
+  margin-left:16px;
   padding:0px;
 }
 
@@ -162,14 +179,31 @@ div.progressBar div.background {
   overflow:visible;  
 }
 
+#login {
+  width:540px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.loginwindow {
+  background-image:url(/images/gradient.png); 
+  background-repeat:repeat-x;
+  background-color:#fff;
+  width:503px;
+  height:240px;
+  margin:0px;
+  padding:0px;
+  border-bottom:1px solid #fff;
+}
+
 #fdboptions {
   background-image:url(/images/gradient.png); 
   background-repeat:repeat-x;
   margin-top:0px;
   margin-bottom:0px;
-  padding-left:10px;
+  padding-left:20px;
   padding-top:10px;
-  padding-bottom:-10px;
+  padding-bottom:-20px;
   overflow:auto;
   border-top:1px solid #bfbfbf;
 }
@@ -193,7 +227,6 @@ div.progressBar div.background {
 
 #fdbcontent {
   background-color: #fff;
-  width:1178px;
   min-height:100%;
   margin-right:auto;
   margin-left:0px;
@@ -212,7 +245,7 @@ div.progressBar div.background {
 
 #fdbsearchlist {
   top: 0px;
-  left: 820px;
+  right: 50px;
   position: absolute;
   z-index: 8000;
   width:280px;
@@ -234,6 +267,7 @@ div.progressBar div.background {
   border-bottom: 6px solid #f5f5f5;
   background:url(/images/footer.png) #f5f5f5;
   left: 0px;
+  width:100%;
   padding-left:10px;
   padding-top:4px;
 	margin-top:20px;
@@ -242,7 +276,6 @@ div.progressBar div.background {
   color: #aaa;
   font-size: 10px;
   z-index:10000;
-  width:1168px;
   opacity:0.9;
   filter:alpha(opacity:90);  
 }
@@ -262,26 +295,45 @@ div.progressBar div.background {
 }
 
 #fdbtopic-list {
-  background-image:url(/images/300topiclistbackground.png); 
-  background-repeat:repeat-y;
+  background:#fafafa;
   font-size:13px;
   margin:0;
   padding:0;
   padding-top:5px;
   padding-left:5px;
+  padding-bottom:5px;
   list-style-type:none;
   width:295px;
 }
 
 #fdbtopic-list li {
-  background-image:url(/images/300topiclistentry.png); 
-  background-repeat:no-repeat;
-  height:24px;
+  background-image:url(/images/gradientmini.png); 
+  background-repeat:repeat-x;
+  height:20px;
   margin:0;
+  margin-top:1px;
   padding-top:3px;
   padding-left:30px;
   cursor:move;
+  overflow:hidden;
   width:260px;
+  border-top:1px solid #ddd;
+  border-bottom:1px solid #fff;
+}
+
+#fdbtopic-list li:hover {
+  background-image:url(/images/gradientminig.png); 
+  background-repeat:repeat-x;
+  height:40px;
+  margin:0;
+  margin-top:1px;
+  padding-top:3px;
+  padding-left:30px;
+  cursor:move;
+  overflow:hidden;
+  width:260px;
+  border-top:1px solid #ddd;
+  border-bottom:1px solid #fff;
 }
 
 #fdbtopic-list a {
@@ -299,14 +351,6 @@ div.progressBar div.background {
   font-size:14px;
   font-weight:bold;
   letter-spacing:1px;
-  width:300px;
-}
-
-#fdbtopic-list-bottom {
-  background-image:url(/images/300topiclistbottom.png); 
-  background-repeat:no-repeat;
-  margin:0;
-  height:10px;
   width:300px;
 }
 
@@ -353,17 +397,18 @@ html>body:not(:-safari-only) h1 {
 */
 
 h1 {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Arial", sans-serif;
+  font-family: "MyriadPro-LightSemiExt", "Myriad Pro Light SemiExtended", "Arial", sans-serif;
   color:#81bc00;
-  margin-left:25px;
+  margin:0px;  
   font-size:22px;
   font-weight:normal;
-  line-height:28px;
+  line-height:36px;
 }
 
 h2 {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Arial", sans-serif;
   color:#4d5659;
+  margin:0px;  
   font-size:16px;
   font-weight:normal;
 }
@@ -371,6 +416,7 @@ h2 {
 h3 {
   font-family: "HelveticaNeue-Bold", "Helvetica Neue Bold", sans-serif;
   color:#81bc00;
+  margin:0px;  
   height:10px;
   font-size:12px;
   line-height:14px;
@@ -521,7 +567,8 @@ div.ipmtitle:hover {
 }
 
 .listblock {
-  background-color:#fafafa;
+  background-image:url(/images/gradient.png); 
+  background-repeat:repeat-x;
   line-height:16px;
   padding:5px;
   padding-top:0px;
@@ -591,12 +638,12 @@ div.block128x128:hover {
 }
 
 .listdescription {
+  font-size:11px;
   padding-left:5px;
   padding-right:10px;
   padding-top:-10px;
   margin-top:0px;
   height:75px;
-  width:160px;
   overflow:hidden;
 }
 
@@ -691,7 +738,7 @@ div.block128x128:hover {
   position:relative;
   left:0px;
   top:112px;
-  background-image:url(/images/plastic.png); 
+  background-image:url(/images/iconplastic.png); 
   background-repeat:repeat-x;
   height:20px;
   margin-top:-18px;
@@ -702,6 +749,29 @@ div.block128x128:hover {
   overflow:auto;
   border-top:1px solid #f0f0f0;
   border-bottom:1px solid #f0f0f0;
+  font-size:10px;
+  z-index:2000;
+  overflow:hidden;
+}
+
+.iconblack {
+  position:relative;
+  left:0px;
+  top:112px;
+  color:#fff;
+  font-weight:bold;
+  background-image:url(/images/iconblack.png); 
+  background-repeat:repeat-x;
+  height:20px;
+  margin-left:-5px;
+  margin-right:-5px;
+  margin-top:-18px;
+  margin-bottom:0px;
+  padding-left:5px;
+  padding-right:5px;
+  padding-top:5px;
+  padding-bottom:-5px;
+  overflow:auto;
   font-size:10px;
   z-index:2000;
   overflow:hidden;

@@ -1,17 +1,15 @@
-<div id="fdbarticlelist">
-  <%= render_partial 'articles/dragarticle' %>
-</div>
-<div id=".png">
 <h1>Neuer Navigationspunkt</h1>
-
-<%= start_form_tag :action => 'create' %>
-  <%= render :partial => 'new' %>
-  <%= submit_tag "Anlegen" %>
-<%= end_form_tag %>
-
-<%= link_to 'Zur&uuml;ck', :action => 'list' %>
+<div id="fdboptions">
+  <div id="entrySettings" >
+    <%= start_form_tag :action => 'create' %>
+      <%= render :partial => 'new' %>
+      <%= submit_tag "Anlegen" %>
+    <%= end_form_tag %>
+  </div>
+</div>
+<div id="fdbheader">
 </div>
 
-<div id="fdbmedialist">
-.
+<div id="fdbcontainer">
+<%= link_to 'Zur&uuml;ck', :action => 'list' %>
 </div>

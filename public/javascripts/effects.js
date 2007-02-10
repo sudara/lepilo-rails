@@ -485,7 +485,7 @@ Effect.Highlight = Class.create();
 Object.extend(Object.extend(Effect.Highlight.prototype, Effect.Base.prototype), {
   initialize: function(element) {
     this.element = $(element);
-    var options = Object.extend({ startcolor: '#ffff99' }, arguments[1] || {});
+    var options = Object.extend({ startcolor: '#d4e543' }, arguments[1] || {});
     this.start(options);
   },
   setup: function() {

@@ -1,12 +1,14 @@
 <%= error_messages_for 'topic' %>
 
 <!--[form:topic]-->
-<p>Geh&ouml;rt zu<br/>
-<select id="topic_topic_id" name="topic[topic_id]">
-  <%= options_from_collection_for_select(
-   Topic.find(:all, :conditions => "id != #{@topic.id}", :order => "id"), "id", "title") 
-   %>
-</select>
+
+<%= hidden_field 'article', 'topic_id', 'value'=>@article.topic_id %>
+
+<div id="fdbtopic-selector">
+Seite zuordnen unter:<br/>
+<%= render_partial 'topics/selector' %>
+</div><br/>
+
 
 
 <p>Titel<br/>

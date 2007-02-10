@@ -1,7 +1,3 @@
-<div id="fdbarticlelist">
-  <%= render_partial 'articles/dragarticle' %>
-</div>
-<div id=".png">
 <% for column in Topic.content_columns %>
 <p>
   <b><%= column.human_name %>:</b> <%=h @topic.send(column.name) %>
@@ -10,8 +6,3 @@
 
 <%= link_to 'Bearbeiten', :action => 'edit', :id => @topic %> |
 <%= link_to 'Zur&uuml;ck', :action => 'list' %>
-</div>
-
-<div id="fdbmedialist">
-.
-</div>

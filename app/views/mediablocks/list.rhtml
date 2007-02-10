@@ -18,7 +18,7 @@
   <div class="block128x128">
 
     <div class="previewblock">
-    	<div class="iconplastic"><div class="icontainer">
+    	<div class="iconblack"><div class="icontainer">
       <%= link_to image_tag("/images/b24look.png", :alt => mediablock.filename),"/data/images/#{mediablock.filename}", {:rel => "lightbox", :title => mediablock.title, :class => "icon24" } %>
       <%= link_to_image '/images/b24edit.png', { :action => 'edit', :id => mediablock, :page => params[:page] },  html_options = { :class => "icon24", :title => "bearbeiten",} %>
       <%= link_to_image '/images/b24delete.png', { :action => 'destroy', :id => mediablock },  html_options = { :class => "icon24", :title => "löschen", :confirm => 'Artikel »' + mediablock.title + '« löschen — sind Sie sicher?'} %>

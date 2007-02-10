@@ -1,7 +1,7 @@
 <%= start_form_tag :action=> "signup" %>
 
 <div title="Account signup" id="signupform" class="form">
-  <h1>Signup</h1>
+  <h1>Bitte neuen Benutzer anlegen</h1>
   <%= error_messages_for 'user' %><br/>
   
   <label for="user_login">Desired login:</label><br/>
@@ -11,7 +11,7 @@
   <label for="user_password_confirmation">Confirm password:</label><br/>
   <%= password_field "user", "password_confirmation", :size => 30 %><br/>
 
-<input type="submit" value="Signup &#187;" class="primary" />
+<input type="submit" value="Signup &#187;" />
 
 <%= end_form_tag %>
 

@@ -35,7 +35,7 @@
       <% end %>
     </div>
   	<div class="listblock" id="<%= article.id %>">
-    	<div class="iconplastic" id="plastic_<%= article.id %>">
+    	<div class="iconblack" id="plastic_<%= article.id %>">
         <div class="icontainer">
         <%= link_to_image '/images/b24edit.png', { :action => 'edit', :id => article, :page => params[:page] },  html_options = { :class => "icon24", :title => "bearbeiten",} %>
         <%= link_to_image '/images/b24delete.png', { :action => 'destroy', :id => article },  html_options = { :class => "icon24", :title => "löschen", :confirm => 'Artikel »' + article.title + '« löschen — sind Sie sicher?'} %>

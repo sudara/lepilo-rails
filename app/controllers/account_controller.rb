@@ -1,19 +1,24 @@
 class AccountController < ApplicationController
   model   :user
-  layout  'scaffold'
+  layout  'login'
 
   # before_filter :login_required, :except => [ :login ]
 
   def login
-    case @request.method
-      when :post
-        if @session['user'] = User.authenticate(@params['user_login'], @params['user_password'])
+    usercount = User.count
+    if @session[:user].nil? && usercount == 0
+      redirect_to :action => "signup" 
+    else
+      case @request.method
+        when :post
+          if @session['user'] = User.authenticate(@params['user_login'], @params['user_password'])
 
-          flash['notice']  = "Login successful"
-          redirect_back_or_default :action => "welcome"
-        else
-          @login    = @params['user_login']
-          @message  = "Login unsuccessful"
+            flash['notice']  = "Login successful"
+            redirect_back_or_default :action => "welcome"
+          else
+            @login    = @params['user_login']
+            @message  = "Login unsuccessful"
+        end
       end
     end
   end
@@ -21,9 +26,9 @@ class AccountController < ApplicationController
   def signup
     
     usercount = User.count
-    #if @session[:user].nil? && usercount != 0
-      # redirect_to :action => "login" 
-    #else
+    if @session[:user].nil? && usercount != 0
+      redirect_to :action => "login" 
+    else
       case @request.method
         when :post
           @user = User.new(@params['user'])
@@ -37,7 +42,7 @@ class AccountController < ApplicationController
         when :get
           @user = User.new
       end      
-    #end
+    end
   end  
   
   def delete

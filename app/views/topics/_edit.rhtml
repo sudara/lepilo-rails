@@ -1,37 +1,61 @@
-<h1>Navigationspunkt &raquo; <span class="gray"><%= @topic.title %></span> &laquo; bearbeiten</h1><br/>
-<%= error_messages_for 'topic' %>
-
 <!--[form:topic]-->
 
-<div class="fdbblock">
-  <div id="fdbtopic-list-top"><%= @topic.title %></div>
-    <ul id="fdbtopic-list"> 
-    <% @topic.topics.each do |subtopic| %> 
-    <li id="item_<%= subtopic.id %>"> 
-      <%= link_to subtopic.title, :action => 'edit', :id => subtopic.id %> 
-    </li> 
-    <% end %> 
-    </ul> 
-  <div id="fdbtopic-list-bottom"></div>
+  Derzeit unter:<br/> 
+  <h4>
+  <%= hidden_field 'topic', 'topic_id', 'value'=>@topic.topic_id %>
 
-</div>
+  <% 
+    if metatopic = Topic.find_by_id (@topic.topic_id) 
+  %>
 
-<div class="fdbblock">
+    <% if parent = Topic.find_by_id (metatopic.topic_id) %>
+      <% if parent_parent = Topic.find_by_id (parent.topic_id) %>
+        <% if parent_parent_parent = Topic.find_by_id (parent_parent.topic_id) %>
+            <% #parent_parent_parent.title %>
+        <% end %>
+      <% end %>
+    <% end %>
 
-  Geh&ouml;rt zu<br/>
-  <select id="topic_topic_id" name="topic[topic_id]">
-    <%= options_from_collection_for_select(
-     Topic.find(:all, :conditions => "id != #{@topic.id}"), "id", "title", "topic_id") 
-     %>
-  </select>
+    <% if parent_parent_parent %>
+      » <%= parent_parent_parent.title %> 
+    <% end %>
 
+    <% if parent_parent %>
+      » <%= parent_parent.title %> 
+    <% end %>
+
+    <% if parent %>
+      » <%= parent.title %> 
+    <% end %>
+
+    » <%= metatopic.title %> 
+
+  <% end %>
+  </h4><br/>
+
+  <div class="fdbblock">
+    <div id="fdbtopic-list-top"><%= @topic.title %></div>
+      <ul id="fdbtopic-list"> 
+      <% @topic.topics.each do |subtopic| %> 
+      <li id="item_<%= subtopic.id %>"> 
+        <%= link_to subtopic.title, :action => 'edit', :id => subtopic.id %><br/>
+        <% if subtopic.description %><div class="listdescription"><%= subtopic.description %></div><% end %> 
+      </li> 
+      <% end %> 
+      </ul> 
+  </div>
+
+  <div id="fdbtopic-selector">
+  Zuordnen unter:<br/>
+  <%= render_partial 'topics/selector' %>
+  </div>
+  
   <br/>Titel<br/>
   <%= text_field 'topic', 'title'  %><br/>
 
   <br/>Beschreibung<br/>
   <%= text_area 'topic', 'description', "cols" => 60, "rows" => 5  %><br/>
 
-</div>
 
 <!--[eoform:topic]-->
 
