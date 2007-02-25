@@ -18,6 +18,8 @@ class TextblocksController < ApplicationController
     @textblock = Textblock.find(params[:id])
     if params[:rendersimple]  
       render :layout => "simple"
+    else
+      render_without_layout
     end
   end
 
@@ -85,7 +87,8 @@ class TextblocksController < ApplicationController
 
   def destroy
     Textblock.find(params[:id]).destroy
-    #redirect_to :action => 'list'
-    redirect_to :controller=>"/block_links", :action => "close_reload"
+    # redirect_to :action => 'list'
+    # redirect_to :controller=>"/block_links", :action => "close_reload"
+    redirect_to :controller => '/articles', :action => 'edit', :id => session[:current_article]
   end
 end

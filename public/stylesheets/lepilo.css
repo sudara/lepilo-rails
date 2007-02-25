@@ -491,6 +491,12 @@ div.progress-container > div {
   float:left;
 }
 
+.articlemedia {
+  width:250px;
+  height:auto;
+  max-height:250px;
+}
+
 .imagepreview {
   width:250px;
   height:auto;
@@ -805,7 +811,6 @@ div.block128x128:hover {
   background-image:url(/images/gradientedit.png); 
   background-repeat:repeat-x;
   background-color:#d1d1d1;
-  margin-top:10px;
   margin-bottom:10px;
   padding-left:10px;
   padding-top:10px;

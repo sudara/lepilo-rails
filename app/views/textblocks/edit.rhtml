@@ -18,11 +18,21 @@
 <div id="fdbcontainer">
 
   <div class="editdata">
-  <h2>Editing textblock</h2>
+    <div class="fdbblock">
+      <h2>Editing textblock</h2><br/>
+      <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="400" height="400">
+        <param name="movie" value="/dina4/dina4-text-preview.swf" />
+        <param name=FlashVars value="textblock=<%= @textblock.id %>">
+        <param name="quality" value="best" />
+        <embed src="/dina4/dina4-text-preview.swf" quality="best" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" FlashVars="textblock=<%= @textblock.id %>" width="400" height="400"></embed>
+      </object>
+    </div>
+
   <%= start_form_tag :action => 'update', :id => @textblock %>
     <%= render :partial => 'form' %>
     <%= submit_tag 'Speichern' %>
   <%= end_form_tag %>
+  
   </div>
 
 </div>

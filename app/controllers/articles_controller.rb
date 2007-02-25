@@ -119,6 +119,25 @@ class ArticlesController < ApplicationController
     render :layout => false
   end
 
+  def writexml
+    @articles = Article.find(:all, :order => 'release_date DESC', :conditions => "released = 1")
+    # render :layout => false
+    projectsxml = render_to_string :layout => false
+    timestamp = Time.now.to_i.to_s
+    
+    if File.exists?("#{RAILS_ROOT}/public/projekte.xml")
+      File.open("#{RAILS_ROOT}/public/data/backups/projekte-#{timestamp}.xml", "wb") do |f|
+        f.write( File.read("#{RAILS_ROOT}/public/projekte.xml") )
+      end        
+    end
+    
+    File.open("#{RAILS_ROOT}/public/projekte.xml", "wb") do |f|
+      f.write( projectsxml )
+    end
+
+    redirect_to :action => 'list'
+  end
+
   def simple
     @article = Article.find_by_topic_id(params[:id])
     render :layout => false
@@ -215,7 +234,23 @@ class ArticlesController < ApplicationController
       render :action => 'list'
     end
   end
+  
+  def imagedescriptions
+    @article = Article.find(params[:id])
+    fragmentno = @article.fragments.first.id
+    @mediablocklist = BlockLink.find_all_by_fragment_id(fragmentno)
 
+    for blocklink in @mediablocklist
+      if blocklink.mediablock_id != nil
+        image = Mediablock.find_by_id(blocklink.mediablock_id)
+        image.description = params[:description]
+        image.update
+      end
+    end 
+
+    redirect_to :action => 'edit', :id => @article
+  end
+  
   def edit
     @article = Article.find(params[:id])
     
@@ -246,5 +281,10 @@ class ArticlesController < ApplicationController
   def destroy
     Article.find(params[:id]).destroy
     redirect_to :action => 'list'
+  end
+
+  def destroylink
+    BlockLink.find(params[:id]).destroy
+    redirect_to :controller => '/galleries', :action => 'edit', :id => session[:current_gallery]
   end
 end

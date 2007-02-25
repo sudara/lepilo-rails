@@ -15,10 +15,8 @@
     :update => 'searchResultsMedia', 
     :url => { :controller => 'mediablocks', :action=> 'search' }, 
     :with => "'criteria=' + escape(value)", 
-    :loading => "document.getElementById('busyarticlesearch').
-      style.display='inline'", 
-    :loaded => "document.getElementById('busyarticlesearch').
-      style.display='none'" %> 
+    :loading => "document.getElementById('busyarticlesearch').style.display='inline'", 
+    :loaded => "document.getElementById('busyarticlesearch').style.display='none'" %> 
 
 
 <%= observe_field 'searcharticles', 
@@ -26,20 +24,16 @@
     :update => 'searchResultsArticles', 
     :url => { :controller => 'articles', :action=> 'search' }, 
     :with => "'criteria=' + escape(value)", 
-    :loading => "document.getElementById('busyarticlesearch').
-      style.display='inline'", 
-    :loaded => "document.getElementById('busyarticlesearch').
-      style.display='none'" %> 
+    :loading => "document.getElementById('busyarticlesearch').style.display='inline'", 
+    :loaded => "document.getElementById('busyarticlesearch').style.display='none'" %> 
 
 <%= observe_field 'searcharticles', 
     :frequency => 0.5, 
     :update => 'searchResultsGalleries', 
     :url => { :controller => 'galleries', :action=> 'search' }, 
     :with => "'criteria=' + escape(value)", 
-    :loading => "document.getElementById('busyarticlesearch').
-      style.display='inline'", 
-    :loaded => "document.getElementById('busyarticlesearch').
-      style.display='none'" %> 
+    :loading => "document.getElementById('busyarticlesearch').style.display='inline'", 
+    :loaded => "document.getElementById('busyarticlesearch').style.display='none'" %> 
       
 <img src="/images/search-close.png" />
       

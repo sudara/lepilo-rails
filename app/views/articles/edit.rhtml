@@ -39,6 +39,16 @@
   <%= link_to 'Zur&uuml;ck', :action => 'list', :page => params[:page] %>
        
   </div>
+  <div class="editdata">
+
+    <%= start_form_tag :action => 'imagedescriptions', :id => @article %>
+      Copyright Vermerk für Bilder: 
+      <input name="description" size="45" type="text" />
+      <%# text_field 'images', 'description', "size" => 45  %>
+      <%= submit_tag 'Anwenden' %>
+    <%= end_form_tag %>
+       
+  </div>
   
 <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.last.id }) -%>  
 

@@ -99,6 +99,6 @@ class MediablocksController < ApplicationController
 
   def destroylink
     BlockLink.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to :controller => '/articles', :action => 'edit', :id => session[:current_article]
   end
 end

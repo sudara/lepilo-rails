@@ -6,6 +6,10 @@
                                 :action => "edit",
                                 :rendersimple => "true",
                                 :id => article.id } %> |
+  <%= link_to 'Verknüpfung Löschen', {  :controller => "articles",
+                                        :action => "destroylink", 
+                                        :id => link_id }, 
+                                        :confirm => 'Sind Sie sicher?' %> |
   <%= link_to 'L&ouml;schen', { :controller => "articles",
                                 :action => "destroy", 
                                 :id => article.id }, 

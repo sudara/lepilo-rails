@@ -1,8 +1,2 @@
-<% for column in Textblock.content_columns %>
-<p>
-  <b><%= column.human_name %>:</b> <%=h @textblock.send(column.name) %>
-</p>
-<% end %>
-
-<%= link_to 'Bearbeiten', :action => 'edit', :id => @textblock %> |
-<%= link_to 'Zur&uuml;ck', :action => 'list' %>
+<%= textilize(@textblock.title) %>
+<%= textilize(@textblock.content) %>

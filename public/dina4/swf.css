@@ -56,7 +56,7 @@ a:active {
 }
 
 .f {
-  font-family: Verdana-Bold;
+  font-family: Verdana-Bold, Verdana Bold, "Verdana Bold";
   font-weight: bold;
   display: inline;
 }

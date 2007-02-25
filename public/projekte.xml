@@ -1,106 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dina4projekte><dina4projekt>
-		<id>123</id>
+		<id>127</id>
 		<datum>2005-09-26 08:24:23</datum>
 		<freigabe>1</freigabe>
 		<farbe>#ff9900</farbe>
 		<typ>projekt</typ>
-		<fertigstellung>2007-01-26</fertigstellung>
-		<name><![CDATA[<b>sadfasdfasdf</b>]]></name>
-		<auszeichnungen></auszeichnungen>
-		<bilder></bilder>
-		<titel>sadfasdfasdf</titel>
-		<info><![CDATA[
-		  Kein text
-		  ]]></info>
-		<thumbnail></thumbnail>
+		<fertigstellung>2007-02-10</fertigstellung>
+		<name><![CDATA[<b>Novi članek</b>]]></name>
+		<auszeichnungen>Ta najnoveši članek na svetu in od vseh!</auszeichnungen>
+		<bilder>./data/images/1170687221.jpg|||./data/images/1170681312.jpg|||./data/images/1172063375.jpg|||</bilder>
+		<titel>Novi članek</titel>
+		<info>
+		  <![CDATA[<p><span class="f">UI ui ui ui ui</span><br />
+<strong>UI ui ui</strong> ui ui UI ui ui ui ui UI <span class="o">ui ui</span> ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui</p>
+		  ]]> 
+		  </info>
+		<thumbnail>./data/thumbnails/1170681312.jpg</thumbnail>
 	</dina4projekt><dina4projekt>
-		<id>125</id>
+		<id>126</id>
 		<datum>2005-09-26 08:24:23</datum>
 		<freigabe>1</freigabe>
 		<farbe>#ff9900</farbe>
 		<typ>projekt</typ>
-		<fertigstellung>2007-01-26</fertigstellung>
-		<name><![CDATA[<b>Seitentesten</b>]]></name>
-		<auszeichnungen></auszeichnungen>
+		<fertigstellung>2007-02-05</fertigstellung>
+		<name><![CDATA[<b>Testartikel</b>]]></name>
+		<auszeichnungen>Dada</auszeichnungen>
 		<bilder></bilder>
-		<titel>Seitentesten</titel>
-		<info><![CDATA[
-		  Kein text
-		  ]]></info>
-		<thumbnail></thumbnail>
-	</dina4projekt><dina4projekt>
-		<id>120</id>
-		<datum>2005-09-26 08:24:23</datum>
-		<freigabe>1</freigabe>
-		<farbe>#ff9900</farbe>
-		<typ>projekt</typ>
-		<fertigstellung>2007-01-24</fertigstellung>
-		<name><![CDATA[<b>Newseintrag heute</b>]]></name>
-		<auszeichnungen></auszeichnungen>
-		<bilder></bilder>
-		<titel>Newseintrag heute</titel>
-		<info><![CDATA[
-		  Kein text
-		  ]]></info>
-		<thumbnail></thumbnail>
-	</dina4projekt><dina4projekt>
-		<id>97</id>
-		<datum>2005-09-26 08:24:23</datum>
-		<freigabe>1</freigabe>
-		<farbe>#ff9900</farbe>
-		<typ>projekt</typ>
-		<fertigstellung>2002-01-01</fertigstellung>
-		<name><![CDATA[<b>Sportstätten Schwaz</b>]]></name>
-		<auszeichnungen></auszeichnungen>
-		<bilder>./data/images/1168877521.jpg|||./data/images/1168877534.jpg|||./data/images/1168877543.jpg|||./data/images/1168877552.jpg|||./data/images/1168877562.jpg|||</bilder>
-		<titel>Sportstätten Schwaz</titel>
+		<titel>Testartikel</titel>
 		<info></info>
-		<thumbnail>./data/thumbnails/1168877543.jpg</thumbnail>
-	</dina4projekt><dina4projekt>
-		<id>9</id>
-		<datum>2005-09-26 08:24:23</datum>
-		<freigabe>1</freigabe>
-		<farbe>#ff9900</farbe>
-		<typ>projekt</typ>
-		<fertigstellung>1997-01-01</fertigstellung>
-		<name><![CDATA[<b>1.1 yay</b>]]></name>
-		<auszeichnungen></auszeichnungen>
-		<bilder>./data/images/1164787762.jpg|||</bilder>
-		<titel>1.1 yay</titel>
-		<info><![CDATA[
-		  <p>sds fsa asddaas</p>
-		  ]]></info>
-		<thumbnail>./data/images/1164787762.jpg</thumbnail>
-	</dina4projekt><dina4projekt>
-		<id>86</id>
-		<datum>2005-09-26 08:24:23</datum>
-		<freigabe>1</freigabe>
-		<farbe>#ff9900</farbe>
-		<typ>projekt</typ>
-		<fertigstellung>1997-01-01</fertigstellung>
-		<name><![CDATA[<b>Gallerhaus mit  höherer Referenz</b>]]></name>
-		<auszeichnungen></auszeichnungen>
-		<bilder>./data/images/1164785913.jpg|||./data/images/1168262830.jpg|||./data/images/1164787745.jpg|||./data/images/1164785897.jpg|||./data/images/1164785927.jpg|||./data/images/1168262830.jpg|||./data/images/1168262881.jpg|||./data/images/1168853500.png|||./data/images/1165845368.jpg|||./data/images/1164787745.jpg|||</bilder>
-		<titel>Gallerhaus mit  höherer Referenz</titel>
-		<info><![CDATA[
-		  <p>cxv cx vxc  cxv cx v cxv cx vxcxc  cxv cx vxc  cxv cx vxc  cxvcxvxc  cxv cx vxc  cxv cx vxc  cxv c cxv cx vxcx vxc  cxv cx vxc  cxv cx vxc  cxvcx vxccxvcx vxc</p>
-		  ]]></info>
-		<thumbnail>./data/thumbnails/1164787730.jpg</thumbnail>
-	</dina4projekt><dina4projekt>
-		<id>95</id>
-		<datum>2005-09-26 08:24:23</datum>
-		<freigabe>1</freigabe>
-		<farbe>#ff9900</farbe>
-		<typ>projekt</typ>
-		<fertigstellung>1997-01-01</fertigstellung>
-		<name><![CDATA[<b>Gallerhaus</b>]]></name>
-		<auszeichnungen></auszeichnungen>
-		<bilder>./data/images/1168265659.jpg|||./data/images/1168265656.jpg|||./data/images/1168265662.jpg|||</bilder>
-		<titel>Gallerhaus</titel>
-		<info><![CDATA[
-		  <p>asdfsa asd sd fsad fsa d asdfsa asd sd fsad fsa d asdfsa asd sd fsad fsa d asdfsa asd sd fsad fsa d asdfsa asd sd fsad fsa d</p>
-		  ]]></info>
-		<thumbnail>./data/thumbnails/1168265662.jpg</thumbnail>
+		<thumbnail></thumbnail>
 	</dina4projekt>
 </dina4projekte>
