@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
     include LoginSystem
     include Magick
     model :user
-
+    layout 'lepilo'
+    
     before_filter :configure_charsets
 
     def configure_charsets
