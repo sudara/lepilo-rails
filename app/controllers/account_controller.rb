@@ -46,9 +46,13 @@ class AccountController < ApplicationController
   end  
   
   def delete
-    if @params['id']
-      @user = User.find(@params['id'])
-      @user.destroy
+    if @session[:user].nil? && usercount != 0
+      redirect_to :action => "login" 
+    else
+      if @params['id']
+        @user = User.find(@params['id'])
+        @user.destroy
+      end
     end
     redirect_back_or_default :action => "welcome"
   end  
