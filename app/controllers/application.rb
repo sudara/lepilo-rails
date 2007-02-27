@@ -5,9 +5,11 @@ require 'login_system'
 require 'rand'
 require 'redcloth'
 require 'RMagick'  
-
+require 'mini_magick' 
+ 
 class ApplicationController < ActionController::Base
     include LoginSystem
+    include Magick
     model :user
 
     before_filter :configure_charsets

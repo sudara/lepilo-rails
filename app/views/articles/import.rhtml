@@ -44,8 +44,8 @@
       <% if file[0,1] != "." %>  
         <td width="400px"><%=h file %></td>
         
-        <% if file[-4..-1] == ".jpg" || file[-5..-1] == ".jpeg" %>
-        
+        <% if file[-4..-1] == ".jpg" || file[-5..-1] == ".jpeg" || if file[-4..-1] == ".tif" || file[-5..-1] == ".tiff" || if file[-4..-1] == ".png" %>
+                
         <%  
         
         @importmediablock = Mediablock.new
@@ -64,7 +64,7 @@
 
         addLink.fragment_id = @fragment.id
         addLink.save
-
+        
         %>
         
           <td width="150px">Bild importiert</td>
