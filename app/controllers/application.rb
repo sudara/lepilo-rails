@@ -3,9 +3,8 @@
 
 require 'login_system'
 require 'rand'
-require 'redcloth'
-require 'RMagick'  
-require 'mini_magick' 
+require 'redcloth' 
+# require 'mini_magick' 
  
 class ApplicationController < ActionController::Base
     include LoginSystem
