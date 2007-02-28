@@ -1,3 +1,5 @@
+require 'net/ftp'
+
 class SettingsController < ApplicationController
   before_filter :login_required
   
