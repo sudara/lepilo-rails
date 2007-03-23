@@ -11,7 +11,7 @@
     
     if link.mediablock_id != nil
       image = Mediablock.find_by_id(link.mediablock_id)
-      @images.push("./data/images/#{image.filename}")
+      @images.push("./data/images/#{image.filename}>>>#{image.description}")
     end
   end 
   
@@ -21,20 +21,20 @@
   else
     @thumbfile = @images.first
   end %><dina4projekt>
-		<id><%= article.id %></id>
-		<datum>2005-09-26 08:24:23</datum>
-		<freigabe>1</freigabe>
-		<farbe>#ff9900</farbe>
-		<typ>projekt</typ>
-		<fertigstellung><%= article.release_date %></fertigstellung>
-		<name><![CDATA[<b><%= article.title %></b>]]></name>
-		<auszeichnungen><%if article.description %><%= article.description %><% end %></auszeichnungen>
-		<bilder><% @images.each do |imagelink| %><%= imagelink %>|||<% end %></bilder>
-		<titel><%= article.title %></titel>
-		<info><%if @text.content %>
-		  <![CDATA[<%= textilize(@text.content) %>
-		  ]]> 
-		  <% end %></info>
-		<thumbnail><%= @thumbfile %></thumbnail>
-	</dina4projekt><% end %>
+    <id><%= article.id %></id>
+    <datum>2005-09-26 08:24:23</datum>
+    <freigabe>1</freigabe>
+    <farbe>#ff9900</farbe>
+    <typ>projekt</typ>
+    <fertigstellung><%= article.release_date %></fertigstellung>
+    <name><![CDATA[<b><%= article.title %></b>]]></name>
+    <auszeichnungen><%if article.description %><%= article.description %><% end %></auszeichnungen>
+    <bilder><% @images.each do |imagelink| %><%= imagelink %>|||<% end %></bilder>
+    <titel><%= article.title %></titel>
+    <info><%if @text.content %>
+      <![CDATA[<%= textilize(@text.content) %>
+      ]]> 
+      <% end %></info>
+    <thumbnail><%= @thumbfile %></thumbnail>
+  </dina4projekt><% end %>
 </dina4projekte>
