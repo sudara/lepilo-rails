@@ -19,7 +19,8 @@ class GalleriesController < ApplicationController
       @items = nil
       render_without_layout
     else
-      @items = Gallery.find(:all, :order => 'updated_at DESC',
+      #@items = Gallery.find(:all, :order => 'updated_at DESC',
+      @items = Gallery.find(:all, :order => 'created_at DESC',
         :conditions => [ 'LOWER(title) LIKE ?', 
         '%' + @params['criteria'].downcase + '%' ])
       @mark_term = @params['criteria']
