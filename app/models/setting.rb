@@ -5,6 +5,4 @@ class Setting < ActiveRecord::Base
   acts_as_tree  :order => :id, :foreign_key => 'setting_id'  
   acts_as_list  :scope => :setting_id
   
-  
-  
 end
