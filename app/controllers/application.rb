@@ -4,11 +4,10 @@
 require 'login_system'
 require 'rand'
 require 'redcloth' 
-# require 'mini_magick' 
+require 'mini_magick'
  
 class ApplicationController < ActionController::Base
     include LoginSystem
-    include Magick
     model :user
     layout 'lepilo'
     
