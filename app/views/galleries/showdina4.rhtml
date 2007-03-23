@@ -18,7 +18,7 @@
     
           if link.mediablock_id != nil
             image = Mediablock.find_by_id(link.mediablock_id)
-            @images.push("./data/images/#{image.filename}")
+            @images.push("./data/images/#{image.filename}>>>#{image.description}")
           end
         end 
   
