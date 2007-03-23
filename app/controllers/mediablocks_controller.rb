@@ -59,6 +59,7 @@ class MediablocksController < ApplicationController
 
     @mediablock = Mediablock.new(params[:mediablock])
     @mediablock.uploaded_at = DateTime.new
+    
     if @mediablock.save
 
       @mediablock.update
