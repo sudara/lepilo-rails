@@ -41,10 +41,10 @@ class Mediablock < ActiveRecord::Base
   def after_save
       if @importflag
         File.open("#{RAILS_ROOT}/public/data/originals/#{self.original}", "wb") do |f|
-          f.write(  File.read( @importfile ) )
-          f.close
+          f.write( File.open(@importfile, "rb").read )
         end
-
+        
+        #MINI_MAGICK
         image = MiniMagick::Image.from_file("#{RAILS_ROOT}/public/data/originals/#{self.original}")
 
         #resize to 400X300
@@ -52,31 +52,33 @@ class Mediablock < ActiveRecord::Base
         #now save it with a different name
         jpgname = "#{RAILS_ROOT}/public/data/images/#{self.filename}"
         image.write(jpgname)
-
+        
         image.resize "x150"
         jpgname = "#{RAILS_ROOT}/public/data/thumbnails/#{self.thumbnail}"
         image.write(jpgname)
         
+        #RMAGICK
         #f.write( File.read(@tmp_file) )
-#        import = Magick::Image.read(@import_file).first
-        # import.write("#{RAILS_ROOT}/public/data/originals/#{self.filename}")
+        #import = Magick::Image.read(@import_file).first
+        #import.write("#{RAILS_ROOT}/public/data/originals/#{self.filename}")
 
-#        image = import.change_geometry!('x350') { |cols, rows, img|
-#          img.resize!(cols, rows)
-#        }
-#        image.format = "JPG"
-#        image.write("#{RAILS_ROOT}/public/data/images/#{self.filename}")
-        
-#        thumbnail = import.change_geometry!('x150') { |cols, rows, img|
-#          img.resize!(cols, rows)
-#        }
-#        thumbnail.format = "JPG"
-#        thumbnail.write("#{RAILS_ROOT}/public/data/thumbnails/#{self.thumbnail}")
+        #image = import.change_geometry!('x350') { |cols, rows, img|
+        #  img.resize!(cols, rows)
+        #}
+        #image.format = "JPG"
+        #image.write("#{RAILS_ROOT}/public/data/images/#{self.filename}")
+
+        #thumbnail = import.change_geometry!('x150') { |cols, rows, img|
+        #  img.resize!(cols, rows)
+        #}
+        #thumbnail.format = "JPG"
+        #thumbnail.write("#{RAILS_ROOT}/public/data/thumbnails/#{self.thumbnail}")
       else
         File.open("#{RAILS_ROOT}/public/data/originals/#{self.original}", "wb") do |f|
           f.write( @tmp_file.read )
         end
         
+        #MINI_MAGICK
         image = MiniMagick::Image.from_file("#{RAILS_ROOT}/public/data/originals/#{self.original}")
 
         #resize to 400X300
@@ -84,24 +86,24 @@ class Mediablock < ActiveRecord::Base
         #now save it with a different name
         jpgname = "#{RAILS_ROOT}/public/data/images/#{self.filename}"
         image.write(jpgname)
-
+        
         image.resize "x150"
         jpgname = "#{RAILS_ROOT}/public/data/thumbnails/#{self.thumbnail}"
         image.write(jpgname)
 
+        
+        #RMAGICK
+        #original = Magick::Image.read("#{RAILS_ROOT}/public/data/originals/#{self.original}").first
+        #image = original.change_geometry!('x350') { |cols, rows, img|
+        #  img.resize!(cols, rows)
+        #}
+        #image.format = "JPG"        image.write("#{RAILS_ROOT}/public/data/images/#{self.filename}")
 
-#        original = Magick::Image.read("#{RAILS_ROOT}/public/data/originals/#{self.original}").first
-#        image = original.change_geometry!('x350') { |cols, rows, img|
-#          img.resize!(cols, rows)
-#        }
-#        image.format = "JPG"
-#        image.write("#{RAILS_ROOT}/public/data/images/#{self.filename}")
-#
-#        thumbnail = original.change_geometry!('x150') { |cols, rows, img|
- #         img.resize!(cols, rows)
- #       }
-  #      thumbnail.format = "JPG"
-   #     thumbnail.write("#{RAILS_ROOT}/public/data/thumbnails/#{self.thumbnail}")
+        #thumbnail = original.change_geometry!('x150') { |cols, rows, img|
+        #  img.resize!(cols, rows)
+        #}
+        #thumbnail.format = "JPG"
+        #thumbnail.write("#{RAILS_ROOT}/public/data/thumbnails/#{self.thumbnail}")
     end
   end
   
