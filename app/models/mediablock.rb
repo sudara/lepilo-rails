@@ -67,9 +67,11 @@ private
   def do_mini_magick(path)
     image = MiniMagick::Image.from_file(path)
     image.resize "x350"
+    image.format "jpg"
     jpgname = "#{RAILS_ROOT}/public/data/images/#{self.filename}"
     image.write(jpgname)
     image.resize "x150"
+    image.format "jpg"
     jpgname = "#{RAILS_ROOT}/public/data/thumbnails/#{self.thumbnail}"
     image.write(jpgname)
   end
