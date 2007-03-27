@@ -1,6 +1,6 @@
 class CreateTextblockLinks < ActiveRecord::Migration
   def self.up
-    create_table :textblock_links do |t|
+    create_table :textblock_links, :force => true do |t|
       # t.column :name, :string
     end
   end
