@@ -24,38 +24,26 @@ class Mediablock < ActiveRecord::Base
   end
   
   def after_save
-      path = "#{RAILS_ROOT}/public/data/originals/#{self.original}"
-      if @importflag
-        File.open(path, "wb") do |f|
-          f.write( File.open(@importfile, "rb").read )
-        end
-        do_mini_magick path   
-      else
-        File.open(path, "wb") do |f|
-          f.write( @tmp_file.read )
-        end
-        do_mini_magick path
+    path = "#{RAILS_ROOT}/public/data/originals/#{self.original}"
+    File.open(path, "wb") do |f|
+      f.write( File.open(@importfile, "rb").read ) if @importflag
+      f.write( @tmp_file.read ) unless @importflag
     end
+    do_mini_magick path   
   end
   
   def after_destroy
-    if File.exists?("#{RAILS_ROOT}/public/data/images/#{self.filename}")
-      File.delete("#{RAILS_ROOT}/public/data/images/#{self.filename}")
-    end
-
-    if File.exists?("#{RAILS_ROOT}/public/data/thumbnails/#{self.thumbnail}")
-      File.delete("#{RAILS_ROOT}/public/data/thumbnails/#{self.thumbnail}")
-    end
-
-    if File.exists?("#{RAILS_ROOT}/public/data/originals/#{self.original}")
-      File.delete("#{RAILS_ROOT}/public/data/originals/#{self.original}")
-    end
+    path = "#{RAILS_ROOT}/public/data/images/#{self.filename}"
+    delete_img path
+    path = "#{RAILS_ROOT}/public/data/thumbnails/#{self.thumbnail}"
+    delete_img path
+    path = "#{RAILS_ROOT}/public/data/originals/#{self.original}"
+    delete_img path
     
     @blocks = BlockLink.find_all_by_mediablock_id(self.id)
     for block in @blocks
       block.destroy
     end
-    
   end
   
 private
@@ -84,5 +72,11 @@ private
     image.resize "x150"
     jpgname = "#{RAILS_ROOT}/public/data/thumbnails/#{self.thumbnail}"
     image.write(jpgname)
+  end
+  
+  def delete_img(path)
+    if File.exists?(path)
+      File.delete(path)
+    end 
   end
 end
