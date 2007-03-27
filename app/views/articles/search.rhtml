@@ -1,7 +1,5 @@
 <% if @items && @items.length > 0 %>
 
-  <img src="/images/search-articles.png" >
-
   <% for dragarticle in @items %>
   <div class="dragline" id="dragarticle_<%= dragarticle.id %>">
     <%
@@ -19,7 +17,7 @@
     <% end %>
   </div>
   <% end %>
-
+  <br style="clear:both"/>
 
 <% else %>
 <% end %>

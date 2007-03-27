@@ -1,12 +1,15 @@
-// Copyright (c) 2005 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
-//           (c) 2005 Ivan Krstic (http://blogs.law.harvard.edu/ivan)
-//           (c) 2005 Jon Tirsen (http://www.tirsen.com)
+// script.aculo.us controls.js v1.7.1_beta1, Mon Mar 12 14:40:50 +0100 2007
+
+// Copyright (c) 2005-2007 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
+//           (c) 2005-2007 Ivan Krstic (http://blogs.law.harvard.edu/ivan)
+//           (c) 2005-2007 Jon Tirsen (http://www.tirsen.com)
 // Contributors:
 //  Richard Livsey
 //  Rahul Bhargava
 //  Rob Wills
 // 
-// See scriptaculous.js for full license.
+// script.aculo.us is freely distributable under the terms of an MIT-style license.
+// For details, see the script.aculo.us web site: http://script.aculo.us/
 
 // Autocompleter.Base handles all the autocompletion functionality 
 // that's independent of the data source for autocompletion. This
@@ -48,7 +51,7 @@ Autocompleter.Base.prototype = {
     this.index       = 0;     
     this.entryCount  = 0;
 
-    if (this.setOptions)
+    if(this.setOptions)
       this.setOptions(options);
     else
       this.options = options || {};
@@ -58,17 +61,20 @@ Autocompleter.Base.prototype = {
     this.options.frequency    = this.options.frequency || 0.4;
     this.options.minChars     = this.options.minChars || 1;
     this.options.onShow       = this.options.onShow || 
-    function(element, update){ 
-      if(!update.style.position || update.style.position=='absolute') {
-        update.style.position = 'absolute';
-        Position.clone(element, update, {setHeight: false, offsetTop: element.offsetHeight});
-      }
-      Effect.Appear(update,{duration:0.15});
-    };
+      function(element, update){ 
+        if(!update.style.position || update.style.position=='absolute') {
+          update.style.position = 'absolute';
+          Position.clone(element, update, {
+            setHeight: false, 
+            offsetTop: element.offsetHeight
+          });
+        }
+        Effect.Appear(update,{duration:0.15});
+      };
     this.options.onHide = this.options.onHide || 
-    function(element, update){ new Effect.Fade(update,{duration:0.15}) };
+      function(element, update){ new Effect.Fade(update,{duration:0.15}) };
 
-    if (typeof(this.options.tokens) == 'string') 
+    if(typeof(this.options.tokens) == 'string') 
       this.options.tokens = new Array(this.options.tokens);
 
     this.observer = null;
@@ -84,8 +90,7 @@ Autocompleter.Base.prototype = {
   show: function() {
     if(Element.getStyle(this.update, 'display')=='none') this.options.onShow(this.element, this.update);
     if(!this.iefix && 
-      (navigator.appVersion.indexOf('MSIE')>0) &&
-      (navigator.userAgent.indexOf('Opera')<0) &&
+      (Prototype.Browser.IE) &&
       (Element.getStyle(this.update, 'position')=='absolute')) {
       new Insertion.After(this.update, 
        '<iframe id="' + this.update.id + '_iefix" '+
@@ -135,17 +140,17 @@ Autocompleter.Base.prototype = {
        case Event.KEY_UP:
          this.markPrevious();
          this.render();
-         if(navigator.appVersion.indexOf('AppleWebKit')>0) Event.stop(event);
+         if(Prototype.Browser.WebKit) Event.stop(event);
          return;
        case Event.KEY_DOWN:
          this.markNext();
          this.render();
-         if(navigator.appVersion.indexOf('AppleWebKit')>0) Event.stop(event);
+         if(Prototype.Browser.WebKit) Event.stop(event);
          return;
       }
      else 
        if(event.keyCode==Event.KEY_TAB || event.keyCode==Event.KEY_RETURN || 
-         (navigator.appVersion.indexOf('AppleWebKit') > 0 && event.keyCode == 0)) return;
+         (Prototype.Browser.WebKit > 0 && event.keyCode == 0)) return;
 
     this.changed = true;
     this.hasFocus = true;
@@ -259,11 +264,11 @@ Autocompleter.Base.prototype = {
     if(!this.changed && this.hasFocus) {
       this.update.innerHTML = choices;
       Element.cleanWhitespace(this.update);
-      Element.cleanWhitespace(this.update.firstChild);
+      Element.cleanWhitespace(this.update.down());
 
-      if(this.update.firstChild && this.update.firstChild.childNodes) {
+      if(this.update.firstChild && this.update.down().childNodes) {
         this.entryCount = 
-          this.update.firstChild.childNodes.length;
+          this.update.down().childNodes.length;
         for (var i = 0; i < this.entryCount; i++) {
           var entry = this.getEntry(i);
           entry.autocompleteIndex = i;
@@ -274,9 +279,14 @@ Autocompleter.Base.prototype = {
       }
 
       this.stopIndicator();
-
       this.index = 0;
-      this.render();
+      
+      if(this.entryCount==1 && this.options.autoSelect) {
+        this.selectEntry();
+        this.hide();
+      } else {
+        this.render();
+      }
     }
   },
 
@@ -464,10 +474,16 @@ Ajax.InPlaceEditor.prototype = {
     this.element = $(element);
 
     this.options = Object.extend({
+      paramName: "value",
       okButton: true,
+      okLink: false,
       okText: "ok",
+      cancelButton: false,
       cancelLink: true,
       cancelText: "cancel",
+      textBeforeControls: '',
+      textBetweenControls: '',
+      textAfterControls: '',
       savingText: "Saving...",
       clickToEditText: "Click to edit",
       okText: "ok",
@@ -555,23 +571,52 @@ Ajax.InPlaceEditor.prototype = {
       var br = document.createElement("br");
       this.form.appendChild(br);
     }
+    
+    if (this.options.textBeforeControls)
+      this.form.appendChild(document.createTextNode(this.options.textBeforeControls));
 
     if (this.options.okButton) {
-      okButton = document.createElement("input");
+      var okButton = document.createElement("input");
       okButton.type = "submit";
       okButton.value = this.options.okText;
       okButton.className = 'editor_ok_button';
       this.form.appendChild(okButton);
     }
+    
+    if (this.options.okLink) {
+      var okLink = document.createElement("a");
+      okLink.href = "#";
+      okLink.appendChild(document.createTextNode(this.options.okText));
+      okLink.onclick = this.onSubmit.bind(this);
+      okLink.className = 'editor_ok_link';
+      this.form.appendChild(okLink);
+    }
+    
+    if (this.options.textBetweenControls && 
+      (this.options.okLink || this.options.okButton) && 
+      (this.options.cancelLink || this.options.cancelButton))
+      this.form.appendChild(document.createTextNode(this.options.textBetweenControls));
+      
+    if (this.options.cancelButton) {
+      var cancelButton = document.createElement("input");
+      cancelButton.type = "submit";
+      cancelButton.value = this.options.cancelText;
+      cancelButton.onclick = this.onclickCancel.bind(this);
+      cancelButton.className = 'editor_cancel_button';
+      this.form.appendChild(cancelButton);
+    }
 
     if (this.options.cancelLink) {
-      cancelLink = document.createElement("a");
+      var cancelLink = document.createElement("a");
       cancelLink.href = "#";
       cancelLink.appendChild(document.createTextNode(this.options.cancelText));
       cancelLink.onclick = this.onclickCancel.bind(this);
-      cancelLink.className = 'editor_cancel';      
+      cancelLink.className = 'editor_cancel editor_cancel_link';      
       this.form.appendChild(cancelLink);
     }
+    
+    if (this.options.textAfterControls)
+      this.form.appendChild(document.createTextNode(this.options.textAfterControls));
   },
   hasHTMLLineBreaks: function(string) {
     if (!this.options.handleLineBreaks) return false;
@@ -595,7 +640,7 @@ Ajax.InPlaceEditor.prototype = {
       var textField = document.createElement("input");
       textField.obj = this;
       textField.type = "text";
-      textField.name = "value";
+      textField.name = this.options.paramName;
       textField.value = text;
       textField.style.backgroundColor = this.options.highlightcolor;
       textField.className = 'editor_field';
@@ -608,7 +653,7 @@ Ajax.InPlaceEditor.prototype = {
       this.options.textarea = true;
       var textArea = document.createElement("textarea");
       textArea.obj = this;
-      textArea.name = "value";
+      textArea.name = this.options.paramName;
       textArea.value = this.convertHTMLLineBreaks(text);
       textArea.rows = this.options.rows;
       textArea.cols = this.options.cols || 40;
@@ -778,6 +823,8 @@ Object.extend(Ajax.InPlaceCollectionEditor.prototype, {
       collection.each(function(e,i) {
         optionTag = document.createElement("option");
         optionTag.value = (e instanceof Array) ? e[0] : e;
+        if((typeof this.options.value == 'undefined') && 
+          ((e instanceof Array) ? this.element.innerHTML == e[1] : e == optionTag.value)) optionTag.selected = true;
         if(this.options.value==optionTag.value) optionTag.selected = true;
         optionTag.appendChild(document.createTextNode((e instanceof Array) ? e[1] : e));
         selectTag.appendChild(optionTag);

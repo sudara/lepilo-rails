@@ -1,22 +1,71 @@
-<h1>Artikel &raquo; <span class="gray"><%= @article.title %></span> &laquo; bearbeiten</h1>
-
-<div id="fdboptions" style="display:none">
-  <div id="entrySettings" >
-      <%= start_form_tag :action => 'update', :id => @article %>
-        <%= render :partial => 'form' %>
-        <br style="clear:both;"/>
-        <%= submit_tag 'Speichern' %>
-      <%= end_form_tag %>
-  </div>
-</div>
-<div id="fdbheader">
-<%= content_tag 'DIV', '<img src="/images/closetray.png">', :style => 'width:80px;float:right',
-  :onclick => visual_effect(:slideUp, 'fdboptions') %>
-<%= content_tag 'DIV', '<img src="/images/opentray.png">', :style => 'width:63px;float:right',
-  :onclick => visual_effect(:slideDown, 'fdboptions')  %>
-</div>
 
 <div id="fdbcontainer">
+  <div id="fdbinspector">
+    <div id="tabs">
+      <ul>
+        <li style="margin-left: 1px" id="tabHeader1" class="currenttab"><a href="javascript:void(0)" onClick="toggleTab(1,5)"><span>Einstellungen</span></a></li>
+        <li id="tabHeader2"><a href="javascript:void(0)" onClick="toggleTab(2,5)" ><span><%= image_tag "/images/16article.png",
+            :alt => "artikel", 
+            :title => "artikel", 
+            :class => "icon16"  %>
+        </span></a></li>
+        <li id="tabHeader3"><a href="javascript:void(0)" onclick="toggleTab(3,5)"><span><%= image_tag "/images/16gallery.png",
+            :alt => "gallerien", 
+            :title => "gallerien", 
+            :class => "icon16"  %>
+        </span></a></li>
+        <li id="tabHeader4"><a href="javascript:void(0)" onClick="toggleTab(4,5)"><span><%= image_tag "/images/16image.png",
+            :alt => "bilder", 
+            :title => "bilder", 
+            :class => "icon16"  %>
+        </span></a></li>
+        <li id="tabHeader5"><a href="javascript:void(0)" onclick="toggleTab(5,5);"><span><%= image_tag "/images/16text.png",
+            :alt => "texte", 
+            :title => "texte", 
+            :class => "icon16"  %></span></a></li>
+      </ul>
+    
+    </div><!--End of tabs-->
+        
+    <div id="tabscontent">
+        <div id="tabContent1" class="tabContent" >
+          Artikel bearbeiten: <%= @article.title %>
+        </div>
+
+        <div id="tabContent2" class="tabContent" style="display:none;">
+          <%= render_partial 'articles/sidebar' %>
+        </div>
+
+        <div id="tabContent3" class="tabContent" style="display:none;">
+          <%= render_partial 'galleries/sidebar' %>
+        </div>
+
+        <div id="tabContent4" class="tabContent" style="display:none;">
+          <%= render_partial 'mediablocks/sidebar' %>
+        </div>
+
+        <div id="tabContent5" class="tabContent" style="display:none;">
+          <%= render_partial 'textblocks/sidebar' %>
+        </div>
+    </div><!--End of tabscontent-->
+  </div>
+
+  <div id="fdboptions" style="display:none">
+    <div id="entrySettings" >
+        <%= start_form_tag :action => 'update', :id => @article %>
+          <%= render :partial => 'form' %>
+          <br style="clear:both;"/>
+          <%= submit_tag 'Speichern' %>
+        <%= end_form_tag %>
+    </div>
+  </div>
+  <div id="fdbheader">
+  <%= content_tag 'div', '<img src="/images/closetray.png" />', :style => 'width:80px;float:right',
+    :onclick => visual_effect(:slideUp, 'fdboptions') %>
+  <%= content_tag 'div', '<img src="/images/opentray.png" />', :style => 'width:63px;float:right',
+    :onclick => visual_effect(:slideDown, 'fdboptions')  %>
+  </div>
+
   <div class="editdata">
 
   <%= link_to "Neuer Textblock", {  :controller => "textblocks",
@@ -49,21 +98,25 @@
     <%= end_form_tag %>
        
   </div>
-  
-<%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.last.id }) -%>  
 
-<%= sortable_element 'block-list' ,
-  :tag => "div",
-  :constraint => false,
-  :url => { :action => "sort", :id => @article }, 
-  :complete => visual_effect(:highlight, 'block-list' ) 
-%> 
+  <div id="fdbtemplatecontainer">  
+  <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.last.id }) -%>  
 
-<br style="clear:both"/>
+  <br style="clear:both"/>
+  </div>
 
 </div>
 
-<%= drop_receiving_element "fdbcontainer", 
+<%= drop_receiving_element "fdbtemplatecontainer", 
       :update => "fdbcontent", :url => { :action => "addblock" },
       :accept => "dragblock", :hoverclass => "dropzone-active" %>
 
+<%= drop_receiving_element "fdbtemplatecontainer", 
+      :update => "fdbcontent", :url => { :action => "addblock" },
+      :accept => "dragline", :hoverclass => "dropzone-active" %>
+
+<%= sortable_element 'block-list' ,
+      :tag => "div",
+      :constraint => false,
+      :url => { :action => "sort", :id => @article }, 
+      :complete => visual_effect(:highlight, 'block-list' ) %> 

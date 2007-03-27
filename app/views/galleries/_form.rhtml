@@ -1,5 +1,6 @@
 <%= error_messages_for 'gallery' %>
 
+<%  session[:current_article] = nil %>  
 <%  session[:current_gallery] = params[:id] %>  
 <%  
   if params[:page]
@@ -10,7 +11,7 @@
 %>
 
 <!--[form:gallery]-->
-<div class="fdbblock" style="width:500px">
+<div class="fdbblock" style="width:350px">
 
   <p>Name<br/>
   <%= text_field 'gallery', 'title'  %></p>

@@ -1,0 +1,19 @@
+<% if @items && @items.length > 0 %>
+
+  <% for dragtextblock in @items %>
+  <div class="dragline" id="dragtextblock_<%= dragtextblock.id %>">
+    <%= draggable_element "dragtextblock_#{dragtextblock.id}", :revert => true %>
+    <%= image_tag "/images/16text.png",
+        :title => "textblock", 
+        :class => "iconlist"  %>
+    <strong><%= link_to dragtextblock.title, {   :controller => "textblocks",
+      	                              :action => "edit",
+      	                              :id => dragtextblock.id }, 
+      	                              :popup => ['new_window', 'height=600,width=900,scrollbars=1'] %></strong><br/>
+    <span style="font-size:10px"><%= textilize(dragtextblock.content[0...150]) %></span>
+  </div>
+  <% end %>
+  <br style="clear:both"/>
+
+<% else %>
+<% end %>

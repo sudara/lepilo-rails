@@ -14,6 +14,19 @@ class TextblocksController < ApplicationController
     end
   end
 
+  def search
+    if !@params['criteria'] || 0 == @params['criteria'].length
+      @items = nil
+      render_without_layout
+    else
+      @items = Textblock.find(:all, :order => 'updated_at DESC',
+        :conditions => [ 'LOWER(content) LIKE ?', 
+        '%' + @params['criteria'].downcase + '%' ])
+      @mark_term = @params['criteria']
+      render_without_layout
+    end
+  end
+
   def show
     @textblock = Textblock.find(params[:id])
     if params[:rendersimple]  
@@ -69,9 +82,9 @@ class TextblocksController < ApplicationController
 
   def edit
     @textblock = Textblock.find(params[:id])
-    if params[:rendersimple]  
+    # if params[:rendersimple]  
       render :layout => "simple"
-    end
+    # end
   end
 
   def update

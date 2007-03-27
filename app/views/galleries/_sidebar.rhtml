@@ -1,0 +1,14 @@
+<div class="searchblock">
+  <input type="text" id="searchgalleriessidebar" name="searchgalleriessidebar" size="30" />&nbsp;<img id="busygallerysearch" src="/images/ajax-loader.gif" style="display:none" /> 
+</div>
+<div id="searchGalleriesResultsSidebar" class="sidebar" style="overflow:visible">
+
+</div>
+
+<%= observe_field 'searchgalleriessidebar', 
+    :frequency => 0.5, 
+    :update => 'searchGalleriesResultsSidebar', 
+    :url => { :controller => 'galleries', :action=> 'search' }, 
+    :with => "'criteria=' + escape(value)", 
+    :loading => "document.getElementById('busygallerysearch').style.display='inline'", 
+    :loaded => "document.getElementById('busygallerysearch').style.display='none'" %>       

@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    if 0 == @params['criteria'].length
+    if !@params['criteria'] || 0 == @params['criteria'].length
       @items = nil
       render_without_layout
     else

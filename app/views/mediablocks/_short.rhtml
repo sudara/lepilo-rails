@@ -10,10 +10,10 @@
                                         :action => "destroylink", 
                                         :id => link_id }, 
                                         :confirm => 'Sind Sie sicher?' %> |
-  <%= link_to 'Löschen', { :controller => "mediablocks",
-                                :action => "destroy", 
-                                :id => mediablock.id }, 
-                                :confirm => 'Sind Sie sicher?' %>
+  <%= link_to 'Löschen', {  :controller => "mediablocks",
+                            :action => "destroy", 
+                            :id => mediablock.id }, 
+                            :confirm => 'Sind Sie sicher?' %>
   </span>
 <% end %><br/>
-<img src="/data/images/<%= mediablock.filename %>" class="articlemedia" ><br/>
+<img src="/data/images/<%= mediablock.filename %>" class="articlemedia" /><br/>

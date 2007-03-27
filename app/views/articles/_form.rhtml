@@ -1,6 +1,7 @@
 <%= error_messages_for 'article' %>
 
 <%  session[:current_article] = params[:id] %>  
+<%  session[:current_gallery] = nil %>  
 <%  
   if params[:page]
     session[:current_page] = params[:page] 
@@ -12,7 +13,7 @@
 <!--[form:article]-->
 <div style="float:left">
 
-  <div class="fdbblock" style="width:500px">
+  <div class="fdbblock" style="width:280px">
     Derzeit unter:<br/> 
     <h4>
     <%= hidden_field 'article', 'topic_id', 'value'=>@article.topic_id %>
@@ -64,13 +65,13 @@
     
   <div class="fdbblock">
   Titel<br/>
-  <%= text_field 'article', 'title', "size" => 45  %><br/>
+  <%= text_field 'article', 'title', "size" => 40  %><br/>
 
   Artikeltyp<br/>
   <select id="article_type" name="article[type]"><option value="projekt">Projekt</option><option value="news">News</option></select><br/>
 
   Beschreibung<br/>
-  <%= text_area 'article', 'description', "cols" => 45, "rows" => 4  %><br/>
+  <%= text_area 'article', 'description', "cols" => 40, "rows" => 4  %><br/>
   </div>
 
   <!--[eoform:article]-->

@@ -29,6 +29,7 @@ class SettingsController < ApplicationController
     flash[:notice] = 'FTP Upload abgeschlossen'
     redirect_to :action => 'index'
   end
+  
   def writexml
       @articles = Article.find(:all, :order => 'release_date DESC', :conditions => "released = 1")
       # render :layout => false

@@ -8,20 +8,20 @@ class MediablocksController < ApplicationController
   end
 
   def list
-    @mediablock_pages, @mediablocks = paginate :mediablocks, :order => 'created_at DESC', :per_page => 32
+    @mediablock_pages, @mediablocks = paginate :mediablocks, :order => 'created_at DESC', :per_page => 6
     if params[:rendersimple]  
       render :layout => "simple"
     end
   end
 
   def search
-    if 0 == @params['criteria'].length
+    if !@params['criteria'] || 0 == @params['criteria'].length
       @mediaitems = nil
       render_without_layout
     else
       @mediaitems = Mediablock.find(:all, :order => 'updated_at DESC',
         :conditions => [ 'LOWER(title) LIKE ?', 
-        '%' + @params['criteria'].downcase + '%' ], :limit => 12)
+        '%' + @params['criteria'].downcase + '%' ], :limit => 18)
       @mark_term = @params['criteria']
       render_without_layout
     end
@@ -101,6 +101,11 @@ class MediablocksController < ApplicationController
 
   def destroylink
     BlockLink.find(params[:id]).destroy
-    redirect_to :controller => '/articles', :action => 'edit', :id => session[:current_article]
+    if session[:current_article]
+      redirect_to :controller => '/articles', :action => 'edit', :id => session[:current_article]
+    end
+    if session[:current_gallery]
+      redirect_to :controller => '/galleries', :action => 'edit', :id => session[:current_gallery]
+    end    
   end
 end

@@ -127,10 +127,11 @@ div.progressBar div.background {
 
 #navigation {
   margin:0px;
-  margin-left:200px;
+  padding-left:240px;
   margin-top:10px;
-  margin-bottom:10px;
-  overflow:auto;
+  height:70px;
+  border-bottom:1px solid #bfbfbf;
+  overflow:hidden;
   clear:both;
 }
 
@@ -171,13 +172,6 @@ div.progressBar div.background {
   padding:0px;
 }
 
-#searchResultArticles {
-  overflow:visible;  
-} 
-
-#searchResultMedia {
-  overflow:visible;  
-}
 
 #login {
   width:540px;
@@ -205,7 +199,6 @@ div.progressBar div.background {
   padding-top:10px;
   padding-bottom:-20px;
   overflow:auto;
-  border-top:1px solid #bfbfbf;
 }
 
 #fdbhelp {
@@ -218,6 +211,7 @@ div.progressBar div.background {
 #fdbheader {
   background-image:url(/images/bgheader.png); 
   background-repeat:repeat-x;
+  background-color: #333;
   overflow:auto;
   height:30px;
   margin-top:0px;
@@ -228,19 +222,19 @@ div.progressBar div.background {
 #fdbcontent {
   background-color: #fff;
   min-height:100%;
-  margin-right:auto;
-  margin-left:0px;
-  margin-top:0px;
-  margin-bottom:0px;
-  padding-bottom:20px;
   overflow:auto;
 }
 
 #fdbcontainer {
-  background-image:url(/images/bgedit.png); 
-  background-repeat: repeat-x;
-  background-color:#666;
-  padding:15px;
+  background-color:#333;
+  padding-bottom:20px;
+  bottom:0px;
+}
+
+#fdbtemplatecontainer {
+  margin:20px;
+  margin-right:310px;
+  padding-bottom:0px;
 }
 
 #fdbsearchlist {
@@ -252,6 +246,92 @@ div.progressBar div.background {
   float:left;
 }
 
+#fdbinspector {
+  background-color:#fff;
+  background-image:url(/images/plastic.png); 
+  background-repeat: repeat-x;
+  position: relative;
+  right:0px;
+  bottom:0px;
+  z-index: 1000;
+  margin:0px;
+  width:300px;
+  min-height:700px;
+  height:100%;
+  float:right;
+}
+ 
+  
+  
+#tabs{
+  padding: 0;
+  height:21px;
+  background: transparent;
+  voice-family: "\"}\"";
+  voice-family: inherit;
+  border-top:1px solid #bfbfbf;
+  border-bottom:1px solid #bfbfbf;
+}
+#tabs ul{
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+#tabs li{
+  display:inline;
+  padding:0;
+}
+#tabs a{
+    float:left;
+    margin:0;
+    height:22px;
+    min-width:32px;
+    text-decoration:none;
+    border:0px;
+    background-color:transparent;
+    border-right:1px solid #999;
+}
+#tabs a span{
+    float:left;
+    display:block;
+    margin:0px;
+    padding-top:3px;
+    padding-left:5px;
+    padding-right:5px;
+    border:0px;
+    text-align:center;
+}
+#tabs a span img {border:0px;}
+#tabs a span{float:none;}
+#tabs a:hover{
+  background-color: #fafafa; 
+}
+#tabs a:hover span{
+}
+#tabHeaderActive span { 
+  background: transparent;
+  border:0px;
+}
+#tabHeaderActive a { 
+  background: transparent;
+  background-image:url(/images/plasticg.png); 
+  background-repeat: repeat-x;
+  border-right:1px solid #999;
+}
+.tabContent {
+  background-image:url(/images/container.png); 
+  background-repeat: repeat-x;
+  clear:both;
+  height:750px;
+  background-color:#fff;
+}
+.sidebar {
+  position:absolute;
+  width:100%;
+  top:56px;
+}
+ 
+ 
 #fdbexplanation {
   width:650px;
   margin-right:0px;
@@ -511,16 +591,21 @@ div.progress-container > div {
 div.ipmtitle {
   font-family: "HelveticaNeue-Bold", "Helvetica Neue Bold", sans-serif;
   color:#fff;
-  height:10px;
+  background-color:#333;
+  height:25px;
   font-size:10px;
   font-weight:bold;
   line-height:10px;
-  margin-left:-105;
-  display: inline;
+  margin-bottom:-25px;
+  padding-left:2px;
+  overflow:hidden;
+  opacity:0.1;
+  filter:alpha(opacity:10);  
 }
 
 div.ipmtitle:hover {
-  color:#000;
+  opacity:0.9;
+  filter:alpha(opacity:90);
 }
 
 #searchResultsMedia {
@@ -548,17 +633,16 @@ div.ipmtitle:hover {
 }
 
 .searchblock {
-  background-image:url(/images/search-field.png); 
-  background-repeat:repeat-y;
-  position:relative;
-  height:32px;
-  width:280px;
-  padding-left:40px;
-  padding-right:10px;
-  padding-top:5px;
-  margin-right:5px;
-  overflow:hidden;
+  height:30px;
+  top:0px;
+  padding-left:10px;
+  border-bottom:1px solid #bfbfbf;
+  vertical-align: text-top;
   z-index:100;
+}
+
+.searchblock img {
+  vertical-align: text-top;
 }
 
 .sortableblock {
@@ -643,6 +727,15 @@ div.block128x128:hover {
   float:left;
 }
 
+.searchthumbnail {
+  border:1px solid #fff;
+  height:auto;
+  width:92px;
+  max-height:92px;
+  padding-top:2px;
+  float:left;
+}
+
 .listdescription {
   font-size:11px;
   padding-left:5px;
@@ -654,15 +747,15 @@ div.block128x128:hover {
 }
 
 .dragblock {
-  background-image:url(/images/dragblock.png); 
-  background-repeat: no-repeat;
+  background-color:#fff;
   text-align:center;
   font-size:10px;
-  width:89px;
-  height:90px;
+  width:94px;
+  height:100px;
   margin-top:1px;
   margin-right:1px;
   overflow:hidden;
+  padding:2px;
   float:left;
 }
 
