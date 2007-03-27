@@ -98,6 +98,10 @@
     <%= end_form_tag %>
        
   </div>
+  <div class="editdata">
+    Fragment: 1 | 2 | 3 | 4 | — Neues Fragment
+  </div>
+  
 
   <div id="fdbtemplatecontainer">  
   <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.last.id }) -%>  

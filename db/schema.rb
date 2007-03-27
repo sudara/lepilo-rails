@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 8) do
 
   create_table "articles", :force => true do |t|
     t.column "topic_id",     :integer
@@ -61,6 +61,27 @@ ActiveRecord::Schema.define(:version => 0) do
     t.column "content",    :text
   end
 
+  create_table "fragments", :force => true do |t|
+    t.column "article_id", :integer
+    t.column "type",       :string,   :limit => 64
+    t.column "position",   :integer
+    t.column "user_id",    :integer
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
+    t.column "info",       :string,   :limit => 250
+  end
+
+  create_table "galleries", :force => true do |t|
+    t.column "topic_id",     :integer
+    t.column "thumbnail_id", :integer
+    t.column "released",     :boolean
+    t.column "user_id",      :integer
+    t.column "created_at",   :datetime
+    t.column "updated_at",   :datetime
+    t.column "title",        :string,   :limit => 250
+    t.column "description",  :text
+  end
+
   create_table "mediablocks", :force => true do |t|
     t.column "created_at",    :datetime
     t.column "updated_at",    :datetime
@@ -81,6 +102,21 @@ ActiveRecord::Schema.define(:version => 0) do
     t.column "updated_at",  :datetime
     t.column "title",       :string,   :limit => 250
     t.column "description", :text
+  end
+
+  create_table "settings", :force => true do |t|
+    t.column "setting_id",  :integer, :default => 0
+    t.column "position",    :integer
+    t.column "key",         :string
+    t.column "value",       :string
+    t.column "description", :text
+  end
+
+  create_table "tags", :force => true do |t|
+    t.column "name", :string, :limit => 250
+  end
+
+  create_table "templates", :force => true do |t|
   end
 
   create_table "textblocks", :force => true do |t|

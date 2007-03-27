@@ -8,7 +8,7 @@ class MediablocksController < ApplicationController
   end
 
   def list
-    @mediablock_pages, @mediablocks = paginate :mediablocks, :order => 'created_at DESC', :per_page => 6
+    @mediablock_pages, @mediablocks = paginate :mediablocks, :order => 'created_at DESC', :per_page => 24
     if params[:rendersimple]  
       render :layout => "simple"
     end
