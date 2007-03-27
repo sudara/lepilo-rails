@@ -19,7 +19,8 @@ class SettingsController < ApplicationController
       ftp.putbinaryfile("#{RAILS_ROOT}/public/projekte.xml", rfile)
       #
       @mediablocks = Mediablock.find(:all, :conditions => "uploaded_at = '0000-00-00 00:00:00'")
-      for mediablock in @mediablocks
+      #breakpoint
+      @mediablocks.each do |mediablock|
         ftp.putbinaryfile("#{RAILS_ROOT}/public/data/images/#{mediablock.filename}", "/test/images/#{mediablock.filename}")
         ftp.putbinaryfile("#{RAILS_ROOT}/public/data/thumbnails/#{mediablock.thumbnail}", "/test/thumbnails/#{mediablock.thumbnail}")
         mediablock.uploaded_at = DateTime.now
