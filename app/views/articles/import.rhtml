@@ -47,10 +47,11 @@
         <% if file[-4..-1] == ".jpg" || file[-5..-1] == ".jpeg" || file[-4..-1] == ".tif" || file[-5..-1] == ".tiff" || file[-4..-1] == ".png" %>
                 
         <%  
-        
+        path = "#{RAILS_ROOT}/public/data/import/#{params[:importdir]}/#{file}"
         @importmediablock = Mediablock.new
         @importmediablock.original_name = "#{@article.reference} - #{file}"
-        @importmediablock.importfile = "#{RAILS_ROOT}/public/data/import/#{params[:importdir]}/#{file}"
+        @importmediablock.importfile = path
+        @importmediablock.uploaded_at = DateTime.new
 		@importmediablock.description = @article.title
 
         @importmediablock.save!
