@@ -1,0 +1,24 @@
+<h1>JAGSCHEMASCH!</h1>
+
+<div id="box1" class="templatebox" style="width:302px;height:300px;">&nbsp;</div>
+<div id="box2" class="templatebox" style="width:302px;height:300px;">&nbsp; </div>
+<br style="clear:left"/>
+<div id="box3" class="templatebox" style="width:150px;height:150px;">&nbsp; </div>
+<div id="box4" class="templatebox" style="width:150px;height:150px;">&nbsp; </div>
+<div id="box5" class="templatebox" style="width:150px;height:150px;">&nbsp; </div>
+<div id="box6" class="templatebox" style="width:150px;height:150px;">&nbsp; </div>
+<br style="clear:left"/>
+<div id="box7" class="templatebox" style="width:150px;height:150px;">&nbsp; </div>
+<div id="box8" class="templatebox" style="width:150px;height:150px;">&nbsp; </div>
+<div id="box9" class="templatebox" style="width:150px;height:150px;">&nbsp; </div>
+<div id="box10" class="templatebox" style="width:150px;height:150px;">&nbsp; </div>
+<br style="clear:both"/>
+<br style="clear:both"/>
+
+<%= drop_receiving_element "box1", 
+      :update => "fdbcontent", :url => { :action => "addblock" },
+      :accept => "dragblock", :hoverclass => "templateboxover" %>
+
+<%= drop_receiving_element "box1", 
+      :update => "fdbcontent", :url => { :action => "addblock" },
+      :accept => "dragline", :hoverclass => "templateboxover" %>

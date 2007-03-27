@@ -1,33 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dina4projekte><dina4projekt>
-		<id>127</id>
-		<datum>2005-09-26 08:24:23</datum>
-		<freigabe>1</freigabe>
-		<farbe>#ff9900</farbe>
-		<typ>projekt</typ>
-		<fertigstellung>2007-02-10</fertigstellung>
-		<name><![CDATA[<b>Novi članek</b>]]></name>
-		<auszeichnungen>Ta najnoveši članek na svetu in od vseh!</auszeichnungen>
-		<bilder>./data/images/1170687221.jpg|||./data/images/1170681312.jpg|||./data/images/1172063375.jpg|||</bilder>
-		<titel>Novi članek</titel>
-		<info>
-		  <![CDATA[<p><span class="f">UI ui ui ui ui</span><br />
-<strong>UI ui ui</strong> ui ui UI ui ui ui ui UI <span class="o">ui ui</span> ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui UI ui ui ui ui</p>
-		  ]]> 
-		  </info>
-		<thumbnail>./data/thumbnails/1170681312.jpg</thumbnail>
-	</dina4projekt><dina4projekt>
-		<id>126</id>
-		<datum>2005-09-26 08:24:23</datum>
-		<freigabe>1</freigabe>
-		<farbe>#ff9900</farbe>
-		<typ>projekt</typ>
-		<fertigstellung>2007-02-05</fertigstellung>
-		<name><![CDATA[<b>Testartikel</b>]]></name>
-		<auszeichnungen>Dada</auszeichnungen>
-		<bilder></bilder>
-		<titel>Testartikel</titel>
-		<info></info>
-		<thumbnail></thumbnail>
-	</dina4projekt>
+<dina4projekte>
 </dina4projekte>

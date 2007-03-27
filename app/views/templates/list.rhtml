@@ -1,0 +1,27 @@
+<h1>Listing templates</h1>
+
+<table>
+  <tr>
+  <% for column in Template.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for template in @templates %>
+  <tr>
+  <% for column in Template.content_columns %>
+    <td><%=h template.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => template %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => template %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => template }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @template_pages.current.previous } if @template_pages.current.previous %>
+<%= link_to 'Next page', { :page => @template_pages.current.next } if @template_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New template', :action => 'new' %>

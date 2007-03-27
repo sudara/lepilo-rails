@@ -2,7 +2,7 @@
 <div id="fdbcontainer">
   <div id="fdbinspector">
     <div id="tabs">
-      <ul>
+      <ul> 
         <li style="margin-left: 1px" id="tabHeader1" class="currenttab"><a href="javascript:void(0)" onClick="toggleTab(1,5)"><span>Einstellungen</span></a></li>
         <li id="tabHeader2"><a href="javascript:void(0)" onClick="toggleTab(2,5)" ><span><%= image_tag "/images/16article.png",
             :alt => "artikel", 
@@ -104,6 +104,7 @@
   
 
   <div id="fdbtemplatecontainer">  
+  <%= render :partial => "templates/dina4print" %>
   <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.last.id }) -%>  
 
   <br style="clear:both"/>

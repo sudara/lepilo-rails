@@ -370,6 +370,24 @@ div.progressBar div.background {
   border:5px solid #d4e543;  
 }
 
+.templatebox {
+  min-height: 50px;
+  min-width: 50px;
+  border: 1px dashed #fff;
+  background-color: #7d7d7d;
+  float: left;
+  overflow: visible;
+}
+
+.templateboxover {
+  min-height: 50px;
+  min-width: 50px;
+  border: 1px dashed #a1ff2a;
+  float: left;
+  overflow: visible;
+  background: #7d7d7d url(/images/dropzone.png) no-repeat 10px 10px;
+}
+
 #block-list {
   margin:0px;
 }
