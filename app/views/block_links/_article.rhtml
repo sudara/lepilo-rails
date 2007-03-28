@@ -3,7 +3,7 @@
 <% for link in @blocks %>
   <%  if link.textblock_id != nil %>
   <div id="item_<%= link.id %>" class="sortableblock"> 
-    <%= render_component(:controller => "textblocks", :action => "short", :params => {:block_id => link.textblock_id }) %>  
+    <%= render_partial 'textblocks/short', nil, 'textblock_id' => link.textblock_id, 'link_id' => link.id %>
   </div> 
   <% end %>
 

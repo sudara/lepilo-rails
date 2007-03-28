@@ -98,14 +98,16 @@
        
   </div>
   <div class="editdata">
-    Fragment: 1 | 2 | 3 | 4 | — Neues Fragment
+    Art: <%= link_to 'Web', {  :action => "edit", :id => @article.id, :fragment => "web" } %> | <%= link_to 'Print', {  :action => "edit", :id => @article.id, :fragment => "print" } %>
   </div>
   
 
   <div id="fdbtemplatecontainer">  
-  <%= render :partial => "templates/dina4print" %>
-  <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.last.id }) -%>  
-
+  <% if params[:fragment] == "print" %>
+    <%= render :partial => "templates/dina4print" %>
+  <% else %>
+    <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.find_by_content("web") }) -%>  
+  <% end %>
   <br style="clear:both"/>
   </div>
 

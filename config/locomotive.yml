@@ -3,4 +3,4 @@ mode: development
 runs_at_launch: 1
 identifier: lepilo
 port: 3344
-bundle: /Applications/Productivity/Locomotive2/Bundles/rmagickRailsJan2007_x86.locobundle
+bundle: /Applications/Productivity/Locomotive2/Bundles/rmagickRailsMar2007_i386.locobundle

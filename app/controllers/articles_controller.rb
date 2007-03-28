@@ -59,46 +59,53 @@ class ArticlesController < ApplicationController
     drop_type = params[:id].split("_")[0]  
     drop_id = params[:id].split("_")[1]  
     
+    if !params['fragment']
+      drop_into_fragment = @article.fragments.find_by_content("web").id
+    else
+      drop_into_fragment = @article.fragments.find_by_content(params['fragment']).id
+    end
+        
     if drop_type == "dragarticle"
       addlink = BlockLink.new
       addlink.article_id = drop_id
-      addlink.fragment_id = @article.fragments.first.id
+      addlink.fragment_id = drop_into_fragment
 
       if addlink.save
-        redirect_to :action => 'edit', :id => @article
+        redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']
       end
     end
 
     if drop_type == "draggallery"
       addlink = BlockLink.new
       addlink.gallery_id = drop_id
-      addlink.fragment_id = @article.fragments.first.id
+      addlink.fragment_id = drop_into_fragment
 
       if addlink.save
-        redirect_to :action => 'edit', :id => @article
+        redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']
       end
     end
 
     if drop_type == "dragmediablock"
       addlink = BlockLink.new
       addlink.mediablock_id = drop_id
-      addlink.fragment_id = @article.fragments.first.id
+      addlink.fragment_id = drop_into_fragment
 
       if addlink.save
-        redirect_to :action => 'edit', :id => @article
+        redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']
       end
     end
 
     if drop_type == "dragtextblock"
       addlink = BlockLink.new
       addlink.textblock_id = drop_id
-      addlink.fragment_id = @article.fragments.first.id
+      addlink.fragment_id = drop_into_fragment
 
       if addlink.save
-        redirect_to :action => 'edit', :id => @article
+        redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']
       end
     end
         
+                  
   end
 
 
@@ -253,6 +260,15 @@ class ArticlesController < ApplicationController
   
   def edit
     @article = Article.find(params[:id])
+    
+   # if test != Fragment.find_by_article_id_and_content(:article_id => @article.id, :content => "print")
+  #    @articlePrintFragment = Fragment.new
+  #    @articlePrintFragment.article_id = self.id
+  #    @articlePrintFragment.info = "Print PDF for #{self.title}"
+  #    @articlePrintFragment.content = "print"
+  #    @articlePrintFragment.save
+  #    @articlePrintFragment.update
+  #  end
     
     if params[:rendersimple]  
       render :layout => "simple"

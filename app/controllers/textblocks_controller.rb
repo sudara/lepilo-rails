@@ -104,4 +104,15 @@ class TextblocksController < ApplicationController
     # redirect_to :controller=>"/block_links", :action => "close_reload"
     redirect_to :controller => '/articles', :action => 'edit', :id => session[:current_article]
   end
+  
+  def destroylink
+    BlockLink.find(params[:id]).destroy
+    if session[:current_article]
+      redirect_to :controller => '/articles', :action => 'edit', :id => session[:current_article]
+    end
+    if session[:current_gallery]
+      redirect_to :controller => '/galleries', :action => 'edit', :id => session[:current_gallery]
+    end    
+  end
+  
 end

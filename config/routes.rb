@@ -23,13 +23,14 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'articles/showdina4/:page',
     :controller => 'articles', :action => 'showdina4',
     :page => /\d+/
+  map.connect ':controller/:action/:id/:fragment', 
+    :fragment => 'web'
   map.connect 'galleries',
     :controller => 'galleries', :action => 'index'
   map.connect 'galleries/showdina4/:id',
     :controller => 'galleries', :action => 'showdina4',
     :page => /\d+/
 
-
   # Install the default route as the lowest priority.
-  map.connect ':controller/:action/:id'
+    map.connect ':controller/:action/:id'
 end

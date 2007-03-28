@@ -14,15 +14,15 @@ class SettingsController < ApplicationController
       ftp.login(un, pw)
       #
       writexml
-      rfile = "/test/projekte.xml"
+      rfile = "/htdocs/projekte.xml"
       #ftp.delete(rfile)
       ftp.putbinaryfile("#{RAILS_ROOT}/public/projekte.xml", rfile)
       #
       @mediablocks = Mediablock.find(:all, :conditions => "uploaded_at = '0000-00-00 00:00:00'")
       #breakpoint
       @mediablocks.each do |mediablock|
-        ftp.putbinaryfile("#{RAILS_ROOT}/public/data/images/#{mediablock.filename}", "/test/images/#{mediablock.filename}")
-        ftp.putbinaryfile("#{RAILS_ROOT}/public/data/thumbnails/#{mediablock.thumbnail}", "/test/thumbnails/#{mediablock.thumbnail}")
+        ftp.putbinaryfile("#{RAILS_ROOT}/public/data/images/#{mediablock.filename}", "/htdocs/data/images/#{mediablock.filename}")
+        ftp.putbinaryfile("#{RAILS_ROOT}/public/data/thumbnails/#{mediablock.thumbnail}", "/htdocs/data/thumbnails/#{mediablock.thumbnail}")
         mediablock.uploaded_at = DateTime.now
         mediablock.update
       end

@@ -1,9 +1,10 @@
+<%  textblock = Textblock.find(textblock_id) %>
 <% # && @session['user'].role == "admin" 
 if @session['user'] %>
 	<span class="smalltext">
 	<%= link_to 'Bearbeiten', {   :controller => "textblocks",
 	                              :action => "edit",
-	                              :id => @textblock.id }, 
+	                              :id => textblock.id }, 
 	                              :popup => ['new_window', 'height=600,width=900,scrollbars=1'] %> |
   <%= link_to 'Verknüpfung Löschen', {  :controller => "textblocks",
                                         :action => "destroylink", 
@@ -11,10 +12,10 @@ if @session['user'] %>
                                         :confirm => 'Sind Sie sicher?' %> |
 	<%= link_to 'L&ouml;schen', { :controller => "textblocks",
 	                              :action => "destroy", 
-	                              :id => @textblock.id }, 
+	                              :id => textblock.id }, 
 	                              :confirm => 'Sind Sie sicher?' %>
 	</span>
 <% end %>
 <br/>
-<%= textilize(@textblock.title) %>
-<%= textilize(@textblock.content) %>
+<%= textilize(textblock.title) %>
+<%= textilize(textblock.content) %>

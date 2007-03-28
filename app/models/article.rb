@@ -4,11 +4,19 @@ class Article < ActiveRecord::Base
   has_and_belongs_to_many :tags
   
   def after_create
-    @articleFragment = Fragment.new
-    @articleFragment.article_id = self.id
-    @articleFragment.info = "Page 1 of #{self.title}"
-    @articleFragment.save
-    @articleFragment.update
+    @articleWebFragment = Fragment.new
+    @articleWebFragment.article_id = self.id
+    @articleWebFragment.info = "Web page for #{self.title}"
+    @articleWebFragment.content = "web"
+    @articleWebFragment.save
+    @articleWebFragment.update
+
+    @articlePrintFragment = Fragment.new
+    @articlePrintFragment.article_id = self.id
+    @articlePrintFragment.info = "Print PDF for #{self.title}"
+    @articlePrintFragment.content = "print"
+    @articlePrintFragment.save
+    @articlePrintFragment.update
   end
   
   def count_media
