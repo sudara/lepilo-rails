@@ -23,8 +23,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'articles/showdina4/:page',
     :controller => 'articles', :action => 'showdina4',
     :page => /\d+/
-  map.connect ':controller/:action/:id/:fragment', 
-    :fragment => 'web'
+  map.connect ':controller/:action/:id/:fragment' 
   map.connect 'galleries',
     :controller => 'galleries', :action => 'index'
   map.connect 'galleries/showdina4/:id',

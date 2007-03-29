@@ -1,4 +1,4 @@
-class ArticlesController < ApplicationController
+  class ArticlesController < ApplicationController
 
   before_filter :login_required, :except => [ :show, :showswf, :showdina4, :simple ]
 
@@ -64,7 +64,7 @@ class ArticlesController < ApplicationController
     else
       drop_into_fragment = @article.fragments.find_by_content(params['fragment']).id
     end
-        
+            
     if drop_type == "dragarticle"
       addlink = BlockLink.new
       addlink.article_id = drop_id
@@ -72,6 +72,12 @@ class ArticlesController < ApplicationController
 
       if addlink.save
         redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']
+      end
+      
+      if params['position']
+        addlink.update
+        addlink.position = params['position']
+        addlink.save
       end
     end
 
@@ -83,29 +89,61 @@ class ArticlesController < ApplicationController
       if addlink.save
         redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']
       end
+
+      if params['position']
+        addlink.update
+        addlink.position = params['position']
+        addlink.save
+      end
     end
 
     if drop_type == "dragmediablock"
-      addlink = BlockLink.new
-      addlink.mediablock_id = drop_id
-      addlink.fragment_id = drop_into_fragment
 
-      if addlink.save
+      if !testforlink = BlockLink.find_by_fragment_id_and_position(drop_into_fragment, params['position'])
+        addlink = BlockLink.new
+        addlink.mediablock_id = drop_id
+        addlink.fragment_id = drop_into_fragment
+
+        if addlink.save
+          redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']
+        end
+
+        if params['position']
+          addlink.update
+          addlink.position = params['position']
+          addlink.save
+        end
+      else
+        testforlink.mediablock_id = drop_id
+        testforlink.position = params['position']
+        testforlink.save
         redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']
       end
     end
 
     if drop_type == "dragtextblock"
-      addlink = BlockLink.new
-      addlink.textblock_id = drop_id
-      addlink.fragment_id = drop_into_fragment
+      if !testforlink = BlockLink.find_by_fragment_id_and_position(drop_into_fragment, params['position'])
+        addlink = BlockLink.new
+        addlink.textblock_id = drop_id
+        addlink.fragment_id = drop_into_fragment
 
-      if addlink.save
+        if addlink.save
+          redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']
+        end
+
+        if params['position']
+          addlink.update
+          addlink.position = params['position']
+          addlink.save
+        end
+      else
+        testforlink.mediablock_id = drop_id
+        testforlink.position = params['position']
+        testforlink.save
         redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']
       end
     end
-        
-                  
+               
   end
 
 
@@ -144,7 +182,26 @@ class ArticlesController < ApplicationController
 
     redirect_to :action => 'list'
   end
+  
+  def writeindesignxml
+    @article = Article.find(params[:id])
+    # render :layout => false
+    indesignxml = render_to_string :layout => false
+    timestamp = Time.now.to_i.to_s
+    
+    if File.exists?("#{RAILS_ROOT}/public/indesign.xml")
+      File.open("#{RAILS_ROOT}/public/data/backups/indesign-#{timestamp}.xml", "wb") do |f|
+        f.write( File.read("#{RAILS_ROOT}/public/projekte.xml") )
+      end        
+    end
+    
+    File.open("#{RAILS_ROOT}/public/indesign.xml", "wb") do |f|
+      f.write( indesignxml )
+    end
 
+    redirect_to :action => 'edit', :id => params[:id], :fragment => 'print'
+  end
+  
   def simple
     @article = Article.find_by_topic_id(params[:id])
     render :layout => false
@@ -261,14 +318,14 @@ class ArticlesController < ApplicationController
   def edit
     @article = Article.find(params[:id])
     
-   # if test != Fragment.find_by_article_id_and_content(:article_id => @article.id, :content => "print")
-  #    @articlePrintFragment = Fragment.new
-  #    @articlePrintFragment.article_id = self.id
-  #    @articlePrintFragment.info = "Print PDF for #{self.title}"
-  #    @articlePrintFragment.content = "print"
-  #    @articlePrintFragment.save
-  #    @articlePrintFragment.update
-  #  end
+    if !test = Fragment.find_by_article_id_and_content(params[:id], "print")
+      @articlePrintFragment = Fragment.new
+      @articlePrintFragment.article_id = @article.id
+      @articlePrintFragment.info = "Print PDF for #{@article.title}"
+      @articlePrintFragment.content = "print"
+      @articlePrintFragment.save
+      @articlePrintFragment.update
+    end
     
     if params[:rendersimple]  
       render :layout => "simple"

@@ -1,0 +1,19 @@
+<%
+  indesignfragment = Fragment.find_by_article_id_and_content(params[:id], "print") 
+  @blocks = BlockLink.find_all_by_fragment_id(indesignfragment.id)
+  @images = Array.new(9, "file://nt3151/din_a4_Office/Webseite_Server/dina4cms/public/data/nix.jpg")
+  @text = Textblock.new
+
+  for link in @blocks
+      
+    if link.textblock_id != nil
+      @text = Textblock.find_by_id(link.textblock_id)   
+    elsif link.mediablock_id != nil
+      image = Mediablock.find_by_id(link.mediablock_id)
+      @images[link.position, 1] = "file://nt3151/din_a4_Office/Webseite_Server/dina4cms/public/data/originals/#{image.filename}"
+    end
+
+  end 
+%>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Root><Projektname><Titel><%= @article.title %></Titel></Projektname><Projektinfo><%if @text.content %><Absatz><%= textilize(@text.content) %></Absatz><% else %><Absatz>Kein Textinhalt</Absatz><% end %></Projektinfo><% @images.each do |imagelink| %><Bild href="<%= imagelink %>"></Bild><% end %></Root>

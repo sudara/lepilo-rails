@@ -1,54 +1,96 @@
-<div id="box1" class="templatebox" style="width:302px;height:300px;">&nbsp;</div>
-<div id="box2" class="templatebox" style="width:302px;height:300px;">&nbsp; </div>
+<div id="box1" class="templatebox" style="width:302px;height:300px;"><% if fragment = Fragment.find_by_article_id_and_content(params[:id], "print") 
+  if blocklink = BlockLink.find_by_fragment_id_and_position(fragment, 1) %>
+  <%= render_partial 'mediablocks/short', nil, 'mediablock_id' => blocklink.mediablock_id %>
+  <% end 
+  end %></div>
+  
+<div id="box2" class="templatebox" style="width:302px;height:300px;">  <% if fragment = Fragment.find_by_article_id_and_content(params[:id], "print") 
+    if blocklink = BlockLink.find_by_fragment_id_and_position(fragment, 2) %>
+      <%= render_partial 'textblocks/short', nil, 'textblock_id' => blocklink.textblock_id %>
+    <% end 
+    end %>
+</div>
 <br style="clear:left"/>
-<div id="box3" class="templatebox" style="width:150px;height:150px;">&nbsp; </div>
-<div id="box4" class="templatebox" style="width:150px;height:150px;">&nbsp; </div>
-<div id="box5" class="templatebox" style="width:150px;height:150px;">&nbsp; </div>
-<div id="box6" class="templatebox" style="width:150px;height:150px;">&nbsp; </div>
+<div id="box3" class="templatebox" style="width:150px;height:150px;"><% if fragment = Fragment.find_by_article_id_and_content(params[:id], "print") 
+  if blocklink = BlockLink.find_by_fragment_id_and_position(fragment, 3) %>
+  <%= render_partial 'mediablocks/short', nil, 'mediablock_id' => blocklink.mediablock_id %>
+  <% end 
+  end %></div>
+<div id="box4" class="templatebox" style="width:150px;height:150px;">  <% if fragment = Fragment.find_by_article_id_and_content(params[:id], "print") 
+    if blocklink = BlockLink.find_by_fragment_id_and_position(fragment, 4) %>
+    <%= render_partial 'mediablocks/short', nil, 'mediablock_id' => blocklink.mediablock_id %>
+    <% end 
+    end %></div>
+<div id="box5" class="templatebox" style="width:150px;height:150px;">    <% if fragment = Fragment.find_by_article_id_and_content(params[:id], "print") 
+      if blocklink = BlockLink.find_by_fragment_id_and_position(fragment, 5) %>
+      <%= render_partial 'mediablocks/short', nil, 'mediablock_id' => blocklink.mediablock_id %>
+      <% end 
+      end %></div>
+<div id="box6" class="templatebox" style="width:150px;height:150px;">      <% if fragment = Fragment.find_by_article_id_and_content(params[:id], "print") 
+        if blocklink = BlockLink.find_by_fragment_id_and_position(fragment, 6) %>
+        <%= render_partial 'mediablocks/short', nil, 'mediablock_id' => blocklink.mediablock_id %>
+        <% end 
+        end %></div>
 <br style="clear:left"/>
-<div id="box7" class="templatebox" style="width:150px;height:150px;">&nbsp; </div>
-<div id="box8" class="templatebox" style="width:150px;height:150px;">&nbsp; </div>
-<div id="box9" class="templatebox" style="width:150px;height:150px;">&nbsp; </div>
-<div id="box10" class="templatebox" style="width:150px;height:150px;">&nbsp; </div>
+<div id="box7" class="templatebox" style="width:150px;height:150px;"><% if fragment = Fragment.find_by_article_id_and_content(params[:id], "print") 
+  if blocklink = BlockLink.find_by_fragment_id_and_position(fragment, 7) %>
+  <%= render_partial 'mediablocks/short', nil, 'mediablock_id' => blocklink.mediablock_id %>
+  <% end 
+  end %></div>
+<div id="box8" class="templatebox" style="width:150px;height:150px;">  <% if fragment = Fragment.find_by_article_id_and_content(params[:id], "print") 
+    if blocklink = BlockLink.find_by_fragment_id_and_position(fragment, 8) %>
+    <%= render_partial 'mediablocks/short', nil, 'mediablock_id' => blocklink.mediablock_id %>
+    <% end 
+    end %></div>
+<div id="box9" class="templatebox" style="width:150px;height:150px;">    <% if fragment = Fragment.find_by_article_id_and_content(params[:id], "print") 
+      if blocklink = BlockLink.find_by_fragment_id_and_position(fragment, 9) %>
+      <%= render_partial 'mediablocks/short', nil, 'mediablock_id' => blocklink.mediablock_id %>
+      <% end 
+      end %></div>
+<div id="box10" class="templatebox" style="width:150px;height:150px;">      <% if fragment = Fragment.find_by_article_id_and_content(params[:id], "print") 
+        if blocklink = BlockLink.find_by_fragment_id_and_position(fragment, 10) %>
+        <%= render_partial 'mediablocks/short', nil, 'mediablock_id' => blocklink.mediablock_id %>
+        <% end 
+        end %></div>
 <br style="clear:both"/>
 <br style="clear:both"/>
 
-<%= drop_receiving_element "box1", 
-      :update => "fdbcontent", :url => { :action => "addblock", :fragment => "print" },
+<%= drop_receiving_element "box1",  
+      :update => "fdbcontent", :url => { :action => "addblock", :fragment => "print", :position => 1 },
       :accept => "dragblock", :hoverclass => "templateboxover" %>
 
 <%= drop_receiving_element "box2", 
-      :update => "fdbcontent", :url => { :action => "addblock", :fragment => 2 },
+      :update => "fdbcontent", :url => { :action => "addblock", :fragment => "print", :position => 2 },
       :accept => "dragline", :hoverclass => "templateboxover" %>
 
 <%= drop_receiving_element "box3", 
-      :update => "fdbcontent", :url => { :action => "addblock", :fragment => 2 },
+      :update => "fdbcontent", :url => { :action => "addblock", :fragment => "print", :position => 3 },
       :accept => "dragblock", :hoverclass => "templateboxover" %>
 
 <%= drop_receiving_element "box4", 
-      :update => "fdbcontent", :url => { :action => "addblock", :fragment => 2 },
+      :update => "fdbcontent", :url => { :action => "addblock", :fragment => "print", :position => 4 },
       :accept => "dragblock", :hoverclass => "templateboxover" %>
 
 <%= drop_receiving_element "box5", 
-      :update => "fdbcontent", :url => { :action => "addblock", :fragment => 2 },
+      :update => "fdbcontent", :url => { :action => "addblock", :fragment => "print", :position => 5 },
       :accept => "dragblock", :hoverclass => "templateboxover" %>
 
 <%= drop_receiving_element "box6", 
-      :update => "fdbcontent", :url => { :action => "addblock", :fragment => 2 },
+      :update => "fdbcontent", :url => { :action => "addblock", :fragment => "print", :position => 6 },
       :accept => "dragblock", :hoverclass => "templateboxover" %>
 
 <%= drop_receiving_element "box7", 
-      :update => "fdbcontent", :url => { :action => "addblock", :fragment => 2 },
+      :update => "fdbcontent", :url => { :action => "addblock", :fragment => "print", :position => 7 },
       :accept => "dragblock", :hoverclass => "templateboxover" %>
 
 <%= drop_receiving_element "box8", 
-      :update => "fdbcontent", :url => { :action => "addblock", :fragment => 2 },
+      :update => "fdbcontent", :url => { :action => "addblock", :fragment => "print", :position => 8 },
       :accept => "dragblock", :hoverclass => "templateboxover" %>
 
 <%= drop_receiving_element "box9", 
-      :update => "fdbcontent", :url => { :action => "addblock", :fragment => 2 },
+      :update => "fdbcontent", :url => { :action => "addblock", :fragment => "print", :position => 9 },
       :accept => "dragblock", :hoverclass => "templateboxover" %>
 
 <%= drop_receiving_element "box10", 
-      :update => "fdbcontent", :url => { :action => "addblock", :fragment => 2 },
+      :update => "fdbcontent", :url => { :action => "addblock", :fragment => "print", :position => 10 },
       :accept => "dragblock", :hoverclass => "templateboxover" %>
