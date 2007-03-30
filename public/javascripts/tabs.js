@@ -34,7 +34,7 @@ function toggleTab(num,numelems,opennum,animate) {
                 var c = $(tempc);
                 if(c.style.display != 'none'){
                     if (animate || typeof animate == 'undefined')
-                        Effect.toggle(tempc,'appear',{duration:0.1, queue:{scope:'menus', limit: 3}});
+                        Effect.toggle(tempc,'appear',{duration:0.2, queue:{scope:'menus', position:'end', limit: 3}});
                     else
                         toggleDisp(tempc);
                 }
@@ -47,7 +47,7 @@ function toggleTab(num,numelems,opennum,animate) {
         var c = $('tabContent'+num);
         c.style.marginTop = '2px';
         if (animate || typeof animate == 'undefined'){
-            Effect.toggle('tabContent'+num,'appear',{duration:0.1, queue:{scope:'menus', position:'end', limit: 3}});
+            Effect.toggle('tabContent'+num,'appear',{duration:0.2, queue:{scope:'menus', position:'end', limit: 3}});
         }else{
             toggleDisp('tabContent'+num);
         }

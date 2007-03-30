@@ -2,6 +2,10 @@
 
   before_filter :login_required, :except => [ :show, :showswf, :showdina4, :simple ]
 
+  Article.content_columns.each do |column| 
+    in_place_edit_for :article, column.name 
+  end 
+
   def index
     list
     render :action => 'list'
@@ -221,6 +225,7 @@
         year = "20" << yearstamp
       end
       @article.release_date = year << "-01-01"
+      @article.released = 0
       
       @article.title = articledata[1]
       @article.topic_id = 4
@@ -246,7 +251,12 @@
 
   def create
     @article = Article.new(params[:article])
+    if params[:article][:title] == ""
+      @article.title = "Noname"
+    end
+    
     @article.release_date = Date.today
+    @article.released = 0
     
     if @article.save
       flash[:notice] = 'Article was successfully created.'
@@ -257,6 +267,12 @@
   end
 
   def addtextblock
+    if !params['fragment']
+      drop_into_fragment = @article.fragments.find_by_content("web").id
+    else
+      drop_into_fragment = @article.fragments.find_by_content(params['fragment']).id
+    end
+
     @article = Article.find(params[:id])
 
     addlink = BlockLink.new
@@ -265,6 +281,7 @@
     addblock.title = "Textblock, #{@article.title}"
     
     addlink.textblock_id = addblock.id
+    addlink.fragment_id = drop_into_fragment
     addlink.save
 
     addblock.save
@@ -279,6 +296,12 @@
   
   
   def addmediablock
+    if !params['fragment']
+      drop_into_fragment = @article.fragments.find_by_content("web").id
+    else
+      drop_into_fragment = @article.fragments.find_by_content(params['fragment']).id
+    end
+
     @article = Article.find(params[:id])
 
     addlink = BlockLink.new
@@ -288,7 +311,7 @@
     addblock.save
     
     addlink.textblock_id = addblock.id
-    addlink.fragment_id = addblock.id
+    addlink.fragment_id = drop_into_fragment
     
 
     if addlink.save

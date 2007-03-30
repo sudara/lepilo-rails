@@ -2,7 +2,7 @@
   <div id="fdbinspector">
     <div id="tabs">
       <ul> 
-        <li style="margin-left: 1px" id="tabHeader1" class="currenttab"><a href="javascript:void(0)" onClick="toggleTab(1,5)"><span>Einstellungen</span></a></li>
+        <li style="margin-left: 1px" id="tabHeaderActive"><a href="javascript:void(0)" onClick="toggleTab(1,5)"><span>Einstellungen</span></a></li>
         <li id="tabHeader2"><a href="javascript:void(0)" onClick="toggleTab(2,5)" ><span><%= image_tag "/images/16article.png",
             :alt => "artikel", 
             :title => "artikel", 
@@ -28,7 +28,25 @@
         
     <div id="tabscontent">
         <div id="tabContent1" class="tabContent" >
-          Artikel bearbeiten: <%= @article.title %>
+          <div class="searchblock">
+            Art: <%= link_to 'Web', {  :action => "edit", :id => @article.id, :fragment => "web" } %> | <%= link_to 'Print', {  :action => "edit", :id => @article.id, :fragment => "print" } %> | <%= link_to 'InDesign XML speichern', {  :action => "writeindesignxml", :id => @article.id, :fragment => "print" } %>
+          </div>
+          <div class="sidebar">
+            <div class="editdata">
+            <h1><%= in_place_editor_field :article, :title %></h1>
+            Typ: <h3><%= in_place_editor_field :article, :type %><%= @article.type %></h3>, Freigegeben: <h3><%= @article.released %></h3><br/>
+            </div>
+            <div class="editdata">
+
+              <%= start_form_tag :action => 'imagedescriptions', :id => @article %>
+                Copyright Vermerk für Bilder: 
+                <input name="description" size="30" type="text" />
+                <%# text_field 'images', 'description', "size" => 45  %>
+                <%= submit_tag 'Anwenden' %>
+              <%= end_form_tag %>
+
+            </div>
+          </div>
         </div>
 
         <div id="tabContent2" class="tabContent" style="display:none;">
@@ -86,19 +104,6 @@
       %>
   <%= link_to 'Zur&uuml;ck', :action => 'list', :page => params[:page] %>
        
-  </div>
-  <div class="editdata">
-
-    <%= start_form_tag :action => 'imagedescriptions', :id => @article %>
-      Copyright Vermerk für Bilder: 
-      <input name="description" size="45" type="text" />
-      <%# text_field 'images', 'description', "size" => 45  %>
-      <%= submit_tag 'Anwenden' %>
-    <%= end_form_tag %>
-       
-  </div>
-  <div class="editdata">
-    Art: <%= link_to 'Web', {  :action => "edit", :id => @article.id, :fragment => "web" } %> | <%= link_to 'Print', {  :action => "edit", :id => @article.id, :fragment => "print" } %> | <%= link_to 'InDesign XML speichern', {  :action => "writeindesignxml", :id => @article.id, :fragment => "print" } %>
   </div>
 
   <div id="fdbtemplatecontainer">  

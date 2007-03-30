@@ -1,8 +1,11 @@
+* {
+  padding:0;
+  margin:0;
+}
+
 body { 
   background-color:#333; 
   color:#3d4649; 
-  margin:0px;
-  padding:0px;
   font-family: "HelveticaNeue", "Helvetica Neue", "Arial", sans-serif;
   font-size:12px;
   line-height:16px;
@@ -38,8 +41,6 @@ a {
 }
 
 a > img { 
-  margin:0px;
-  padding:0px;
   text-decoration:none;
   border:none;
 }
@@ -62,9 +63,7 @@ a.icon24, a.icon24:visited, a.icon24:hover {
   background-color:transparent;
   position: relative;
   float: left;
-  margin:0px;
   margin-left:2px;
-  padding:0px;
   padding-left:0px;
   padding-right:0px;
   border:0px;
@@ -126,7 +125,6 @@ div.progressBar div.background {
 }
 
 #navigation {
-  margin:0px;
   padding-left:240px;
   margin-top:10px;
   height:70px;
@@ -145,9 +143,7 @@ div.progressBar div.background {
 
 
 #navigation a:link, #navigation a:visited {
-  margin:0px;
   margin-left:16px;
-  padding:0px;
   height:48px;
   float:left;
   text-decoration:none;
@@ -157,9 +153,7 @@ div.progressBar div.background {
 #navigation a:hover {
   background-image:url(/images/48x48b.png); 
   background-repeat:no-repeat;
-  margin:0px;
   margin-left:16px;
-  padding:0px;
   float:left;
   border-bottom:0px;
 }
@@ -167,9 +161,7 @@ div.progressBar div.background {
 #navigation a.active:link, #navigation a.active:visited {
   background-image:url(/images/48x48b.png); 
   background-repeat:no-repeat;
-  margin:0px;
   margin-left:16px;
-  padding:0px;
 }
 
 
@@ -185,8 +177,6 @@ div.progressBar div.background {
   background-color:#fff;
   width:503px;
   height:240px;
-  margin:0px;
-  padding:0px;
   border-bottom:1px solid #fff;
 }
 
@@ -254,7 +244,6 @@ div.progressBar div.background {
   right:0px;
   bottom:0px;
   z-index: 1000;
-  margin:0px;
   width:300px;
   min-height:700px;
   height:100%;
@@ -265,11 +254,10 @@ div.progressBar div.background {
   
 #tabs{
   padding: 0;
-  height:21px;
+  height:22px;
   background: transparent;
   voice-family: "\"}\"";
   voice-family: inherit;
-  border-top:1px solid #bfbfbf;
   border-bottom:1px solid #bfbfbf;
 }
 #tabs ul{
@@ -322,13 +310,14 @@ div.progressBar div.background {
   background-image:url(/images/container.png); 
   background-repeat: repeat-x;
   clear:both;
-  height:750px;
   background-color:#fff;
 }
 .sidebar {
+  background-image:url(/images/container.png); 
+  background-repeat: repeat-x;
   position:absolute;
   width:100%;
-  top:56px;
+  top:66px;
 }
  
  
@@ -373,8 +362,8 @@ div.progressBar div.background {
 .templatebox {
   min-height: 50px;
   min-width: 50px;
-  border: 1px dashed #fff;
-  background-color: #7d7d7d;
+  border: 1px dashed #7d7d7d;
+  background-color: #fff;
   float: left;
   overflow: visible;
 }
@@ -395,8 +384,6 @@ div.progressBar div.background {
 #fdbtopic-list {
   background:#fafafa;
   font-size:13px;
-  margin:0;
-  padding:0;
   padding-top:5px;
   padding-left:5px;
   padding-bottom:5px;
@@ -408,7 +395,6 @@ div.progressBar div.background {
   background-image:url(/images/gradientmini.png); 
   background-repeat:repeat-x;
   height:20px;
-  margin:0;
   margin-top:1px;
   padding-top:3px;
   padding-left:30px;
@@ -423,7 +409,6 @@ div.progressBar div.background {
   background-image:url(/images/gradientminig.png); 
   background-repeat:repeat-x;
   height:40px;
-  margin:0;
   margin-top:1px;
   padding-top:3px;
   padding-left:30px;
@@ -442,7 +427,6 @@ div.progressBar div.background {
 #fdbtopic-list-top {
   background-image:url(/images/300topiclisttop.png); 
   background-repeat:no-repeat;
-  margin:0;
   padding-top:6px;
   height:26px;
   text-align:center;
@@ -477,7 +461,6 @@ td {
   padding-right:4px;
   padding-top:2px;
   padding-bottom:2px;
-  margin:0px;
   font-size:13px;
   font-weight:normal;
   text-align:left;
@@ -497,16 +480,15 @@ html>body:not(:-safari-only) h1 {
 h1 {
   font-family: "MyriadPro-LightSemiExt", "Myriad Pro Light SemiExtended", "Arial", sans-serif;
   color:#81bc00;
-  margin:0px;  
   font-size:22px;
   font-weight:normal;
   line-height:36px;
+  display: block;
 }
 
 h2 {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Arial", sans-serif;
   color:#4d5659;
-  margin:0px;  
   font-size:16px;
   font-weight:normal;
 }
@@ -514,7 +496,6 @@ h2 {
 h3 {
   font-family: "HelveticaNeue-Bold", "Helvetica Neue Bold", sans-serif;
   color:#81bc00;
-  margin:0px;  
   height:10px;
   font-size:12px;
   line-height:14px;
@@ -526,9 +507,8 @@ h4 {
   color:#81bc00;
   font-size:14px;
   font-weight:normal;
-  line-height:14px;
+  line-height:20px;
   margin:5px;
-  padding:0px;
   display: inline;
 }
 
@@ -539,7 +519,6 @@ h5, h5.gray {
   font-weight:bold;
   line-height:12px;
   margin:5px;
-  padding:0px;
   display: inline;
 }
 
@@ -550,7 +529,6 @@ h5.green {
   font-weight:bold;
   line-height:12px;
   margin:5px;
-  padding:0px;
   display: inline;
 }
 
@@ -654,8 +632,9 @@ div.ipmtitle:hover {
   height:30px;
   top:0px;
   padding-left:10px;
+  padding-top:5px;
+  padding-bottom:5px;
   border-bottom:1px solid #bfbfbf;
-  vertical-align: text-top;
   z-index:100;
 }
 
@@ -689,7 +668,6 @@ div.ipmtitle:hover {
 div.block256x128 {
   width:256px;
   height:128px;
-  margin:0px;
   padding-right:-10px;
   padding:5px;
   float:left;
@@ -720,7 +698,6 @@ div.block256x128:hover {
 div.block128x128 {
   width:128px;
   height:128px;
-  margin:0px;
   padding-right:-10px;
   padding:5px;
   float:left;
@@ -731,7 +708,6 @@ div.block128x128:hover {
   background-repeat:no-repeat;
   width:128px;
   height:128px;
-  margin:0px;
   padding:5px;
   float:left;
 }
@@ -922,13 +898,11 @@ div.block128x128:hover {
   background-image:url(/images/gradientedit.png); 
   background-repeat:repeat-x;
   background-color:#d1d1d1;
-  margin-bottom:10px;
   padding-left:10px;
   padding-top:10px;
   padding-bottom:10px;
   overflow:auto;
-  border-top:1px solid #bfbfbf;
-  border-bottom:1px solid #fff;
+  border-bottom:1px solid #ddd;
 }
 
 .centered {

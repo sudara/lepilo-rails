@@ -3,7 +3,7 @@ class Article < ActiveRecord::Base
   has_many :fragments, :order => :position
   has_and_belongs_to_many :tags
   
-  def after_create
+  def after_create    
     @articleWebFragment = Fragment.new
     @articleWebFragment.article_id = self.id
     @articleWebFragment.info = "Web page for #{self.title}"
