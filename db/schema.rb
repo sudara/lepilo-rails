@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 8) do
+ActiveRecord::Schema.define(:version => 9) do
 
   create_table "articles", :force => true do |t|
     t.column "topic_id",     :integer
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(:version => 8) do
 
   create_table "fragments", :force => true do |t|
     t.column "article_id", :integer
-    t.column "type",       :string,   :limit => 64
+    t.column "content",    :string,   :limit => 64
     t.column "position",   :integer
     t.column "user_id",    :integer
     t.column "created_at", :datetime

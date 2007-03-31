@@ -32,7 +32,6 @@ input:focus, textarea:focus, select:focus {
 
 a { 
   color:#000; 
-  background-color:#fff;
   margin:2px;
   padding-left:2px;
   padding-right:2px;
@@ -144,6 +143,7 @@ div.progressBar div.background {
 
 #navigation a:link, #navigation a:visited {
   margin-left:16px;
+  padding:0px;
   height:48px;
   float:left;
   text-decoration:none;
@@ -151,17 +151,16 @@ div.progressBar div.background {
 }
 
 #navigation a:hover {
-  background-image:url(/images/48x48b.png); 
-  background-repeat:no-repeat;
   margin-left:16px;
+  padding:0px;
   float:left;
-  border-bottom:0px;
+  border-bottom:2px solid #b4e614;
 }
 
 #navigation a.active:link, #navigation a.active:visited {
-  background-image:url(/images/48x48b.png); 
-  background-repeat:no-repeat;
+  border-bottom:1px solid #81bc00;
   margin-left:16px;
+  padding:0px;
 }
 
 
