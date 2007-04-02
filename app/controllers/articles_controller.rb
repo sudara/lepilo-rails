@@ -69,85 +69,26 @@
       drop_into_fragment = @article.fragments.find_by_content(params['fragment']).id
     end
             
-    if drop_type == "dragarticle"
-      addlink = BlockLink.new
-      addlink.article_id = drop_id
-      addlink.fragment_id = drop_into_fragment
+    addlink = BlockLink.new unless addlink = BlockLink.find_by_fragment_id_and_position(drop_into_fragment, params['position'])
+    addlink.fragment_id = drop_into_fragment
 
-      if addlink.save
-        redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']
-      end
-      
-      if params['position']
-        addlink.update
-        addlink.position = params['position']
-        addlink.save
-      end
-    end
-
-    if drop_type == "draggallery"
-      addlink = BlockLink.new
-      addlink.gallery_id = drop_id
-      addlink.fragment_id = drop_into_fragment
-
-      if addlink.save
-        redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']
-      end
-
-      if params['position']
-        addlink.update
-        addlink.position = params['position']
-        addlink.save
-      end
-    end
-
-    if drop_type == "dragmediablock"
-
-      if !testforlink = BlockLink.find_by_fragment_id_and_position(drop_into_fragment, params['position'])
-        addlink = BlockLink.new
-        addlink.mediablock_id = drop_id
-        addlink.fragment_id = drop_into_fragment
-
-        if addlink.save
-          redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']
-        end
-
-        if params['position']
-          addlink.update
-          addlink.position = params['position']
-          addlink.save
-        end
-      else
-        testforlink.mediablock_id = drop_id
-        testforlink.position = params['position']
-        testforlink.save
-        redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']
-      end
-    end
-
-    if drop_type == "dragtextblock"
-      if !testforlink = BlockLink.find_by_fragment_id_and_position(drop_into_fragment, params['position'])
-        addlink = BlockLink.new
+    case
+      when "dragtextblock"
         addlink.textblock_id = drop_id
-        addlink.fragment_id = drop_into_fragment
-
-        if addlink.save
-          redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']
-        end
-
-        if params['position']
-          addlink.update
-          addlink.position = params['position']
-          addlink.save
-        end
-      else
-        testforlink.mediablock_id = drop_id
-        testforlink.position = params['position']
-        testforlink.save
-        redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']
-      end
+      when "dragmediablock"
+        addlink.mediablock_id = drop_id
+      when "draggallery"
+      addlink.gallery_id = drop_id
+      when "dragarticle"
+      addlink.article_id = drop_id
     end
-               
+
+    if params['position']
+      addlink.update
+      addlink.position = params['position']
+    end
+
+    redirect_to :action => 'edit', :id => @article, :fragment => params['fragment'] if addlink.save               
   end
 
 
@@ -231,14 +172,7 @@
       @article.topic_id = 4
       
       @article.save
-      @article.update
-      
-      #"public/data/import/"
-#      importfrom = Dir.new(params[:importdir]) 
-#      importfrom.each  do |file| 
-        
-#      end
-      
+      @article.update      
     end
   end
 
@@ -263,62 +197,6 @@
       redirect_to :action => 'list'
     else
       render :action => 'new'
-    end
-  end
-
-  def addtextblock
-    if !params['fragment']
-      drop_into_fragment = @article.fragments.find_by_content("web").id
-    else
-      drop_into_fragment = @article.fragments.find_by_content(params['fragment']).id
-    end
-
-    @article = Article.find(params[:id])
-
-    addlink = BlockLink.new
-    
-    addblock = Textblock.new
-    addblock.title = "Textblock, #{@article.title}"
-    
-    addlink.textblock_id = addblock.id
-    addlink.fragment_id = drop_into_fragment
-    addlink.save
-
-    addblock.save
-    
-    if addlink.save
-      flash[:notice] = 'Textblock hinzugef&uuml;gt.'
-      redirect_to :action => 'show', :id => self.id
-    else
-      render :action => 'list'
-    end
-  end
-  
-  
-  def addmediablock
-    if !params['fragment']
-      drop_into_fragment = @article.fragments.find_by_content("web").id
-    else
-      drop_into_fragment = @article.fragments.find_by_content(params['fragment']).id
-    end
-
-    @article = Article.find(params[:id])
-
-    addlink = BlockLink.new
-    
-    addblock = Mediablock.new
-    addblock.title = "Mediablock, #{self.title}"
-    addblock.save
-    
-    addlink.textblock_id = addblock.id
-    addlink.fragment_id = drop_into_fragment
-    
-
-    if addlink.save
-      flash[:notice] = 'Mediablock hinzugef&uuml;gt.'
-      redirect_to :action => 'show', :id => @article
-    else
-      render :action => 'list'
     end
   end
   

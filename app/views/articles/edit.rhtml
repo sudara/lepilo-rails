@@ -84,17 +84,21 @@
   </div>
 
   <div class="editdata">
-
+  <%  if params[:fragment] == "print"
+        newinfragment = @article.fragments.find_by_content("print").id 
+      else
+        newinfragment = @article.fragments.find_by_content("web").id 
+      end %>
   <%= link_to "Neuer Textblock", {  :controller => "textblocks",
                                     :action => "new",
                                     :article_id => @article.id, 
-                                    :fragment_id => @article.fragments.last.id }, 
+                                    :fragment_id => newinfragment }, 
                                     :popup => ['new_window', 'height=600,width=600,scrollbars=1'] %> |
 
   <%= link_to "Neuer Mediablock", { :controller => "mediablocks",
                                     :action => "new", 
                                     :article_id => @article.id, 
-                                    :fragment_id => @article.fragments.last.id }, 
+                                    :fragment_id => newinfragment }, 
                                     :popup => ['new_window', 'height=600,width=600,scrollbars=1'] %> |
 
   <% #link_to "Flash Vorschau", { :controller => "articles",
