@@ -72,7 +72,7 @@
     addlink = BlockLink.new unless addlink = BlockLink.find_by_fragment_id_and_position(drop_into_fragment, params['position'])
     addlink.fragment_id = drop_into_fragment
 
-    case
+    case drop_type
       when "dragtextblock"
         addlink.textblock_id = drop_id
       when "dragmediablock"
