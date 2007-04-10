@@ -51,7 +51,7 @@
         @importmediablock = Mediablock.new
         @importmediablock.original_name = "#{@article.reference} - #{file}"
         @importmediablock.importfile = path
-        @importmediablock.uploaded_at = DateTime.new
+        @importmediablock.uploaded_at = DateTime.new(1970, 01, 01, 01, 01).to_s(:db)
 		@importmediablock.description = @article.title
 
         @importmediablock.save!

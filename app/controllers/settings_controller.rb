@@ -18,7 +18,7 @@ class SettingsController < ApplicationController
       #ftp.delete(rfile)
       ftp.putbinaryfile("#{RAILS_ROOT}/public/projekte.xml", rfile)
       #
-      @mediablocks = Mediablock.find(:all, :conditions => "uploaded_at = '0000-00-00 00:00:00'")
+      @mediablocks = Mediablock.find(:all, :conditions => "uploaded_at = '1970-01-01 01:01:00'")
       #breakpoint
       @mediablocks.each do |mediablock|
         ftp.putbinaryfile("#{RAILS_ROOT}/public/data/images/#{mediablock.filename}", "/htdocs/data/images/#{mediablock.filename}")
