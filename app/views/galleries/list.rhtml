@@ -1,14 +1,13 @@
-<div id="fdboptions">
-  <h1>Gallerieliste</h1> | <%= link_to 'Neue Gallerie', :action => 'new' %> | 
-  <%= link_to 'Vorherige Seite', { :page => @gallery_pages.current.previous } if @gallery_pages.current.previous %> | 
-  <%= link_to 'N&auml;chste Seite', { :page => @gallery_pages.current.next } if @gallery_pages.current.next %> 
-  <br />
-  <br />
-</div> 
-<div id="fdbheader">
-</div> 
-
 <div id="fdbcontainer">
+  <div id="fdboptions">
+    <h1>Gallerieliste</h1> | <%= link_to 'Neue Gallerie', :action => 'new' %> | 
+    <%= link_to 'Vorherige Seite', { :page => @gallery_pages.current.previous } if @gallery_pages.current.previous %> | 
+    <%= link_to 'N&auml;chste Seite', { :page => @gallery_pages.current.next } if @gallery_pages.current.next %> 
+    <br />
+    <br />
+  </div> 
+  <div id="fdbheader">
+  </div> 
  
   <% for gallery in @galleries %>
   <div class="block256x128">

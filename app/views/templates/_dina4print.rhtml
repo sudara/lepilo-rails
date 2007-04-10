@@ -5,8 +5,10 @@
   end %></div>
   
 <div id="box2" class="templatebox" style="width:402px;height:400px;"><% if fragment = Fragment.find_by_article_id_and_content(params[:id], "print") 
-  if blocklink = BlockLink.find_by_fragment_id_and_position(fragment, 2) %>
+  if blocklink = BlockLink.find_by_fragment_id_and_position(fragment, 2) 
+    if blocklink.textblock_id %>
     <%= render_partial 'textblocks/short', nil, 'textblock_id' => blocklink.textblock_id, 'link_id' => blocklink.id %>
+    <% end %>
   <% end 
   end %>
 </div>
@@ -32,7 +34,7 @@
   <% end 
   end %></div>
 <br style="clear:left"/>
-<div id="box7" class="templatebox" style="width:200px;height:220px;"><% if fragment = Fragment.find_by_article_id_and_content(params[:id], "print") 
+<div id="box7" class="templatebox" style="width:200px;height:220px;"> <% if fragment = Fragment.find_by_article_id_and_content(params[:id], "print") 
   if blocklink = BlockLink.find_by_fragment_id_and_position(fragment, 7) %>
   <%= render_partial 'mediablocks/short', nil, 'mediablock_id' => blocklink.mediablock_id, 'link_id' => blocklink.id %>
   <% end 

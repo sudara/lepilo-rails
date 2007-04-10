@@ -103,9 +103,10 @@ class MediablocksController < ApplicationController
     BlockLink.find(params[:id]).destroy
     if session[:current_article]
       redirect_to :controller => '/articles', :action => 'edit', :id => session[:current_article]
-    end
-    if session[:current_gallery]
+    elsif session[:current_gallery]
       redirect_to :controller => '/galleries', :action => 'edit', :id => session[:current_gallery]
+    else
+      render :nothing => true
     end    
   end
 end

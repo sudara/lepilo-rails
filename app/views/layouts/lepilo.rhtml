@@ -16,8 +16,9 @@
       <img src="/images/lepilo.png" class="lepilo" />
       <a href="/settings/" <%= 'class="active"' if params[:controller] == "settings"%>><img src="/images/overview.png" border="0" /></a>
       <!--<a href="/" <%= 'class="active"' if params[:controller] == ""%>><img src="/images/overview.png" border=0></a>-->
-      <a href="/notes/" <%= 'class="active"' if params[:controller] == "notes"%>><img src="/images/notes.png" border="0" /></a>
       <a href="/articles/" <%= 'class="active"' if params[:controller] == "articles"%>><img src="/images/articles.png" border="0" /></a>
+      <a href="/notes/" <%= 'class="active"' if params[:controller] == "notes"%>><img src="/images/notes.png" border="0" /></a>
+      <a href="/comments/" <%= 'class="active"' if params[:controller] == "comments"%>><img src="/images/posts.png" border="0" /></a>
       <a href="/galleries/" <%= 'class="active"' if params[:controller] == "galleries"%>><img src="/images/galleries.png" border="0" /></a>
       <a href="/topics/" <%= 'class="active"' if params[:controller] == "topics"%>><img src="/images/navigation.png" border="0" /></a>
       <a href="/mediablocks/" <%= 'class="active"' if params[:controller] == "mediablocks"%>><img src="/images/media.png" border="0" /></a>
@@ -35,8 +36,8 @@
   </div>
 
   <div id="fdbfooter">
-  <h5>LEPILO Statistik</h5>
-    <h5 class="green">
+  LEPILO Statistik
+    <strong><span class="green">
     <%
       media_counter = 0
       text_counter = 0
@@ -74,10 +75,11 @@
         :title => "anzahl der textblocks", 
         :class => "icon16"  %>
     <%= text_counter %>
-      </h5>
+      </span></strong>
       <% if @session['user'] %>
-      <h5>Angemeldet als</h5>
-      <h5 class="green"><%= @session['user'].login %></h5>
+      &nbsp;&nbsp;|&nbsp;&nbsp; Angemeldet als
+      <strong><span class="green"><%= @session['user'].login %></span></strong>
+      &nbsp;&nbsp;|&nbsp;&nbsp;
       <% end %>
   </div>
 

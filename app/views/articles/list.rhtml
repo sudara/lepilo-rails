@@ -1,20 +1,20 @@
-<div id="fdboptions">
-  <h1>Artikelliste</h1> | <%= link_to 'Neuer Artikel', :action => 'new' %> | <%= link_to 'Artikel importieren', :action => 'import' %> | <%= link_to 'Artikel XML speichern', :action => 'writexml' %> | 
-  <%= link_to 'Vorherige Seite', { :page => @article_pages.current.previous } if @article_pages.current.previous %> | 
-  Seite: <%= pagination_links(@article_pages) %> |
-  <%= link_to 'N&auml;chste Seite', { :page => @article_pages.current.next } if @article_pages.current.next %> 
-  <br/>
-  <br/>
-</div> 
-<div id="fdbheader">
-</div> 
-
 <div id="fdbcontainer">
+  <div id="fdboptions">
+    <h1>Artikelliste</h1> | <%= link_to 'Neuer Artikel', :action => 'new' %> | <%= link_to 'Artikel importieren', :action => 'import' %> | <%= link_to 'Artikel XML speichern', :action => 'writexml' %> | 
+    <%= link_to 'Vorherige Seite', { :page => @article_pages.current.previous } if @article_pages.current.previous %> | 
+    Seite: <%= pagination_links(@article_pages) %> |
+    <%= link_to 'N&auml;chste Seite', { :page => @article_pages.current.next } if @article_pages.current.next %> 
+    <br/>
+    <br/>
+  </div> 
+  <div id="fdbheader">
+  </div> 
+
  
-<!--  <div class="progress-container">          
+  <div class="progress-container">          
       <div style="width: 75%"></div>
   </div>
--->
+
   <% for article in @articles %>
 
   <%

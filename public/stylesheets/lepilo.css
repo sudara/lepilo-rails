@@ -4,7 +4,7 @@
 }
 
 body { 
-  background-color:#333; 
+  background-color:#fff; 
   color:#3d4649; 
   font-family: "HelveticaNeue", "Helvetica Neue", "Arial", sans-serif;
   font-size:12px;
@@ -113,31 +113,60 @@ div.progressBar {
 }
 
 div.progressBar div.border {
-  border:1px solid grey;
+  background-image:url(/images/container.png); 
+  background-repeat: repeat-x;
+  border-bottom: 1px solid #999; 
+  width: 90%; 
+  margin: 2px 5px 2px 0; 
+  padding: 0px; 
+  margin-left: auto;
+  margin-right: auto;
   width:100%;
 }
 
 div.progressBar div.background {
-  background-color:#333;
-  height:18px;
+  background-image:url(/images/progress.gif); 
+  background-repeat:repeat-x;
+  border-right: 1px solid #ccc; 
+  height: 16px
   width:0%;
 }
 
+div.progress-container {
+  background-image:url(/images/container.png); 
+  background-repeat: repeat-x;
+  border-bottom: 1px solid #999; 
+  width: 90%; 
+  margin: 2px 5px 2px 0; 
+  padding: 0px; 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.progress-container > div {
+  background-image:url(/images/progress.gif); 
+  background-repeat:repeat-x;
+  border-right: 1px solid #ccc; 
+  height: 16px
+}
+
+
 #navigation {
-  padding-left:240px;
-  margin-top:10px;
-  height:70px;
+  padding-left:20px;
+  padding-top:10px;
+  min-height:70px;
   border-bottom:1px solid #bfbfbf;
   overflow:hidden;
   clear:both;
 }
 
 #navigation .lepilo {
-  position:absolute;
-  top:0px;
-  left:20px;
+  position:relative;
+  top:-10px;
+  left:0px;
   float:left;
-  margin-right:25px;
+  margin-right:15px;
+  margin-bottom:0px;
 }
 
 
@@ -180,7 +209,7 @@ div.progressBar div.background {
 }
 
 #fdboptions {
-  background-image:url(/images/gradient.png); 
+  background-image:url(/images/gradientd.png); 
   background-repeat:repeat-x;
   margin-top:0px;
   margin-bottom:0px;
@@ -200,12 +229,11 @@ div.progressBar div.background {
 #fdbheader {
   background-image:url(/images/bgheader.png); 
   background-repeat:repeat-x;
-  background-color: #333;
+  background-color:transparent;
   overflow:auto;
   height:30px;
   margin-top:0px;
   margin-bottom:0px;
-  border-top:1px solid #fff;
 }
 
 #fdbcontent {
@@ -215,7 +243,7 @@ div.progressBar div.background {
 }
 
 #fdbcontainer {
-  background-color:#333;
+  background-color:#ccc;
   padding-bottom:20px;
   bottom:0px;
 }
@@ -343,6 +371,7 @@ div.progressBar div.background {
   text-align:left;
   color: #aaa;
   font-size: 10px;
+  line-height: 16px;
   z-index:10000;
   opacity:0.9;
   filter:alpha(opacity:90);  
@@ -542,23 +571,6 @@ code {
   background-color:#f8ffe7;
 }
 
-div.progress-container {
-  border: 1px solid #ccc; 
-  width: 650px; 
-  margin: 2px 5px 2px 0; 
-  padding: 1px; 
-  margin-left: auto;
-  margin-right: auto;
-  background: white;
-}
-
-div.progress-container > div {
-  background-image:url(/images/progress.png); 
-  background-repeat:repeat-x;
-  height: 12px
-}
-
-
 .fdbblock {
   margin-right:50px;
   margin-bottom:25px;
@@ -662,6 +674,11 @@ div.ipmtitle:hover {
   width:236px;
   height:112px;
   overflow:hidden;
+  border: 1px solid #bbb;
+}
+
+.listblock:hover {
+  border: 1px solid #d4e543;
 }
 
 div.block256x128 {
@@ -812,12 +829,11 @@ div.block128x128:hover {
   margin-right:6px;
   margin-right:2px;
   width:16px;
-  /*baseline/sub/super/top/text-top/middle/bottom/text-bottom/length/%*/
   vertical-align:bottom;
 }
 
 .icontainer {
-  top:-2px;
+  top:-5px;
   float:right;
   position:relative;
   width:auto;

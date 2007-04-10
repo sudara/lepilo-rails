@@ -86,9 +86,10 @@
     if params['position']
       addlink.update
       addlink.position = params['position']
+      addlink.save
     end
 
-    redirect_to :action => 'edit', :id => @article, :fragment => params['fragment'] if addlink.save               
+    redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']                
   end
 
 
@@ -130,7 +131,6 @@
   
   def writeindesignxml
     @article = Article.find(params[:id])
-    # render :layout => false
     indesignxml = render_to_string :layout => false
     timestamp = Time.now.to_i.to_s
     
@@ -144,7 +144,11 @@
       f.write( indesignxml )
     end
 
-    redirect_to :action => 'edit', :id => params[:id], :fragment => 'print'
+    send_file "#{RAILS_ROOT}/public/indesign.xml"
+  end
+  
+  def getindesignfile
+    send_file "#{RAILS_ROOT}/public/a4-xml-import.indd"
   end
   
   def simple

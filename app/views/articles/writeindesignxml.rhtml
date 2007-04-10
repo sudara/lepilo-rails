@@ -14,6 +14,9 @@
     end
 
   end 
-%>
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Root><Projektname><Titel><%= @article.title %></Titel></Projektname><Projektinfo><%if @text.content %><Absatz><%= textilize(@text.content) %></Absatz><% else %><Absatz>Kein Textinhalt</Absatz><% end %></Projektinfo><% @images.each do |imagelink| %><Bild href="<%= imagelink %>"></Bild><% end %></Root>
+%><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Root><Projektname><Titel><%= @article.title %></Titel></Projektname><Projektinfo><%if @text.content %><Absatz><%= textilize(@text.content) %></Absatz><% else %><Absatz>Kein Textinhalt</Absatz><% end %></Projektinfo><% 
+  imagenumber = 1
+  @images.each do |imagelink| %><Bild href="<%= imagelink %>"></Bild><% 
+    imagenumber += 1
+  end %></Root>
