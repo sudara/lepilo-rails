@@ -10,29 +10,8 @@
   </div> 
  
   <% for gallery in @galleries %>
-  <div class="block256x128">
   	<div class="listblock">
-    	<div class="iconblack">
-        <div class="icontainer">
-        <%= link_to_image '/images/b24edit.png', { :action => 'edit', :id => gallery },  html_options = { :class => "icon24", :title => "bearbeiten",} %>
-        <%= link_to_image '/images/b24delete.png', { :action => 'destroy', :id => gallery },  html_options = { :class => "icon24", :title => "löschen", :confirm => 'Artikel »' + gallery.title + '« löschen — sind Sie sicher?'} %>
-        </div>
-  	  
-    	  Statistik:
-    	  <%= image_tag "/images/16article.png",
-            :alt => "anzahl der artikel", 
-            :title => "anzahl der artikel", 
-            :class => "icon16"  %>
-        <%= gallery.count_articles %>    
-    	  <%= image_tag "/images/16image.png",
-            :alt => "anzahl der medienblocks", 
-            :title => "anzahl der medienblocks", 
-            :class => "icon16"  %>
-        <%= gallery.count_media %>    
-      </div>
-      <h3><%= gallery.title %></h3><br/>
-      <%  thumbnail = Mediablock.find_by_id(gallery.thumbnail_id) %>
-      <% if thumbnail %>
+      <% if thumbnail = Mediablock.find_by_id(gallery.thumbnail_id) %>
         <%= image_tag "/data/thumbnails/#{thumbnail.filename}",
             :alt => thumbnail.title, 
             :title => thumbnail.title, 
@@ -41,9 +20,41 @@
         <%= image_tag "/images/rails.png",
             :class => "listthumbnail" %>
       <% end %>
+    	<div class="iconblack">
+        <div class="icontainer">
+          <div class="icontainer" style="margin-right:5px">
+            <% if gallery.released %>
+            <%= image_tag "/images/16unlocked.png",
+                :alt => "freigegeben", 
+                :title => "freigegeben", 
+                :class => "icon16"  %>
+            <% else %>
+            <%= image_tag "/images/16locked.png",
+                :alt => "nicht freigegeben", 
+                :title => "nicht freigegeben", 
+                :class => "icon16"  %>
+            <% end %>
+          </div>
+        <%= link_to_image '/images/b24edit.png', { :action => 'edit', :id => gallery },  html_options = { :class => "icon24", :title => "bearbeiten",} %>
+        <%= link_to_image '/images/b24delete.png', { :action => 'destroy', :id => gallery },  html_options = { :class => "icon24", :title => "löschen", :confirm => 'Artikel »' + gallery.title + '« löschen — sind Sie sicher?'} %>
+        </div>
+      </div>
+      <h3><%= gallery.title %></h3><br/>
+  	  <span class="smalltext">
+      Statistik:
+  	  <%= image_tag "/images/16article.png",
+          :alt => "anzahl der artikel", 
+          :title => "anzahl der artikel", 
+          :class => "icon16"  %>
+      <%= gallery.count_articles %>    
+  	  <%= image_tag "/images/16image.png",
+          :alt => "anzahl der medienblocks", 
+          :title => "anzahl der medienblocks", 
+          :class => "icon16"  %>
+      <%= gallery.count_media %> 
+      </span>   
   	  <div class="listdescription"><%=h gallery.description %></div>
     </div>
-  </div>
   <% end %>
   <br style="clear:both" />
 </div>

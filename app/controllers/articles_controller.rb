@@ -86,8 +86,8 @@
     if params['position']
       addlink.update
       addlink.position = params['position']
-      addlink.save
     end
+    addlink.save
 
     redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']                
   end

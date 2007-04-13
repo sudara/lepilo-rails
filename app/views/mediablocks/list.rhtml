@@ -6,29 +6,59 @@
     <%= link_to 'N&auml;chste Seite', { :page => @mediablock_pages.current.next } if @mediablock_pages.current.next %> 
     <br />
     <br />
+    
   </div> 
-  <div id="fdbheader">
+  <div id="fdbheader" style="padding-top:10px">
+    <div id="mbtrack1" style="position:absolute;width:300px;height:18px;left:32px;background-image:url(/images/canal.png)">
+      <div id="mbhandle1" style="width:15px;height:16px;">
+        <img src="/images/sliderhandle.png"/>
+      </div>
+    </div>
   </div> 
+
+
 
   <% for mediablock in @mediablocks %>
   <%
     #Time.now.strftime('%d-%m-%y -%R') 
   %>
-  <div class="block128x128">
-
     <div class="previewblock">
-    	<div class="iconblack"><div class="icontainer">
+    	<div class="iconblack">
+    	  <div class="icontainer">
       <%= link_to image_tag("/images/b24look.png", :alt => mediablock.filename),"/data/images/#{mediablock.filename}", {:rel => "lightbox", :title => mediablock.title, :class => "icon24" } %>
       <%= link_to_image '/images/b24edit.png', { :action => 'edit', :id => mediablock, :page => params[:page] },  html_options = { :class => "icon24", :title => "bearbeiten",} %>
       <%= link_to_image '/images/b24delete.png', { :action => 'destroy', :id => mediablock },  html_options = { :class => "icon24", :title => "löschen", :confirm => 'Artikel »' + mediablock.title + '« löschen — sind Sie sicher?'} %>
-      </div>
+        </div>
       </div>
       <img src="/data/thumbnails/<%= mediablock.filename %>" class="imagepreviewmini">
     </div>
-  </div>
 
   <% end %>
 
   <br style="clear:both" />
-
 </div>
+<script type="text/javascript">
+
+function scaleIt(v) {
+  var scalePhotos = document.getElementsByClassName('previewblock');
+  floorSize = .40;
+  ceilingSize = 1.0;
+  v = floorSize + (v * (ceilingSize - floorSize));
+
+  for (i=0; i < scalePhotos.length; i++) {
+    scalePhotos[i].style.width = (v*200)+'px';
+    scalePhotos[i].style.height = (v*200)+'px';
+  }
+}
+
+var mediablocksSlider = new Control.Slider('mbhandle1','mbtrack1',
+{axis:'horizontal', minimum: 28, maximum:100, alignX: 1, increment: 1, sliderValue: 0.38});
+
+mediablocksSlider.options.onSlide = function(value){
+  scaleIt(value);
+}
+
+mediablocksSlider.options.onChange = function(value){
+  scaleIt(value);
+}
+</script>

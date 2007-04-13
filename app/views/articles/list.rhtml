@@ -20,39 +20,7 @@
   <%
     #Time.now.strftime('%d-%m-%y -%R') 
   %>
-  <div class="block256x128">
-    <div class="icontainer" style="margin:5px;margin-right:10px">
-      <% if article.released %>
-      <%= image_tag "/images/16unlocked.png",
-          :alt => "freigegeben", 
-          :title => "freigegeben", 
-          :class => "icon16"  %>
-      <% else %>
-      <%= image_tag "/images/16locked.png",
-          :alt => "nicht freigegeben", 
-          :title => "nicht freigegeben", 
-          :class => "icon16"  %>
-      <% end %>
-    </div>
   	<div class="listblock" id="<%= article.id %>">
-    	<div class="iconblack" id="plastic_<%= article.id %>">
-        <div class="icontainer">
-        <%= link_to_image '/images/b24edit.png', { :action => 'edit', :id => article, :page => params[:page] },  html_options = { :class => "icon24", :title => "bearbeiten",} %>
-        <%= link_to_image '/images/b24delete.png', { :action => 'destroy', :id => article },  html_options = { :class => "icon24", :title => "löschen", :confirm => 'Artikel »' + article.title + '« löschen — sind Sie sicher?'} %>
-        </div>
-    	  <strong><%= article.reference %></strong>,
-          <%= image_tag "/images/16image.png",
-              :alt => "anzahl der medienblocks", 
-              :title => "anzahl der medienblocks", 
-              :class => "icon16"  %>
-          <%= article.count_media %>,    
-          <%= image_tag "/images/16text.png",
-              :alt => "anzahl der textblocks", 
-              :title => "anzahl der textblocks", 
-              :class => "icon16"  %>
-          <%= article.count_text %>
-    	</div>
-      <h3><%= article.title %></h3><br/>
       <%  thumbnail = Mediablock.find_by_id(article.thumbnail_id) %>
       <% if thumbnail %>
         <%= image_tag "/data/thumbnails/#{thumbnail.filename}",
@@ -63,10 +31,44 @@
         <%= image_tag "/images/rails.png",
             :class => "listthumbnail" %>
       <% end %>
+    	<div class="iconblack" id="plastic_<%= article.id %>">
+        <div class="icontainer">
+          <div class="icontainer" style="margin-right:5px">
+            <% if article.released %>
+            <%= image_tag "/images/16unlocked.png",
+                :alt => "freigegeben", 
+                :title => "freigegeben", 
+                :class => "icon16"  %>
+            <% else %>
+            <%= image_tag "/images/16locked.png",
+                :alt => "nicht freigegeben", 
+                :title => "nicht freigegeben", 
+                :class => "icon16"  %>
+            <% end %>
+          </div>
+        <%= link_to_image '/images/b24edit.png', { :action => 'edit', :id => article, :page => params[:page] },  html_options = { :class => "icon24", :title => "bearbeiten",} %>
+        <%= link_to_image '/images/b24delete.png', { :action => 'destroy', :id => article },  html_options = { :class => "icon24", :title => "löschen", :confirm => 'Artikel »' + article.title + '« löschen — sind Sie sicher?'} %>
+        </div>
+    	</div>
+      <h3><%= article.title %></h3><br/>
+      <span class="smalltext">
+  	  <strong><%= article.reference %></strong>,
+        <%= image_tag "/images/16image.png",
+            :alt => "anzahl der medienblocks", 
+            :title => "anzahl der medienblocks", 
+            :class => "icon16"  %>
+        <%= article.count_media %>,    
+        <%= image_tag "/images/16text.png",
+            :alt => "anzahl der textblocks", 
+            :title => "anzahl der textblocks", 
+            :class => "icon16"  %>
+        <%= article.count_text %>
+      </span><br/>
   	  <div class="listdescription">
   	<%=h article.description %></div>
-    </div>
+  	
   </div>
   <% end %>
   <br style="clear:both" />
+
 </div> 

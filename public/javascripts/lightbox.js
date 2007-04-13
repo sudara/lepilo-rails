@@ -1,8 +1,8 @@
 // -----------------------------------------------------------------------------------
 //
-//	Lightbox v2.02
+//	Lightbox v2.03
 //	by Lokesh Dhakar - http://www.huddletogether.com
-//	3/31/06
+//	4/9/06
 //
 //	For more information on this script, visit:
 //	http://huddletogether.com/projects/lightbox2/
@@ -47,6 +47,8 @@
 	- listenKey()
 	- showSelectBoxes()
 	- hideSelectBoxes()
+	- showFlash()
+	- hideFlash()
 	- pause()
 	- initLightbox()
 	
@@ -62,7 +64,8 @@
 var fileLoadingImage = "/images/loading.gif";		
 var fileBottomNavCloseImage = "/images/closelabel.gif";
 
-var resizeSpeed = 7;	// controls the speed of the image resizing (1=slowest and 10=fastest)
+var animate = true;	// toggles resizing animations
+var resizeSpeed = 7;	// controls the speed of the image resizing animations (1=slowest and 10=fastest)
 
 var borderSize = 10;	//if you adjust the padding in the CSS, you will need to update this variable
 
@@ -74,9 +77,15 @@ var borderSize = 10;	//if you adjust the padding in the CSS, you will need to up
 var imageArray = new Array;
 var activeImage;
 
-if(resizeSpeed > 10){ resizeSpeed = 10;}
-if(resizeSpeed < 1){ resizeSpeed = 1;}
-resizeDuration = (11 - resizeSpeed) * 0.15;
+if(animate == true){
+	overlayDuration = 0.2;	// shadow fade in/out duration
+	if(resizeSpeed > 10){ resizeSpeed = 10;}
+	if(resizeSpeed < 1){ resizeSpeed = 1;}
+	resizeDuration = (11 - resizeSpeed) * 0.15;
+} else { 
+	overlayDuration = 0;
+	resizeDuration = 0;
+}
 
 // -----------------------------------------------------------------------------------
 
@@ -123,11 +132,13 @@ Object.extend(Element, {
 //	- array.empty()
 //
 Array.prototype.removeDuplicates = function () {
-	for(i = 1; i < this.length; i++){
-		if(this[i][0] == this[i-1][0]){
-			this.splice(i,1);
-		}
-	}
+    for(i = 0; i < this.length; i++){
+        for(j = this.length-1; j>i; j--){        
+            if(this[i][0] == this[j][0]){
+                this.splice(j,1);
+            }
+        }
+    }
 }
 
 // -----------------------------------------------------------------------------------
@@ -170,6 +181,7 @@ Lightbox.prototype = {
 	initialize: function() {	
 		if (!document.getElementsByTagName){ return; }
 		var anchors = document.getElementsByTagName('a');
+		var areas = document.getElementsByTagName('area');
 
 		// loop through all anchor tags
 		for (var i=0; i<anchors.length; i++){
@@ -180,6 +192,19 @@ Lightbox.prototype = {
 			// use the string.match() method to catch 'lightbox' references in the rel attribute
 			if (anchor.getAttribute('href') && (relAttribute.toLowerCase().match('lightbox'))){
 				anchor.onclick = function () {myLightbox.start(this); return false;}
+			}
+		}
+
+		// loop through all area tags
+		// todo: combine anchor & area tag loops
+		for (var i=0; i< areas.length; i++){
+			var area = areas[i];
+			
+			var relAttribute = String(area.getAttribute('rel'));
+			
+			// use the string.match() method to catch 'lightbox' references in the rel attribute
+			if (area.getAttribute('href') && (relAttribute.toLowerCase().match('lightbox'))){
+				area.onclick = function () {myLightbox.start(this); return false;}
 			}
 		}
 
@@ -196,7 +221,7 @@ Lightbox.prototype = {
 		//				</div>
 		//				<div id="loading">
 		//					<a href="#" id="loadingLink">
-		//						<img src="images/loading.gif">
+		//						<img src="/images/loading.gif">
 		//					</a>
 		//				</div>
 		//			</div>
@@ -209,7 +234,7 @@ Lightbox.prototype = {
 		//				</div>
 		//				<div id="bottomNav">
 		//					<a href="#" id="bottomNavClose">
-		//						<img src="images/close.gif">
+		//						<img src="/images/close.gif">
 		//					</a>
 		//				</div>
 		//			</div>
@@ -222,17 +247,35 @@ Lightbox.prototype = {
 		var objOverlay = document.createElement("div");
 		objOverlay.setAttribute('id','overlay');
 		objOverlay.style.display = 'none';
-		objOverlay.onclick = function() { myLightbox.end(); return false; }
+		objOverlay.onclick = function() { myLightbox.end(); }
 		objBody.appendChild(objOverlay);
 		
 		var objLightbox = document.createElement("div");
 		objLightbox.setAttribute('id','lightbox');
 		objLightbox.style.display = 'none';
+		objLightbox.onclick = function(e) {	// close Lightbox is user clicks shadow overlay
+			if (!e) var e = window.event;
+			var clickObj = Event.element(e).id;
+			if ( clickObj == 'lightbox') {
+				myLightbox.end();
+			}
+		};
 		objBody.appendChild(objLightbox);
-	
+			
 		var objOuterImageContainer = document.createElement("div");
 		objOuterImageContainer.setAttribute('id','outerImageContainer');
 		objLightbox.appendChild(objOuterImageContainer);
+
+		// When Lightbox starts it will resize itself from 250 by 250 to the current image dimension.
+		// If animations are turned off, it will be hidden as to prevent a flicker of a
+		// white 250 by 250 box.
+		if(animate){
+			Element.setWidth('outerImageContainer', 250);
+			Element.setHeight('outerImageContainer', 250);			
+		} else {
+			Element.setWidth('outerImageContainer', 1);
+			Element.setHeight('outerImageContainer', 1);			
+		}
 
 		var objImageContainer = document.createElement("div");
 		objImageContainer.setAttribute('id','imageContainer');
@@ -313,11 +356,13 @@ Lightbox.prototype = {
 	start: function(imageLink) {	
 
 		hideSelectBoxes();
+		hideFlash();
 
 		// stretch overlay to fill page and fade in
 		var arrayPageSize = getPageSize();
 		Element.setHeight('overlay', arrayPageSize[1]);
-		new Effect.Appear('overlay', { duration: 0.2, from: 0.0, to: 0.8 });
+
+		new Effect.Appear('overlay', { duration: overlayDuration, from: 0.0, to: 0.8 });
 
 		imageArray = [];
 		imageNum = 0;		
@@ -344,9 +389,8 @@ Lightbox.prototype = {
 		}
 
 		// calculate top offset for the lightbox and display 
-		var arrayPageSize = getPageSize();
 		var arrayPageScroll = getPageScroll();
-		var lightboxTop = arrayPageScroll[1] + (arrayPageSize[3] / 15);
+		var lightboxTop = arrayPageScroll[1] + (arrayPageSize[3] / 10);
 
 		Element.setTop('lightbox', lightboxTop);
 		Element.show('lightbox');
@@ -363,7 +407,7 @@ Lightbox.prototype = {
 		activeImage = imageNum;	// update global var
 
 		// hide elements during transition
-		Element.show('loading');
+		if(animate){ Element.show('loading');}
 		Element.hide('lightboxImage');
 		Element.hide('hoverNav');
 		Element.hide('prevLink');
@@ -386,17 +430,21 @@ Lightbox.prototype = {
 	//
 	resizeImageContainer: function( imgWidth, imgHeight) {
 
-		// get current height and width
-		this.wCur = Element.getWidth('outerImageContainer');
-		this.hCur = Element.getHeight('outerImageContainer');
+		// get curren width and height
+		this.widthCurrent = Element.getWidth('outerImageContainer');
+		this.heightCurrent = Element.getHeight('outerImageContainer');
+
+		// get new width and height
+		var widthNew = (imgWidth  + (borderSize * 2));
+		var heightNew = (imgHeight  + (borderSize * 2));
 
 		// scalars based on change from old to new
-		this.xScale = ((imgWidth  + (borderSize * 2)) / this.wCur) * 100;
-		this.yScale = ((imgHeight  + (borderSize * 2)) / this.hCur) * 100;
+		this.xScale = ( widthNew / this.widthCurrent) * 100;
+		this.yScale = ( heightNew / this.heightCurrent) * 100;
 
 		// calculate size difference between new and old image, and resize if necessary
-		wDiff = (this.wCur - borderSize * 2) - imgWidth;
-		hDiff = (this.hCur - borderSize * 2) - imgHeight;
+		wDiff = this.widthCurrent - widthNew;
+		hDiff = this.heightCurrent - heightNew;
 
 		if(!( hDiff == 0)){ new Effect.Scale('outerImageContainer', this.yScale, {scaleX: false, duration: resizeDuration, queue: 'front'}); }
 		if(!( wDiff == 0)){ new Effect.Scale('outerImageContainer', this.xScale, {scaleY: false, delay: resizeDuration, duration: resizeDuration}); }
@@ -409,7 +457,7 @@ Lightbox.prototype = {
 
 		Element.setHeight('prevLink', imgHeight);
 		Element.setHeight('nextLink', imgHeight);
-		Element.setWidth( 'imageDataContainer', imgWidth + (borderSize * 2));
+		Element.setWidth( 'imageDataContainer', widthNew);
 
 		this.showImage();
 	},
@@ -420,7 +468,7 @@ Lightbox.prototype = {
 	//
 	showImage: function(){
 		Element.hide('loading');
-		new Effect.Appear('lightboxImage', { duration: 0.5, queue: 'end', afterFinish: function(){	myLightbox.updateDetails(); } });
+		new Effect.Appear('lightboxImage', { duration: resizeDuration, queue: 'end', afterFinish: function(){	myLightbox.updateDetails(); } });
 		this.preloadNeighborImages();
 	},
 
@@ -440,9 +488,15 @@ Lightbox.prototype = {
 		}
 
 		new Effect.Parallel(
-			[ new Effect.SlideDown( 'imageDataContainer', { sync: true, duration: resizeDuration + 0.25, from: 0.0, to: 1.0 }), 
-			  new Effect.Appear('imageDataContainer', { sync: true, duration: 1.0 }) ], 
-			{ duration: 0.65, afterFinish: function() { myLightbox.updateNav();} } 
+			[ new Effect.SlideDown( 'imageDataContainer', { sync: true, duration: resizeDuration, from: 0.0, to: 1.0 }), 
+			  new Effect.Appear('imageDataContainer', { sync: true, duration: resizeDuration }) ], 
+			{ duration: resizeDuration, afterFinish: function() {
+				// update overlay size and update nav
+				var arrayPageSize = getPageSize();
+				Element.setHeight('overlay', arrayPageSize[1]);
+				myLightbox.updateNav();
+				}
+			} 
 		);
 	},
 
@@ -493,26 +547,27 @@ Lightbox.prototype = {
 	keyboardAction: function(e) {
 		if (e == null) { // ie
 			keycode = event.keyCode;
+			escapeKey = 27;
 		} else { // mozilla
-			keycode = e.which;
+			keycode = e.keyCode;
+			escapeKey = e.DOM_VK_ESCAPE;
 		}
 
 		key = String.fromCharCode(keycode).toLowerCase();
 		
-		if((key == 'x') || (key == 'o') || (key == 'c')){	// close lightbox
+		if((key == 'x') || (key == 'o') || (key == 'c') || (keycode == escapeKey)){	// close lightbox
 			myLightbox.end();
-		} else if(key == 'p'){	// display previous image
+		} else if((key == 'p') || (keycode == 37)){	// display previous image
 			if(activeImage != 0){
 				myLightbox.disableKeyboardNav();
 				myLightbox.changeImage(activeImage - 1);
 			}
-		} else if(key == 'n'){	// display next image
+		} else if((key == 'n') || (keycode == 39)){	// display next image
 			if(activeImage != (imageArray.length - 1)){
 				myLightbox.disableKeyboardNav();
 				myLightbox.changeImage(activeImage + 1);
 			}
 		}
-
 
 	},
 
@@ -539,8 +594,9 @@ Lightbox.prototype = {
 	end: function() {
 		this.disableKeyboardNav();
 		Element.hide('lightbox');
-		new Effect.Fade('overlay', { duration: 0.2});
+		new Effect.Fade('overlay', { duration: overlayDuration});
 		showSelectBoxes();
+		showFlash();
 	}
 }
 
@@ -616,7 +672,6 @@ function getPageSize(){
 		pageWidth = xScroll;
 	}
 
-
 	arrayPageSize = new Array(pageWidth,pageHeight,windowWidth,windowHeight) 
 	return arrayPageSize;
 }
@@ -649,7 +704,7 @@ function listenKey () {	document.onkeypress = getKey; }
 // ---------------------------------------------------
 
 function showSelectBoxes(){
-	selects = document.getElementsByTagName("select");
+	var selects = document.getElementsByTagName("select");
 	for (i = 0; i != selects.length; i++) {
 		selects[i].style.visibility = "visible";
 	}
@@ -658,7 +713,7 @@ function showSelectBoxes(){
 // ---------------------------------------------------
 
 function hideSelectBoxes(){
-	selects = document.getElementsByTagName("select");
+	var selects = document.getElementsByTagName("select");
 	for (i = 0; i != selects.length; i++) {
 		selects[i].style.visibility = "hidden";
 	}
@@ -666,21 +721,54 @@ function hideSelectBoxes(){
 
 // ---------------------------------------------------
 
-//
-// pause(numberMillis)
-// Pauses code execution for specified time. Uses busy code, not good.
-// Code from http://www.faqts.com/knowledge_base/view.phtml/aid/1602
-//
-function pause(numberMillis) {
-	var now = new Date();
-	var exitTime = now.getTime() + numberMillis;
-	while (true) {
-		now = new Date();
-		if (now.getTime() > exitTime)
-			return;
+function showFlash(){
+	var flashObjects = document.getElementsByTagName("object");
+	for (i = 0; i != flashObjects.length; i++) {
+		flashObjects[i].style.visibility = "visible";
+	}
+
+	var flashEmbeds = document.getElementsByTagName("embeds");
+	for (i = 0; i != flashEmbeds.length; i++) {
+		flashEmbeds[i].style.visibility = "visible";
 	}
 }
 
+// ---------------------------------------------------
+
+function hideFlash(){
+	var flashObjects = document.getElementsByTagName("object");
+	for (i = 0; i != flashObjects.length; i++) {
+		flashObjects[i].style.visibility = "hidden";
+	}
+
+	var flashEmbeds = document.getElementsByTagName("embeds");
+	for (i = 0; i != flashEmbeds.length; i++) {
+		flashEmbeds[i].style.visibility = "hidden";
+	}
+
+}
+
+
+// ---------------------------------------------------
+
+//
+// pause(numberMillis)
+// Pauses code execution for specified time. Uses busy code, not good.
+// Help from Ran Bar-On [ran2103@gmail.com]
+//
+
+function pause(ms){
+	var date = new Date();
+	curDate = null;
+	do{var curDate = new Date();}
+	while( curDate - date < ms);
+}
+/*
+function pause(numberMillis) {
+	var curently = new Date().getTime() + sender;
+	while (new Date().getTime();	
+}
+*/
 // ---------------------------------------------------
 
 
