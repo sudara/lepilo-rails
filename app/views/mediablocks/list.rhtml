@@ -8,12 +8,12 @@
     <br />
     
   </div> 
-  <div id="fdbheader" style="padding-top:10px">
-    <div id="mbtrack1" style="position:absolute;width:300px;height:18px;left:32px;background-image:url(/images/canal.png)">
-      <div id="mbhandle1" style="width:15px;height:16px;">
+  <div id="fdbheader"><img src="/images/slidermini.png" style="float:left;margin-left:25px;margin-top:7px"/>
+    <div id="mbtrack1" class="slidertrack">
+      <div id="mbhandle1" style="sliderhandle">
         <img src="/images/sliderhandle.png"/>
       </div>
-    </div>
+    </div><img src="/images/sliderbig.png" style="float:left;margin-top:6px"/>
   </div> 
 
 
@@ -52,7 +52,7 @@ function scaleIt(v) {
 }
 
 var mediablocksSlider = new Control.Slider('mbhandle1','mbtrack1',
-{axis:'horizontal', minimum: 28, maximum:100, alignX: 1, increment: 1, sliderValue: 0.38});
+{axis:'horizontal', minimum:0, maximum:200, alignX:-280, increment: 1, sliderValue: 0.38});
 
 mediablocksSlider.options.onSlide = function(value){
   scaleIt(value);

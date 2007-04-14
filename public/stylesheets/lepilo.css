@@ -231,7 +231,8 @@ div.progress-container > div {
   background-repeat:repeat-x;
   background-color:transparent;
   overflow:auto;
-  height:30px;
+  min-height:30px;
+  padding-top:5px;
   margin-top:0px;
   margin-bottom:0px;
 }
@@ -243,9 +244,11 @@ div.progress-container > div {
 }
 
 #fdbcontainer {
+  position:absolute;
   background-color:#444;
-  padding-bottom:20px;
-  bottom:0px;
+  padding-bottom:50px;
+  min-height:85%;
+  width:100%;
 }
 
 #fdbtemplatecontainer {
@@ -595,6 +598,21 @@ code {
   height:auto;
 }
 
+.slidertrack {
+  background-image:url(/images/canal.png);
+  background-repeat:no-repeat;
+  float:left;
+  margin-top:5px;
+  margin-right:5px;
+  width:300px;
+  height:18px;
+}
+
+.sliderhandle {
+  width:15px;
+  height:18px;
+}
+
 div.ipmtitle {
   font-family: "HelveticaNeue-Bold", "Helvetica Neue Bold", sans-serif;
   color:#fff;
@@ -673,7 +691,7 @@ div.ipmtitle:hover {
   width:350px;
   height:100px;
   overflow:hidden;
-  border: 1px solid #bbb;
+  border: 1px solid #333;
   float:left;
 }
 
@@ -692,7 +710,7 @@ div.ipmtitle:hover {
   width:125px;
   height:125px;
   overflow:hidden;
-  border: 1px solid #bbb;
+  border: 1px solid #333;
   float:left;
 }
 
@@ -862,7 +880,7 @@ div.block128x128:hover {
   width:25px;
   height:auto;
   margin-left:-35px;
-  margin-right:-5px;
+  margin-right:-8px;
   padding-left:5px;
   padding-right:10px;
   padding-top:5px;
