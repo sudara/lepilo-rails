@@ -1,6 +1,7 @@
 class MediablocksController < ApplicationController
 
   before_filter :login_required, :except => [ :show, :show_search ]
+  upload_status_for :create
 
   def index
     list
@@ -56,6 +57,21 @@ class MediablocksController < ApplicationController
   end
 
   def create
+
+    case @request.method
+    when :post
+      @message = 'File uploaded: ' + params[:mediablock][:file].size.to_s
+
+      upload_progress.message = "Simulating some file processing stage 1..."
+      session.update
+      sleep(8)
+      
+      upload_progress.message = "Continuing processing stage 2..."
+      session.update
+      sleep(8)
+
+      finish_upload_status "'#{@message}'"
+    end
 
     @mediablock = Mediablock.new(params[:mediablock])
     @mediablock.uploaded_at = DateTime.new(1970, 01, 01, 01, 01).to_s(:db)

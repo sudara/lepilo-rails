@@ -112,25 +112,27 @@ div.progressBar {
   margin:5px;
 }
 
-div.progressBar div.border {
+
+.progressBar .border {
   background-image:url(/images/containerb.png); 
   background-repeat: repeat-x;
   border-bottom: 1px solid #333; 
-  width: 90%; 
+  width:700px; 
+  height:16px;
   margin: 2px 5px 2px 0; 
   padding: 0px; 
   margin-left: auto;
   margin-right: auto;
-  width:100%;
 }
 
-div.progressBar div.background {
+.progressBar .background {
   background-image:url(/images/progress.gif); 
   background-repeat:repeat-x;
   border-right: 1px solid #ccc; 
-  height: 16px
-  width:0%;
+  height:16px;
+  width:1px;
 }
+
 
 div.progress-container {
   background-image:url(/images/containerb.png); 
