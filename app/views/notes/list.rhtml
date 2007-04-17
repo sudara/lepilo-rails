@@ -1,4 +1,19 @@
-<h1>Listing notes</h1>
+<div id="fdbcontainer">
+  <div id="fdboptions">
+    <h1>Notizen</h1> | <%= link_to 'Neue Notiz', :action => 'new' %> | 
+    <%= link_to 'Vorherige Seite', { :page => @note_pages.current.previous } if @note_pages.current.previous %> | 
+    Seite: <%= pagination_links(@note_pages) %> |
+    <%= link_to 'N&auml;chste Seite', { :page => @note_pages.current.next } if @note_pages.current.next %> 
+    <br/>
+    <br/>
+  </div> 
+  <div id="fdbheader">
+    <div class="centered">
+      <%= image_tag "/images/loadingg.gif",
+          :alt => "loading", 
+          :title => "loading" %>     
+    </div>
+  </div> 
 
 <table>
   <tr>
@@ -25,3 +40,5 @@
 <br />
 
 <%= link_to 'New note', :action => 'new' %>
+
+</div>

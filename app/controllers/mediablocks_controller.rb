@@ -11,7 +11,7 @@ class MediablocksController < ApplicationController
   def list
     @mediablock_pages, @mediablocks = paginate :mediablocks, :order => 'created_at DESC', :per_page => 24
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 
@@ -31,28 +31,28 @@ class MediablocksController < ApplicationController
   def selectmedia
     @mediablock_pages, @mediablocks = paginate :mediablocks, :per_page => 10
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 
   def show
     @mediablock = Mediablock.find(params[:id])
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 
   def show_search
     @mediablocks = Mediablock.find(:all)
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 
   def new
     @mediablock = Mediablock.new
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 
@@ -64,11 +64,11 @@ class MediablocksController < ApplicationController
 
       upload_progress.message = "Simulating some file processing stage 1..."
       session.update
-      sleep(8)
+      sleep(2)
       
       upload_progress.message = "Continuing processing stage 2..."
       session.update
-      sleep(8)
+      sleep(2)
 
       finish_upload_status "'#{@message}'"
     end
@@ -96,7 +96,7 @@ class MediablocksController < ApplicationController
   def edit
     @mediablock = Mediablock.find(params[:id])
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 

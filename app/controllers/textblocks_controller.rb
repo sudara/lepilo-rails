@@ -10,7 +10,7 @@ class TextblocksController < ApplicationController
   def list
     @textblock_pages, @textblocks = paginate :textblocks, :per_page => 10
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 
@@ -30,7 +30,7 @@ class TextblocksController < ApplicationController
   def show
     @textblock = Textblock.find(params[:id])
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     else
       render_without_layout
     end
@@ -39,7 +39,7 @@ class TextblocksController < ApplicationController
   def flashpreview
     @textblock = Textblock.find(params[:id])
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 
@@ -55,9 +55,7 @@ class TextblocksController < ApplicationController
 
   def new
     @textblock = Textblock.new
-    if params[:rendersimple]  
-      render :layout => "simple"
-    end
+    render :layout => 'simple'
   end
 
   def create
@@ -73,18 +71,16 @@ class TextblocksController < ApplicationController
       addLink.save
       
       flash[:notice] = 'Textblock was successfully created.'
-      #redirect_to :action => 'list'
       redirect_to :controller=>"/block_links", :action => "close_reload"
     else
+      render :layout => 'simple'
       render :action => 'new'
     end
   end
 
   def edit
     @textblock = Textblock.find(params[:id])
-    # if params[:rendersimple]  
-      render :layout => "simple"
-    # end
+    render :layout => 'simple'
   end
 
   def update
@@ -94,24 +90,30 @@ class TextblocksController < ApplicationController
       #redirect_to :action => 'show', :id => @textblock
       redirect_to :controller=>"/block_links", :action => "close_reload"
     else
+      render :layout => 'simple'
       render :action => 'edit'
     end
   end
 
   def destroy
     Textblock.find(params[:id]).destroy
-    # redirect_to :action => 'list'
-    # redirect_to :controller=>"/block_links", :action => "close_reload"
-    redirect_to :controller => '/articles', :action => 'edit', :id => session[:current_article]
+    if session[:current_article]
+      redirect_to :controller => '/articles', :action => 'edit', :id => session[:current_article]
+    elsif session[:current_gallery]
+      redirect_to :controller => '/galleries', :action => 'edit', :id => session[:current_gallery]
+    else
+      redirect_to :action => 'list'
+    end    
   end
   
   def destroylink
     BlockLink.find(params[:id]).destroy
     if session[:current_article]
       redirect_to :controller => '/articles', :action => 'edit', :id => session[:current_article]
-    end
-    if session[:current_gallery]
+    elsif session[:current_gallery]
       redirect_to :controller => '/galleries', :action => 'edit', :id => session[:current_gallery]
+    else
+      redirect_to :action => 'list'
     end    
   end
   

@@ -10,7 +10,7 @@ class GalleriesController < ApplicationController
   def list
     @gallery_pages, @galleries = paginate :galleries, :per_page => 12
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 
@@ -59,7 +59,7 @@ class GalleriesController < ApplicationController
   def show
     @gallery = Gallery.find(params[:id])
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
   
@@ -81,7 +81,7 @@ class GalleriesController < ApplicationController
   def new
     @gallery = Gallery.new
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 
@@ -118,7 +118,7 @@ class GalleriesController < ApplicationController
   def edit
     @gallery = Gallery.find(params[:id])
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 

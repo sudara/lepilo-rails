@@ -1,15 +1,15 @@
 <%= render :partial => "article", :object => "article" %>
 
 <%= drop_receiving_element "fdbtemplatecontainer", 
-      :update => "fdbcontent", :url => { :action => "addblock" },
+      :update => "fdbcontent", :url => { :action => "addblock", :dropfragment_id => params['fragment_id'] },
       :accept => "dragblock", :hoverclass => "dropzone-active" %>
 
 <%= drop_receiving_element "fdbtemplatecontainer", 
-      :update => "fdbcontent", :url => { :action => "addblock" },
+      :update => "fdbcontent", :url => { :action => "addblock", :dropfragment_id => params['fragment_id'] },
       :accept => "dragline", :hoverclass => "dropzone-active" %>
 
 <%= sortable_element 'block-list' ,
       :tag => "div",
       :constraint => false,
-      :url => { :action => "sort", :id => @article }, 
+      :url => { :action => "sort", :id => @article, :sortfragment_id => params['fragment_id'] }, 
       :complete => visual_effect(:highlight, 'block-list' ) %> 

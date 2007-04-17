@@ -12,15 +12,15 @@ class BlockLinksController < ApplicationController
 
   def list
     @block_link_pages, @block_links = paginate :block_links, :per_page => 10
-    if params[:rendersimple] = "true" 
-      render :layout => "simple"
+    if params[:rendersimple] == "true" 
+      render :layout => 'simple'
     end
   end
 
   def show
     @block_link = BlockLink.find(params[:id])
-    if params[:rendersimple] = "true" 
-      render :layout => "simple"
+    if params[:rendersimple] == "true" 
+      render :layout => 'simple'
     end
   end
   
@@ -40,8 +40,8 @@ class BlockLinksController < ApplicationController
 
   def new
     @block_link = BlockLink.new
-    if params[:rendersimple] = "true" 
-      render :layout => "simple"
+    if params[:rendersimple] == "true" 
+      render :layout => 'simple'
     end
   end
 
@@ -57,8 +57,8 @@ class BlockLinksController < ApplicationController
 
   def edit
     @block_link = BlockLink.find(params[:id])
-    if params[:rendersimple] = "true" 
-      render :layout => "simple"
+    if params[:rendersimple] == "true" 
+      render :layout => 'simple'
     end
   end
 

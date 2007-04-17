@@ -19,7 +19,7 @@
     @article_pages, @articles = paginate :articles, :order => 'release_date DESC, reference DESC', :per_page => 16
     
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 
@@ -63,10 +63,12 @@
     drop_type = params[:id].split("_")[0]  
     drop_id = params[:id].split("_")[1]  
     
-    if !params['fragment']
-      drop_into_fragment = @article.fragments.find_by_content("web").id
+    if params[:dropfragment_id]
+      drop_into_fragment = params[:dropfragment_id]
+    elsif params[:fragment]
+      drop_into_fragment = @article.fragments.find_by_content(params[:fragment]).id
     else
-      drop_into_fragment = @article.fragments.find_by_content(params['fragment']).id
+      drop_into_fragment = @article.fragments.find_by_content("web").id
     end
             
     addlink = BlockLink.new unless addlink = BlockLink.find_by_fragment_id_and_position(drop_into_fragment, params['position'])
@@ -89,20 +91,26 @@
     end
     addlink.save
 
-    redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']                
+    if params[:dropfragment_id]
+      redirect_to :action => 'edit', :id => @article, :fragment => Fragment.find(params['dropfragment_id']).content
+    elsif params[:fragment]
+      redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']                
+    else
+      redirect_to :action => 'edit', :id => @article                
+    end
   end
 
 
   def show
     @article = Article.find(params[:id])
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 
   def showswf
     @article = Article.find(params[:id])
-    render :layout => "simple"
+    render :layout => 'simple'
   end
 
   def showdina4
@@ -183,7 +191,7 @@
   def new
     @article = Article.new
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 
@@ -233,13 +241,13 @@
     end
     
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 
   def sort 
-    @article = Article.find(params[:id])
-    @article.fragments.first.block_links.each do |block| 
+    @sortfragment = Fragment.find(params[:sortfragment_id])
+    @sortfragment.block_links.each do |block| 
       block.position = params[ 'block-list' ].index(block.id.to_s) + 1 
       block.save 
     end 

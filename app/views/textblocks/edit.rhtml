@@ -1,25 +1,24 @@
-<div id="fdboptions" style="display:none">
-  <div id="fdbhelp">
-    Titel auszeichnen:  <code>h1. </code>,&nbsp;<code>h2. </code>&nbsp;oder <code>h3. </code>&nbsp;vor den text setzen <br/>
-  Texte <strong>fett</strong> auszeichnen:  <code>%(f)text%</code> <br/>
-  Texte <em>kursiv</em> auszeichnen: <code>%(k)text%</code> <br/>
-  Texte <span class="orange">orange</span> auszeichnen: <code>%(o)text%</code> <br/>
-  Links definieren mit: <code>"linkname":http://www.webseite.at</code> <br/>
-  </div>
-  <br/>
-</div>
-<div id="fdbheader">
-<%= content_tag 'DIV', '<img src="/images/closetray.png">', :style => 'width:80px;float:right',
-  :onclick => visual_effect(:slideUp, 'fdboptions') %>
-<%= content_tag 'DIV', '<img src="/images/opentray.png">', :style => 'width:63px;float:right',
-  :onclick => visual_effect(:slideDown, 'fdboptions')  %>
-</div>
-
 <div id="fdbcontainer">
+  <div id="fdboptions">
+    <h1>Textblock Bearbeiten</h1>
+    
+  </div> 
+  <div id="fdbheader">
+  </div> 
 
   <div class="editdata">
+    <div id="fdbhelp">
+    Titel auszeichnen:  <code>h1. </code>,&nbsp;<code>h2. </code>&nbsp;oder <code>h3. </code>&nbsp;vor den text setzen <br/>
+    Texte <strong>fett</strong> auszeichnen:  <code>%(f)text%</code> <br/>
+    Texte <em>kursiv</em> auszeichnen: <code>%(k)text%</code> <br/>
+    Texte <span class="orange">orange</span> auszeichnen: <code>%(o)text%</code> <br/>
+    Links definieren mit: <code>"linkname":http://www.webseite.at</code> <br/>
+    </div>
+    <br/>
+  </div>
+  
+  <div class="editdata">
     <div class="fdbblock">
-      <h2>Editing textblock</h2><br/>
       <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="400" height="400">
         <param name="movie" value="/dina4/dina4-text-preview.swf" />
         <param name=FlashVars value="textblock=<%= @textblock.id %>">

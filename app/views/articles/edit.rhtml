@@ -36,7 +36,7 @@
             
             <h1><%= in_place_editor_field :article, :title %></h1>
             Typ: <h3><%= @article.type %></h3>, Freigegeben: <h3><%= @article.released %></h3><br/>
-            <%= in_place_editor_field :article, :description %>
+           <%= in_place_editor_field :article, :description, tag_options = {}, in_place_editor_options = { :cols => 32, :rows => 10, :cancel_text => 'abbrechen'} %>
             </div>
             
             <div class="editdata">
@@ -115,7 +115,8 @@
 
   <div id="fdbtemplatecontainer">  
   <% if params[:fragment] == "print" %>
-    <%= render :partial => "templates/dina4print" %>
+  <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.find_by_content("print") }) -%>  
+    <%# render :partial => "templates/dina4print" %>
   <% else %>
     <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.find_by_content("web") }) -%>  
   <% end %>

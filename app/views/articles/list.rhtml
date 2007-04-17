@@ -8,13 +8,12 @@
     <br/>
   </div> 
   <div id="fdbheader">
+    <div class="centered">
+      <%= image_tag "/images/loadingg.gif",
+          :alt => "loading", 
+          :title => "loading" %>     
+    </div>
   </div> 
-
-  <div class="centered">
-    <%= image_tag "/images/loadingg.gif",
-        :alt => "loading", 
-        :title => "loading" %>     
-  </div><br/>
       
   <% for article in @articles %>
 
@@ -71,9 +70,5 @@
   </div>
   <% end %>
   <br style="clear:both" />
-<br/>
-  <div class="progress-container">          
-      <div style="width: 75%"></div>
-  </div>
 
 </div> 

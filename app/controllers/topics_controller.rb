@@ -10,14 +10,14 @@ class TopicsController < ApplicationController
   def list
     @topic_pages, @topics = paginate :topics, :per_page => 75
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 
   def show
     @topic = Topic.find(params[:id])
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 
@@ -29,7 +29,7 @@ class TopicsController < ApplicationController
   def new
     @topic = Topic.new
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
 
@@ -46,7 +46,7 @@ class TopicsController < ApplicationController
   def edit
     @topic = Topic.find(params[:id])
     if params[:rendersimple]  
-      render :layout => "simple"
+      render :layout => 'simple'
     end
   end
   

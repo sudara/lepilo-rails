@@ -20,31 +20,13 @@ class Article < ActiveRecord::Base
   end
   
   def count_media
-    media_counter = 0
-    
-    if mediablocks = BlockLink.find_all_by_fragment_id(self.fragments.first.id) 
-      for block in mediablocks
-        if block.mediablock_id
-          media_counter = media_counter + 1
-        end
-      end
-    end 
-    
+    media_counter = BlockLink.count(:all, :conditions => "mediablock_id AND fragment_id = #{self.fragments.first.id}")
     return media_counter
   end
 
 
   def count_text
-    text_counter = 0
-    
-    if textblocks = BlockLink.find_all_by_fragment_id(self.fragments.first.id) 
-      for block in textblocks
-        if block.textblock_id
-          text_counter = text_counter + 1
-        end
-      end
-    end 
-    
+    text_counter = BlockLink.count(:all, :conditions => "textblock_id AND fragment_id = #{self.fragments.first.id}")
     return text_counter
   end
 
@@ -53,6 +35,11 @@ class Article < ActiveRecord::Base
     @blocks = BlockLink.find_all_by_article_id(self.id)
     for block in @blocks
       block.destroy
+    end
+
+    @fragments = Fragment.find_all_by_article_id(self.id)
+    for fragment in @fragments
+      fragment.destroy
     end
   end
   

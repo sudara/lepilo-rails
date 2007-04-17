@@ -4,24 +4,24 @@ class CommentsController < ApplicationController
     render :action => 'list'
   end
 
-  def list
+  def list    
     @comment_pages, @comments = paginate :comments, :per_page => 10
-    if params[:rendersimple] = "true" 
-      render :layout => "simple"
+    if params[:rendersimple] == "true" 
+      render :layout => 'simple'
     end
   end
 
   def show
     @comment = Comment.find(params[:id])
-    if params[:rendersimple] = "true" 
-      render :layout => "simple"
+    if params[:rendersimple] == "true" 
+      render :layout => 'simple'
     end
   end
 
   def new
     @comment = Comment.new
-    if params[:rendersimple] = "true" 
-      render :layout => "simple"
+    if params[:rendersimple] == "true" 
+      render :layout => 'simple'
     end
   end
 
@@ -37,8 +37,8 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = Comment.find(params[:id])
-    if params[:rendersimple] = "true" 
-      render :layout => "simple"
+    if params[:rendersimple] == "true" 
+      render :layout => 'simple'
     end
   end
 

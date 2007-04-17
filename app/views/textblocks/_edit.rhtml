@@ -1,19 +1,11 @@
 <%= error_messages_for 'textblock' %>
 
 <!--[form:textblock]-->
-<h2>Ist dem folgenden Thema untergeordnet: </h2><br/>
-
-<select id="topic_base_id" name="topic[base_id]">
-  <%= options_from_collection_for_select(
-   Topic.find(:all, :conditions => "topic_id = 1", :order => "id"), "id", "title") 
-   %>
-</select>
-
 <p><label for="textblock_title">Content</label><br/>
-<%= text_field 'textblock', 'title'  %></p>
+<%= text_field 'textblock', 'title', 'size' => 25  %></p>
 
 
 <p><label for="textblock_content">Content</label><br/>
-<%= text_area 'textblock', 'content'  %></p>
+<%= text_area 'textblock', 'content', 'cols' => 25, 'rows' => 10  %></p>
 <!--[eoform:textblock]-->
 

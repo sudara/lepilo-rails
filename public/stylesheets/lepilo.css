@@ -117,7 +117,7 @@ div.progressBar {
   background-image:url(/images/containerb.png); 
   background-repeat: repeat-x;
   border-bottom: 1px solid #333; 
-  width:700px; 
+  width:90%; 
   height:16px;
   margin: 2px 5px 2px 0; 
   padding: 0px; 
@@ -458,8 +458,6 @@ div.progress-container > div {
 }
 
 #fdbtopic-list-top {
-  background-image:url(/images/300topiclisttop.png); 
-  background-repeat:no-repeat;
   padding-top:6px;
   height:26px;
   text-align:center;

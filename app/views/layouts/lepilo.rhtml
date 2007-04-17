@@ -28,45 +28,31 @@
       <a href="/account/logout" ><img src="/images/logout.png" border="0" /></a>
     </div>
 
-  <%= flash[:notice] %>
-  <%= @content_for_layout %>
-  
-  <div id="fdbsearchlist">
-    <%# = render_partial 'articles/dragarticle' %>
-  </div>
-  
+  <% flash.each do |key, msg| %>
+    <%= content_tag :div, msg, :id => key %>
+  <% end %>
+    <%= @content_for_layout %>
+    
   </div>
 
   <div id="fdbfooter">
-  LEPILO Statistik
+  <strong>LEPILO</strong> Statistik
     <strong><span class="green">
     <%
-      media_counter = 0
-      text_counter = 0
-      article_counter = 0
-      mediablocks = BlockLink.find_all() 
-      articles = Article.find_all() 
-
-      for block in mediablocks
-        if block.mediablock_id
-          media_counter = media_counter + 1
-        end
-
-        if block.textblock_id
-          text_counter = text_counter + 1
-        end
-      end    
-
-      for page in articles
-        article_counter = article_counter + 1
-      end    
-
-    %>  
+      article_counter = Article.count
+      gallery_counter = Gallery.count
+      text_counter = BlockLink.count(:conditions => "textblock_id")
+      media_counter = BlockLink.count(:conditions => "mediablock_id") %>  
     <%= image_tag "/images/16article.png",
         :alt => "anzahl der seiten", 
         :title => "anzahl der seiten", 
         :class => "icon16"  %>
     <%= article_counter %>
+    <%= image_tag "/images/16gallery.png",
+        :alt => "anzahl der galerien", 
+        :title => "anzahl der galerien", 
+        :class => "icon16"  %>
+    <%= gallery_counter %>
     <%= image_tag "/images/16image.png",
         :alt => "anzahl der medienblocks", 
         :title => "anzahl der medienblocks", 

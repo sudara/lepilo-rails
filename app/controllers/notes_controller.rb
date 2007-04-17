@@ -6,22 +6,22 @@ class NotesController < ApplicationController
 
   def list
     @note_pages, @notes = paginate :notes, :per_page => 10
-    if params[:rendersimple] = "true" 
-      render :layout => "simple"
+    if params[:rendersimple] == "true" 
+      render :layout => 'simple'
     end
   end
 
   def show
     @note = Note.find(params[:id])
-    if params[:rendersimple] = "true" 
-      render :layout => "simple"
+    if params[:rendersimple] == "true" 
+      render :layout => 'simple'
     end
   end
 
   def new
     @note = Note.new
-    if params[:rendersimple] = "true" 
-      render :layout => "simple"
+    if params[:rendersimple] == "true" 
+      render :layout => 'simple'
     end
   end
 
@@ -37,8 +37,8 @@ class NotesController < ApplicationController
 
   def edit
     @note = Note.find(params[:id])
-    if params[:rendersimple] = "true" 
-      render :layout => "simple"
+    if params[:rendersimple] == "true" 
+      render :layout => 'simple'
     end
   end
 
