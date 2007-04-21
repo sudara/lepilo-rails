@@ -13,7 +13,7 @@
 <!--[form:article]-->
 <div style="float:left">
 
-  <div class="fdbblock" style="width:280px">
+  <div class="lplblock" style="width:280px">
     Derzeit unter:<br/> 
     <h4>
     <%= hidden_field 'article', 'topic_id', 'value'=>@article.topic_id %>
@@ -47,7 +47,7 @@
     <% end %>
     </h4><br/>
 
-    <div id="fdbtopic-selector">
+    <div id="lpltopic-selector">
     Seite zuordnen unter:<br/>
     <%= render_partial 'topics/selector' %>
     </div><br/>
@@ -63,11 +63,17 @@
     <%= text_field 'article', 'reference', "size" => 25  %><br/>
   </div>
     
-  <div class="fdbblock">
-
+  <div class="lplblock">
+    
+  <% if @article.released == false %>
+  Publikationsdatum<br/>
+  <%= date_select 'article', 'release_date'  %><br/>
+  <% end %>
+    
   Artikeltyp<br/>
   <select id="article_type" name="article[type]"><option value="projekt">Projekt</option><option value="news">News</option></select><br/>
   </div>
+      
 
   <!--[eoform:article]-->
 

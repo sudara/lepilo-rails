@@ -1,8 +1,29 @@
-<h1>New note</h1>
+<div id="lplcontainer">
+  <div id="lploptions">
+    <h1>Neue Notiz</h1>
+    <br/>
+  </div> 
+  <div id="lplheader">
+  </div> 
 
-<%= start_form_tag :action => 'create' %>
-  <%= render :partial => 'form' %>
-  <%= submit_tag "Anlegen" %>
-<%= end_form_tag %>
+  <div class="editdata" style="width:700px; margin-right:auto; margin-left:auto;">
 
-<%= link_to 'Zur&uuml;ck', :action => 'list' %>
+  <%
+  # start_form_tag ( {:action => 'create' }, :multipart => true) 
+  # For your edit screens use:
+  # start_form_tag ( {:action => 'update', :id => @product }, :multipart => true ) 
+  %>
+
+  <%= start_form_tag :action => 'create' %>
+    <%= render :partial => 'form' %>
+    <%= submit_tag "Anlegen" %>
+  <%= end_form_tag %>
+
+  <%= error_messages_for 'mediablock' %>
+
+  <!--[form:mediablock]-->
+
+  <%= link_to 'Zur&uuml;ck', :action => 'list' %>
+
+  </div>
+</div>

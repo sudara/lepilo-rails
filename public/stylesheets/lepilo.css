@@ -68,6 +68,26 @@ a.icon24, a.icon24:visited, a.icon24:hover {
   border:0px;
 }
 
+#notice {
+  background-image:url(/images/gradientg.png); 
+  background-repeat: repeat-x;
+  border-color:transparent;
+  height:48px;
+}
+
+#error {
+  background-image:url(/images/gradientr.png); 
+  background-repeat: repeat-x;
+  border-color:transparent;
+  height:48px;
+}
+
+#notice div, #error div {
+  width:90%;
+  margin-left:auto;
+  margin-right:auto;
+}
+
 .fieldWithErrors {
   padding:2px;
   background-color:red;
@@ -210,7 +230,7 @@ div.progress-container > div {
   border-bottom:1px solid #fff;
 }
 
-#fdboptions {
+#lploptions {
   background-image:url(/images/gradientd.png); 
   background-repeat:repeat-x;
   margin-top:0px;
@@ -221,14 +241,14 @@ div.progress-container > div {
   overflow:auto;
 }
 
-#fdbhelp {
+#lplhelp {
   margin-left:10px;
   font-size:14px;
   line-height:2em;
   overflow:visible;
 }
 
-#fdbheader {
+#lplheader {
   background-image:url(/images/bgheader.png); 
   background-repeat:repeat-x;
   background-color:transparent;
@@ -239,13 +259,13 @@ div.progress-container > div {
   margin-bottom:0px;
 }
 
-#fdbcontent {
+#lplcontent {
   background-color: #fff;
   min-height:100%;
   overflow:auto;
 }
 
-#fdbcontainer {
+#lplcontainer {
   position:absolute;
   background-color:#444;
   padding-bottom:50px;
@@ -253,13 +273,13 @@ div.progress-container > div {
   width:100%;
 }
 
-#fdbtemplatecontainer {
+#lpltemplatecontainer {
   margin:20px;
   margin-right:310px;
   padding-bottom:0px;
 }
 
-#fdbsearchlist {
+#lplsearchlist {
   top: 0px;
   right: 50px;
   position: absolute;
@@ -268,7 +288,7 @@ div.progress-container > div {
   float:left;
 }
 
-#fdbinspector {
+#lplinspector {
   background-color:#fff;
   background-image:url(/images/plastic.png); 
   background-repeat: repeat-x;
@@ -353,7 +373,7 @@ div.progress-container > div {
 }
  
  
-#fdbexplanation {
+#lplexplanation {
   width:650px;
   margin-right:0px;
   margin-left:0px;
@@ -362,7 +382,7 @@ div.progress-container > div {
   border-top:1px dashed #ddd;
 }
 
-#fdbfooter {
+#lplfooter {
   position: fixed;
   border-top: 1px solid #ddd;
   border-bottom: 6px solid #f5f5f5;
@@ -414,7 +434,7 @@ div.progress-container > div {
   margin:0px;
 }
 
-#fdbtopic-list {
+#lpltopic-list {
   background:#fafafa;
   font-size:13px;
   padding-top:5px;
@@ -424,7 +444,7 @@ div.progress-container > div {
   width:295px;
 }
 
-#fdbtopic-list li {
+#lpltopic-list li {
   background-image:url(/images/gradientmini.png); 
   background-repeat:repeat-x;
   height:20px;
@@ -438,7 +458,7 @@ div.progress-container > div {
   border-bottom:1px solid #fff;
 }
 
-#fdbtopic-list li:hover {
+#lpltopic-list li:hover {
   background-image:url(/images/gradientminig.png); 
   background-repeat:repeat-x;
   height:40px;
@@ -452,12 +472,12 @@ div.progress-container > div {
   border-bottom:1px solid #fff;
 }
 
-#fdbtopic-list a {
+#lpltopic-list a {
   cursor:pointer;
   border:none;
 }
 
-#fdbtopic-list-top {
+#lpltopic-list-top {
   padding-top:6px;
   height:26px;
   text-align:center;
@@ -513,7 +533,7 @@ h1 {
   color:#81bc00;
   font-size:22px;
   font-weight:normal;
-  line-height:2em;
+  line-height:1.4em;
   display: block;
 }
 
@@ -574,7 +594,7 @@ code {
   background-color:#f8ffe7;
 }
 
-.fdbblock {
+.lplblock {
   margin-right:50px;
   margin-bottom:25px;
   overflow:auto;
@@ -759,7 +779,7 @@ div.block128x128:hover {
 .listdescription {
   font-size:11px;
   padding-left:5px;
-  padding-right:10px;
+  margin-right:30px;
   padding-top:-10px;
   margin-top:0px;
   height:75px;

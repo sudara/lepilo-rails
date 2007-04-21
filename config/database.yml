@@ -14,7 +14,7 @@ development:
 
 #development:
 #  adapter: mysql
-#  database: fdb
+#  database: lpl
 #  username: samo
 #  password: xype
 #  socket: /tmp/mysql.sock

@@ -66,7 +66,7 @@ class TopicsController < ApplicationController
   def sort 
     @topic = Topic.find(params[:id]) 
     @topic.topics.each do |subtopics| 
-      subtopics.position = params[ 'fdbtopic-list' ].index(subtopics.id.to_s) + 1 
+      subtopics.position = params[ 'lpltopic-list' ].index(subtopics.id.to_s) + 1 
       subtopics.save 
     end 
     render :nothing => true 

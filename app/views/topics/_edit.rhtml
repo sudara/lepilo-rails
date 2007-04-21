@@ -33,9 +33,9 @@
   <% end %>
   </h4><br/>
 
-  <div class="fdbblock">
-    <div id="fdbtopic-list-top"><%= @topic.title %></div>
-      <ul id="fdbtopic-list"> 
+  <div class="lplblock">
+    <div id="lpltopic-list-top"><%= @topic.title %></div>
+      <ul id="lpltopic-list"> 
       <% @topic.topics.each do |subtopic| %> 
       <li id="item_<%= subtopic.id %>"> 
         <%= link_to subtopic.title, :action => 'edit', :id => subtopic.id %><br/>
@@ -45,7 +45,7 @@
       </ul> 
   </div>
 
-  <div id="fdbtopic-selector">
+  <div id="lpltopic-selector">
   Zuordnen unter:<br/>
   <%= render_partial 'topics/selector' %>
   </div>

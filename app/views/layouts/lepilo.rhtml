@@ -12,7 +12,7 @@
   <%= stylesheet_link_tag 'lightbox' %>
 </head>
 <body>
-  <div id="fdbcontent">
+  <div id="lplcontent">
     
     <div id="navigation">
       <img src="/images/lepilo.png" class="lepilo" />
@@ -29,13 +29,19 @@
     </div>
 
   <% flash.each do |key, msg| %>
-    <%= content_tag :div, msg, :id => key %>
+    <%= content_tag :div, '<div>'+msg+'</div>', :id => key %>
+    <script type="text/javascript" charset="utf-8">
+      setTimeout( function() {
+        new Effect.BlindUp('<%= key %>', 500);
+      }, 2000)
+    </script>
   <% end %>
-    <%= @content_for_layout %>
+
+  <%= @content_for_layout %>
     
   </div>
 
-  <div id="fdbfooter">
+  <div id="lplfooter">
   <strong>LEPILO</strong> Statistik
     <strong><span class="green">
     <%

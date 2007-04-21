@@ -1,6 +1,6 @@
 <h1>Navigassstionspunkt &raquo; <span class="gray"><%= @topic.title %></span> &laquo; bearbeiten</h1><br/>
 <%= error_messages_for 'topic' %>
-<div id="fdboptions">
+<div id="lploptions">
   <div id="entrySettings" >
     <%= start_form_tag :action => 'update', :id => @topic %>
       <%= render :partial => 'edit' %><br/>
@@ -8,15 +8,15 @@
     <%= end_form_tag %>
   </div>
 </div>
-<div id="fdbheader">
+<div id="lplheader">
 </div>
 
-<div id="fdbcontainer">
+<div id="lplcontainer">
 <%= link_to 'Zur&uuml;ck', :action => 'list' %>
 </div>
 
-<%= sortable_element 'fdbtopic-list' , 
+<%= sortable_element 'lpltopic-list' , 
   :url => { :action => "sort", :id => @topic }, 
-  :complete => visual_effect(:highlight, 'fdbtopic-list' ) 
+  :complete => visual_effect(:highlight, 'lpltopic-list' ) 
 %>
 

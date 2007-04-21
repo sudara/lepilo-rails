@@ -1,5 +1,5 @@
-<div id="fdbcontainer">
-  <div id="fdbinspector">
+<div id="lplcontainer">
+  <div id="lplinspector">
     <div id="tabs">
       <ul> 
         <li style="margin-left: 1px" id="tabHeaderActive"><a href="javascript:void(0)" onClick="toggleTab(1,5)"><span style="line-height:14px">Einstellungen</span></a></li>
@@ -29,12 +29,13 @@
     <div id="tabscontent">
         <div id="tabContent1" class="tabContent" >
           <div class="searchblock">
-            <%= link_to 'Web', {  :action => "edit", :id => @article.id, :fragment => "web" } %> | <%= link_to 'Print', {  :action => "edit", :id => @article.id, :fragment => "print" } %> | <%= link_to 'XML speichern', {  :action => "writeindesignxml", :id => @article.id, :fragment => "print" } %> | <%= link_to 'InDesign Datei', {  :action => "getindesignfile" } %>
+            <%= link_to 'Web', {  :action => "edit", :id => @article.id, :fragment => "web" } %> | <%= link_to 'Print', {  :action => "edit", :id => @article.id, :fragment => "print" } %> | <%= link_to 'XML', {  :action => "writeindesignxml", :id => @article.id, :fragment => "print" } %> | <%= link_to 'Din A4', {  :action => "getindesignfile", :format => "A4" } %> | <%= link_to 'A5', {  :action => "getindesignfile", :format => "A5" } %> | <%= link_to 'A4/3', {  :action => "getindesignfile", :format => "A4-3" } %>
           </div>
           <div class="sidebar">
             <div class="editdata">
             
-            <h1><%= in_place_editor_field :article, :title %></h1>
+            <h1><%= in_place_editor_field :article, :title, tag_options = {}, in_place_editor_options = { :cols => 32, :rows => 3, :cancel_text => 'abbrechen'} %>
+            </h1>
             Typ: <h3><%= @article.type %></h3>, Freigegeben: <h3><%= @article.released %></h3><br/>
            <%= in_place_editor_field :article, :description, tag_options = {}, in_place_editor_options = { :cols => 32, :rows => 10, :cancel_text => 'abbrechen'} %>
             </div>
@@ -70,7 +71,7 @@
     </div><!--End of tabscontent-->
   </div>
 
-  <div id="fdboptions" style="display:none">
+  <div id="lploptions" style="display:none">
     <div id="entrySettings" >
         <%= start_form_tag :action => 'update', :id => @article %>
           <%= render :partial => 'form' %>
@@ -79,11 +80,11 @@
         <%= end_form_tag %>
     </div>
   </div>
-  <div id="fdbheader">
+  <div id="lplheader">
   <%= content_tag 'div', '<img src="/images/closetray.png" />', :style => 'width:80px;float:right',
-    :onclick => visual_effect(:slideUp, 'fdboptions') %>
+    :onclick => visual_effect(:slideUp, 'lploptions') %>
   <%= content_tag 'div', '<img src="/images/opentray.png" />', :style => 'width:63px;float:right',
-    :onclick => visual_effect(:slideDown, 'fdboptions')  %>
+    :onclick => visual_effect(:slideDown, 'lploptions')  %>
   </div>
 
   <div class="editdata">
@@ -113,7 +114,7 @@
        
   </div>
 
-  <div id="fdbtemplatecontainer">  
+  <div id="lpltemplatecontainer">  
   <% if params[:fragment] == "print" %>
   <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.find_by_content("print") }) -%>  
     <%# render :partial => "templates/dina4print" %>

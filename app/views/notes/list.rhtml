@@ -1,44 +1,63 @@
-<div id="fdbcontainer">
-  <div id="fdboptions">
-    <h1>Notizen</h1> | <%= link_to 'Neue Notiz', :action => 'new' %> | 
+<div id="lplcontainer">
+  <div id="lploptions">
+    <h1>Notizen</h1> | <%= link_to 'Neue Notiz', :action => 'new' %>
+    <% if @note_pages %> | 
     <%= link_to 'Vorherige Seite', { :page => @note_pages.current.previous } if @note_pages.current.previous %> | 
     Seite: <%= pagination_links(@note_pages) %> |
     <%= link_to 'N&auml;chste Seite', { :page => @note_pages.current.next } if @note_pages.current.next %> 
+    <% end %>
     <br/>
     <br/>
   </div> 
-  <div id="fdbheader">
-    <div class="centered">
-      <%= image_tag "/images/loadingg.gif",
-          :alt => "loading", 
-          :title => "loading" %>     
+  <div id="lplheader" style="text-align:right;padding-right:25px">
+<img id="busynotesearch" src="/images/loadingg.gif" style="display:none" /> &nbsp;
+  <input type="text" id="searchnotesheader" name="searchnotesheader" size="30" />
+    
+    <%= observe_field 'searchnotesheader', 
+        :frequency => 0.5, 
+        :update => 'lplcontainer', 
+        :url => { :controller => 'notes', :action=> 'list' }, 
+        :with => "'criteria=' + escape(value)", 
+        :loading => "document.getElementById('busynotesearch').style.display='inline'", 
+        :loaded => "document.getElementById('busynotesearch').style.display='none'" %>       
+  </div> 
+<br/>
+  <div class="editdata" style="margin-right:auto; margin-left:auto;">
+
+    <% for note in @notes %>
+
+    <%
+      #Time.now.strftime('%d-%m-%y -%R') 
+    %>
+    	<div class="listblock" id="<%= note.id %>" style="height:65px">
+      	<div class="iconblack" id="plastic_<%= note.id %>" style="width:32px">
+          <div class="icontainer">
+          <%= link_to_image '/images/b24edit.png', { :action => 'edit', :id => note, :page => params[:page] },  html_options = { :class => "icon24", :title => "bearbeiten",} %>
+          <%= link_to_image '/images/b24delete.png', { :action => 'destroy', :id => note },  html_options = { :class => "icon24", :title => "löschen", :confirm => 'Artikel »' + note.title + '« löschen — sind Sie sicher?'} %>
+          </div>
+      	</div>
+          <% if note.released %>
+          <%= image_tag "/images/16unlocked.png",
+              :alt => "freigegeben", 
+              :title => "freigegeben", 
+              :class => "icon16"  %>
+          <% else %>
+          <%= image_tag "/images/16locked.png",
+              :alt => "nicht freigegeben", 
+              :title => "nicht freigegeben", 
+              :class => "icon16"  %>
+          <% end %>
+        
+        <h3><%= note.title %></h3><br/>
+    	  <div class="listdescription">
+    	<%=h note.content %></div>
+
     </div>
-  </div> 
+    <% end %>
 
-<table>
-  <tr>
-  <% for column in Note.content_columns %>
-    <th><%= column.human_name %></th>
-  <% end %>
-  </tr>
-  
-<% for note in @notes %>
-  <tr>
-  <% for column in Note.content_columns %>
-    <td><%=h note.send(column.name) %></td>
-  <% end %>
-    <td><%= link_to 'Anzeigen', :action => 'show', :id => note %></td>
-    <td><%= link_to 'Bearbeiten', :action => 'edit', :id => note %></td>
-    <td><%= link_to 'Entfernen', { :action => 'destroy', :id => note }, :confirm => 'Are you sure?', :post => true %></td>
-  </tr>
-<% end %>
-</table>
-
-<%= link_to 'Previous page', { :page => @note_pages.current.previous } if @note_pages.current.previous %>
-<%= link_to 'Next page', { :page => @note_pages.current.next } if @note_pages.current.next %> 
-
-<br />
+<br style="clear:both "/>
 
 <%= link_to 'New note', :action => 'new' %>
 
+</div>
 </div>

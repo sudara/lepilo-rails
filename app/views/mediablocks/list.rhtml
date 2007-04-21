@@ -1,5 +1,5 @@
-<div id="fdbcontainer">
-  <div id="fdboptions">
+<div id="lplcontainer">
+  <div id="lploptions">
     <h1>Mediablockliste</h1> | <%= link_to 'Neuer mediablock', :action => 'new' %> | 
     <%= link_to 'Vorherige Seite', { :page => @mediablock_pages.current.previous } if @mediablock_pages.current.previous %> |
     Seite: <%= pagination_links(@mediablock_pages) %> |
@@ -8,7 +8,7 @@
     <br />
     
   </div> 
-  <div id="fdbheader"><img src="/images/slidermini.png" style="float:left;margin-left:25px;margin-top:7px"/>
+  <div id="lplheader"><img src="/images/slidermini.png" style="float:left;margin-left:25px;margin-top:7px"/>
     <div id="mbtrack1" class="slidertrack">
       <div id="mbhandle1" style="sliderhandle">
         <img src="/images/sliderhandle.png"/>

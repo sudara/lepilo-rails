@@ -1,11 +1,11 @@
 <%= render :partial => "article", :object => "article" %>
 
-<%= drop_receiving_element "fdbtemplatecontainer", 
-      :update => "fdbcontent", :url => { :action => "addblock", :dropfragment_id => params['fragment_id'] },
+<%= drop_receiving_element "lpltemplatecontainer", 
+      :update => "lplcontent", :url => { :action => "addblock", :dropfragment_id => params['fragment_id'] },
       :accept => "dragblock", :hoverclass => "dropzone-active" %>
 
-<%= drop_receiving_element "fdbtemplatecontainer", 
-      :update => "fdbcontent", :url => { :action => "addblock", :dropfragment_id => params['fragment_id'] },
+<%= drop_receiving_element "lpltemplatecontainer", 
+      :update => "lplcontent", :url => { :action => "addblock", :dropfragment_id => params['fragment_id'] },
       :accept => "dragline", :hoverclass => "dropzone-active" %>
 
 <%= sortable_element 'block-list' ,

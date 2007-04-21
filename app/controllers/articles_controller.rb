@@ -156,7 +156,14 @@
   end
   
   def getindesignfile
-    send_file "#{RAILS_ROOT}/public/a4-xml-import.indd"
+    case params[:format]
+      when "A4"
+        send_file "#{RAILS_ROOT}/public/a4-xml-import.indd"
+      when "A5"
+        send_file "#{RAILS_ROOT}/public/a5-xml-import.indd"
+      when "A4-3"
+        send_file "#{RAILS_ROOT}/public/a4-3-xml-import.indd"
+      end
   end
   
   def simple

@@ -1,4 +1,4 @@
-<div id="fdbcontainer">
+<div id="lplcontainer">
 <% for column in Article.content_columns %>
 <p>
   <b><%= column.human_name %>:</b> <%=h @article.send(column.name) %>

@@ -1,5 +1,5 @@
-<div id="fdbcontainer">
-  <div id="fdboptions">
+<div id="lplcontainer">
+  <div id="lploptions">
     <h1>Artikelliste</h1> | <%= link_to 'Neuer Artikel', :action => 'new' %> | <%= link_to 'Artikel importieren', :action => 'import' %> | <%= link_to 'Artikel XML speichern', :action => 'writexml' %> | 
     <%= link_to 'Vorherige Seite', { :page => @article_pages.current.previous } if @article_pages.current.previous %> | 
     Seite: <%= pagination_links(@article_pages) %> |
@@ -7,7 +7,7 @@
     <br/>
     <br/>
   </div> 
-  <div id="fdbheader">
+  <div id="lplheader">
     <div class="centered">
       <%= image_tag "/images/loadingg.gif",
           :alt => "loading", 

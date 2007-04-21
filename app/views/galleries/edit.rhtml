@@ -1,6 +1,6 @@
-<div id="fdbcontainer">
+<div id="lplcontainer">
 
-  <div id="fdbinspector">
+  <div id="lplinspector">
     <div id="tabs">
       <ul>
         <li style="margin-left: 1px"  id="tabHeaderActive"><a href="javascript:void(0)" onClick="toggleTab(1,5)"><span style="line-height:14px">Einstellungen</span></a></li>
@@ -50,7 +50,7 @@
     </div><!--End of tabscontent-->
   </div>
 
-  <div id="fdboptions" style="display:none">
+  <div id="lploptions" style="display:none">
     <div id="entrySettings" >
       <%= start_form_tag :action => 'update', :id => @gallery %>
         <%= render :partial => 'form' %>
@@ -59,11 +59,11 @@
       <%= end_form_tag %>
     </div>
   </div>
-  <div id="fdbheader">
+  <div id="lplheader">
   <%= content_tag 'DIV', '<img src="/images/closetray.png">', :style => 'width:80px;float:right',
-    :onclick => visual_effect(:slideUp, 'fdboptions') %>
+    :onclick => visual_effect(:slideUp, 'lploptions') %>
   <%= content_tag 'DIV', '<img src="/images/opentray.png">', :style => 'width:63px;float:right',
-    :onclick => visual_effect(:slideDown, 'fdboptions')  %>
+    :onclick => visual_effect(:slideDown, 'lploptions')  %>
   </div>
 
 <div class="editdata">
@@ -77,7 +77,7 @@
   <%= link_to 'Zur&uuml;ck', :action => 'list' %>
 </div>
 
-<div id="fdbtemplatecontainer">  
+<div id="lpltemplatecontainer">  
 <%= render_partial 'block_links/gallery', nil, 'gallery_id' => @gallery.id %>
 <br style="clear:both"/>
 </div>
@@ -86,12 +86,12 @@
 
 </div>
 
-<%= drop_receiving_element "fdbtemplatecontainer", 
-      :update => "fdbcontent", :url => { :action => "addblock" },
+<%= drop_receiving_element "lpltemplatecontainer", 
+      :update => "lplcontent", :url => { :action => "addblock" },
       :accept => "dragblock", :hoverclass => "dropzone-active" %>
 
-<%= drop_receiving_element "fdbtemplatecontainer", 
-      :update => "fdbcontent", :url => { :action => "addblock" },
+<%= drop_receiving_element "lpltemplatecontainer", 
+      :update => "lplcontent", :url => { :action => "addblock" },
       :accept => "dragline", :hoverclass => "dropzone-active" %>
 
 <%= sortable_element 'block-list' , 
