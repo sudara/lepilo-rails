@@ -1,19 +1,23 @@
+<div id="lplheader">
+</div> 
+
+<div id="lploptions">
+  <h1>Artikelliste</h1> | <%= link_to 'Neuer Artikel', :action => 'new' %> | <%= link_to 'Artikel importieren', :action => 'import' %> | <%= link_to 'Artikel XML speichern', :action => 'writexml' %> | 
+  <%= link_to 'Vorherige Seite', { :page => @article_pages.current.previous } if @article_pages.current.previous %> | 
+  Seite: <%= pagination_links(@article_pages) %> |
+  <%= link_to 'N&auml;chste Seite', { :page => @article_pages.current.next } if @article_pages.current.next %> 
+  <br/>
+  <br/>
+</div> 
+
 <div id="lplcontainer">
-  <div id="lploptions">
-    <h1>Artikelliste</h1> | <%= link_to 'Neuer Artikel', :action => 'new' %> | <%= link_to 'Artikel importieren', :action => 'import' %> | <%= link_to 'Artikel XML speichern', :action => 'writexml' %> | 
-    <%= link_to 'Vorherige Seite', { :page => @article_pages.current.previous } if @article_pages.current.previous %> | 
-    Seite: <%= pagination_links(@article_pages) %> |
-    <%= link_to 'N&auml;chste Seite', { :page => @article_pages.current.next } if @article_pages.current.next %> 
-    <br/>
-    <br/>
-  </div> 
-  <div id="lplheader">
-    <div class="centered">
-      <%= image_tag "/images/loadingg.gif",
-          :alt => "loading", 
-          :title => "loading" %>     
-    </div>
-  </div> 
+  <div id="lplshadow"></div>
+
+  <div class="centered">
+    <%= image_tag "/images/loadingd.gif",
+        :alt => "loading", 
+        :title => "loading" %>     
+  </div>
       
   <% for article in @articles %>
 
@@ -38,18 +42,19 @@
             <%= image_tag "/images/16unlocked.png",
                 :alt => "freigegeben", 
                 :title => "freigegeben", 
-                :class => "icon16"  %>
+                :class => "linkicon"  %>
             <% else %>
             <%= image_tag "/images/16locked.png",
                 :alt => "nicht freigegeben", 
                 :title => "nicht freigegeben", 
-                :class => "icon16"  %>
+                :class => "linkicon"  %>
             <% end %>
           </div>
-        <%= link_to_image '/images/b24edit.png', { :action => 'edit', :id => article, :page => params[:page] },  html_options = { :class => "icon24", :title => "bearbeiten",} %>
-        <%= link_to_image '/images/b24delete.png', { :action => 'destroy', :id => article },  html_options = { :class => "icon24", :title => "löschen", :confirm => 'Artikel »' + article.title + '« löschen — sind Sie sicher?'} %>
+          <%= link_to image_tag("/images/b24edit.png", :title => 'bearbeiten', :alt => 'bearbeiten'), { :action => 'edit', :id => article, :page => params[:page] }, :class => 'linkicon' %>
+          <%= link_to image_tag("/images/b24delete.png", :title => 'löschen', :alt => 'löschen'), { :action => 'destroy', :id => article, :page => params[:page] }, :class => 'linkicon', :confirm => 'Artikel »' + article.title + '« löschen — sind Sie sicher?' %>          
         </div>
     	</div>
+  	  <div class="listdescription">
       <h3><%= article.title %></h3><br/>
       <span class="smalltext">
   	  <strong><%= article.reference %></strong>,
@@ -64,9 +69,8 @@
             :class => "icon16"  %>
         <%= article.count_text %>
       </span><br/>
-  	  <div class="listdescription">
-  	<%=h article.description %></div>
-  	
+  	  <%=h article.description %>
+  	</div>
   </div>
   <% end %>
   <br style="clear:both" />

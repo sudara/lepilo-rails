@@ -48,7 +48,7 @@ class BlockLinksController < ApplicationController
   def create
     @block_link = BlockLink.new(params[:block_link])
     if @block_link.save
-      flash[:notice] = 'BlockLink was successfully created.'
+      flash[:ok] = 'BlockLink was successfully created.'
       redirect_to :action => 'list'
     else
       render :action => 'new'
@@ -65,7 +65,7 @@ class BlockLinksController < ApplicationController
   def update
     @block_link = BlockLink.find(params[:id])
     if @block_link.update_attributes(params[:block_link])
-      flash[:notice] = 'BlockLink was successfully updated.'
+      flash[:ok] = 'BlockLink was successfully updated.'
       redirect_to :action => 'show', :id => @block_link
     else
       render :action => 'edit'

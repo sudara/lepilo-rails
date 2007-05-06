@@ -23,7 +23,7 @@ class TemplatesController < ApplicationController
   def create
     @template = Template.new(params[:template])
     if @template.save
-      flash[:notice] = 'Template was successfully created.'
+      flash[:ok] = 'Template was successfully created.'
       redirect_to :action => 'list'
     else
       render :action => 'new'
@@ -37,7 +37,7 @@ class TemplatesController < ApplicationController
   def update
     @template = Template.find(params[:id])
     if @template.update_attributes(params[:template])
-      flash[:notice] = 'Template was successfully updated.'
+      flash[:ok] = 'Template was successfully updated.'
       redirect_to :action => 'show', :id => @template
     else
       render :action => 'edit'

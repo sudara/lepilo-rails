@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-  <title>Articles: <%= controller.action_name %> <% if @article %>&raquo;<%= @article.title %>&laquo;<% end %></title>
+  <title><%= controller.controller_name %> &raquo; <%= controller.action_name %></title>
   <%= javascript_include_tag :defaults %>
   <%= javascript_include_tag "scriptaculous" %> 
   <%= javascript_include_tag "lightbox" %> 
@@ -12,6 +12,29 @@
   <%= stylesheet_link_tag 'lightbox' %>
 </head>
 <body>
+  <% 
+    flashimg = '...'
+    
+    flash.each do |key, msg|
+     case key
+        when :ok
+          flashimg = '<img src="/images/railsflash-ok.png"/>'
+        when :info
+          flashimg = '<img src="/images/railsflash-info.png"/>'
+        when :warning
+          flashimg = '<img src="/images/railsflash-warning.png"/>'
+        when :error
+          flashimg = '<img src="/images/railsflash-error.png"/>'
+      end %>
+
+    <%= content_tag :div, flashimg + '<div>' + msg + '</div>', :id => key %>
+    <script type="text/javascript" charset="utf-8">
+      setTimeout( function() {
+        new Effect.BlindUp('<%= key %>', 500);
+      }, 3000)
+    </script>
+  <% end %>
+
   <div id="lplcontent">
     
     <div id="navigation">
@@ -27,15 +50,6 @@
       <a href="/account/" <%= 'class="active"' if params[:controller] == "account"%>><img src="/images/accounts.png" border="0" /></a>
       <a href="/account/logout" ><img src="/images/logout.png" border="0" /></a>
     </div>
-
-  <% flash.each do |key, msg| %>
-    <%= content_tag :div, '<div>'+msg+'</div>', :id => key %>
-    <script type="text/javascript" charset="utf-8">
-      setTimeout( function() {
-        new Effect.BlindUp('<%= key %>', 500);
-      }, 2000)
-    </script>
-  <% end %>
 
   <%= @content_for_layout %>
     

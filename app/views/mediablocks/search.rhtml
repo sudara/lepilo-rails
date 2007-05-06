@@ -3,7 +3,8 @@
   <% for dragmediablock in @mediaitems %>
   <div class="dragblock" id="dragmediablock_<%= dragmediablock.id %>"> 
     <div class="ipmtitle">
-      <%= link_to dragmediablock.title, :controller => 'mediablocks', :action => 'edit', :id => dragmediablock.id %> 
+      <%= link_to image_tag("/images/b24look.png", :alt => dragmediablock.filename),"/data/images/#{dragmediablock.filename}", {:rel => "lightbox", :title => dragmediablock.title, :class => "linkicon" } %>
+      <%= link_to_image '/images/b24edit.png', { :action => 'edit', :id => dragmediablock, :page => params[:page] },  html_options = { :class => "linkicon", :title => "bearbeiten",} %>
     </div>
     <%= image_tag "/data/thumbnails/#{dragmediablock.filename}",
           :alt => dragmediablock.title, 

@@ -15,15 +15,15 @@ class GalleriesController < ApplicationController
   end
 
   def search
-    if !@params['criteria'] || 0 == @params['criteria'].length
+    if !params['criteria'] || 0 == params['criteria'].length
       @items = nil
       render_without_layout
     else
       #@items = Gallery.find(:all, :order => 'updated_at DESC',
       @items = Gallery.find(:all, :order => 'created_at DESC',
         :conditions => [ 'LOWER(title) LIKE ?', 
-        '%' + @params['criteria'].downcase + '%' ])
-      @mark_term = @params['criteria']
+        '%' + params['criteria'].downcase + '%' ])
+      @mark_term = params['criteria']
       render_without_layout
     end
   end
@@ -88,7 +88,7 @@ class GalleriesController < ApplicationController
   def create
     @gallery = Gallery.new(params[:gallery])
     if @gallery.save
-      flash[:notice] = 'Gallery was successfully created.'
+      flash[:ok] = 'Gallery was successfully created.'
       redirect_to :action => 'list'
     else
       render :action => 'new'
@@ -108,7 +108,7 @@ class GalleriesController < ApplicationController
     addlink.gallery_id = self.id
 
     if addlink.save
-      flash[:notice] = 'Mediablock hinzugef&uuml;gt.'
+      flash[:ok] = 'Mediablock hinzugef&uuml;gt.'
       redirect_to :action => 'show', :id => @gallery
     else
       render :action => 'list'
@@ -134,7 +134,7 @@ class GalleriesController < ApplicationController
   def update
     @gallery = Gallery.find(params[:id])
     if @gallery.update_attributes(params[:gallery])
-      flash[:notice] = "Gallerie #{@gallery.title} aktualisiert."
+      flash[:ok] = "Gallerie #{@gallery.title} aktualisiert."
       redirect_to :action => 'list'
     else
       render :action => 'edit'

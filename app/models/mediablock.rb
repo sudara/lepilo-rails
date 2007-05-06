@@ -4,6 +4,14 @@ class Mediablock < ActiveRecord::Base
   #                        :description
   has_and_belongs_to_many :block_links
   
+  def resize
+    @format
+  end
+  
+  def resize=(format)
+    @format = format
+  end
+  
   def file=(incoming_file)
     @tmp_file = incoming_file
     
@@ -12,7 +20,7 @@ class Mediablock < ActiveRecord::Base
     self.title = self.original_name
     manage_img self.original_name
   end
-
+  
   def importfile=(incoming_file)
     @importflag = true
     @importfile = incoming_file
@@ -65,15 +73,17 @@ private
   end
   
   def do_mini_magick(path)
-    image = MiniMagick::Image.from_file(path)
-    image.resize "x350"
-    image.format "jpg"
+    @image = MiniMagick::Image.from_file(path)
+    if self.resize == "true"
+      @image.resize "x350"
+    end
+    @image.format "jpg"
     jpgname = "#{RAILS_ROOT}/public/data/images/#{self.filename}"
-    image.write(jpgname)
-    image.resize "x150"
-    image.format "jpg"
+    @image.write(jpgname)
+    @image.resize "x150"
+    @image.format "jpg"
     jpgname = "#{RAILS_ROOT}/public/data/thumbnails/#{self.thumbnail}"
-    image.write(jpgname)
+    @image.write(jpgname)
   end
   
   def delete_img(path)

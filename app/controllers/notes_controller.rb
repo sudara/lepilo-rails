@@ -5,16 +5,16 @@ class NotesController < ApplicationController
   end
 
   def list
-    if !@params['criteria'] || 0 == @params['criteria'].length
+    if !params['criteria'] || 0 == params['criteria'].length
       @note_pages, @notes = paginate :notes, :per_page => 18
     else
       @notes = Note.find(:all, :order => 'updated_at DESC',
         :conditions => [ 'LOWER(title) LIKE ?', 
-        '%' + @params['criteria'].downcase + '%' ])
-      @mark_term = @params['criteria']
+        '%' + params['criteria'].downcase + '%' ])
+      @mark_term = params['criteria']
       render_without_layout
     end
-
+    
 
     if params[:rendersimple] == "true" 
       render :layout => 'simple'
@@ -40,7 +40,7 @@ class NotesController < ApplicationController
     @note.released = 0
     
     if @note.save
-      flash[:notice] = 'Note was successfully created.'
+      flash[:ok] = 'Note was successfully created.'
       redirect_to :action => 'list'
     else
       render :action => 'new'
@@ -57,7 +57,7 @@ class NotesController < ApplicationController
   def update
     @note = Note.find(params[:id])
     if @note.update_attributes(params[:note])
-      flash[:notice] = 'Note was successfully updated.'
+      flash[:ok] = 'Note was successfully updated.'
       redirect_to :action => 'show', :id => @note
     else
       render :action => 'edit'
@@ -66,7 +66,7 @@ class NotesController < ApplicationController
 
   def destroy
     Note.find(params[:id]).destroy
-    flash[:notice] = 'Note was successfully destroyed.'
+    flash[:ok] = 'Note was successfully destroyed.'
     redirect_to :action => 'list'
   end
 end

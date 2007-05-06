@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(params[:comment])
     if @comment.save
-      flash[:notice] = 'Comment was successfully created.'
+      flash[:ok] = 'Comment was successfully created.'
       redirect_to :action => 'list'
     else
       render :action => 'new'
@@ -45,7 +45,7 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     if @comment.update_attributes(params[:comment])
-      flash[:notice] = 'Comment was successfully updated.'
+      flash[:ok] = 'Comment was successfully updated.'
       redirect_to :action => 'show', :id => @comment
     else
       render :action => 'edit'

@@ -10,6 +10,12 @@
 <p>Datei:<br/>
 <%= file_field 'mediablock', 'file'  %></p>
 
+<p>Bilder verkleinern?<br/>
+<select id="mediablock_resize" name="mediablock[resize]">
+  <option value="true" >Ja</option>
+  <option value="false" selected="selected">Nein</option>
+</select><br/></p>
+
 <p>Beschreibung:<br/>
 <%= text_area 'mediablock', 'description', "cols" => 50, "rows" => 3  %>
 

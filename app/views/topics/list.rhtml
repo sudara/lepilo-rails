@@ -1,13 +1,14 @@
+<div id="lplheader">
+</div> 
+<div id="lploptions">
+  <h1>Navigationspunkte</h1> | <%= link_to 'Neues Thema', :action => 'new' %>
+  <%= link_to 'Vorherige Seite', { :page => @topic_pages.current.previous } if @topic_pages.current.previous %>
+  <%= link_to 'N&auml;chste Seite', { :page => @topic_pages.current.next } if @topic_pages.current.next %> 
+  <br />
+  <br />
+</div> 
 <div id="lplcontainer">
-  <div id="lploptions">
-    <h1>Navigationspunkte</h1> | <%= link_to 'Neues Thema', :action => 'new' %>
-    <%= link_to 'Vorherige Seite', { :page => @topic_pages.current.previous } if @topic_pages.current.previous %>
-    <%= link_to 'N&auml;chste Seite', { :page => @topic_pages.current.next } if @topic_pages.current.next %> 
-    <br />
-    <br />
-  </div> 
-  <div id="lplheader">
-  </div> 
+  <div id="lplshadow"></div>
  
 <table width="700px">
   <tr>

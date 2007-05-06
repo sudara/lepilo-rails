@@ -11,12 +11,12 @@ class AccountController < ApplicationController
     else
       case @request.method
         when :post
-          if @session['user'] = User.authenticate(@params['user_login'], @params['user_password'])
+          if @session['user'] = User.authenticate(params['user_login'], params['user_password'])
 
-            flash['notice']  = "Login successful"
+            flash[:ok]  = "Login successful"
             redirect_back_or_default :action => "welcome"
           else
-            @login    = @params['user_login']
+            @login    = params['user_login']
             @message  = "Login unsuccessful"
         end
       end
@@ -31,11 +31,11 @@ class AccountController < ApplicationController
     else
       case @request.method
         when :post
-          @user = User.new(@params['user'])
+          @user = User.new(params['user'])
         
           if @user.save      
-            @session['user'] = User.authenticate(@user.login, @params['user']['password'])
-            flash['notice']  = "Signup successful"
+            @session['user'] = User.authenticate(@user.login, params['user']['password'])
+            flash[:ok]  = "Signup successful"
             # redirect_back_or_default :action => "welcome"          
             redirect_to :controller=>"/articles", :action =>"index"
           end
@@ -49,8 +49,8 @@ class AccountController < ApplicationController
     if @session[:user].nil? && usercount != 0
       redirect_to :action => "login" 
     else
-      if @params['id']
-        @user = User.find(@params['id'])
+      if params['id']
+        @user = User.find(params['id'])
         @user.destroy
       end
     end

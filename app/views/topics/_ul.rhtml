@@ -1,0 +1,13 @@
+<ul class="makeMenu">
+<%  @topics = Topic.find_all_by_topic_id(1, :order => :position)
+  for topic in @topics -%>
+    <li><a href="/ps/article/<%= topic.id %>"><%= topic.title %></a>
+    <% if Topic.count(:conditions => "topic_id = "+ topic.id.to_s) > 0 
+          @subtopics = Topic.find_all_by_topic_id(topic.id, :order => :position) -%><div style="position:relative;float:right;left:-16px;top:-16px;height:1px;width:1px"><%= image_tag("/ps/pfeil.png", :title => 'untermenü', :alt => 'untermenü') %></div>
+      <ul><% for subtopic in @subtopics %>
+        <li><a href="/ps/article/<%= subtopic.id %>"><%= subtopic.title %> </a></li><% end %>
+      </ul>
+    <% end -%>
+    </li>
+<% end -%>
+</ul>

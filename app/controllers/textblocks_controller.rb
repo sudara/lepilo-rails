@@ -15,14 +15,14 @@ class TextblocksController < ApplicationController
   end
 
   def search
-    if !@params['criteria'] || 0 == @params['criteria'].length
+    if !params['criteria'] || 0 == params['criteria'].length
       @items = nil
       render_without_layout
     else
       @items = Textblock.find(:all, :order => 'updated_at DESC',
         :conditions => [ 'LOWER(content) LIKE ?', 
-        '%' + @params['criteria'].downcase + '%' ])
-      @mark_term = @params['criteria']
+        '%' + params['criteria'].downcase + '%' ])
+      @mark_term = params['criteria']
       render_without_layout
     end
   end
@@ -70,7 +70,7 @@ class TextblocksController < ApplicationController
       addLink.fragment_id = session[:current_fragment]
       addLink.save
       
-      flash[:notice] = 'Textblock was successfully created.'
+      flash[:ok] = 'Textblock was successfully created.'
       redirect_to :controller=>"/block_links", :action => "close_reload"
     else
       render :layout => 'simple'
@@ -86,7 +86,7 @@ class TextblocksController < ApplicationController
   def update
     @textblock = Textblock.find(params[:id])
     if @textblock.update_attributes(params[:textblock])
-      flash[:notice] = 'Textblock was successfully updated.'
+      flash[:ok] = 'Textblock was successfully updated.'
       #redirect_to :action => 'show', :id => @textblock
       redirect_to :controller=>"/block_links", :action => "close_reload"
     else

@@ -27,7 +27,7 @@ class SettingsController < ApplicationController
         mediablock.update
       end
     end
-    flash[:notice] = 'FTP Upload abgeschlossen'
+    flash[:ok] = 'FTP Upload abgeschlossen'
     redirect_to :action => 'index'
   end
   

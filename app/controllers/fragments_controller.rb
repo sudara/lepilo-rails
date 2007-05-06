@@ -31,7 +31,7 @@ class FragmentsController < ApplicationController
   def create
     @fragment = Fragment.new(params[:fragment])
     if @fragment.save
-      flash[:notice] = 'Fragment was successfully created.'
+      flash[:ok] = 'Fragment was successfully created.'
       redirect_to :action => 'list'
     else
       render :action => 'new'
@@ -48,7 +48,7 @@ class FragmentsController < ApplicationController
   def update
     @fragment = Fragment.find(params[:id])
     if @fragment.update_attributes(params[:fragment])
-      flash[:notice] = 'Fragment was successfully updated.'
+      flash[:ok] = 'Fragment was successfully updated.'
       redirect_to :action => 'show', :id => @fragment
     else
       render :action => 'edit'

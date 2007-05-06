@@ -71,6 +71,12 @@
     </div><!--End of tabscontent-->
   </div>
 
+  <div id="lplheader">
+  <%= content_tag 'div', '<img src="/images/opentray.png" />', :style => 'width:63px;float:left',
+    :onclick => visual_effect(:slideDown, 'lploptions')  %>
+  <%= content_tag 'div', '<img src="/images/closetray.png" />', :style => 'width:80px;float:left',
+    :onclick => visual_effect(:slideUp, 'lploptions') %>
+  </div>
   <div id="lploptions" style="display:none">
     <div id="entrySettings" >
         <%= start_form_tag :action => 'update', :id => @article %>
@@ -80,39 +86,34 @@
         <%= end_form_tag %>
     </div>
   </div>
-  <div id="lplheader">
-  <%= content_tag 'div', '<img src="/images/closetray.png" />', :style => 'width:80px;float:right',
-    :onclick => visual_effect(:slideUp, 'lploptions') %>
-  <%= content_tag 'div', '<img src="/images/opentray.png" />', :style => 'width:63px;float:right',
-    :onclick => visual_effect(:slideDown, 'lploptions')  %>
-  </div>
+  <div id="lplshadow"></div>
 
-  <div class="editdata">
   <%  if params[:fragment] == "print"
         newinfragment = @article.fragments.find_by_content("print").id 
       else
         newinfragment = @article.fragments.find_by_content("web").id 
       end %>
-  <%= link_to "Neuer Textblock", {  :controller => "textblocks",
-                                    :action => "new",
-                                    :article_id => @article.id, 
-                                    :fragment_id => newinfragment }, 
-                                    :popup => ['new_window', 'height=600,width=600,scrollbars=1'] %> |
-
-  <%= link_to "Neuer Mediablock", { :controller => "mediablocks",
-                                    :action => "new", 
-                                    :article_id => @article.id, 
-                                    :fragment_id => newinfragment }, 
-                                    :popup => ['new_window', 'height=600,width=600,scrollbars=1'] %> |
 
   <% #link_to "Flash Vorschau", { :controller => "articles",
     #                                :action => "showswf", 
      #                               :id => @article.id }, 
       #                              :popup => ['swf_preview', 'height=700,width=980,scrollbars=0'] 
       %>
-  <%= link_to 'Zur&uuml;ck', :action => 'list', :page => params[:page] %>
-       
-  </div>
+
+  <%= link_to image_tag("/images/back.png", :alt => "back", :title => "back", :class => "linkicon"), 
+  { :action => 'list', :page => params[:page] } %>
+  <%= link_to image_tag("/images/textblock-add.png", :alt => "add textblock", :title => "add textblock", :class => "linkicon"), 
+  { :controller => "textblocks", 
+    :action => "new",
+    :article_id => @article.id, 
+    :fragment_id => newinfragment }, 
+    :popup => ['new_window', 'height=600,width=600,scrollbars=1'] %>
+  <%= link_to image_tag("/images/mediablock-add.png", :alt => "add mediablock", :title => "add mediablock", :class => "linkicon"), 
+  { :controller => "mediablocks", 
+    :action => "new",
+    :article_id => @article.id, 
+    :fragment_id => newinfragment }, 
+    :popup => ['new_window', 'height=600,width=600,scrollbars=1'] %> |
 
   <div id="lpltemplatecontainer">  
   <% if params[:fragment] == "print" %>

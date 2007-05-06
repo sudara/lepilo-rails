@@ -16,14 +16,14 @@ class MediablocksController < ApplicationController
   end
 
   def search
-    if !@params['criteria'] || 0 == @params['criteria'].length
+    if !params['criteria'] || 0 == params['criteria'].length
       @mediaitems = nil
       render_without_layout
     else
       @mediaitems = Mediablock.find(:all, :order => 'updated_at DESC',
         :conditions => [ 'LOWER(title) LIKE ?', 
-        '%' + @params['criteria'].downcase + '%' ], :limit => 18)
-      @mark_term = @params['criteria']
+        '%' + params['criteria'].downcase + '%' ], :limit => 18)
+      @mark_term = params['criteria']
       render_without_layout
     end
   end
@@ -76,6 +76,8 @@ class MediablocksController < ApplicationController
     @mediablock = Mediablock.new(params[:mediablock])
     @mediablock.uploaded_at = DateTime.new(1970, 01, 01, 01, 01).to_s(:db)
     
+    #flash[:info] = "Resize set to #{self.resize}"
+    
     if @mediablock.save
 
       @mediablock.update
@@ -86,10 +88,10 @@ class MediablocksController < ApplicationController
       addLink.gallery_id = session[:current_gallery]
       addLink.save
 
-      flash[:notice] = 'Mediablock was successfully created.'
+      flash[:ok] = 'Mediablock was successfully created.'
       redirect_to :action => 'list'
     else
-      flash[:notice] = 'Mediablock was successfully created.'
+      flash[:ok] = 'Mediablock was successfully created.'
       render :action => 'new'
     end
   end
@@ -104,7 +106,7 @@ class MediablocksController < ApplicationController
   def update
     @mediablock = Mediablock.find(params[:id])
     if @mediablock.update_attributes(params[:mediablock])
-      flash[:notice] = 'Mediablock was successfully updated.'
+      flash[:ok] = 'Mediablock was successfully updated.'
       redirect_to :action => 'show', :id => @mediablock
     else
       render :action => 'edit'

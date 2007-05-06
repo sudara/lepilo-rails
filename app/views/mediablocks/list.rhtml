@@ -1,21 +1,24 @@
+<div id="lplheader"></div> 
+<div id="lploptions">
+  <h1>Mediablockliste</h1> | <%= link_to 'Neuer mediablock', :action => 'new' %> | 
+  <%= link_to 'Vorherige Seite', { :page => @mediablock_pages.current.previous } if @mediablock_pages.current.previous %> |
+  Seite: <%= pagination_links(@mediablock_pages) %> |
+  <%= link_to 'N&auml;chste Seite', { :page => @mediablock_pages.current.next } if @mediablock_pages.current.next %> 
+  <br />
+  <br />
+  
+</div> 
+
 <div id="lplcontainer">
-  <div id="lploptions">
-    <h1>Mediablockliste</h1> | <%= link_to 'Neuer mediablock', :action => 'new' %> | 
-    <%= link_to 'Vorherige Seite', { :page => @mediablock_pages.current.previous } if @mediablock_pages.current.previous %> |
-    Seite: <%= pagination_links(@mediablock_pages) %> |
-    <%= link_to 'N&auml;chste Seite', { :page => @mediablock_pages.current.next } if @mediablock_pages.current.next %> 
-    <br />
-    <br />
-    
-  </div> 
-  <div id="lplheader"><img src="/images/slidermini.png" style="float:left;margin-left:25px;margin-top:7px"/>
+  <div id="lplshadow"></div>
+
+  <img src="/images/slidermini.png" style="float:left;margin-left:25px;margin-top:7px"/>
     <div id="mbtrack1" class="slidertrack">
       <div id="mbhandle1" style="sliderhandle">
         <img src="/images/sliderhandle.png"/>
       </div>
     </div><img src="/images/sliderbig.png" style="float:left;margin-top:6px"/>
-  </div> 
-
+  <br style="clear:both"/>
 
 
   <% for mediablock in @mediablocks %>
@@ -25,12 +28,12 @@
     <div class="previewblock">
     	<div class="iconblack">
     	  <div class="icontainer">
-      <%= link_to image_tag("/images/b24look.png", :alt => mediablock.filename),"/data/images/#{mediablock.filename}", {:rel => "lightbox", :title => mediablock.title, :class => "icon24" } %>
-      <%= link_to_image '/images/b24edit.png', { :action => 'edit', :id => mediablock, :page => params[:page] },  html_options = { :class => "icon24", :title => "bearbeiten",} %>
-      <%= link_to_image '/images/b24delete.png', { :action => 'destroy', :id => mediablock },  html_options = { :class => "icon24", :title => "löschen", :confirm => 'Artikel »' + mediablock.title + '« löschen — sind Sie sicher?'} %>
+          <%= link_to image_tag("/images/b24look.png", :alt => mediablock.filename, :title => mediablock.title, :class => "linkicon"),"/data/images/#{mediablock.filename}", {:rel => "lightbox" } %>
+          <%= link_to image_tag("/images/b24edit.png", :alt => 'bearbeiten', :title => 'bearbeiten', :class => "linkicon"), { :action => 'edit', :id => mediablock, :page => params[:page] } %>
+          <%= link_to image_tag("/images/b24delete.png", :alt => 'löschen', :title => 'löschen', :class => "linkicon"), { :action => 'destroy', :id => mediablock }, html_options = { :confirm => 'Mediablock »' + mediablock.title + '« löschen — sind Sie sicher?'} %>
         </div>
       </div>
-      <img src="/data/thumbnails/<%= mediablock.filename %>" class="imagepreviewmini">
+        <%= image_tag("/data/thumbnails/#{mediablock.filename}", :alt => mediablock.filename, :title => mediablock.title, :class => "imagepreviewmini") %>
     </div>
 
   <% end %>

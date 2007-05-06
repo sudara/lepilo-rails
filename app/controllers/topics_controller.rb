@@ -36,7 +36,7 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(params[:topic])
     if @topic.save
-      flash[:notice] = 'Topic was successfully created.'
+      flash[:ok] = 'Topic was successfully created.'
       redirect_to :action => 'list'
     else
       render :action => 'new'
@@ -51,15 +51,15 @@ class TopicsController < ApplicationController
   end
   
   def topic_changed
-    render :partial => "subtopics", :locals => { :topic_id => @params[:id]}
+    render :partial => "subtopics", :locals => { :topic_id => params[:id]}
   end 
   
   def subtopic_changed
-    render :partial => "subsubtopics", :locals => { :topic_id => @params[:id]}
+    render :partial => "subsubtopics", :locals => { :topic_id => params[:id]}
   end
 
   def subsubtopic_changed
-    # render :partial => "subsubsubtopics", :locals => { :topic_id => @params[:id]}
+    # render :partial => "subsubsubtopics", :locals => { :topic_id => params[:id]}
   end
   
   
@@ -75,7 +75,7 @@ class TopicsController < ApplicationController
   def update
     @topic = Topic.find(params[:id])
     if @topic.update_attributes(params[:topic])
-      flash[:notice] = 'Topic was successfully updated.'
+      flash[:ok] = 'Topic was successfully updated.'
       redirect_to :action => 'list', :id => @topic
     else
       render :action => 'edit'

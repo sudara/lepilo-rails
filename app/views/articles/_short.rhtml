@@ -20,8 +20,8 @@
 <div class="listblock" id="<%= article.id %>">
 	<div class="iconplastic" id="plastic_<%= article.id %>">
     <div class="icontainer">
-    <%= link_to_image '/images/b24edit.png', { :action => 'edit', :id => article },  html_options = { :class => "icon24", :title => "bearbeiten",} %>
-    <%= link_to_image '/images/b24delete.png', { :action => 'destroy', :id => article },  html_options = { :class => "icon24", :title => "löschen", :confirm => 'Artikel »' + article.title + '« löschen — sind Sie sicher?'} %>
+    <%= link_to_image '/images/b24edit.png', { :action => 'edit', :id => article },  html_options = { :class => "linkicon", :title => "bearbeiten",} %>
+    <%= link_to_image '/images/b24delete.png', { :action => 'destroy', :id => article },  html_options = { :class => "linkicon", :title => "löschen", :confirm => 'Artikel »' + article.title + '« löschen — sind Sie sicher?'} %>
     </div>
 	  Projekt <strong><%= article.reference %></strong>,
       <%= image_tag "/images/16image.png",

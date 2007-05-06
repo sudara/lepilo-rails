@@ -132,7 +132,7 @@ class CGI #:nodoc:
           # Assumes that @cookies has already been setup
           # Raises nomethod if upload_id is not defined
           @params = CGI::parse(read_params_from_query)
-          upload_id = @params[(options['upload_key'] || 'upload_id')].first
+          upload_id = params[(options['upload_key'] || 'upload_id')].first
           raise RuntimeError.new("Multipart upload progress disabled, no upload id in query string") unless upload_id
 
           upload_progress = UploadProgress::Progress.new(content_length)
