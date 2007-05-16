@@ -21,7 +21,7 @@ class MediablocksController < ApplicationController
       render_without_layout
     else
       @mediaitems = Mediablock.find(:all, :order => 'updated_at DESC',
-        :conditions => [ 'LOWER(title) LIKE ?', 
+        :conditions => [ 'LOWER(title) OR LOWER(description) LIKE ?', 
         '%' + params['criteria'].downcase + '%' ], :limit => 18)
       @mark_term = params['criteria']
       render_without_layout

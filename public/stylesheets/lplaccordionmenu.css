@@ -1,0 +1,46 @@
+.panel {
+  padding-left:10px;
+  margin-bottom:5px;
+}
+
+.panel > span {
+  font-size:14px;
+  color: #333; 
+  display: block; 
+  width: 100%; 
+  text-decoration: none;
+  padding:0px;
+  margin:0px;
+  padding-left:10px;
+}
+
+.panel > span:hover {
+  font-size:14px;
+  color: #333;
+  background-color:#fafafa; 
+  display: block; 
+  width: 100%; 
+  text-decoration: none;
+  padding:0px;
+  margin:0px;
+  padding-left:10px;
+  cursor: pointer;
+}
+
+
+.panelBody {
+  padding:0px;
+  margin:0px;
+  background-color: #eee;
+}
+
+.panelBody > span {
+  cursor: pointer;
+}
+
+.panelBody > div {
+  padding-left:20px;
+}
+.panelBody > div:hover {
+  background-color: #fafafa;
+}

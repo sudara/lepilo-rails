@@ -23,7 +23,7 @@ class SettingsController < ApplicationController
       @mediablocks.each do |mediablock|
         ftp.putbinaryfile("#{RAILS_ROOT}/public/data/images/#{mediablock.filename}", "/htdocs/data/images/#{mediablock.filename}")
         ftp.putbinaryfile("#{RAILS_ROOT}/public/data/thumbnails/#{mediablock.thumbnail}", "/htdocs/data/thumbnails/#{mediablock.thumbnail}")
-        mediablock.uploaded_at = DateTime.now
+        mediablock.uploaded_at = DateTime.now.to_s(:db)
         mediablock.update
       end
     end

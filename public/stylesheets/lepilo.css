@@ -255,7 +255,20 @@ div.progress-container > div {
 }
 
 #lploptions {
+  background-color:#bfbfbf;
   background-image:url(/images/gradientd.png); 
+  background-repeat:repeat-x;
+  margin-top:0px;
+  margin-bottom:0px;
+  padding-left:20px;
+  padding-top:10px;
+  padding-bottom:-20px;
+  overflow:auto;
+}
+
+#lpleditor {
+  background-color:#bfbfbf;
+  background-image:url(/images/gradient-big.png); 
   background-repeat:repeat-x;
   margin-top:0px;
   margin-bottom:0px;

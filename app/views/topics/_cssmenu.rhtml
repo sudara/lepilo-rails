@@ -1,4 +1,4 @@
-<ul class="makeMenu">
+<ul class="lplCSSMenu">
 <%  @topics = Topic.find_all_by_topic_id(1, :order => :position)
   for topic in @topics -%>
     <li><a href="/ps/article/<%= topic.id %>"><%= topic.title %></a>
