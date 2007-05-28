@@ -15,7 +15,7 @@
     <div class="loginwindow">
       <div style="width:450px;margin-right:20px;margin-left:auto;padding-top:10px">
       <%= flash[:ok] %>
-      <%= @content_for_layout %>
+      <%= yield  %>
       </div>
     </div>
     <center><img src="/images/copyright.png" alt="copyright"/></center>

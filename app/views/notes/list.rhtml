@@ -1,6 +1,3 @@
-<div id="lplheader">
-</div> 
-
 <div id="lploptions">
   <div style="float:right;text-align:right;padding-right:25px">
     <img id="busynotesearch" src="/images/loadingw.gif" style="display:none" /> &nbsp;
@@ -22,12 +19,8 @@
   <%= link_to 'N&auml;chste Seite', { :page => @note_pages.current.next } if @note_pages.current.next %> 
   <% end %>
   <br/>
-  <br/>
 </div> 
 <div id="lplcontainer">
-  <div id="lplshadow"></div>
-
-  <div class="editdata" style="margin-right:auto; margin-left:auto;">
 
     <% for note in @notes %>
 
@@ -35,10 +28,10 @@
       #Time.now.strftime('%d-%m-%y -%R') 
     %>
     	<div class="listblock" id="<%= note.id %>">
-      	<div class="iconblack" id="plastic_<%= note.id %>" style="width:32px">
+      	<div class="iconwhite" id="plastic_<%= note.id %>" style="width:32px">
           <div class="icontainer">
-            <%= link_to image_tag("/images/b24edit.png", :title => 'bearbeiten', :alt => 'bearbeiten'), { :action => 'edit', :id => note, :page => params[:page] }, :class => 'linkicon' %>
-            <%= link_to image_tag("/images/b24delete.png", :title => 'löschen', :alt => 'löschen'), { :action => 'destroy', :id => note, :page => params[:page] }, :class => 'linkicon', :confirm => 'Notiz »' + note.title + '« löschen — sind Sie sicher?' %>          
+            <%= link_to image_tag("/images/w24edit.png", :title => 'bearbeiten', :alt => 'bearbeiten'), { :action => 'edit', :id => note, :page => params[:page] }, :class => 'linkicon' %>
+            <%= link_to image_tag("/images/w24delete.png", :title => 'löschen', :alt => 'löschen'), { :action => 'destroy', :id => note, :page => params[:page] }, :class => 'linkicon', :confirm => 'Notiz »' + note.title + '« löschen — sind Sie sicher?' %>          
           </div>
       	</div>
     	  <div class="listdescription">
@@ -59,5 +52,4 @@
     </div>
     <% end %>
 <br style="clear:both "/>
-</div>
 </div>

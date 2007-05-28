@@ -1,14 +1,14 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'galleries_controller'
+require 'collections_controller'
 
 # Re-raise errors caught by the controller.
-class GalleriesController; def rescue_action(e) raise e end; end
+class CollectionsController; def rescue_action(e) raise e end; end
 
-class GalleriesControllerTest < Test::Unit::TestCase
-  fixtures :galleries
+class CollectionsControllerTest < Test::Unit::TestCase
+  fixtures :collections
 
   def setup
-    @controller = GalleriesController.new
+    @controller = CollectionsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
   end
@@ -25,7 +25,7 @@ class GalleriesControllerTest < Test::Unit::TestCase
     assert_response :success
     assert_template 'list'
 
-    assert_not_nil assigns(:galleries)
+    assert_not_nil assigns(:collections)
   end
 
   def test_show
@@ -34,8 +34,8 @@ class GalleriesControllerTest < Test::Unit::TestCase
     assert_response :success
     assert_template 'show'
 
-    assert_not_nil assigns(:gallery)
-    assert assigns(:gallery).valid?
+    assert_not_nil assigns(:collection)
+    assert assigns(:collection).valid?
   end
 
   def test_new
@@ -44,18 +44,18 @@ class GalleriesControllerTest < Test::Unit::TestCase
     assert_response :success
     assert_template 'new'
 
-    assert_not_nil assigns(:gallery)
+    assert_not_nil assigns(:collection)
   end
 
   def test_create
-    num_galleries = Gallery.count
+    num_collections = Collection.count
 
-    post :create, :gallery => {}
+    post :create, :collection => {}
 
     assert_response :redirect
     assert_redirected_to :action => 'list'
 
-    assert_equal num_galleries + 1, Gallery.count
+    assert_equal num_collections + 1, Collection.count
   end
 
   def test_edit
@@ -64,8 +64,8 @@ class GalleriesControllerTest < Test::Unit::TestCase
     assert_response :success
     assert_template 'edit'
 
-    assert_not_nil assigns(:gallery)
-    assert assigns(:gallery).valid?
+    assert_not_nil assigns(:collection)
+    assert assigns(:collection).valid?
   end
 
   def test_update
@@ -75,14 +75,14 @@ class GalleriesControllerTest < Test::Unit::TestCase
   end
 
   def test_destroy
-    assert_not_nil Gallery.find(1)
+    assert_not_nil Collection.find(1)
 
     post :destroy, :id => 1
     assert_response :redirect
     assert_redirected_to :action => 'list'
 
     assert_raise(ActiveRecord::RecordNotFound) {
-      Gallery.find(1)
+      Collection.find(1)
     }
   end
 end

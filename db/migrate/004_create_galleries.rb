@@ -1,6 +1,6 @@
-class CreateGalleries < ActiveRecord::Migration
+class CreateCollections < ActiveRecord::Migration
   def self.up
-    create_table :galleries, :force => true do |t|
+    create_table :collections, :force => true do |t|
       t.column "topic_id", :integer
       t.column "thumbnail_id", :integer
       t.column "released", :integer
@@ -13,6 +13,6 @@ class CreateGalleries < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :galleries
+    drop_table :collections
   end
 end

@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 9) do
     t.column "textblock_id",  :integer
     t.column "position",      :integer
     t.column "fragment_id",   :integer
-    t.column "gallery_id",    :integer
+    t.column "collection_id",    :integer
   end
 
   create_table "block_links_fragments", :id => false, :force => true do |t|
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(:version => 9) do
     t.column "info",       :string,   :limit => 250
   end
 
-  create_table "galleries", :force => true do |t|
+  create_table "collections", :force => true do |t|
     t.column "topic_id",     :integer
     t.column "thumbnail_id", :integer
     t.column "released",     :boolean

@@ -85,7 +85,7 @@ class MediablocksController < ApplicationController
       addLink = BlockLink.new
       addLink.mediablock_id = @mediablock.id
       addLink.fragment_id = session[:current_fragment]
-      addLink.gallery_id = session[:current_gallery]
+      addLink.collection_id = session[:current_collection]
       addLink.save
 
       flash[:ok] = 'Mediablock was successfully created.'
@@ -122,8 +122,8 @@ class MediablocksController < ApplicationController
     BlockLink.find(params[:id]).destroy
     if session[:current_article]
       redirect_to :controller => '/articles', :action => 'edit', :id => session[:current_article]
-    elsif session[:current_gallery]
-      redirect_to :controller => '/galleries', :action => 'edit', :id => session[:current_gallery]
+    elsif session[:current_collection]
+      redirect_to :controller => '/collections', :action => 'edit', :id => session[:current_collection]
     else
       render :nothing => true
     end    

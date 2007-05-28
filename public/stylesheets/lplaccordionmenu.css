@@ -11,19 +11,19 @@
   text-decoration: none;
   padding:0px;
   margin:0px;
-  padding-left:10px;
+  padding-left:20px;
 }
 
 .panel > span:hover {
   font-size:14px;
   color: #333;
-  background-color:#fafafa; 
+  background-color:#e0e0e0; 
   display: block; 
   width: 100%; 
   text-decoration: none;
   padding:0px;
   margin:0px;
-  padding-left:10px;
+  padding-left:20px;
   cursor: pointer;
 }
 
@@ -42,5 +42,5 @@
   padding-left:20px;
 }
 .panelBody > div:hover {
-  background-color: #fafafa;
+  background-color: #e0e0e0;
 }

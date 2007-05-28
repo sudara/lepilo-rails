@@ -35,9 +35,11 @@ ul.lplCSSMenu ul {  /* copy of above declaration without the > selector, except 
 %>
   
 <div id="header"><div>
-  <%= image_tag "/ps/n-puresenses.png",
-      :alt => "über uns", 
-      :title => "über uns" -%>
+  <%= link_to image_tag("/ps/n-puresenses.png", :alt => "über puresenses", :title => "über puresenses", :class => "linkimage"), 
+  { :controller => "ps", 
+    :action => "article",
+    :id => 16 },
+    :class => "linkimage" -%>
   <%= image_tag "/ps/n-termine.png",
       :alt => "die Termine", 
       :title => "die Termine" -%>
@@ -48,10 +50,18 @@ ul.lplCSSMenu ul {  /* copy of above declaration without the > selector, except 
 
 <div id="content">
 	<div id="navigation">
+    <div id="aktuelles">
+      <%= link_to_function('<img src="/ps/t-aktuelles.png" />', "Effect.toggle('aktuell', 'blind', {duration: 0.5})") %>
+      
+      <%# content_tag 'div', '<img src="/ps/t-aktuelles.png" />', :onclick => toggle('aktuell')  -%>      
+    </div>
 	  <%= image_tag "/ps/t-angebot.png",
         :alt => "unser Angebot", 
         :title => "unser Angebot" -%>
-    <%= render :partial => "topics/accordion" %>
+    <%= render :partial => "topics/accordion", :locals => { :menuwidth => "200"} %>
+    <div id="aktuell" style="display:none">
+      aktuell
+    </div>
   </div>
 	<div id="page" style="background-repeat:no-repeat;background-image:url(/data/images/<% if @psblocks && @psblocks[0] && @psblocks[0].mediablock_id != nil -%><%= @page.filename -%><% end -%>)">
 		<div class="container">
@@ -76,4 +86,11 @@ ul.lplCSSMenu ul {  /* copy of above declaration without the > selector, except 
 	</div>
 
 &nbsp;
+</div>
+
+<div id="footer">
+  <%= image_tag "/ps/n-impressum.png",
+      :alt => "impressum", 
+      :title => "impressum" -%>
+  
 </div>

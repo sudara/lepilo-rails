@@ -1,7 +1,7 @@
 <%= error_messages_for 'article' %>
 
 <%  session[:current_article] = params[:id] %>  
-<%  session[:current_gallery] = nil %>  
+<%  session[:current_collection] = nil %>  
 <%  
   if params[:page]
     session[:current_page] = params[:page] 
@@ -84,7 +84,7 @@
 <div id="dropzone">
   Vorschaubild:<br/>
   <%  thumbnail = Mediablock.find_by_id(@article.thumbnail_id) %>
-  <div id="thumbnaildrop" style="background-image:url(/images/gradientb.png)">
+  <div id="thumbnaildrop">
   <% if thumbnail %>
     <%= image_tag "/data/thumbnails/#{thumbnail.filename}",
         :alt => thumbnail.title, 

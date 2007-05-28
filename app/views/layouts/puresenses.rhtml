@@ -14,11 +14,11 @@
 </head>
 <% 
 
-backgroundsgallery = Gallery.find_by_title('backgrounds')
-#@galleryblocks = BlockLink.find_all_by_gallery_id(backgroundsgallery.id)
+backgroundscollection = Collection.find_by_title('backgrounds')
+#@collectionblocks = BlockLink.find_all_by_collection_id(backgroundscollection.id)
 @backgrounds = Array.new
 
-backgroundsgallery.block_links.each do |link|
+backgroundscollection.block_links.each do |link|
 
   if link.mediablock_id != nil
     image = Mediablock.find(link.mediablock_id)
@@ -29,6 +29,6 @@ end %>
 
 
 <body style="background-image: url(/data/images/<%= @backgrounds.pick %>)">
-    <%= @content_for_layout %>
+  <%= yield  %>
 </body>
 </html>

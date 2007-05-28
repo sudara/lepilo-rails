@@ -1,4 +1,7 @@
-<div id="lplaccordion">
+<div id="lplaccordion"  
+<% if local_assigns.has_key? :menuwidth -%>
+  style="width:<%= menuwidth -%>px"
+<% end -%> >
 <%  @topics = Topic.find_all_by_topic_id(1, :order => :position)
   for topic in @topics -%>
 	<div class="panel">

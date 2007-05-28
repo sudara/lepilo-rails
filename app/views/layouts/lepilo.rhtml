@@ -9,61 +9,197 @@
   <%= javascript_include_tag "slider" %> 
   <%= javascript_include_tag "tabs" %> 
   <%= javascript_include_tag "accordion"%> 
+  <%= stylesheet_link_tag 'layout_3col_standard'%>
+  <!--[if lte IE 7]>
+  <link href="/stylesheets/explorer/layout_3col_standard.css" rel="stylesheet" type="text/css" />
+  <![endif]-->
   <%= stylesheet_link_tag 'lepilo'%>
   <%= stylesheet_link_tag 'lightbox'%>
   <%= stylesheet_link_tag 'lplaccordionmenu'%>
   <%= stylesheet_link_tag 'lplcssmenu'%>
 </head>
 <body>
-  <% 
-    flashimg = '...'
-    
-    flash.each do |key, msg|
-     case key
-        when :ok
-          flashimg = '<img src="/images/railsflash-ok.png"/>'
-        when :info
-          flashimg = '<img src="/images/railsflash-info.png"/>'
-        when :warning
-          flashimg = '<img src="/images/railsflash-warning.png"/>'
-        when :error
-          flashimg = '<img src="/images/railsflash-error.png"/>'
-      end %>
 
-    <%= content_tag :div, flashimg + '<div>' + msg + '</div>', :id => key %>
-    <script type="text/javascript" charset="utf-8">
-      setTimeout( function() {
-        new Effect.BlindUp('<%= key %>', 500);
-      }, 3000)
-    </script>
-  <% end %>
+  <div id="page_margins">
+  <div id="page" class="hold_floats">
 
-  <div id="lplcontent">
-    
-    <div id="navigation">
+  <div id="header">
+    <div id="lplnavigation">
       <img src="/images/lepilo.png" class="lepilo" alt="lepilo version" />
       <a href="/settings/" <%= 'class="active"' if params[:controller] == "settings"%>><img src="/images/overview.png" alt="overview" /></a>
       <!--<a href="/" <%= 'class="active"' if params[:controller] == ""%>><img src="/images/overview.png" border=0></a>-->
       <a href="/articles/" <%= 'class="active"' if params[:controller] == "articles"%>><img src="/images/articles.png" alt="articles" /></a>
       <a href="/notes/" <%= 'class="active"' if params[:controller] == "notes"%>><img src="/images/notes.png" alt="notes"/></a>
       <a href="/comments/" <%= 'class="active"' if params[:controller] == "comments"%>><img src="/images/posts.png" alt="posts"/></a>
-      <a href="/galleries/" <%= 'class="active"' if params[:controller] == "galleries"%>><img src="/images/galleries.png" alt="galleries"/></a>
+      <a href="/collections/" <%= 'class="active"' if params[:controller] == "collections"%>><img src="/images/collections.png" alt="collections"/></a>
       <a href="/topics/" <%= 'class="active"' if params[:controller] == "topics"%>><img src="/images/navigation.png" alt="navigation"/></a>
       <a href="/mediablocks/" <%= 'class="active"' if params[:controller] == "mediablocks"%>><img src="/images/media.png" alt="media"/></a>
       <a href="/account/" <%= 'class="active"' if params[:controller] == "account"%>><img src="/images/accounts.png" alt="accounts"/></a>
       <a href="/account/logout" ><img src="/images/logout.png" alt="log out of lepilo"/></a>
     </div>
-
-  <%= @content_for_layout %>
-    
   </div>
+
+  <!-- #nav: Hauptnavigation -->
+  <div id="nav">
+  	<div id="nav_main">
+      <span><%= image_tag "/images/16toleft.png",
+        :alt => "inspector", 
+        :title => "inspector", 
+        :style => "padding-top:4px;padding-left:5px;padding-right:5px;border:0px;float:left"  %>
+      </span>
+
+      <div id="tabs">
+        <ul> 
+          <li style="margin-left: 1px" id="tabHeaderActive"><a href="javascript:void(0)" onClick="toggleTab(1,5)"><span style="line-height:14px">Einstellungen</span></a></li>
+          <li id="tabHeader2"><a href="javascript:void(0)" onClick="toggleTab(2,5)" ><span><%= image_tag "/images/16article.png",
+              :alt => "artikel", 
+              :title => "artikel", 
+              :class => "icon16"  %>
+          </span></a></li>
+          <li id="tabHeader3"><a href="javascript:void(0)" onclick="toggleTab(3,5)"><span><%= image_tag "/images/16collection.png",
+              :alt => "gallerien", 
+              :title => "gallerien", 
+              :class => "icon16"  %>
+          </span></a></li>
+          <li id="tabHeader4"><a href="javascript:void(0)" onClick="toggleTab(4,5)"><span><%= image_tag "/images/16image.png",
+              :alt => "bilder", 
+              :title => "bilder", 
+              :class => "icon16"  %>
+          </span></a></li>
+          <li id="tabHeader5"><a href="javascript:void(0)" onclick="toggleTab(5,5);"><span><%= image_tag "/images/16text.png",
+              :alt => "texte", 
+              :title => "texte", 
+              :class => "icon16"  %></span></a></li>
+          <span><%= image_tag "/images/16toright.png",
+            :alt => "inspector", 
+            :title => "inspector", 
+            :style => "padding-top:4px;padding-left:5px;padding-right:5px;border:0px;float:right"  %>
+          </span>
+        </ul>
+
+      </div><!--End of tabs-->
+
+  	</div>
+  </div>
+  <!-- #nav: - Ende -->
+
+  <!-- #main: Beginn Inhaltsbereich -->
+  <div id="main">
+    <% 
+      flashimg = '...'
+
+      flash.each do |key, msg|
+       case key
+          when :ok
+            flashimg = '<img src="/images/railsflash-ok.png"/>'
+          when :info
+            flashimg = '<img src="/images/railsflash-info.png"/>'
+          when :warning
+            flashimg = '<img src="/images/railsflash-warning.png"/>'
+          when :error
+            flashimg = '<img src="/images/railsflash-error.png"/>'
+        end %>
+
+      <%= content_tag :div, flashimg + '<div>' + msg + '</div>', :id => key %>
+      <script type="text/javascript" charset="utf-8">
+        setTimeout( function() {
+          new Effect.BlindUp('<%= key %>', 500);
+        }, 3000)
+      </script>
+    <% end %>
+
+  <!-- #col1: Erste Float-Spalte des Inhaltsbereiches -->
+      <div id="col1">
+        <div id="col1_content" class="clearfix">
+
+          <h2>Spalte #col1</h2>
+          <p>...</p>
+
+  	    </div>
+      </div>
+  <!-- #col1: - Ende -->
+
+  <!-- #col2: zweite Flaot-Spalte des Inhaltsbereiches -->
+      <div id="col2">
+        <div id="col2_content" class="clearfix">
+          <div id="tabscontent">
+              <div id="tabContent1" class="tabContent" >
+                <div class="searchblock">
+                  <% if @article %>
+                  <%= link_to 'Web', {  :action => "edit", :id => @article.id, :fragment => "web" } %> | <%= link_to 'Print', {  :action => "edit", :id => @article.id, :fragment => "print" } %> | <%= link_to 'XML', {  :action => "writeindesignxml", :id => @article.id, :fragment => "print" } %> | <%= link_to 'Din A4', {  :action => "getindesignfile", :format => "A4" } %> | <%= link_to 'A5', {  :action => "getindesignfile", :format => "A5" } %> | <%= link_to 'A4/3', {  :action => "getindesignfile", :format => "A4-3" } %>
+                  <% end -%>
+                </div>
+                <div class="sidebar">
+                  <div class="editdata">
+                    <% if @article %>
+
+                  <h1><%= in_place_editor_field :article, :title, tag_options = {}, in_place_editor_options = { :cols => 32, :rows => 3, :cancel_text => 'abbrechen'} %>
+                  </h1>
+                  Typ: <h3><%= @article.type %></h3>, Freigegeben: <h3><%= @article.released %></h3><br/>
+                 <%= in_place_editor_field :article, :description, tag_options = {}, in_place_editor_options = { :cols => 32, :rows => 10, :cancel_text => 'abbrechen'} %>
+                 <% end -%>
+                  </div>
+
+                  <div class="editdata">
+
+                    <%= start_form_tag :action => 'imagedescriptions', :id => @article %>
+                      Copyright Vermerk für Bilder: 
+                      <input name="description" size="30" type="text" />
+                      <%# text_field 'images', 'description', "size" => 45  %>
+                      <%= submit_tag 'Anwenden' %>
+                    <%= end_form_tag %>
+
+                  </div>
+                </div>
+              </div>
+
+              <div id="tabContent2" class="tabContent" style="display:none;">
+                <%= render_partial 'articles/sidebar' %>
+              </div>
+
+              <div id="tabContent3" class="tabContent" style="display:none;">
+                <%= render_partial 'collections/sidebar' %>
+              </div>
+
+              <div id="tabContent4" class="tabContent" style="display:none;">
+                <%= render_partial 'mediablocks/sidebar' %>
+              </div>
+
+              <div id="tabContent5" class="tabContent" style="display:none;">
+                <%= render_partial 'textblocks/sidebar' %>
+              </div>
+          </div><!--End of tabscontent-->
+
+        </div>
+      </div>
+  <!-- #col2: - Ende -->
+
+  <!-- #col3: Statische Spalte des Inhaltsbereiches -->
+      <div id="col3">
+        <div id="col3_content" class="clearfix" >
+
+          <div id="lplcontent">
+            <%= yield  %>
+          </div>
+
+        </div>
+        <!-- IE Column Clearing -->
+  	  <div id="ie_clearing">&nbsp;</div>
+        <!-- Ende: IE Column Clearing -->
+      </div>
+  <!-- #col3: - Ende -->
+
+  </div>
+  <!-- #main: - Ende -->
+
+
 
   <div id="lplfooter">
   <strong>LEPILO</strong> Statistik
     <strong><span class="green">
     <%
       article_counter = Article.count
-      gallery_counter = Gallery.count
+      collection_counter = Collection.count
       text_counter = BlockLink.count(:conditions => "textblock_id")
       media_counter = BlockLink.count(:conditions => "mediablock_id") %>  
     <%= image_tag "/images/16article.png",
@@ -71,11 +207,11 @@
         :title => "anzahl der seiten", 
         :class => "icon16"  %>
     <%= article_counter %>
-    <%= image_tag "/images/16gallery.png",
+    <%= image_tag "/images/16collection.png",
         :alt => "anzahl der galerien", 
         :title => "anzahl der galerien", 
         :class => "icon16"  %>
-    <%= gallery_counter %>
+    <%= collection_counter %>
     <%= image_tag "/images/16image.png",
         :alt => "anzahl der medienblocks", 
         :title => "anzahl der medienblocks", 
@@ -92,7 +228,19 @@
       <strong><span class="green"><%= @session['user'].login %></span></strong>
       &nbsp;&nbsp;|&nbsp;&nbsp;
       <% end %>
+      Dieses Layout basiert auf <a href="http://www.yaml.de/">YAML</a> 
+      &copy; 2005-2006 by <a href="http://www.highresolution.info">Dirk Jesse</a>
+      
   </div>
+
+  <!-- #footer: Beginn Fußzeile -->
+  <div id="footer">
+
+  </div>
+  <!-- #footer: Ende -->
+
+
+  </div> <!-- id="page_margins" END -->
 
 </body>
 </html>

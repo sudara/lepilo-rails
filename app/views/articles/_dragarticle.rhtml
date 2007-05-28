@@ -4,7 +4,7 @@
 <div id="searchResultsArticles" style="overflow:visible">
 </div>
 
-<div id="searchResultsGalleries" style="overflow:visible">
+<div id="searchResultsCollections" style="overflow:visible">
 </div>
 
 <div id="searchResultsMedia"  style="overflow:visible">
@@ -29,8 +29,8 @@
 
 <%= observe_field 'searcharticles', 
     :frequency => 0.5, 
-    :update => 'searchResultsGalleries', 
-    :url => { :controller => 'galleries', :action=> 'search' }, 
+    :update => 'searchResultsCollections', 
+    :url => { :controller => 'collections', :action=> 'search' }, 
     :with => "'criteria=' + escape(value)", 
     :loading => "document.getElementById('busyarticlesearch').style.display='inline'", 
     :loaded => "document.getElementById('busyarticlesearch').style.display='none'" %> 

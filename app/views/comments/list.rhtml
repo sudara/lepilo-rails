@@ -5,14 +5,6 @@
     Seite: <%= pagination_links(@comment_pages) %> |
     <%= link_to 'N&auml;chste Seite', { :page => @comment_pages.current.next } if @comment_pages.current.next %> 
     <br/>
-    <br/>
-  </div> 
-  <div id="lplheader">
-    <div class="centered">
-      <%= image_tag "/images/loadingd.gif",
-          :alt => "loading", 
-          :title => "loading" %>     
-    </div>
   </div> 
 
 <table>

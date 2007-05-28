@@ -79,8 +79,8 @@
         addlink.textblock_id = drop_id
       when 'dragmediablock'
         addlink.mediablock_id = drop_id
-      when 'draggallery'
-      addlink.gallery_id = drop_id
+      when 'dragcollection'
+      addlink.collection_id = drop_id
       when 'dragarticle'
       addlink.article_id = drop_id
     end
@@ -280,6 +280,6 @@
 
   def destroylink
     BlockLink.find(params[:id]).destroy
-    redirect_to :controller => '/galleries', :action => 'edit', :id => session[:current_gallery]
+    redirect_to :controller => '/collections', :action => 'edit', :id => session[:current_collection]
   end
 end

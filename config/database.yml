@@ -42,6 +42,13 @@ development:
 #  password: xype
 #  socket: /tmp/mysql.sock
 
+production:
+  adapter: mysql
+  database: lepilo_production
+  username: samo
+  password: xype
+  socket: /tmp/mysql.sock
+
 #production:
 #  adapter: mysql
 #  database: hellenot

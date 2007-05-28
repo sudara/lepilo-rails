@@ -52,10 +52,10 @@ Accordion.prototype = {
 				//alert("force to show the visible element.");
 				for(var i = 0; i < this.length; i++) {
 					if(this._body(this.panels[i]).style.display != "none") {
-						new Effect.SlideUp(this._body(this.panels[i]));
+						new Effect.BlindUp(this._body(this.panels[i]));
 					}
 				}
-				new Effect.SlideDown(this._body(this.panels[index]));
+				new Effect.BlindDown(this._body(this.panels[index]));
 				return;
 			}
 			
@@ -66,8 +66,8 @@ Accordion.prototype = {
 		//alert("show another element.");
 		new Effect.Parallel(
 			[
-				new Effect.SlideUp( this._body($('visible')) ),
-				new Effect.SlideDown( this._body(this.panels[index]) )
+				new Effect.BlindUp( this._body($('visible')) ),
+				new Effect.BlindDown( this._body(this.panels[index]) )
 			], {
 				duration: 0.5
 			}

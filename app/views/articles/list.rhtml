@@ -1,5 +1,3 @@
-<div id="lplheader">
-</div> 
 
 <div id="lploptions">
   <h1>Artikelliste</h1> | <%= link_to 'Neuer Artikel', :action => 'new' %> | <%= link_to 'Artikel importieren', :action => 'import' %> | <%= link_to 'Artikel XML speichern', :action => 'writexml' %> | 
@@ -7,17 +5,9 @@
   Seite: <%= pagination_links(@article_pages) %> |
   <%= link_to 'N&auml;chste Seite', { :page => @article_pages.current.next } if @article_pages.current.next %> 
   <br/>
-  <br/>
 </div> 
 
 <div id="lplcontainer">
-  <div id="lplshadow"></div>
-
-  <div class="centered">
-    <%= image_tag "/images/loadingd.gif",
-        :alt => "loading", 
-        :title => "loading" %>     
-  </div>
       
   <% for article in @articles %>
 
@@ -35,7 +25,7 @@
         <%= image_tag "/images/rails.png",
             :class => "listthumbnail" %>
       <% end %>
-    	<div class="iconblack" id="plastic_<%= article.id %>">
+    	<div class="iconwhite" id="plastic_<%= article.id %>">
         <div class="icontainer">
           <div class="icontainer" style="margin-right:5px">
             <% if article.released %>
@@ -50,8 +40,8 @@
                 :class => "linkicon"  %>
             <% end %>
           </div>
-          <%= link_to image_tag("/images/b24edit.png", :title => 'bearbeiten', :alt => 'bearbeiten'), { :action => 'edit', :id => article, :page => params[:page] }, :class => 'linkicon' %>
-          <%= link_to image_tag("/images/b24delete.png", :title => 'löschen', :alt => 'löschen'), { :action => 'destroy', :id => article, :page => params[:page] }, :class => 'linkicon', :confirm => 'Artikel »' + article.title + '« löschen — sind Sie sicher?' %>          
+          <%= link_to image_tag("/images/w24edit.png", :title => 'bearbeiten', :alt => 'bearbeiten'), { :action => 'edit', :id => article, :page => params[:page] }, :class => 'linkicon' %>
+          <%= link_to image_tag("/images/w24delete.png", :title => 'löschen', :alt => 'löschen'), { :action => 'destroy', :id => article, :page => params[:page] }, :class => 'linkicon', :confirm => 'Artikel »' + article.title + '« löschen — sind Sie sicher?' %>          
         </div>
     	</div>
   	  <div class="listdescription">

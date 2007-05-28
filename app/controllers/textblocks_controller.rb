@@ -99,8 +99,8 @@ class TextblocksController < ApplicationController
     Textblock.find(params[:id]).destroy
     if session[:current_article]
       redirect_to :controller => '/articles', :action => 'edit', :id => session[:current_article]
-    elsif session[:current_gallery]
-      redirect_to :controller => '/galleries', :action => 'edit', :id => session[:current_gallery]
+    elsif session[:current_collection]
+      redirect_to :controller => '/collections', :action => 'edit', :id => session[:current_collection]
     else
       redirect_to :action => 'list'
     end    
@@ -110,8 +110,8 @@ class TextblocksController < ApplicationController
     BlockLink.find(params[:id]).destroy
     if session[:current_article]
       redirect_to :controller => '/articles', :action => 'edit', :id => session[:current_article]
-    elsif session[:current_gallery]
-      redirect_to :controller => '/galleries', :action => 'edit', :id => session[:current_gallery]
+    elsif session[:current_collection]
+      redirect_to :controller => '/collections', :action => 'edit', :id => session[:current_collection]
     else
       redirect_to :action => 'list'
     end    
