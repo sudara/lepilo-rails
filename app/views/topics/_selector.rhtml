@@ -1,5 +1,6 @@
+<% @topics = Topic.find_all() %>
+topics? <%= @topics.first.title.to_s -%> topics!
   <%=
-  @topics = Topic.find_by_topic_id(1)
   collection_select(:topic, :topic_id, @topics, :id, :title,
       options = {:prompt => "- Navigation -"},
       html_options = 

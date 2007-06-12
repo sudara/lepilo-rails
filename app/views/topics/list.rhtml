@@ -1,36 +1,17 @@
-<div id="lploptions">
-  <h1>Navigationspunkte</h1> | <%= link_to 'Neues Thema', :action => 'new' %>
-  <%= link_to 'Vorherige Seite', { :page => @topic_pages.current.previous } if @topic_pages.current.previous %>
-  <%= link_to 'N&auml;chste Seite', { :page => @topic_pages.current.next } if @topic_pages.current.next %> 
-  <br />
-</div> 
-<div id="lplcontainer">
- 
-<table width="700px">
-  <tr>
-    <th>Position:</th>
-    <th>Name:</th>
-    <th>Beschreibung:</th>
-    <th>Aktionen:</th>
-  </tr>
+<h3>Site root navigation</h3>
+<% if @topics %>
+<ul id="lpltopic-list"> 
+<% nextlevel = params[:level].to_i + 1 %>
+<% @topics.each do |subtopic| %> 
+<li id="item_<%= subtopic.id %>">   
+  <%= link_to_remote '<img src="/images/16trileft.png" style="cursor:pointer;padding-right:5px;padding-top:2px;border:0px;float:right"/>', 
+  :url => {:action => 'list', :params => {:level => nextlevel.to_s, :topic_id => subtopic.id} }, 
+  :update => 'lpltopiclevel' + nextlevel.to_s -%>
   
-<% for topic in @topics %>
-
-<%
-  #Time.now.strftime('%d-%m-%y -%R') 
-%>
-
-  <tr class="<%= cycle("even", "odd") %>">
-    <td width="50px"><%=h topic.position %></td>
-    <td width="175px"><%=h topic.title %></td>
-    <td width="325px"><%=h topic.description %></td>
-    <td width="50px"><%= link_to 'Anzeigen', :action => 'show', :id => topic %></td>
-    <td width="50px"><%= link_to 'Bearbeiten', :action => 'edit', :id => topic %></td>
-    <td width="50px"><%= link_to 'L&ouml;schen', { :action => 'destroy', :id => topic }, :confirm => 'Sind Sie sicher?' %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-</div>
-
+  <%= link_to subtopic.title, :action => 'edit', :id => subtopic.id %><br/>
+</li> 
+<% end %> 
+</ul> 
+<% else %>
+  No subtopics found.
+<% end %> 

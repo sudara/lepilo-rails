@@ -11,7 +11,7 @@ ul.lplCSSMenu ul {  /* copy of above declaration without the > selector, except 
 </style>
 <![endif]><![endif]-->
 
-<% 
+<%
     if @psarticle
       @psblocks = BlockLink.find_all_by_fragment_id(@psarticle.fragments.first.id, :order => :position)
 

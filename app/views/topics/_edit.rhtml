@@ -3,34 +3,9 @@
   Derzeit unter:<br/> 
   <h4>
   <%= hidden_field 'topic', 'topic_id', 'value'=>@topic.topic_id %>
-
-  <% 
-    if metatopic = Topic.find_by_id (@topic.topic_id) 
-  %>
-
-    <% if parent = Topic.find_by_id (metatopic.topic_id) %>
-      <% if parent_parent = Topic.find_by_id (parent.topic_id) %>
-        <% if parent_parent_parent = Topic.find_by_id (parent_parent.topic_id) %>
-            <% #parent_parent_parent.title %>
-        <% end %>
-      <% end %>
-    <% end %>
-
-    <% if parent_parent_parent %>
-      » <%= parent_parent_parent.title %> 
-    <% end %>
-
-    <% if parent_parent %>
-      » <%= parent_parent.title %> 
-    <% end %>
-
-    <% if parent %>
-      » <%= parent.title %> 
-    <% end %>
-
-    » <%= metatopic.title %> 
-
-  <% end %>
+asasfsafasdf
+  <%= @topic.ancestors %> 
+sfsafsadf
   </h4><br/>
 
   <div class="lplblock">
@@ -47,7 +22,16 @@
 
   <div id="lpltopic-selector">
   Zuordnen unter:<br/>
-  <%= render_partial 'topics/selector' %>
+  <%# render_partial 'topics/selector' %>
+  <br style="clear:both">
+  <div id="lpltopiclevel1" class="lpltopiccontaier">
+    <%= render_partial 'list',  nil, "parent_id" => '1', "level" => '2' %>
+  </div>
+
+  <div id="lpltopiclevel2" class="lpltopiccontaier"></div>
+  <div id="lpltopiclevel3" class="lpltopiccontaier"></div>
+  <div id="lpltopiclevel4" class="lpltopiccontaier"></div>
+
   </div>
   
   <br/>Titel<br/>

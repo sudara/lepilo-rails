@@ -1,5 +1,5 @@
 class CollectionsController < ApplicationController
-  #blah
+  
   before_filter :login_required, :except => [ :show, :showdina4, :simple ]
 
   def index

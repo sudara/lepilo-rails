@@ -38,11 +38,13 @@ a {
   color:#000; 
   margin:2px;
   text-decoration:none;
-  border-bottom:1px solid #ddd;
+  background-color:transparent;
+  border-bottom:1px solid #b4e614;
 }
 
 a > img { 
   text-decoration:none;
+  background-color:transparent;
   border:none;
 }
 
@@ -50,6 +52,7 @@ a:visited {
   color:#4d5659; 
   margin:2px;
   text-decoration:none;
+  background-color:transparent;
   border-bottom:1px solid #4d5659;
 }
 
@@ -57,7 +60,10 @@ a:hover {
   color:#000; 
   margin:2px;
   text-decoration:none;
+  background-color:transparent;
   border-bottom:2px solid #b4e614;
+  border-bottom:2px solid #81bc00;
+  
 }
 
 a.linkicon, a img.linkicon {
@@ -271,12 +277,13 @@ div.progress-container > div {
   background-color:#bfbfbf;
   background-image:url(/images/gradientd.png); 
   background-repeat:repeat-x;
-  margin-top:0px;
-  margin-bottom:0px;
-  padding-left:20px;
-  padding-top:0px;
-  padding-bottom:0px;
+  width:100%;
+  margin:0px;
   overflow:auto;
+}
+
+#lploptions > div {
+  padding:25px;
 }
 
 #lpleditor {
@@ -496,39 +503,47 @@ div.progress-container > div {
 #lpltopic-list {
   background:#fafafa;
   font-size:13px;
-  padding-top:5px;
-  padding-left:5px;
-  padding-bottom:5px;
+  padding:0px;
+  margin:0px;
   list-style-type:none;
-  width:295px;
+  border-bottom:1px solid #ddd;
+  border-left:1px solid #ddd;
+  border-right:1px solid #ddd;
 }
 
-#lpltopic-list li {
+.lpltopiccontaier {
+  float:left;
+  font-size:13px;
+  padding:0px;
+  margin-left:1px;
+  margin-bottom:1px;
+  list-style-type:none;
+  width:220px;
+  min-height:350px;
+}
+
+#lpltopic-list > li {
   background-image:url(/images/gradientmini.png); 
   background-repeat:repeat-x;
-  height:20px;
-  margin-top:1px;
-  padding-top:3px;
-  padding-left:30px;
-  cursor:move;
-  overflow:hidden;
-  width:260px;
+  margin:0px;
+  padding:0px;
+  padding-top:2px;
+  padding-bottom:2px;
+  padding-left:4px;
+  /*cursor:move;*/
   border-top:1px solid #ddd;
-  border-bottom:1px solid #fff;
 }
 
 #lpltopic-list li:hover {
-  background-image:url(/images/gradientminig.png); 
+  background-image:url(/images/gradientg.png); 
   background-repeat:repeat-x;
-  height:40px;
-  margin-top:1px;
-  padding-top:3px;
-  padding-left:30px;
-  cursor:move;
+  margin:0px;
+  padding:0px;
+  padding-top:2px;
+  padding-bottom:2px;
+  padding-left:4px;
   overflow:hidden;
-  width:260px;
   border-top:1px solid #ddd;
-  border-bottom:1px solid #fff;
 }
 
 #lpltopic-list a {
@@ -620,13 +635,15 @@ h3 {
 }
 
 h4 {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica", "Arial", sans-serif;
+  font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   color:#81bc00;
+  background-color:#fff;
   font-size:14px;
   font-weight:normal;
-  line-height:2em;
+  line-height:1.6em;
   margin:5px;
   display: inline;
+  border:0;
   padding:0;
   margin:0;
 }
@@ -672,9 +689,8 @@ code {
 }
 
 .articlemedia {
-  width:250px;
+  max-width:250px;
   height:auto;
-  max-height:250px;
 }
 
 .imagepreview {
@@ -755,14 +771,13 @@ div.ipmtitle {
 }
 
 .sortableblock {
-  height:250px;
-  width:250px;
   margin-right:5px;
   margin-bottom:5px;
   overflow:hidden;
   float:left;
   background-color:#fff;
   border: 5px solid #fff;
+  clear:both;
 }
 
 .listblock {
@@ -845,7 +860,6 @@ div.block128x128:hover {
   margin-right:30px;
   padding-top:-10px;
   margin-top:0px;
-  height:75px;
   overflow:hidden;
 }
 

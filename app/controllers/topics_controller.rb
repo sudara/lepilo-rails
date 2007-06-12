@@ -3,15 +3,25 @@ class TopicsController < ApplicationController
   before_filter :login_required, :except => [ :show, :simple ]
 
   def index
-    list
-    render :action => 'list'
+    if params[:topic_id]
+      by_id = params[:topic_id]
+    else
+      by_id = '1'
+    end
+    
+    @topics = Topic.find_all_by_topic_id(by_id)
   end
 
   def list
-    @topic_pages, @topics = paginate :topics, :per_page => 75
-    if params[:rendersimple]  
-      render :layout => 'simple'
+    if params[:topic_id]
+      by_id = params[:topic_id]
+    else
+      by_id = '1'
     end
+    
+    level = params[:level]
+    @topics = Topic.find_all_by_topic_id(by_id)
+    render_without_layout
   end
 
   def show

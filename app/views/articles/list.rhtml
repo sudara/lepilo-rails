@@ -1,10 +1,10 @@
 
-<div id="lploptions">
+<div id="lploptions"><div>
   <h1>Artikelliste</h1> | <%= link_to 'Neuer Artikel', :action => 'new' %> | <%= link_to 'Artikel importieren', :action => 'import' %> | <%= link_to 'Artikel XML speichern', :action => 'writexml' %> | 
   <%= link_to 'Vorherige Seite', { :page => @article_pages.current.previous } if @article_pages.current.previous %> | 
   Seite: <%= pagination_links(@article_pages) %> |
   <%= link_to 'N&auml;chste Seite', { :page => @article_pages.current.next } if @article_pages.current.next %> 
-  <br/>
+  <br/></div>
 </div> 
 
 <div id="lplcontainer">

@@ -2,7 +2,7 @@
 <% if local_assigns.has_key? :menuwidth -%>
   style="width:<%= menuwidth -%>px"
 <% end -%> >
-<%  @topics = Topic.find_all_by_topic_id(1, :order => :position)
+<%  @topics = Topic.find_all_by_topic_id(1, :order => :position, :include => :article)
   for topic in @topics -%>
 	<div class="panel">
     <span onclick="javascript:location.href='/ps/article/<%= topic.id %>'"><%= topic.title %>
@@ -10,7 +10,7 @@
       @subtopics = Topic.find_all_by_topic_id(topic.id, :order => :position) -%>  
       <div class="panelBody">
       <% for subtopic in @subtopics %>
-        <div><span onclick="javascript:location.href='/ps/article/<%= topic.id %>'"><%= subtopic.title %> </span></div>
+        <div><span onclick="javascript:location.href='/ps/article/<%= topic.article.id if topic.article %>'"><%= subtopic.title %> </span></div>
       <% end %>
       </div>
     <% else %>

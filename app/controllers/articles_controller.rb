@@ -92,11 +92,11 @@
     addlink.save
 
     if params[:dropfragment_id]
-      redirect_to :action => 'edit', :id => @article, :fragment => Fragment.find(params['dropfragment_id']).content
+      redirect_to :action => 'edit', :id => @article, :fragment => Fragment.find(params['dropfragment_id']).content, :nolayout => true 
     elsif params[:fragment]
-      redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']                
+      redirect_to :action => 'edit', :id => @article, :fragment => params['fragment'], :nolayout => true 
     else
-      redirect_to :action => 'edit', :id => @article                
+      redirect_to :action => 'edit', :id => @article, :nolayout => true 
     end
   end
 
@@ -251,6 +251,8 @@
     
     if params[:rendersimple]  
       render :layout => 'simple'
+    elsif params[:nolayout]
+      render_without_layout
     end
   end
 

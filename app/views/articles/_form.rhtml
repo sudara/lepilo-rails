@@ -15,41 +15,18 @@
 
   <div class="lplblock" style="width:280px">
     Derzeit unter:<br/> 
-    <h4>
     <%= hidden_field 'article', 'topic_id', 'value'=>@article.topic_id %>
-
-    <% 
-      if metatopic = Topic.find_by_id (@article.topic_id) 
-    %>
-
-      <% if parent = Topic.find_by_id (metatopic.topic_id) %>
-        <% if parent_parent = Topic.find_by_id (parent.topic_id) %>
-          <% if parent_parent_parent = Topic.find_by_id (parent_parent.topic_id) %>
-              <% #parent_parent_parent.title %>
-          <% end %>
-        <% end %>
+      <h4>
+      <% @article.topic.ancestors.reverse.each do |parent| %> 
+      
+        » <%= parent.title -%>
       <% end %>
-
-      <% if parent_parent_parent %>
-        » <%= parent_parent_parent.title %> 
-      <% end %>
-
-      <% if parent_parent %>
-        » <%= parent_parent.title %> 
-      <% end %>
-
-      <% if parent %>
-        » <%= parent.title %> 
-      <% end %>
-
-      » <%= metatopic.title %> 
-
-    <% end %>
-    </h4><br/>
+      </h4>
+    <br/>
 
     <div id="lpltopic-selector">
     Seite zuordnen unter:<br/>
-    <%= render_partial 'topics/selector' %>
+    <%# render_partial 'topics/selector' %>
     </div><br/>
     
     <div style="width:100px;float:left">

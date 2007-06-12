@@ -4,14 +4,14 @@ class PsController < ApplicationController
 
   def index
     if @psarticle = Article.find_by_title('puresenses startseite', :include => :fragments)
-      @psblocklinks = BlockLink.find_by_fragment_id(@psarticle.fragments.first)
+      @psblocks = BlockLink.find_by_fragment_id(@psarticle.fragments.first)
     end
     render :layout => "puresenses"
   end
 
   def article
-    if @psarticle = Article.find_by_topic_id(params[:id], :include => :fragments)
-      @psblocklinks = BlockLink.find_by_fragment_id(@psarticle.fragments.first)
+    if @psarticle = Article.find(params[:id], :include => :fragments)
+      @psblocks = BlockLink.find_by_fragment_id(@psarticle.fragments.first)
     end
     render :layout => "puresenses"
   end

@@ -25,6 +25,7 @@ body { background: #99a; padding: 0px; margin:0px;	}
 
 #nav_main {
 	width:100%;
+	padding-left:-10px;
 	float:left;
 	color: #fff;
 	height:22px;
