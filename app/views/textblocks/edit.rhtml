@@ -1,4 +1,3 @@
-<div id="lplcontainer">
   <div id="lploptions">
     <h1>Textblock Bearbeiten</h1>
     
@@ -9,29 +8,18 @@
   <div class="editdata">
     <div id="lplhelp">
     Titel auszeichnen:  <code>h1. </code>,&nbsp;<code>h2. </code>&nbsp;oder <code>h3. </code>&nbsp;vor den text setzen <br/>
-    Texte <strong>fett</strong> auszeichnen:  <code>%(f)text%</code> <br/>
-    Texte <em>kursiv</em> auszeichnen: <code>%(k)text%</code> <br/>
-    Texte <span class="orange">orange</span> auszeichnen: <code>%(o)text%</code> <br/>
+    Texte <strong>fett</strong> auszeichnen:  <code>*text*</code> <br/>
+    Texte <em>kursiv</em> auszeichnen: <code>_text_</code> <br/>
+    Listen: <code>* Punkt</code>, &nbsp; <code>** Unterpunkt</code>, &nsbp; <code># Aufzählungen</code> und <code>## Unterpunkte</code>
     Links definieren mit: <code>"linkname":http://www.webseite.at</code> <br/>
     </div>
     <br/>
   </div>
   
   <div class="editdata">
-    <div class="lplblock">
-      <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="400" height="400">
-        <param name="movie" value="/dina4/dina4-text-preview.swf" />
-        <param name=FlashVars value="textblock=<%= @textblock.id %>">
-        <param name="quality" value="best" />
-        <embed src="/dina4/dina4-text-preview.swf" quality="best" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" FlashVars="textblock=<%= @textblock.id %>" width="400" height="400"></embed>
-      </object>
-    </div>
-
   <%= start_form_tag :action => 'update', :id => @textblock %>
     <%= render :partial => 'form' %>
     <%= submit_tag 'Speichern' %>
   <%= end_form_tag %>
   
   </div>
-
-</div>

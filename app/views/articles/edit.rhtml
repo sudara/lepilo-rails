@@ -1,4 +1,9 @@
+
 <div id="lplcontainer">
+  <div id="lpltopic-select">
+    <% article_topic = Topic.find(@article.topic_id) %>
+    <%= render_partial 'topics/selector', nil, 'current_topic' => article_topic %>
+  </div><br style="clear:both">
   <div id="lplinspector">
         
   </div>

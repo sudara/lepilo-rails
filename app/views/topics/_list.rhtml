@@ -1,0 +1,17 @@
+<h3>Site root navigation</h3>
+<ul id="lpltopic-list"> 
+<% 
+unless @topics
+  @topics = Topic.find_all_by_topic_id('1')
+end -%>
+<% @topics.each do |subtopic| %> 
+<% subtopic.level = 2 unless subtopic.level %>
+<li id="item_<%= subtopic.id %>">   
+  <%= link_to_remote '<img src="/images/16trileft.png" style="cursor:pointer;padding-right:5px;padding-top:2px;border:0px;float:right"/>', 
+  :url => {:action => 'list', :params => {:level => subtopic.level, :topic_id => subtopic.id} }, 
+  :update => 'lpltopiclevel' + level -%>
+  
+  <%= link_to subtopic.title, :action => 'edit', :id => subtopic.id %><br/>
+</li> 
+<% end %> 
+</ul> 

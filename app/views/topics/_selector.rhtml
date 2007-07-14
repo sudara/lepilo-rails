@@ -1,19 +1,55 @@
-<% @topics = Topic.find_all() %>
-topics? <%= @topics.first.title.to_s -%> topics!
+<div class="gray">Belongs to:</div>
+<% @topics = Topic.find_all_by_topic_id(current_topic) 
+
+  isroot = 1
+  
+  current_topic.ancestors.reverse.each do |pt|
+    @parent = Topic.find_all_by_topic_id(pt.topic_id)
+    
+    if isroot == 0
+      if pt.id == current_topic.topic_id %>
+        <div class="whitegreen">    
+  <%  else %>
+        <div class="whitewhite">
+<%    end 
+    else
+      if pt.id == current_topic.topic_id %>
+        <div class="graygreen">    
+  <%  else %>
+        <div class="graywhite">
+  <%  end
+      isroot = 0
+    end %>  
+  
   <%=
-  collection_select(:topic, :topic_id, @topics, :id, :title,
-      options = {:prompt => "- Navigation -"},
+  collection_select(:topic, :topic_id, @parent, :id, :title,
+      options = {},
       html_options = 
       {
-          :onChange => "new Ajax.Updater('lepilo_subtopics',
+          :onChange => "new Ajax.Updater('lpltopic-select',
           '/topics/topic_changed/' + this[this.selectedIndex].value,
           {asynchronous:true, evalScripts:true}); $(article_topic_id).value = this[this.selectedIndex].value"
       }
       )
   %>
-  <span id="lepilo_subtopics">
-  <% #render :partial => "subtopics", :locals => { :topic_id => @subtopics[0].id}  %>
-  </span>
+</div>
+<% end %>
 
+<div class="greenwhite">
+<% if @children = Topic.find_all_by_topic_id(current_topic.topic_id) %> 
+
+  <%=
+  collection_select(:topic, :topic_id, @children, :id, :title,
+      options = {:prompt => "- unterpunkt auswählen -"},
+      html_options = 
+      {
+          :onChange => "new Ajax.Updater('lpltopic-select',
+          '/topics/topic_changed/' + this[this.selectedIndex].value,
+          {asynchronous:true, evalScripts:true}); $(article_topic_id).value = this[this.selectedIndex].value"
+      }
+      )
+  %>
+<% end %>
+</div>
 
   

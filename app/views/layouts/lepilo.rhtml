@@ -30,11 +30,13 @@
       <a href="/settings/" <%= 'class="active"' if params[:controller] == "settings"%>><img src="/images/overview.png" alt="overview" /></a>
       <!--<a href="/" <%= 'class="active"' if params[:controller] == ""%>><img src="/images/overview.png" border=0></a>-->
       <a href="/articles/" <%= 'class="active"' if params[:controller] == "articles"%>><img src="/images/articles.png" alt="articles" /></a>
-      <a href="/notes/" <%= 'class="active"' if params[:controller] == "notes"%>><img src="/images/notes.png" alt="notes"/></a>
-      <a href="/comments/" <%= 'class="active"' if params[:controller] == "comments"%>><img src="/images/posts.png" alt="posts"/></a>
       <a href="/collections/" <%= 'class="active"' if params[:controller] == "collections"%>><img src="/images/collections.png" alt="collections"/></a>
       <a href="/topics/" <%= 'class="active"' if params[:controller] == "topics"%>><img src="/images/navigation.png" alt="navigation"/></a>
       <a href="/mediablocks/" <%= 'class="active"' if params[:controller] == "mediablocks"%>><img src="/images/media.png" alt="media"/></a>
+      <a href="/events/" <%= 'class="active"' if params[:controller] == "events"%>><img src="/images/events.png" alt="events"/></a>
+      <a href="/notes/" <%= 'class="active"' if params[:controller] == "notes"%>><img src="/images/notes.png" alt="notes"/></a>
+      <a href="/comments/" <%= 'class="active"' if params[:controller] == "comments"%>><img src="/images/posts.png" alt="posts"/></a>
+      <a href="/textblocks/" <%= 'class="active"' if params[:controller] == "textblocks"%>><img src="/images/textblocks.png" alt="textblocks"/></a>
       <a href="/account/" <%= 'class="active"' if params[:controller] == "account"%>><img src="/images/accounts.png" alt="accounts"/></a>
       <a href="/account/logout" ><img src="/images/logout.png" alt="log out of lepilo"/></a>
     </div>
@@ -134,15 +136,17 @@
                   <% end -%>
                 </div>
                 <div class="sidebar">
+                  <% if @article -%>
                   <div class="editdata">
-                    <% if @article -%>
 
                   <h1><%= in_place_editor_field :article, :title, tag_options = {}, in_place_editor_options = { :cols => 32, :rows => 3, :cancel_text => 'abbrechen'} -%>
                   </h1>
                   Typ: <h3><%= @article.type -%></h3>, Freigegeben: <h3><%= @article.released -%></h3><br/>
                  <%= in_place_editor_field :article, :description, tag_options = {}, in_place_editor_options = { :cols => 32, :rows => 10, :cancel_text => 'abbrechen'} -%>
-                 <% end -%>
                   </div>
+                  <% end -%>
+
+                  <% if @article -%>
 
                   <div class="editdata">
 
@@ -152,8 +156,8 @@
                       <%# text_field 'images', 'description', "size" => 45  -%>
                       <%= submit_tag 'Anwenden' -%>
                     <%= end_form_tag -%>
-
                   </div>
+                  <% end -%>
                 </div>
               </div>
 

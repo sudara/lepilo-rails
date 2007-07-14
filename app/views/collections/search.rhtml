@@ -1,0 +1,24 @@
+<% if @items && @items.length > 0 %>
+
+  <% for dragcollection in @items %>
+  <div class="dragline" id="dragcollection_<%= dragcollection.id %>">
+    <%
+      current = Topic.find_by_id (dragcollection.topic_id)
+      if current
+        parent = Topic.find_by_id (current.topic_id)
+      end
+    %>
+    <%= draggable_element "dragcollection_#{dragcollection.id}", :revert => true %>
+    <%= image_tag "/images/16collection.png",
+        :title => "gallerie", 
+        :class => "iconlist"  %>
+    <strong><%= link_to dragcollection.title, :controller => 'collections',:action => 'edit', :id => dragcollection.id %></strong><br/>
+    <% if parent %>
+      <span class="green">&nbsp;&nbsp;&raquo; <span style="font-size:10px"><%= parent.title %></span></span>
+    <% end %>
+  </div>
+  <% end %>
+  <br style="clear:both"/>
+
+<% else %>
+<% end %>

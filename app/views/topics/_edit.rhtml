@@ -1,12 +1,9 @@
 <!--[form:topic]-->
-
-  Derzeit unter:<br/> 
-  <h4>
+<div id="lpltopic-select">
+  <%= render_partial 'topics/selector', nil, 'current_topic' => @topic %>
+</div>
+<br style="clear:both">
   <%= hidden_field 'topic', 'topic_id', 'value'=>@topic.topic_id %>
-asasfsafasdf
-  <%= @topic.ancestors %> 
-sfsafsadf
-  </h4><br/>
 
   <div class="lplblock">
     <div id="lpltopic-list-top"><%= @topic.title %></div>
@@ -20,26 +17,13 @@ sfsafsadf
       </ul> 
   </div>
 
-  <div id="lpltopic-selector">
-  Zuordnen unter:<br/>
-  <%# render_partial 'topics/selector' %>
-  <br style="clear:both">
-  <div id="lpltopiclevel1" class="lpltopiccontaier">
-    <%= render_partial 'list',  nil, "parent_id" => '1', "level" => '2' %>
+  <div class="lplblock">  
+    <span class="smalltext"><br/>Titel<br/></span>
+    <%= in_place_editor_field :topic, :title, tag_options = {}, in_place_editor_options = { :size => 32, :cancel_text => 'abbrechen'} -%>
+
+    <span class="smalltext"><br/>Beschreibung<br/></span>
+<%= in_place_editor_field :topic, :description, tag_options = {}, in_place_editor_options = { :cols => 50, :rows => 5, :cancel_text => 'abbrechen'} -%>
   </div>
-
-  <div id="lpltopiclevel2" class="lpltopiccontaier"></div>
-  <div id="lpltopiclevel3" class="lpltopiccontaier"></div>
-  <div id="lpltopiclevel4" class="lpltopiccontaier"></div>
-
-  </div>
-  
-  <br/>Titel<br/>
-  <%= text_field 'topic', 'title'  %><br/>
-
-  <br/>Beschreibung<br/>
-  <%= text_area 'topic', 'description', "cols" => 60, "rows" => 5  %><br/>
-
 
 <!--[eoform:topic]-->
 

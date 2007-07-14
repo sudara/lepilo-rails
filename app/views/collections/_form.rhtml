@@ -1,0 +1,30 @@
+<%= error_messages_for 'collection' %>
+
+<%  session[:current_article] = nil %>  
+<%  session[:current_collection] = params[:id] %>  
+<%  
+  if params[:page]
+    session[:current_page] = params[:page] 
+  else
+    session[:current_page] = 1
+  end 
+%>
+
+<!--[form:collection]-->
+<div class="lplblock" style="width:350px">
+
+  <p>Name<br/>
+  <%= text_field 'collection', 'title'  %></p>
+
+  <p>Freigegeben<br/>
+  <select id="collection_released" name="collection[released]"><option value="false">Nein</option><option value="true">Ja</option></select></p>
+
+</div>
+<div class="lplblock">
+
+  <p>Beschreibung<br/>
+  <%= text_area 'collection', 'description', "cols" => 45, "rows" => 4  %><br/>
+
+</div>
+<!--[eoform:collection]-->
+

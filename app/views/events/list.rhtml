@@ -1,27 +1,34 @@
-<h1>Listing events</h1>
+<div id="lploptions">
 
-<table>
-  <tr>
-  <% for column in Event.content_columns %>
-    <th><%= column.human_name %></th>
+  <h1>Events</h1> | <%= link_to 'Neues Event', :action => 'new' %>
+  <% if @event_pages %> | 
+  <%= link_to 'Vorherige Seite', { :page => @event_pages.current.previous } if @event_pages.current.previous %> | 
+  Seite: <%= pagination_links(@event_pages) %> |
+  <%= link_to 'N&auml;chste Seite', { :page => @event_pages.current.next } if @event_pages.current.next %> 
   <% end %>
-  </tr>
-  
-<% for event in @events %>
-  <tr>
-  <% for column in Event.content_columns %>
-    <td><%=h event.send(column.name) %></td>
-  <% end %>
-    <td><%= link_to 'Show', :action => 'show', :id => event %></td>
-    <td><%= link_to 'Edit', :action => 'edit', :id => event %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => event }, :confirm => 'Are you sure?', :method => :post %></td>
-  </tr>
-<% end %>
-</table>
+  <br/>
+</div> 
+<div id="lplcontainer">
 
-<%= link_to 'Previous page', { :page => @event_pages.current.previous } if @event_pages.current.previous %>
-<%= link_to 'Next page', { :page => @event_pages.current.next } if @event_pages.current.next %> 
+    <% for event in @events %>
 
-<br />
-
-<%= link_to 'New event', :action => 'new' %>
+    <%
+      #Time.now.strftime('%d-%m-%y -%R') 
+    %>
+    	<div class="listblock" id="<%= event.id %>" style="width:350px;height:150px">
+      	<div class="iconwhite" id="plastic_<%= event.id %>" style="width:32px">
+          <div class="icontainer">
+            <%= link_to image_tag("/images/w24edit.png", :title => 'bearbeiten', :alt => 'bearbeiten'), { :action => 'edit', :id => event, :page => params[:page] }, :class => 'linkicon' %>
+            <%= link_to image_tag("/images/w24delete.png", :title => 'löschen', :alt => 'löschen'), { :action => 'destroy', :id => event, :page => params[:page] }, :class => 'linkicon', :confirm => 'Event »' + event.title + '« löschen — sind Sie sicher?' %>          
+          </div>
+      	</div>
+    	  <div class="listdescription">
+          <h3><%= event.title %></h3><br/>
+          Startet am: <%= event.starts_at %><br>
+          Endet am: <%= event.ends_at if event.ends_at %><br/>
+    	    <p class="lepilo"><%=h event.content %></p>
+    	  </div>
+    </div>
+    <% end %>
+<br style="clear:both "/>
+</div>

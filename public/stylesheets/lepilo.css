@@ -23,9 +23,15 @@ body {
   background-color:#fff; 
   color:#3d4649; 
   font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  font-size:12px;
+  font-size:0.75em;
   line-height:2em;
   height:100%;
+}
+
+p.lepilo {
+  font-size:1.2em;
+  padding:2px;
+  color:#000;
 }
 
 pre {
@@ -278,7 +284,6 @@ div.progress-container > div {
   background-image:url(/images/gradientd.png); 
   background-repeat:repeat-x;
   width:100%;
-  margin:0px;
   overflow:auto;
 }
 
@@ -330,6 +335,8 @@ div.progress-container > div {
 }
 
 #lplcontainer {
+  position:relative;
+  float:left;
   background-color:#f0f0f0;
 }
 
@@ -364,7 +371,7 @@ div.progress-container > div {
   
   
 #tabs{
-  background: url("/images/plastic.png") repeat-x top;	
+  background: url(/images/plastic.png) repeat-x top;	
   padding:0;
   float:right;
   width:300px;
@@ -561,6 +568,70 @@ div.progress-container > div {
   width:300px;
 }
 
+#lpltopic-select {
+  position:relative;
+  top:0px;
+  left:0px;
+  border:1px solid #bfbfbf;
+  background: #bfbfbf url(/images/container.png);
+  float:left;
+}
+
+#lpltopic-select > .gray {
+  background: url(/images/navg.png) no-repeat center left;
+  margin:0px;
+  padding:0px;
+  padding-left:5px;
+  padding-right:5px;
+  color:#333;
+  float:left;
+}
+
+#lpltopic-select > .graywhite {
+  background: url(/images/navgw.png) no-repeat center left;
+  margin:0px;
+  padding:0px;
+  padding-left:25px;
+  padding-right:5px;
+  float:left;
+}
+
+#lpltopic-select > .graygreen {
+  background: url(/images/navgg.png) no-repeat center left;
+  margin:0px;
+  padding:0px;
+  padding-left:25px;
+  padding-right:5px;
+  float:left;
+}
+
+#lpltopic-select > .whitewhite {
+  background: url(/images/navww.png) no-repeat center left;
+  margin:0px;
+  padding:0px;
+  padding-left:25px;
+  padding-right:5px;
+  float:left;
+}
+
+#lpltopic-select > .whitegreen {
+  background: url(/images/navwg.png) no-repeat center left;
+  margin:0px;
+  padding:0px;
+  padding-left:25px;
+  padding-right:5px;
+  float:left;
+}
+
+#lpltopic-select > .greenwhite {
+  background: url(/images/navw.png) no-repeat center left;
+  margin:0px;
+  padding:0px;
+  padding-left:25px;
+  padding-right:15px;
+  float:left;
+}
+
 table {
   border-collapse:collapse;
 }
@@ -608,7 +679,6 @@ h1 {
   font-size:2em;
   font-weight:normal;
   line-height:1.2em;
-  display: block;
   padding:0;
   margin:0;
 }
@@ -637,7 +707,6 @@ h3 {
 h4 {
   font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   color:#81bc00;
-  background-color:#fff;
   font-size:14px;
   font-weight:normal;
   line-height:1.6em;

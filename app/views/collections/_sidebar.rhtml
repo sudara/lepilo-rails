@@ -1,0 +1,14 @@
+<div class="searchblock">
+  <input type="text" id="searchcollectionssidebar" name="searchcollectionssidebar" size="30" />&nbsp;<img id="busycollectionsearch" src="/images/loadingw.gif" style="display:none" /> 
+</div>
+<div id="searchCollectionsResultsSidebar" class="sidebar" style="overflow:visible">
+
+</div>
+
+<%= observe_field 'searchcollectionssidebar', 
+    :frequency => 0.5, 
+    :update => 'searchCollectionsResultsSidebar', 
+    :url => { :controller => 'collections', :action=> 'search' }, 
+    :with => "'criteria=' + escape(value)", 
+    :loading => "document.getElementById('busycollectionsearch').style.display='inline'", 
+    :loaded => "document.getElementById('busycollectionsearch').style.display='none'" %>       

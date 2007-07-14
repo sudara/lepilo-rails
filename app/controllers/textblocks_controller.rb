@@ -20,7 +20,7 @@ class TextblocksController < ApplicationController
       render_without_layout
     else
       @items = Textblock.find(:all, :order => 'updated_at DESC',
-        :conditions => [ 'LOWER(content) LIKE ?', 
+        :conditions => [ 'LOWER(title) OR LOWER(content) LIKE ?', 
         '%' + params['criteria'].downcase + '%' ])
       @mark_term = params['criteria']
       render_without_layout

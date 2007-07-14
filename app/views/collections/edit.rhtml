@@ -1,0 +1,53 @@
+<div id="lplcontainer">
+
+<div id="lplheader">
+  <%= content_tag 'DIV', '<img src="/images/opentray.png">', :style => 'width:63px;float:left',
+    :onclick => visual_effect(:slideDown, 'lploptions')  %>
+  <%= content_tag 'DIV', '<img src="/images/closetray.png">', :style => 'width:80px;float:left',
+    :onclick => visual_effect(:slideUp, 'lploptions') %>
+</div>
+
+<div id="lploptions" style="display:none">
+  <div id="entrySettings" >
+    <%= start_form_tag :action => 'update', :id => @collection %>
+      <%= render :partial => 'form' %>
+      <br style="clear:both;"/>
+      <%= submit_tag 'Speichern' %>
+    <%= end_form_tag %>
+  </div>
+</div>
+
+
+<div class="editdata">
+
+  <%= link_to "Neues Bild", { :controller => "mediablocks",
+                            :action => "new", 
+                            :rendersimple => "true",
+                            :collection_id => @collection.id }, 
+                            :popup => ['new_window', 'height=600,width=600,scrollbars=1'] %> |
+  <%= link_to 'Anzeigen', :action => 'show', :id => @collection %> |
+  <%= link_to 'Zur&uuml;ck', :action => 'list' %>
+</div>
+
+<div id="lpltemplatecontainer">  
+<%= render_partial 'block_links/collection', nil, 'collection_id' => @collection.id %>
+<br style="clear:both"/>
+</div>
+
+<br style="clear:both"/>
+
+</div>
+
+<%= drop_receiving_element "lpltemplatecontainer", 
+      :update => "lplcontent", :url => { :action => "addblock" },
+      :accept => "dragblock", :hoverclass => "dropzone-active" %>
+
+<%= drop_receiving_element "lpltemplatecontainer", 
+      :update => "lplcontent", :url => { :action => "addblock" },
+      :accept => "dragline", :hoverclass => "dropzone-active" %>
+
+<%= sortable_element 'block-list' , 
+      :tag => "div",
+      :constraint => false,
+      :url => { :action => "sort", :id => @collection }, 
+      :complete => visual_effect(:highlight, 'block-list' ) %> 

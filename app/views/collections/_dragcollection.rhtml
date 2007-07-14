@@ -1,0 +1,34 @@
+<div class="searchblock">
+  <input type="text" id="searchcollections" name="searchcollections" size="20" />&nbsp;<img id="busyarticlesearch" src="/images/searching.gif" style="display:none" /> 
+</div>
+<%
+  dragcollections = Collection.find(:all, :order => "updated_at DESC", :limit => 10) 
+%>
+<div id="searchResultsCollections">
+
+  <% for dragcollection in dragcollections %>
+  <div class="dragline" id="dragcollection_<%= dragcollection.id %>">
+    <%
+      current = Topic.find_by_id (dragcollection.topic_id)
+      if current
+        parent = Topic.find_by_id (current.topic_id)
+      end
+    %>
+    <%= draggable_element "dragcollection_#{dragcollection.id}", :revert => true %>
+    <strong><%= link_to dragcollection.title, :controller => 'collections', :action => 'edit', :id => dragcollection.id %></strong><br/>
+    <span class="green">
+      <span class="green"><span style="font-size:10px"><%= dragcollection.description %></span></span>
+  </div>
+  <% end %>
+
+</div>
+
+<%= observe_field 'searchcollections', 
+    :frequency => 0.5, 
+    :update => 'searchResultsCollections', 
+    :url => { :controller => 'collections', :action=> 'search' }, 
+    :with => "'criteria=' + escape(value)", 
+    :loading => "document.getElementById('busyarticlesearch').
+      style.display='inline'", 
+    :loaded => "document.getElementById('busyarticlesearch').
+      style.display='none'" %> 

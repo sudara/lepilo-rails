@@ -17,11 +17,11 @@
     Derzeit unter:<br/> 
     <%= hidden_field 'article', 'topic_id', 'value'=>@article.topic_id %>
       <h4>
-      <% @article.topic.ancestors.reverse.each do |parent| %> 
-      
-        » <%= parent.title -%>
+      <% @article.topic.ancestors.reverse.each do |x| %> 
+        » <%= x.title -%>
       <% end %>
       </h4>
+      <h4 class="gray">» <%= @article.topic.title -%></h4>
     <br/>
 
     <div id="lpltopic-selector">

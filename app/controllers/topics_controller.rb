@@ -2,6 +2,10 @@ class TopicsController < ApplicationController
 
   before_filter :login_required, :except => [ :show, :simple ]
 
+  Topic.content_columns.each do |column| 
+    in_place_edit_for :topic, column.name 
+  end 
+
   def index
     if params[:topic_id]
       by_id = params[:topic_id]
@@ -47,7 +51,7 @@ class TopicsController < ApplicationController
     @topic = Topic.new(params[:topic])
     if @topic.save
       flash[:ok] = 'Topic was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to :action => 'index'
     else
       render :action => 'new'
     end
@@ -61,17 +65,9 @@ class TopicsController < ApplicationController
   end
   
   def topic_changed
-    render :partial => "subtopics", :locals => { :topic_id => params[:id]}
-  end 
-  
-  def subtopic_changed
-    render :partial => "subsubtopics", :locals => { :topic_id => params[:id]}
-  end
-
-  def subsubtopic_changed
-    # render :partial => "subsubsubtopics", :locals => { :topic_id => params[:id]}
-  end
-  
+    @current_topic = Topic.find_by_topic_id(params[:id])
+    render :partial => "selector", :locals => { :current_topic => @current_topic }
+  end   
   
   def sort 
     @topic = Topic.find(params[:id]) 
@@ -86,14 +82,17 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     if @topic.update_attributes(params[:topic])
       flash[:ok] = 'Topic was successfully updated.'
-      redirect_to :action => 'list', :id => @topic
+      redirect_to :action => 'index', :id => @topic
     else
       render :action => 'edit'
     end
   end
 
   def destroy
-    Topic.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    killtopic = Topic.find(params[:id])
+    killedtopic = killtopic.title
+    killtopic.destroy
+    flash[:warning] = 'Topic ' + killedtopic + ' was destroyed!'
+    redirect_to :action => 'index'
   end
 end

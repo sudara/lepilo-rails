@@ -1,7 +1,8 @@
 class Mediablock < ActiveRecord::Base
   # image = name vom dateifeld im formular
-  #validates_presence_of   :title,
-  #                        :description
+  validates_presence_of   :image, :on => :create
+  validates_presence_of   :title,
+                          :description
   has_and_belongs_to_many :block_links
   
   def resize
