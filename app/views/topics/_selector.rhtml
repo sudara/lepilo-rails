@@ -1,54 +1,53 @@
 <div class="gray">Belongs to:</div>
-<% @topics = Topic.find_all_by_topic_id(current_topic) 
-
+<% 
+  # a bunch of IF conditions to determine which CSS class to use for drawing the options menu 
   isroot = 1
+  loop_position = 0
+  selected = Array.new
+  selected[0] = current_topic.id 
   
-  current_topic.ancestors.reverse.each do |pt|
-    @parent = Topic.find_all_by_topic_id(pt.topic_id)
+  current_topic.ancestors.reverse.each_with_index do |pt, pti|
+    loop_position = loop_position + 1 
+    parent = Topic.find_all_by_topic_id(pt.id)
     
+    selected[pti] = pt.id       
+    selected_key = selected[pti]
+     
     if isroot == 0
       if pt.id == current_topic.topic_id %>
         <div class="whitegreen">    
-  <%  else %>
+<%    else %>
         <div class="whitewhite">
 <%    end 
     else
       if pt.id == current_topic.topic_id %>
         <div class="graygreen">    
-  <%  else %>
+<%    else %>
         <div class="graywhite">
-  <%  end
+<%    end
       isroot = 0
-    end %>  
-  
-  <%=
-  collection_select(:topic, :topic_id, @parent, :id, :title,
-      options = {},
-      html_options = 
-      {
-          :onChange => "new Ajax.Updater('lpltopic-select',
-          '/topics/topic_changed/' + this[this.selectedIndex].value,
-          {asynchronous:true, evalScripts:true}); $(article_topic_id).value = this[this.selectedIndex].value"
-      }
-      )
-  %>
+    end %> 
+  <select name="topic[topic_id]" onChange="new Ajax.Updater('lpltopic-select',
+            '/topics/topic_changed/' + this[this.selectedIndex].value,
+            {asynchronous:true, evalScripts:true}); $(article_topic_id).value = this[this.selectedIndex].value; $(topic_topic_id).value = this[this.selectedIndex].value" >
+     <%= options_from_collection_for_select(parent, :id, :title, selected_key) -%>
+  </select>
 </div>
-<% end %>
+<%  end %>
 
 <div class="greenwhite">
-<% if @children = Topic.find_all_by_topic_id(current_topic.topic_id) %> 
-
+&nbsp;
+<% # Draw optional children of the currently selected topic 
+  if current_topic.children.length > 0 %> 
   <%=
-  collection_select(:topic, :topic_id, @children, :id, :title,
+  # draw the options menu
+  collection_select(:topic, :topic_id, current_topic.children, :id, :title,
       options = {:prompt => "- unterpunkt auswählen -"},
       html_options = 
-      {
-          :onChange => "new Ajax.Updater('lpltopic-select',
+      {   :onChange => "new Ajax.Updater('lpltopic-select',
           '/topics/topic_changed/' + this[this.selectedIndex].value,
-          {asynchronous:true, evalScripts:true}); $(article_topic_id).value = this[this.selectedIndex].value"
-      }
-      )
-  %>
+          {asynchronous:true, evalScripts:true}); $(article_topic_id).value = this[this.selectedIndex].value" } ) -%>
+&nbsp;
 <% end %>
 </div>
 

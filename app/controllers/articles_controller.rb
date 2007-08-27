@@ -1,5 +1,6 @@
-  class ArticlesController < ApplicationController
+class ArticlesController < ApplicationController
 
+  helper :blocks
   before_filter :login_required, :except => [ :show, :showswf, :showdina4, :simple ]
 
   Article.content_columns.each do |column| 
@@ -16,7 +17,7 @@
   #       :redirect_to => { :action => :list }
 
   def list
-    @article_pages, @articles = paginate :articles, :order => 'release_date DESC, reference DESC', :per_page => 16
+    @article_pages, @articles = paginate :articles, :order => 'release_date DESC, reference DESC', :per_page => 25
     
     if params[:rendersimple]  
       render :layout => 'simple'
@@ -56,50 +57,6 @@
         
     render_without_layout
   end
-
-  def addblock
-    @article = Article.find(session[:current_article])
-    
-    drop_type = params[:id].split('_')[0]  
-    drop_id = params[:id].split('_')[1]  
-    
-    if params[:dropfragment_id]
-      drop_into_fragment = params[:dropfragment_id]
-    elsif params[:fragment]
-      drop_into_fragment = @article.fragments.find_by_content(params[:fragment]).id
-    else
-      drop_into_fragment = @article.fragments.find_by_content('web').id
-    end
-            
-    addlink = BlockLink.new unless addlink = BlockLink.find_by_fragment_id_and_position(drop_into_fragment, params['position'])
-    addlink.fragment_id = drop_into_fragment
-
-    case drop_type
-      when 'dragtextblock'
-        addlink.textblock_id = drop_id
-      when 'dragmediablock'
-        addlink.mediablock_id = drop_id
-      when 'dragcollection'
-      addlink.collection_id = drop_id
-      when 'dragarticle'
-      addlink.article_id = drop_id
-    end
-
-    if params['position']
-      addlink.update
-      addlink.position = params['position']
-    end
-    addlink.save
-
-    if params[:dropfragment_id]
-      redirect_to :action => 'edit', :id => @article, :fragment => Fragment.find(params['dropfragment_id']).content, :nolayout => true 
-    elsif params[:fragment]
-      redirect_to :action => 'edit', :id => @article, :fragment => params['fragment'], :nolayout => true 
-    else
-      redirect_to :action => 'edit', :id => @article, :nolayout => true 
-    end
-  end
-
 
   def show
     @article = Article.find(params[:id])
@@ -235,6 +192,17 @@
     redirect_to :action => 'edit', :id => @article
   end
   
+  def inspector
+    @article = Article.find(params[:id])
+    @article.description = '...' unless @article.description
+
+    render :update do |page| 
+      page.replace_html "sidebarSettings",  :partial => "inspector"
+      page.visual_effect :highlight, "sidebarSettings", :duration => 1
+    end
+    return if request.xhr? 
+  end
+  
   def edit
     @article = Article.find(params[:id])
     
@@ -253,8 +221,18 @@
       render :layout => 'simple'
     elsif params[:nolayout]
       render_without_layout
+    elsif params[:dropfragment_id]
+      redirect_to :action => 'edit', :id => @article, :fragment => Fragment.find(params['dropfragment_id']).content, :nolayout => true 
+    elsif params[:fragment]
+      redirect_to :action => 'edit', :id => @article, :fragment => params['fragment'], :nolayout => true 
     end
   end
+
+  def topic_changed
+    current_topic  = Topic.find(params[:id])
+    current_parent = Topic.find_by_topic_id(params[:id])
+    render :partial => "topics/selector", :locals => { :current_topic => current_topic, :current_parent => current_parent }
+  end   
 
   def sort 
     @sortfragment = Fragment.find(params[:sortfragment_id])

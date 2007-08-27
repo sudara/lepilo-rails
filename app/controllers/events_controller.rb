@@ -12,7 +12,7 @@ class EventsController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @event_pages, @events = paginate :events, :per_page => 10
+    @event_pages, @events = paginate :events, :per_page => 25
   end
 
   def show

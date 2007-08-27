@@ -1,6 +1,6 @@
 <!--[form:topic]-->
 <div id="lpltopic-select">
-  <%= render_partial 'topics/selector', nil, 'current_topic' => @topic %>
+  <%= render :partial => 'topics/selector', :locals => { :current_topic => @topic } %>
 </div>
 <br style="clear:both">
   <%= hidden_field 'topic', 'topic_id', 'value'=>@topic.topic_id %>
@@ -10,6 +10,8 @@
       <ul id="lpltopic-list"> 
       <% @topic.topics.each do |subtopic| %> 
       <li id="item_<%= subtopic.id %>"> 
+        <img src="/images/16sort.png" style="cursor:pointer;padding-right:5px;padding-top:2px;border:0px;float:right"/> 
+        
         <%= link_to subtopic.title, :action => 'edit', :id => subtopic.id %><br/>
         <% if subtopic.description %><div class="listdescription"><%= subtopic.description %></div><% end %> 
       </li> 
@@ -19,10 +21,10 @@
 
   <div class="lplblock">  
     <span class="smalltext"><br/>Titel<br/></span>
-    <%= in_place_editor_field :topic, :title, tag_options = {}, in_place_editor_options = { :size => 32, :cancel_text => 'abbrechen'} -%>
+    <h4><%= in_place_editor_field :topic, :title, tag_options = {}, in_place_editor_options = { :size => 32, :cancel_text => 'abbrechen'} -%></h4>
 
     <span class="smalltext"><br/>Beschreibung<br/></span>
-<%= in_place_editor_field :topic, :description, tag_options = {}, in_place_editor_options = { :cols => 50, :rows => 5, :cancel_text => 'abbrechen'} -%>
+    <h4><%= in_place_editor_field :topic, :description, tag_options = {}, in_place_editor_options = { :cols => 50, :rows => 5, :cancel_text => 'abbrechen'} -%></h4>
   </div>
 
 <!--[eoform:topic]-->

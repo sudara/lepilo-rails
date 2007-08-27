@@ -4,8 +4,8 @@ class SettingsController < ApplicationController
   before_filter :login_required
   
   def index
-    
   end
+  
   def ftpupload
     @my_sett = Setting.find_by_key('FTP')
     un = @my_sett.settings.find_by_key('username').value
@@ -46,7 +46,33 @@ class SettingsController < ApplicationController
       File.open("#{RAILS_ROOT}/public/projekte.xml", "wb") do |f|
         f.write( projectsxml )
       end
-  
       #redirect_to :action => 'list'
   end
+  
+  def changeblocklinks
+    
+    @allblocklinks = BlockLink.find(:all)
+    blockcounter = 0
+    
+    @allblocklinks.each do |blocklink|
+      
+      unless blocklink.linked
+        if blocklink.textblock_id
+          @link_to = Textblock.find(blocklink.textblock_id)
+        elsif blocklink.mediablock_id
+          @link_to = Mediablock.find(blocklink.mediablock_id)
+        elsif blocklink.article_id
+          @link_to = Article.find(blocklink.article_id)
+        end
+      
+        blocklink.linked = @link_to
+        blocklink.save
+        blockcounter = blockcounter + 1
+      end
+    end
+    
+    flash[:ok] = blockcounter.to_s + ' BlockLinks aktualisiert'
+    redirect_to :action => 'index'
+  end
+  
 end

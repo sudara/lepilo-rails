@@ -8,7 +8,7 @@ class TextblocksController < ApplicationController
   end
 
   def list
-    @textblock_pages, @textblocks = paginate :textblocks, :per_page => 10
+    @textblock_pages, @textblocks = paginate :textblocks, :per_page => 25
     if params[:rendersimple]  
       render :layout => 'simple'
     end
@@ -66,14 +66,14 @@ class TextblocksController < ApplicationController
       @textblock.update
       
       addLink = BlockLink.new
-      addLink.textblock_id = @textblock.id
+      addLink.linked = @textblock
       addLink.fragment_id = session[:current_fragment]
       addLink.save
       
       flash[:ok] = 'Textblock was successfully created.'
       redirect_to :controller=>"/block_links", :action => "close_reload"
     else
-      render :layout => 'simple'
+      flash[:error] = 'Unable to create Textblock.'
       render :action => 'new'
     end
   end

@@ -3,22 +3,21 @@
 
 <div id="block-list"> 
 
-<% @collection.block_links.each do |link| %> 
+<%# @collection.block_links.each do |link| %> 
+<% @collectionblocks.each do |link| %> 
 
-  <%  if link.mediablock_id != nil %>
+  <%  if link.linked_type == "Mediablock" %>
   <div id="item_<%= link.id %>" class="sortableblock" style="height:250px"> 
-    <%= render_partial 'mediablocks/short', nil, 'mediablock_id' => link.mediablock_id, 'link_id' => link.id %>
+    <%= render_partial 'mediablocks/short', nil, 'mediablock_id' => link.linked_id, 'link_id' => link.id %>
   </div> 
   <% end %>
 
-  <%  if link.article_id != nil %>
+  <%  if link.linked_type == "Article" %>
   <div id="item_<%= link.id %>" class="sortableblock" style="height:250px"> 
-    <%= render_partial 'articles/short', nil, 'article_id' => link.article_id, 'link_id' => link.id %>
+    <%= render_partial 'articles/short', nil, 'article_id' => link.linked_id, 'link_id' => link.id %>
   </div> 
   <% end %>
 
 <% end %>
 
 </div>
-
-&nbsp;

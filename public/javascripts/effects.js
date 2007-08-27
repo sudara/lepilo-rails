@@ -1,4 +1,4 @@
-// script.aculo.us effects.js v1.7.1_beta1, Mon Mar 12 14:40:50 +0100 2007
+// script.aculo.us effects.js v1.7.1_beta3, Fri May 25 17:19:41 +0200 2007
 
 // Copyright (c) 2005-2007 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
 // Contributors:
@@ -491,7 +491,7 @@ Object.extend(Object.extend(Effect.Highlight.prototype, Effect.Base.prototype), 
   initialize: function(element) {
     this.element = $(element);
     if(!this.element) throw(Effect._elementDoesNotExistError);
-    var options = Object.extend({ startcolor: '#d4e543' }, arguments[1] || {});
+    var options = Object.extend({ startcolor: '#e5f4d7' }, arguments[1] || {});
     this.start(options);
   },
   setup: function() {

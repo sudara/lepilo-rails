@@ -1,25 +1,19 @@
-<script type="text/javascript" charset="utf-8">
-toggleRight();
-</script>
-
 <div id="lploptions">
-
-  <h1>Textblocks</h1> | <%= link_to 'Neues Textblock', :action => 'new' %>
+  <div>
+  <h1>Textblocks</h1> | <%= link_to 'Neuer Textblock', :action => 'new' %>
   <% if @textblock_pages %> | 
   <%= link_to 'Vorherige Seite', { :page => @textblock_pages.current.previous } if @textblock_pages.current.previous %> | 
   Seite: <%= pagination_links(@textblock_pages) %> |
   <%= link_to 'N&auml;chste Seite', { :page => @textblock_pages.current.next } if @textblock_pages.current.next %> 
   <% end %>
-  <br/>
+  </div>
 </div> 
 <div id="lplcontainer">
-
     <% for textblock in @textblocks %>
-
     <%
       #Time.now.strftime('%d-%m-%y -%R') 
     %>
-    	<div class="listblock" id="<%= textblock.id %>" style="width:400px;height:200px">
+    	<div class="listblock" id="<%= textblock.id %>" style="width:400px;height:120px">
       	<div class="iconwhite" id="plastic_<%= textblock.id %>" style="width:32px">
           <div class="icontainer">
             <%= link_to image_tag("/images/w24edit.png", :title => 'bearbeiten', :alt => 'bearbeiten'), { :action => 'edit', :id => textblock, :page => params[:page] }, :class => 'linkicon' %>
@@ -28,7 +22,7 @@ toggleRight();
       	</div>
     	  <div class="listdescription">
           <h3><%= textblock.title %></h3><br/>
-    	    <p><%= textilize textblock.content %></p>
+    	    <p><%= textilize (textblock.content) %></p>
     	  </div>
     </div>
     <% end %>

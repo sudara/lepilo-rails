@@ -9,7 +9,7 @@ class TemplatesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @template_pages, @templates = paginate :templates, :per_page => 10
+    @template_pages, @templates = paginate :templates, :per_page => 25
   end
 
   def show

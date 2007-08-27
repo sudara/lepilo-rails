@@ -2,6 +2,10 @@ class CollectionsController < ApplicationController
   
   before_filter :login_required, :except => [ :show, :showdina4, :simple ]
 
+  Collection.content_columns.each do |column| 
+    in_place_edit_for :collection, column.name 
+  end 
+
   def index
     list
     render :action => 'list'
@@ -36,7 +40,8 @@ class CollectionsController < ApplicationController
     
     if drop_type == "dragarticle"
       addlink = BlockLink.new
-      addlink.article_id = drop_id
+      addlink.linked_id = drop_id
+      addlink.linked_type = "Article"
       addlink.collection_id = @collection.id
 
       if addlink.save
@@ -46,11 +51,14 @@ class CollectionsController < ApplicationController
 
     if drop_type == "dragmediablock"
       addlink = BlockLink.new
-      addlink.mediablock_id = drop_id
+      addlink.linked_id = drop_id
+      addlink.linked_type = "Mediablock"
       addlink.collection_id = @collection.id
 
       if addlink.save
-        redirect_to :action => 'edit', :id => @collection
+        #redirect_to :action => 'edit', :id => @collection
+        redirect_to :action => 'edit', :id => @collection, :params => {:nolayout => true}
+        
       end
     end
         
@@ -115,10 +123,23 @@ class CollectionsController < ApplicationController
     end
   end
 
+  def inspector
+    @collection = Collection.find(params[:id])
+    @collection.description = '...' unless @collection.description
+
+    render :update do |page| 
+      page.replace_html "sidebarSettings",  :partial => "inspector"
+      page.visual_effect :highlight, "sidebarSettings", :duration => 1
+    end
+    return if request.xhr? 
+  end
+
   def edit
     @collection = Collection.find(params[:id])
     if params[:rendersimple]  
       render :layout => 'simple'
+    elsif params[:nolayout]
+      render_without_layout
     end
   end
 

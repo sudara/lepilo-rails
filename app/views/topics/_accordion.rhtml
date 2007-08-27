@@ -5,19 +5,7 @@
 <%  @topics = Topic.find_all_by_topic_id(1, :order => :position, :include => :article)
   for topic in @topics -%>
 	<div class="panel">
-    <span onclick="javascript:location.href='/ps/article/<%= topic.id %>'"><%= topic.title %>
-    <% if Topic.count(:conditions => "topic_id = "+ topic.id.to_s) > 0 
-      @subtopics = Topic.find_all_by_topic_id(topic.id, :order => :position) -%>  
-      <div class="panelBody">
-      <% for subtopic in @subtopics %>
-        <div><span onclick="javascript:location.href='/ps/article/<%= topic.article.id if topic.article %>'"><%= subtopic.title %> </span></div>
-      <% end %>
-      </div>
-    <% else %>
-      <div class="panelBody">
-        <span></span>
-      </div>
-    <% end -%>
+    <span onclick="javascript:location.href='/ps/article/<%= topic.id %>'"><%= topic.title %></span>
   </div>
 <% end -%>
 </div>

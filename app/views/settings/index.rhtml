@@ -1,18 +1,16 @@
-<div id="lploptions">
-  <h1>Einstellungen</h1> | <%= link_to 'FTP Upload', :action => 'ftpupload' %>
-  <br/>
-  <br/>
+<div id="lploptions"><div>
+  <h1>Einstellungen</h1> | <%= link_to 'FTP Upload', :action => 'ftpupload' %> | <%= link_to 'BlockLinks Update', :action => 'changeblocklinks' %>
+  </div>
 </div> 
+
 <div id="lplcontainer">
-  <div id="lpleditor">
+  <br>
+  <div style="width:50%;margin:1px;float:left;background:#aaa">FIRST</div>
+  <div style="width:49%;margin:1px;float:left;background:#ccc">asdas</div>
 
-  <div class="lplblock" style="width:350px">
-    <%= render :partial => "topics/cssmenu" %>
-  </div>
-
-  <div class="lplblock" style="width:250px">
-    <%= render :partial => "topics/accordion" %>
-  </div>
-
- </div>
 </div> 
+
+<script type="text/javascript" charset="utf-8">
+  toggleLeft();
+  toggleRight();
+</script>

@@ -1,12 +1,12 @@
 <div id="lploptions">
-
+  <div>
   <h1>Events</h1> | <%= link_to 'Neues Event', :action => 'new' %>
   <% if @event_pages %> | 
   <%= link_to 'Vorherige Seite', { :page => @event_pages.current.previous } if @event_pages.current.previous %> | 
   Seite: <%= pagination_links(@event_pages) %> |
   <%= link_to 'N&auml;chste Seite', { :page => @event_pages.current.next } if @event_pages.current.next %> 
   <% end %>
-  <br/>
+  </div>
 </div> 
 <div id="lplcontainer">
 

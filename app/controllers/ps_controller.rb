@@ -10,9 +10,20 @@ class PsController < ApplicationController
   end
 
   def article
-    if @psarticle = Article.find(params[:id], :include => :fragments)
+    articletopic = Topic.find(params[:id])
+    if @psarticle = Article.find_by_topic_id(articletopic, :include => :fragments)
       @psblocks = BlockLink.find_by_fragment_id(@psarticle.fragments.first)
     end
+    render :layout => "puresenses"
+  end
+  
+  def events
+    @events = Event.find(:all, :order => 'starts_at ASC')
+    render :layout => "puresenses"
+  end
+  
+  def news
+    @news = Note.find(:all, :order => 'created_at ASC')
     render :layout => "puresenses"
   end
 

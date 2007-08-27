@@ -10,70 +10,14 @@ ul.lplCSSMenu ul {  /* copy of above declaration without the > selector, except 
 }
 </style>
 <![endif]><![endif]-->
-
-<% 
-    if @psarticle
-      @psblocks = BlockLink.find_all_by_fragment_id(@psarticle.fragments.first.id, :order => :position)
-
-      if @psblocks[0]
-        if @psblocks[0].textblock_id != nil
-          @page = Textblock.find_by_id(@psblocks[0].textblock_id) 
-        elsif @psblocks[0].mediablock_id != nil
-          @page = Mediablock.find_by_id(@psblocks[0].mediablock_id)
-        end
-      end
-
-      if @psblocks[1]
-        if @psblocks[1].textblock_id != nil
-          @subpage = Textblock.find_by_id(@psblocks[1].textblock_id) 
-        elsif @psblocks[1].mediablock_id != nil
-          @subpage = Mediablock.find_by_id(@psblocks[1].mediablock_id)
-        end
-      end
-
-    end    
-%>
   
-<div id="header"><div>
-  <%= link_to image_tag("/ps/n-puresenses.png", :alt => "über puresenses", :title => "über puresenses", :class => "linkimage"), 
-  { :controller => "ps", 
-    :action => "article",
-    :id => 16 },
-    :class => "linkimage" -%>
-  <%= image_tag "/ps/n-termine.png",
-      :alt => "die Termine", 
-      :title => "die Termine" -%>
-  <%= image_tag "/ps/n-services.png",
-      :alt => "unser Service", 
-      :title => "unser Service" -%></div>
+<div id="header">
 </div>
 
 <div id="content">
-	<div id="navigation">
-	  <%= image_tag "/ps/t-angebot.png",
-        :alt => "unser Angebot", 
-        :title => "unser Angebot" -%>
-    <%= render :partial => "topics/accordion", :locals => { :menuwidth => "200"} %>
+  <div id="page" style="width:100%;">
+<%# render :partial => "events" -%>
   </div>
-	<div id="page" style="background-repeat:no-repeat;background-image:url(/data/images/<% if @psblocks && @psblocks[0] && @psblocks[0].mediablock_id != nil -%><%= @page.filename -%><% end -%>)">
-		<div class="container">        
-        <% if @psblocks && @psblocks[0] && @psblocks[0].textblock_id != nil %>
-        <%= textilize(@page.content) %>
-        <% end %>
-		</div>
-	</div>
-
-
-	<div id="subpage" style="background-repeat:no-repeat;background-image:url(/data/images/<% if @psblocks && @psblocks[1] && @psblocks[1].mediablock_id != nil -%><%= @subpage.filename -%><% end -%>)">
-		<div class="container">
-      <% if @psblocks && @psblocks[1] && @psblocks[1].textblock_id != nil %>
-      <h2><%= @subpage.title %></h2>
-      <%= textilize(@subpage.content) %>
-      <% end %>
-		</div>
-	</div>
-
-&nbsp;
 </div>
 
 <div id="footer">

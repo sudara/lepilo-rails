@@ -17,11 +17,17 @@
     Derzeit unter:<br/> 
     <%= hidden_field 'article', 'topic_id', 'value'=>@article.topic_id %>
       <h4>
-      <% @article.topic.ancestors.reverse.each do |x| %> 
-        » <%= x.title -%>
+      <% if @article.topic %>
+        <% @article.topic.ancestors.reverse.each do |x| %> 
+          » <%= x.title -%>
+        <% end %>
+      <% else %>
+        Keine Zuordnung
       <% end %>
       </h4>
+      <% if @article.topic %>
       <h4 class="gray">» <%= @article.topic.title -%></h4>
+      <% end %>
     <br/>
 
     <div id="lpltopic-selector">
@@ -57,29 +63,3 @@
   <!--[eoform:article]-->
 
 </div>      
-
-<div id="dropzone">
-  Vorschaubild:<br/>
-  <%  thumbnail = Mediablock.find_by_id(@article.thumbnail_id) %>
-  <div id="thumbnaildrop">
-  <% if thumbnail %>
-    <%= image_tag "/data/thumbnails/#{thumbnail.filename}",
-        :alt => thumbnail.title, 
-        :title => thumbnail.title, 
-        :class => "articlethumbnail"  %>
-  <% else %>
-    <%= image_tag "/images/rails.png",
-        :class => "articlethumbnail" %>
-  <% end %>
-  </div>
-
-<%#  <div class="articledescription" id="beschreibung" ><%=h @article.description % ></div> %>
-</div>
-
-<%= drop_receiving_element "dropzone", 
-      :update => "thumbnaildrop", :url => { :action => "thumbnail" },
-      :accept => "dragblock", :hoverclass => "dropzone-active" %>
-
-<%= drop_receiving_element "dropzone", 
-      :update => "thumbnaildrop", :url => { :action => "thumbnail" },
-      :accept => "sortableblock", :hoverclass => "dropzone-active" %>      

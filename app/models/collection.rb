@@ -1,5 +1,5 @@
 class Collection < ActiveRecord::Base
-  has_many  :block_links, :order => :position
+  has_many :block_links, :order => :position, :as => :linked
 
   def count_media
     media_counter = 0

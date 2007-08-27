@@ -10,16 +10,16 @@
   <%= javascript_include_tag "tabs" -%> 
   <%= javascript_include_tag "inspectors" -%> 
   <%= javascript_include_tag "accordion"%> 
-  <%= stylesheet_link_tag 'layout_3col_standard'%>
+  <%= stylesheet_link_tag 'layout_3col'%>
   <!--[if lte IE 7]>
-  <link href="/stylesheets/explorer/layout_3col_standard.css" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/patches/patch_3col_column_backgrounds.css" rel="stylesheet" type="text/css" />
   <![endif]-->
   <%= stylesheet_link_tag 'lepilo'%>
   <%= stylesheet_link_tag 'lightbox'%>
   <%= stylesheet_link_tag 'lplaccordionmenu'%>
   <%= stylesheet_link_tag 'lplcssmenu'%>
 </head>
-<body>
+<body onload="new Ajax.Request('/<%= controller.controller_name-%>/inspector/<%=params[:id]-%>', {asynchronous:true, evalScripts:true}); return false;">
 
   <div id="page_margins">
   <div id="page" class="hold_floats">
@@ -29,13 +29,13 @@
       <img src="/images/lepilo.png" class="lepilo" alt="lepilo version" />
       <a href="/settings/" <%= 'class="active"' if params[:controller] == "settings"%>><img src="/images/overview.png" alt="overview" /></a>
       <!--<a href="/" <%= 'class="active"' if params[:controller] == ""%>><img src="/images/overview.png" border=0></a>-->
+      <a href="/topics/" <%= 'class="active"' if params[:controller] == "topics"%>><img src="/images/navigation.png" alt="navigation"/></a>
       <a href="/articles/" <%= 'class="active"' if params[:controller] == "articles"%>><img src="/images/articles.png" alt="articles" /></a>
       <a href="/collections/" <%= 'class="active"' if params[:controller] == "collections"%>><img src="/images/collections.png" alt="collections"/></a>
-      <a href="/topics/" <%= 'class="active"' if params[:controller] == "topics"%>><img src="/images/navigation.png" alt="navigation"/></a>
-      <a href="/mediablocks/" <%= 'class="active"' if params[:controller] == "mediablocks"%>><img src="/images/media.png" alt="media"/></a>
       <a href="/events/" <%= 'class="active"' if params[:controller] == "events"%>><img src="/images/events.png" alt="events"/></a>
       <a href="/notes/" <%= 'class="active"' if params[:controller] == "notes"%>><img src="/images/notes.png" alt="notes"/></a>
       <a href="/comments/" <%= 'class="active"' if params[:controller] == "comments"%>><img src="/images/posts.png" alt="posts"/></a>
+      <a href="/mediablocks/" <%= 'class="active"' if params[:controller] == "mediablocks"%>><img src="/images/media.png" alt="media"/></a>
       <a href="/textblocks/" <%= 'class="active"' if params[:controller] == "textblocks"%>><img src="/images/textblocks.png" alt="textblocks"/></a>
       <a href="/account/" <%= 'class="active"' if params[:controller] == "account"%>><img src="/images/accounts.png" alt="accounts"/></a>
       <a href="/account/logout" ><img src="/images/logout.png" alt="log out of lepilo"/></a>
@@ -52,26 +52,80 @@
         :style => "padding-top:4px;padding-left:5px;padding-right:5px;border:0px;float:left",
         :onclick => "toggleLeft();"  -%>
       </span>
+      
+      <div id="headerbuttons">
+        <%= image_tag "/images/headerbleft.png",
+            :alt => "button start", 
+            :title => "button start",
+            :style => "margin-left:10px;float:left"  -%>        
+        <div class="button">
+          <%= image_tag "/images/20add.png",
+              :alt => "anzahl der galerien", 
+              :title => "anzahl der galerien"  -%>
+        </div>        
+        <%= image_tag "/images/headerbright.png",
+            :alt => "button end", 
+            :title => "button end",
+            :style => "margin-left:-1px;float:left"  -%>
+
+        <%= image_tag "/images/headerbleft.png",
+            :alt => "button start", 
+            :title => "button start",
+            :style => "margin-left:10px;float:left"  -%>        
+        <div class="button">
+          <%= image_tag "/images/20view.png",
+              :alt => "anzahl der galerien", 
+              :title => "anzahl der galerien"  -%>
+        </div>
+        <div class="button">
+          <%= image_tag "/images/20move.png",
+              :alt => "anzahl der galerien", 
+              :title => "anzahl der galerien"  -%>
+        </div>
+        <div class="button">
+          <%= image_tag "/images/20smart.png",
+              :alt => "anzahl der galerien", 
+              :title => "anzahl der galerien"  -%>
+        </div>        
+        <%= image_tag "/images/headerbright.png",
+            :alt => "button end", 
+            :title => "button end",
+            :style => "margin-left:-1px;float:left"  -%>
+
+        <%= image_tag "/images/headerbleft.png",
+            :alt => "button start", 
+            :title => "button start",
+            :style => "margin-left:10px;float:left"  -%>        
+        <div class="button">
+          <%= image_tag "/images/20delete.png",
+              :alt => "anzahl der galerien", 
+              :title => "anzahl der galerien"  -%>
+        </div>        
+        <%= image_tag "/images/headerbright.png",
+            :alt => "button end", 
+            :title => "button end",
+            :style => "margin-left:-1px;float:left"  -%>
+      </div>
 
       <div id="tabs">
         <ul> 
-          <li style="margin-left: 1px" id="tabHeaderActive"><a href="javascript:void(0)" onClick="toggleTab(1,5)"><span style="line-height:14px">Einstellungen</span></a></li>
-          <li id="tabHeader2"><a href="javascript:void(0)" onClick="toggleTab(2,5)" ><span><%= image_tag "/images/16article.png",
+          <li style="margin-left: 1px" id="tabHeaderActive"><a href="javascript:void(0)" onmouseover="toggleTab(1,5)"><span style="line-height:14px">Einstellungen</span></a></li>
+          <li id="tabHeader2"><a href="javascript:void(0)" onmouseover="toggleTab(2,5)" ><span><%= image_tag "/images/16article.png",
               :alt => "artikel", 
               :title => "artikel", 
               :class => "icon16"  -%>
           </span></a></li>
-          <li id="tabHeader3"><a href="javascript:void(0)" onclick="toggleTab(3,5)"><span><%= image_tag "/images/16collection.png",
+          <li id="tabHeader3"><a href="javascript:void(0)" onmouseover="toggleTab(3,5)"><span><%= image_tag "/images/16collection.png",
               :alt => "gallerien", 
               :title => "gallerien", 
               :class => "icon16"  -%>
           </span></a></li>
-          <li id="tabHeader4"><a href="javascript:void(0)" onClick="toggleTab(4,5)"><span><%= image_tag "/images/16image.png",
+          <li id="tabHeader4"><a href="javascript:void(0)" onmouseover="toggleTab(4,5)"><span><%= image_tag "/images/16image.png",
               :alt => "bilder", 
               :title => "bilder", 
               :class => "icon16"  -%>
           </span></a></li>
-          <li id="tabHeader5"><a href="javascript:void(0)" onclick="toggleTab(5,5);"><span><%= image_tag "/images/16text.png",
+          <li id="tabHeader5"><a href="javascript:void(0)" onmouseover="toggleTab(5,5);"><span><%= image_tag "/images/16text.png",
               :alt => "texte", 
               :title => "texte", 
               :class => "icon16"  -%></span></a></li>
@@ -117,10 +171,55 @@
   <!-- #col1: Erste Float-Spalte des Inhaltsbereiches -->
       <div id="col1">
         <div id="col1_content" class="clearfix">
-
-          <h2>Spalte #col1</h2>
-          <p>...</p>
-
+          <div class="dashboardtitle" ><%= image_tag "/images/16sort.png", :alt => "", :title => "", :class => "titleicon" -%>Overview</div>
+          <div class="dashboard" id="dashboard1">
+            <%= image_tag "/images/16article.png",
+                :alt => "anzahl der seiten", 
+                :title => "anzahl der seiten", 
+                :class => "titleicon"  -%>
+            <strong>Articles</strong>
+            <div><a href="#"> Newest </a></div>
+            <div><a href="#"> Last edited </a></div>
+            <%= image_tag "/images/16collection.png",
+                :alt => "anzahl der galerien", 
+                :title => "anzahl der galerien", 
+                :class => "titleicon"  -%>
+            <strong>Collections</strong><br>
+            <div><a href="#"> Newest </a></div>
+            <div><a href="#"> Last edited </a></div>
+            <%= image_tag "/images/16image.png",
+                :alt => "anzahl der medienblocks", 
+                :title => "anzahl der medienblocks", 
+                :class => "titleicon"  -%>
+            <strong>Media</strong><br>
+            <div><a href="#"> Newest </a></div>
+            <div><a href="#"> Last edited </a></div>
+            <%= image_tag "/images/16text.png",
+                :alt => "anzahl der textblocks", 
+                :title => "anzahl der textblocks", 
+                :class => "titleicon"  -%>
+            <strong>Textblocks</strong><br>
+            <div><a href="#"> Newest </a></div>
+            <div><a href="#"> Last edited </a></div>
+          </div>
+          <div class="dashboardtitle" ><%= image_tag "/images/16sort.png", :alt => "", :title => "", :class => "titleicon" -%>Result Grouping</div>
+          <div class="dashboard"  id="dashboard2">
+            <strong>Group by:</strong><br>
+            <div class="active"><a href="#">Topics</a></div>
+            <div><a href="#">Date</a></div>
+            <div><a href="#">Name</a></div>
+            <strong>Sort within group by:</strong><br>
+            <div><a href="#">Name</a></div>
+            <div><a href="#">Date</a></div>
+            <div><a href="#">Kind</a></div>
+          </div>
+          <div class="dashboardtitle" ><%= image_tag "/images/16sort.png", :alt => "", :title => "", :class => "titleicon" -%>Tags</div>
+          <div class="dashboard" id="dashboard3">
+            <div class="tags">Tagteamed<%= image_tag "/images/tag-end.png", :alt => "tag", :title => "tag" -%></div>
+            <div class="tags">Tutorials<%= image_tag "/images/tag-end.png", :alt => "tag", :title => "tag" -%></div>
+            <div class="tags">Lolcat<%= image_tag "/images/tag-end.png", :alt => "tag", :title => "tag" -%></div>
+            <div class="tags">A somewhat longer tag<%= image_tag "/images/tag-end.png", :alt => "tag", :title => "tag" -%></div>
+          </div>
   	    </div>
       </div>
   <!-- #col1: - Ende -->
@@ -130,35 +229,7 @@
         <div id="col2_content" class="clearfix">
           <div id="tabscontent">
               <div id="tabContent1" class="tabContent" >
-                <div class="searchblock">
-                  <% if @article -%>
-                  <%= link_to 'Web', {  :action => "edit", :id => @article.id, :fragment => "web" } -%> | <%= link_to 'Print', {  :action => "edit", :id => @article.id, :fragment => "print" } -%> | <%= link_to 'XML', {  :action => "writeindesignxml", :id => @article.id, :fragment => "print" } -%> | <%= link_to 'Din A4', {  :action => "getindesignfile", :format => "A4" } -%> | <%= link_to 'A5', {  :action => "getindesignfile", :format => "A5" } -%> | <%= link_to 'A4/3', {  :action => "getindesignfile", :format => "A4-3" } -%>
-                  <% end -%>
-                </div>
-                <div class="sidebar">
-                  <% if @article -%>
-                  <div class="editdata">
-
-                  <h1><%= in_place_editor_field :article, :title, tag_options = {}, in_place_editor_options = { :cols => 32, :rows => 3, :cancel_text => 'abbrechen'} -%>
-                  </h1>
-                  Typ: <h3><%= @article.type -%></h3>, Freigegeben: <h3><%= @article.released -%></h3><br/>
-                 <%= in_place_editor_field :article, :description, tag_options = {}, in_place_editor_options = { :cols => 32, :rows => 10, :cancel_text => 'abbrechen'} -%>
-                  </div>
-                  <% end -%>
-
-                  <% if @article -%>
-
-                  <div class="editdata">
-
-                    <%= start_form_tag :action => 'imagedescriptions', :id => @article -%>
-                      Copyright Vermerk für Bilder: 
-                      <input name="description" size="30" type="text" />
-                      <%# text_field 'images', 'description', "size" => 45  -%>
-                      <%= submit_tag 'Anwenden' -%>
-                    <%= end_form_tag -%>
-                  </div>
-                  <% end -%>
-                </div>
+                <div id="sidebarSettings"></div>
               </div>
 
               <div id="tabContent2" class="tabContent" style="display:none;">
@@ -185,12 +256,11 @@
   <!-- #col3: Statische Spalte des Inhaltsbereiches -->
       <div id="col3">
         <div id="col3_content" class="clearfix" >
-
           <div id="lplcontent">
-            <%= yield  -%>
+            <%= yield -%>
           </div>
-
         </div>
+        <br style="clear:both">
         <!-- IE Column Clearing -->
   	  <div id="ie_clearing">&nbsp;</div>
         <!-- Ende: IE Column Clearing -->
@@ -243,12 +313,25 @@
 
   <!-- #footer: Beginn Fußzeile -->
   <div id="footer">
-
   </div>
   <!-- #footer: Ende -->
 
 
   </div> <!-- id="page_margins" END -->
+
+<script type="text/javascript" charset="utf-8">
+  toggleRight();
+  toggleLeft();
+  
+  var dashboardAccordion = new accordion('#col1_content', { 
+    classNames: { toggle:'dashboardtitle', 
+                  toggleActive:'dashboardtitleactive', 
+                  content:'dashboard' }, 
+    onEvent : 'click' });
+  
+  dashboardAccordion.activate($$('#col1_content .accordion_toggle')[0]);
+  
+</script>
 
 </body>
 </html>

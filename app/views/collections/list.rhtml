@@ -1,8 +1,8 @@
-<div id="lploptions">
+<div id="lploptions"><div>
   <h1>Gallerieliste</h1> | <%= link_to 'Neue Gallerie', :action => 'new' %> | 
   <%= link_to 'Vorherige Seite', { :page => @collection_pages.current.previous } if @collection_pages.current.previous %> | 
   <%= link_to 'N&auml;chste Seite', { :page => @collection_pages.current.next } if @collection_pages.current.next %> 
-  <br />
+  </div>
 </div> 
 <div id="lplcontainer">
 

@@ -8,7 +8,7 @@ class FragmentsController < ApplicationController
   end
 
   def list
-    @fragment_pages, @fragments = paginate :fragments, :per_page => 10
+    @fragment_pages, @fragments = paginate :fragments, :per_page => 25
     if params[:rendersimple]  
       render :layout => 'simple'
     end

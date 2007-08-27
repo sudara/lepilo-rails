@@ -1,23 +1,5 @@
 <div id="lplcontainer">
 
-<div id="lplheader">
-  <%= content_tag 'DIV', '<img src="/images/opentray.png">', :style => 'width:63px;float:left',
-    :onclick => visual_effect(:slideDown, 'lploptions')  %>
-  <%= content_tag 'DIV', '<img src="/images/closetray.png">', :style => 'width:80px;float:left',
-    :onclick => visual_effect(:slideUp, 'lploptions') %>
-</div>
-
-<div id="lploptions" style="display:none">
-  <div id="entrySettings" >
-    <%= start_form_tag :action => 'update', :id => @collection %>
-      <%= render :partial => 'form' %>
-      <br style="clear:both;"/>
-      <%= submit_tag 'Speichern' %>
-    <%= end_form_tag %>
-  </div>
-</div>
-
-
 <div class="editdata">
 
   <%= link_to "Neues Bild", { :controller => "mediablocks",
@@ -31,10 +13,10 @@
 
 <div id="lpltemplatecontainer">  
 <%= render_partial 'block_links/collection', nil, 'collection_id' => @collection.id %>
-<br style="clear:both"/>
+<br style="clear:both">
 </div>
 
-<br style="clear:both"/>
+<br style="clear:both">
 
 </div>
 
@@ -51,3 +33,9 @@
       :constraint => false,
       :url => { :action => "sort", :id => @collection }, 
       :complete => visual_effect(:highlight, 'block-list' ) %> 
+      
+      
+<script type="text/javascript" charset="utf-8">
+  toggleRight();
+</script>
+      

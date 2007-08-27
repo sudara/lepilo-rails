@@ -1,4 +1,4 @@
-// script.aculo.us controls.js v1.7.1_beta1, Mon Mar 12 14:40:50 +0100 2007
+// script.aculo.us controls.js v1.7.1_beta3, Fri May 25 17:19:41 +0200 2007
 
 // Copyright (c) 2005-2007 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
 //           (c) 2005-2007 Ivan Krstic (http://blogs.law.harvard.edu/ivan)
@@ -43,7 +43,8 @@ var Autocompleter = {}
 Autocompleter.Base = function() {};
 Autocompleter.Base.prototype = {
   baseInitialize: function(element, update, options) {
-    this.element     = $(element); 
+    element          = $(element)
+    this.element     = element; 
     this.update      = $(update);  
     this.hasFocus    = false; 
     this.changed     = false; 
@@ -83,8 +84,14 @@ Autocompleter.Base.prototype = {
 
     Element.hide(this.update);
 
-    Event.observe(this.element, "blur", this.onBlur.bindAsEventListener(this));
-    Event.observe(this.element, "keypress", this.onKeyPress.bindAsEventListener(this));
+    Event.observe(this.element, 'blur', this.onBlur.bindAsEventListener(this));
+    Event.observe(this.element, 'keypress', this.onKeyPress.bindAsEventListener(this));
+
+    // Turn autocomplete back on when the user leaves the page, so that the
+    // field's value will be remembered on Mozilla-based browsers.
+    Event.observe(window, 'beforeunload', function(){ 
+      element.setAttribute('autocomplete', 'on'); 
+    });
   },
 
   show: function() {
@@ -196,7 +203,6 @@ Autocompleter.Base.prototype = {
         this.index==i ? 
           Element.addClassName(this.getEntry(i),"selected") : 
           Element.removeClassName(this.getEntry(i),"selected");
-        
       if(this.hasFocus) { 
         this.show();
         this.active = true;
@@ -298,7 +304,6 @@ Autocompleter.Base.prototype = {
   onObserverEvent: function() {
     this.changed = false;   
     if(this.getToken().length>=this.options.minChars) {
-      this.startIndicator();
       this.getUpdatedChoices();
     } else {
       this.active = false;
@@ -339,7 +344,9 @@ Object.extend(Object.extend(Ajax.Autocompleter.prototype, Autocompleter.Base.pro
   },
 
   getUpdatedChoices: function() {
-    entry = encodeURIComponent(this.options.paramName) + '=' + 
+    this.startIndicator();
+    
+    var entry = encodeURIComponent(this.options.paramName) + '=' + 
       encodeURIComponent(this.getToken());
 
     this.options.parameters = this.options.callback ?
@@ -347,7 +354,7 @@ Object.extend(Object.extend(Ajax.Autocompleter.prototype, Autocompleter.Base.pro
 
     if(this.options.defaultParams) 
       this.options.parameters += '&' + this.options.defaultParams;
-
+    
     new Ajax.Request(this.url, this.options);
   },
 
@@ -502,7 +509,7 @@ Ajax.InPlaceEditor.prototype = {
       savingClassName: 'inplaceeditor-saving',
       loadingClassName: 'inplaceeditor-loading',
       formClassName: 'inplaceeditor-form',
-      highlightcolor: Ajax.InPlaceEditor.defaultHighlightColor,
+      highlightcolor: "#cbe845",
       highlightendcolor: "#FFFFFF",
       externalControl: null,
       submitOnBlur: false,

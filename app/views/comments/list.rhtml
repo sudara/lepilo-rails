@@ -1,11 +1,13 @@
 <div id="lplcontainer">
   <div id="lploptions">
+    <div>
     <h1>Kommentare</h1> | <%= link_to 'Neuer Kommentar', :action => 'new' %> | 
     <%= link_to 'Vorherige Seite', { :page => @comment_pages.current.previous } if @comment_pages.current.previous %> | 
     Seite: <%= pagination_links(@comment_pages) %> |
     <%= link_to 'N&auml;chste Seite', { :page => @comment_pages.current.next } if @comment_pages.current.next %> 
-    <br/>
+    </div>
   </div> 
+<div id="lplcontainer">
 
 <table>
   <tr>
@@ -32,5 +34,9 @@
 <br />
 
 <%= link_to 'New comment', :action => 'new' %>
+
+</div>
+
+
 
 </div>

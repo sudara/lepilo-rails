@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   end
 
   def list    
-    @comment_pages, @comments = paginate :comments, :per_page => 10
+    @comment_pages, @comments = paginate :comments, :per_page => 25
     if params[:rendersimple] == "true" 
       render :layout => 'simple'
     end

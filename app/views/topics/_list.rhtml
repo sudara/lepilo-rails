@@ -1,5 +1,5 @@
-<h3>Site root navigation</h3>
-<ul id="lpltopic-list"> 
+<span class="shadedwhite">Navigation » root</span><br style="clear:both">
+<ul id="lpltopic-list" class="lpltopic-list"> 
 <% 
 unless @topics
   @topics = Topic.find_all_by_topic_id('1')
@@ -8,10 +8,16 @@ end -%>
 <% subtopic.level = 2 unless subtopic.level %>
 <li id="item_<%= subtopic.id %>">   
   <%= link_to_remote '<img src="/images/16trileft.png" style="cursor:pointer;padding-right:5px;padding-top:2px;border:0px;float:right"/>', 
-  :url => {:action => 'list', :params => {:level => subtopic.level, :topic_id => subtopic.id} }, 
+  :url => {:action => 'list', :params => {:level => subtopic.level, :topic_id => subtopic.id, :title => subtopic.title} }, 
   :update => 'lpltopiclevel' + level -%>
-  
   <%= link_to subtopic.title, :action => 'edit', :id => subtopic.id %><br/>
 </li> 
 <% end %> 
 </ul> 
+
+<%= link_to image_tag("/images/b24add.png", :title => 'add topic', :alt => 'add topic'), { :action => 'new', :topic_id => '1', :title => 'New Topic' }, :class => 'linkicon',:style => 'float:right;margin-top:5px;' %>
+
+<%= sortable_element 'lpltopic-list' , 
+  :url => { :action => "sort", :id => @topic }, 
+  :complete => visual_effect(:highlight, 'lpltopic-list' ) 
+%>

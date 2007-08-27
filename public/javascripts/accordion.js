@@ -1,101 +1,140 @@
-// JavaScript Document
+// accordion.js v1.0
+//
+// Copyright (c) 2007 stickmanlabs
+// Author: Kevin P Miller | http://www.stickmanlabs.com
+// 
+// ListScroller is freely distributable under the terms of an MIT-style license.
+//
+// I don't care what you think about the file size...
+//   Be a pro: 
+//	    http://www.thinkvitamin.com/features/webapps/serving-javascript-fast
+//      http://rakaz.nl/item/make_your_pages_load_faster_by_combining_and_compressing_javascript_and_css_files
+//
 
-var Accordion = Class.create();
+/*-----------------------------------------------------------------------------------------------*/
 
-Accordion.prototype = {
-	initialize: function(id, tag, name) {
-		this.id = id;
-		this.headerTag = tag.toUpperCase();
-		this.instance = name;
-		this.headingClassName = (arguments[3] || "panel");
-		this.contentClassName = (arguments[4] || "panelBody");
-		this.panels = new Array();
+if (typeof Effect == 'undefined')
+	throw("accordion.js requires including script.aculo.us' effects.js library!");
 
-		var tags = $(id).getElementsByTagName('*');		
-		for ( var i = 0; i < tags.length; i++) {
-			switch(tags.item(i).tagName) {
-				case this.headerTag:
-					tags.item(i).style.cursor = "pointer";
-					tags.item(i).onmouseover = this._returnEvalCode(this.instance);
-					break;
+var accordion = Class.create();
+accordion.prototype = {
+	//
+	//  Setup the Variables
+	//
+	showAccordion : null,
+	currentAccordion : null,
+	duration : null,
+	effects : [],
+	animating : false,
+	//  
+	//  Initialize the accordions
+	//
+	initialize: function(container, options) {
+		this.options = Object.extend({
+			resizeSpeed : 8,
+			classNames : {
+				toggle : 'accordion_toggle',
+				toggleActive : 'accordion_toggle_active',
+				content : 'accordion_content'
+			},
+			defaultSize : {
+				height : null,
+				width : null
+			},
+			direction : 'vertical',
+			onEvent : 'click'
+		}, options || {});
+		
+		this.duration = ((11-this.options.resizeSpeed)*0.15);
 
-				default:
-					if (tags.item(i).className == this.headingClassName) {
-						tags[i]._index = this._returnIndex(this.panels.length);
-						this.panels[this.panels.length] = tags.item(i);
-						//the line above is same meaning as "this.panels.push(tags.item(i));"
-						
-						if (this.panels.length == 1) {
-							tags.item(i).id = "visible";
-						}
-					}
-
-					if (tags.item(i).className == this.contentClassName) {
-						tags.item(i).style.display = "none";
-					}
-					break;
-
-			}
-		}
-		this.length = this.panels.length;
-		this.show(0, true);
-	},
-
-	show: function(index, force) {
-		if ( (index >= this.length) || (index < 0) ) {
-			//alert("index out of range");
-			return;
-		}
-
-		if ( $('visible') == this.panels[index] ){
-			if (force) {
-				//alert("force to show the visible element.");
-				for(var i = 0; i < this.length; i++) {
-					if(this._body(this.panels[i]).style.display != "none") {
-						new Effect.BlindUp(this._body(this.panels[i]));
-					}
-				}
-				new Effect.BlindDown(this._body(this.panels[index]));
-				return;
-			}
+		var accordions = $$(container+' .'+this.options.classNames.toggle);
+		accordions.each(function(accordion) {
+			Event.observe(accordion, this.options.onEvent, this.activate.bind(this, accordion), false);
+			accordion.onclick = function() {return false;};
 			
-			//alert("it's already shown now.");
-			return;
+			if (this.options.direction == 'horizontal') {
+				var options = $H({width: '0px'});
+			} else {
+				var options = $H({height: '0px'});			
+			}			
+			this.currentAccordion = $(accordion.next(0)).setStyle(options);			
+			
+		}.bind(this));
+	},
+	//
+	//  Activate an accordion
+	//
+	activate : function(accordion) {
+		if (this.animating) {
+			return false;
 		}
-
-		//alert("show another element.");
-		new Effect.Parallel(
-			[
-				new Effect.BlindUp( this._body($('visible')) ),
-				new Effect.BlindDown( this._body(this.panels[index]) )
-			], {
-				duration: 0.5
-			}
-		);
+		
+		this.effects = [];
 	
-		$('visible').id = "";
-		this.panels[index].id = "visible";
-		return;
-	},
+		this.currentAccordion = $(accordion.next(0));	
+		if (this.currentAccordion == this.showAccordion) {
+			return false;
+		}
+		
+		this.currentAccordion.previous(0).addClassName(this.options.classNames.toggleActive);
 
-	_body: function(e) {
-		var tags = e.getElementsByTagName('*');
-		for( var i=0; i<tags.length; i++) {
-			if (tags.item(i).className == this.contentClassName) {
-				return tags.item(i);
+		if (this.options.direction == 'horizontal') {
+			var adjustments = $H({
+				scaleX: true,
+				scaleY: false
+			});
+		} else {
+			var adjustments = $H({
+				scaleX: false,
+				scaleY: true
+			});			
+		}
+			
+		var options = $H({
+			sync: true,
+			scaleFrom: 0,
+			scaleContent: false,
+			transition: Effect.Transitions.sinoidal,
+			scaleMode: { 
+				originalHeight: this.options.defaultSize.height ? this.options.defaultSize.height : this.currentAccordion.scrollHeight,
+				originalWidth: this.options.defaultSize.width ? this.options.defaultSize.width : this.currentAccordion.scrollWidth
 			}
-		}
-	},
+		});
+		options.merge(adjustments);
+		
+		this.effects.push(
+			new Effect.Scale(this.currentAccordion, 100, options)
+		);
 
-	_returnIndex: function(i) {
-		return function() {
-			return i;
+		if (this.showAccordion) {
+			this.showAccordion.previous(0).removeClassName(this.options.classNames.toggleActive);
+			
+			options = $H({
+				sync: true,
+				scaleContent: false,
+				transition: Effect.Transitions.sinoidal
+			});
+			options.merge(adjustments);
+			
+			this.effects.push(
+				new Effect.Scale(this.showAccordion, 0, options)
+			);				
 		}
-	},
-
-	_returnEvalCode: function(s) {
-		return function(){
-			eval(s + ".show(" + this.parentNode._index() + ");");
-		}
+		
+		new Effect.Parallel(this.effects, {
+			duration: this.duration, 
+			queue: {
+				position: 'end', 
+				scope: 'accordionAnimation'
+			},
+			beforeStart: function() {
+				this.animating = true;
+			}.bind(this),
+			afterFinish: function() {
+				this.showAccordion = this.currentAccordion;
+				this.animating = false;
+			}.bind(this)
+		});
 	}
-};
+}
+	

@@ -1,1 +1,0 @@
-<%= @gallery.title %>:::<%= @gallery.description %>:::<%  mediablocks = BlockLink.find_all_by_gallery_id(@gallery.id) %><% for block in mediablocks %>---<% image = Mediablock.find_by_id(block.mediablock_id) %>/data/images/<%= image.filename %><% end %>+++

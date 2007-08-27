@@ -1,6 +1,6 @@
 /*
 Original "col3" Border values
-border-left: 48px #ddd solid;
+border-left: 250px #e5f4d7 solid;
 border-right: 320px #fff solid;
 */
  
@@ -19,7 +19,7 @@ function toggleLeft() {
     $("toleft").src  = "/images/16addleft.png";
     ui.left = false;
   } else {
-    $("col3").setStyle( { borderLeft: "48px #ddd solid" } ); 
+    $("col3").setStyle( { borderLeft: "252px #444 solid" } ); 
     $("toleft").src  = "/images/16toleft.png";
     ui.left = true; 
   }

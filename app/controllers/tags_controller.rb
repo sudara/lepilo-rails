@@ -5,7 +5,7 @@ class TagsController < ApplicationController
   end
 
   def list
-    @tag_pages, @tags = paginate :tags, :per_page => 10
+    @tag_pages, @tags = paginate :tags, :per_page => 25
     if params[:rendersimple] == "true" 
       render :layout => 'simple'
     end

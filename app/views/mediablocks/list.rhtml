@@ -1,21 +1,23 @@
 <div id="lploptions">
+  <div>
   <h1>Mediablockliste</h1> | <%= link_to 'Neuer mediablock', :action => 'new' %> | 
   <%= link_to 'Vorherige Seite', { :page => @mediablock_pages.current.previous } if @mediablock_pages.current.previous %> |
   Seite: <%= pagination_links(@mediablock_pages) %> |
   <%= link_to 'N&auml;chste Seite', { :page => @mediablock_pages.current.next } if @mediablock_pages.current.next %> 
-  <br />  
+  </div>  
 </div> 
 
 <div id="lplcontainer" style="background-color:#444">
   <div id="lplshadow"></div>
 
+  <span class="shadedwhite">Vorschaubilder skalieren:</span>
   <img src="/images/slidermini.png" style="float:left;margin-left:25px;margin-top:7px"/>
     <div id="mbtrack1" class="slidertrack">
       <div id="mbhandle1" style="sliderhandle">
         <img src="/images/sliderhandle.png"/>
       </div>
     </div><img src="/images/sliderbig.png" style="float:left;margin-top:6px"/>
-  <br style="clear:both"/>
+  <br style="clear:both">
 
 
   <% for mediablock in @mediablocks %>

@@ -1,8 +1,8 @@
 class Article < ActiveRecord::Base
   belongs_to :topic
   has_many :fragments, :order => :position
-  has_and_belongs_to_many :tags
-  
+  has_many :block_links, :order => :position, :as => :linked
+
   def after_create    
     @articleWebFragment = Fragment.new
     @articleWebFragment.article_id = self.id
@@ -24,21 +24,20 @@ class Article < ActiveRecord::Base
     return media_counter
   end
 
-
   def count_text
     text_counter = BlockLink.count(:all, :conditions => "textblock_id AND fragment_id = #{self.fragments.first.id}")
     return text_counter
   end
 
-  
   def after_destroy
-    @blocks = BlockLink.find_all_by_article_id(self.id)
-    for block in @blocks
-      block.destroy
-    end
-
     @fragments = Fragment.find_all_by_article_id(self.id)
     for fragment in @fragments
+      
+      @blocks = BlockLink.find_all_by_fragment_id(fragment.id)
+      for block in @blocks
+        block.destroy
+      end
+
       fragment.destroy
     end
   end

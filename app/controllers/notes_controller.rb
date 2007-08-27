@@ -6,7 +6,7 @@ class NotesController < ApplicationController
 
   def list
     if !params['criteria'] || 0 == params['criteria'].length
-      @note_pages, @notes = paginate :notes, :per_page => 18
+      @note_pages, @notes = paginate :notes, :per_page => 25
     else
       @notes = Note.find(:all, :order => 'updated_at DESC',
         :conditions => [ 'LOWER(title) LIKE ?', 

@@ -1,26 +1,27 @@
-<script type="text/javascript" charset="utf-8">
-toggleRight();
-</script>
-<div id="lploptions">
-  <h1>Navigationspunkte</h1> | <%= link_to 'Neues Thema', :action => 'new' %>
-  <br />
+<div id="lploptions"><div>
+  <h1>Navigationspunkte</h1> | <%= link_to 'Neues Thema', :action => 'new' %></div>
 </div> 
-
+<div id="lplcontainer" style="background-color:#444">
 
 <div id="lpltopiclevel1" class="lpltopiccontaier">
-  <%= render_partial 'list',  nil, "parent_id" => '1', "level" => '2' %>
+  <%= render_partial 'list',  nil, "parent_id" => '1', "level" => '2', "title" => 'root' %>
 </div>
 
 <div id="lpltopiclevel2" class="lpltopiccontaier">
-  <a href="javascript:void(0)" onclick="Element.hide('lpltopiclevel2')">Doing</a>
 </div>
 
 <div id="lpltopiclevel3" class="lpltopiccontaier">
-  <a href="javascript:void(0)" onclick="Element.hide('lpltopiclevel3')">Doing</a>
 </div>
 
 <div id="lpltopiclevel4" class="lpltopiccontaier">
-  <a href="javascript:void(0)" onclick="javascipt:Element.hide('lpltopiclevel4')">Doing</a>
 </div>
 
+<div id="lpltopiclevel5" class="lpltopiccontaier">
+</div>
+
+<div id="lpltopiclevel6" class="lpltopiccontaier">
+</div>
+
+<br style="clear:both">
+</div>
 

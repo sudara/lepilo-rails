@@ -9,7 +9,7 @@ class MediablocksController < ApplicationController
   end
 
   def list
-    @mediablock_pages, @mediablocks = paginate :mediablocks, :order => 'created_at DESC', :per_page => 24
+    @mediablock_pages, @mediablocks = paginate :mediablocks, :order => 'created_at DESC', :per_page => 25
     if params[:rendersimple]  
       render :layout => 'simple'
     end
@@ -29,7 +29,7 @@ class MediablocksController < ApplicationController
   end
 
   def selectmedia
-    @mediablock_pages, @mediablocks = paginate :mediablocks, :per_page => 10
+    @mediablock_pages, @mediablocks = paginate :mediablocks, :per_page => 25
     if params[:rendersimple]  
       render :layout => 'simple'
     end
@@ -83,7 +83,7 @@ class MediablocksController < ApplicationController
       @mediablock.update
       
       addLink = BlockLink.new
-      addLink.mediablock_id = @mediablock.id
+      addLink.linked = @mediablock
       addLink.fragment_id = session[:current_fragment]
       addLink.collection_id = session[:current_collection]
       addLink.save
@@ -91,7 +91,7 @@ class MediablocksController < ApplicationController
       flash[:ok] = 'Mediablock was successfully created.'
       redirect_to :action => 'list'
     else
-      flash[:ok] = 'Mediablock was successfully created.'
+      flash[:error] = 'Unable to create Mediablock.'
       render :action => 'new'
     end
   end

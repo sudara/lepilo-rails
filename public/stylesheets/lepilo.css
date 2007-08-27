@@ -1,28 +1,28 @@
 /* START YAML definitions */
 
 #main { margin:0; padding:0; }
-#footer { margin:0; padding:0; padding-bottom:50px; }
+#footer { margin:0; padding:0; padding-bottom:5px; }
 
-#col1 { margin:0; padding:0; width: 48px; } 
+#col1 { margin:0; padding:0; width:250px; } 
 
 #col2 { 
   background-image:url(/images/container.png); 
-  background-repeat: repeat-x;
-  margin:0; padding:0; width: 300px; } 
+  background-repeat:repeat-x;
+  margin:0; padding:0; width:300px; } 
 
 #col3 { 
   background-color:#fafafa;
 	margin:0; padding:0;
-	border-left: 48px #ddd solid;
-	border-right: 300px #fff solid;
+	border-left:250px #444 solid;
+	border-right:300px #fff solid;
 }
 
 /* END YAML definitions */
 
 body { 
-  background-color:#fff; 
+  background-color:#fafafa; 
   color:#3d4649; 
-  font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family:"HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   font-size:0.75em;
   line-height:2em;
   height:100%;
@@ -74,8 +74,8 @@ a:hover {
 
 a.linkicon, a img.linkicon {
   background-color:transparent;
-  position: relative;
-  text-decoration: none;
+  position:relative;
+  text-decoration:none;
   float:left;
   margin:0px;
   padding:0px;
@@ -84,7 +84,7 @@ a.linkicon, a img.linkicon {
 
 #ok {
   background-image:url(/images/railsflash.png); 
-  background-repeat: repeat-x;
+  background-repeat:repeat-x;
   border-color:transparent;
   height:64px;
   border-left:5px solid #b4e614;
@@ -94,7 +94,7 @@ a.linkicon, a img.linkicon {
  
 #info {
   background-image:url(/images/railsflash.png); 
-  background-repeat: repeat-x;
+  background-repeat:repeat-x;
   border-color:transparent;
   height:64px;
   border-left:5px solid #86b1ff;
@@ -104,7 +104,7 @@ a.linkicon, a img.linkicon {
  
 #warning {
   background-image:url(/images/railsflash.png); 
-  background-repeat: repeat-x;
+  background-repeat:repeat-x;
   border-color:transparent;
   height:64px;
   border-left:5px solid #ffd90b;
@@ -114,7 +114,7 @@ a.linkicon, a img.linkicon {
 
 #error {
   background-image:url(/images/railsflash.png); 
-  background-repeat: repeat-x;
+  background-repeat:repeat-x;
   border-color:transparent;
   height:64px;
   border-left:5px solid #ff6400;
@@ -185,20 +185,20 @@ div.progressBar {
 
 .progressBar .border {
   background-image:url(/images/containerb.png); 
-  background-repeat: repeat-x;
-  border-bottom: 1px solid #333; 
+  background-repeat:repeat-x;
+  border-bottom:1px solid #333; 
   width:90%; 
   height:16px;
-  margin: 2px 5px 2px 0; 
-  padding: 0px; 
-  margin-left: auto;
-  margin-right: auto;
+  margin:2px 5px 2px 0; 
+  padding:0px; 
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .progressBar .background {
   background-image:url(/images/progress.gif); 
   background-repeat:repeat-x;
-  border-right: 1px solid #ccc; 
+  border-right:1px solid #ccc; 
   height:16px;
   width:1px;
 }
@@ -206,20 +206,20 @@ div.progressBar {
 
 div.progress-container {
   background-image:url(/images/containerb.png); 
-  background-repeat: repeat-x;
-  border-bottom: 1px solid #333; 
-  width: 90%; 
-  margin: 2px 5px 2px 0; 
-  padding: 0px; 
-  margin-left: auto;
-  margin-right: auto;
+  background-repeat:repeat-x;
+  border-bottom:1px solid #333; 
+  width:90%; 
+  margin:2px 5px 2px 0; 
+  padding:0px; 
+  margin-left:auto;
+  margin-right:auto;
 }
 
 div.progress-container > div {
   background-image:url(/images/progress.gif); 
   background-repeat:repeat-x;
-  border-right: 1px solid #ccc; 
-  height: 16px
+  border-right:1px solid #ccc; 
+  height:16px
 }
 
 
@@ -288,7 +288,9 @@ div.progress-container > div {
 }
 
 #lploptions > div {
-  padding:25px;
+  padding-left:1em;
+  padding-top:0.35em;
+  padding-bottom:0.35em;
 }
 
 #lpleditor {
@@ -320,38 +322,74 @@ div.progress-container > div {
 }
 
 #lplheader {
-  background-image:url(/images/plastic.png); 
-  background-repeat:repeat-x;
+/*  background-image:url(/images/plastic.png); 
+  background-repeat:repeat-x; */
   background-color:transparent;
   overflow:hidden;
   height:21px;
   margin-top:0px;
   margin-bottom:0px;
-  border-bottom:1px solid #bfbfbf;
+  border-bottom:1px solid #0f0;
 }
 
+#headerbuttons {
+  position:absolute;
+  left:250px;
+  margin-top:2px;
+}
+
+#headerbuttons .button {
+  background-image:url(/images/headerbidle.png); 
+  background-repeat:repeat-x;
+  background-position:right;
+  background-color:transparent;
+  padding-left:2px;
+  padding-right:3px;
+  float:left;
+  height:22px;
+  margin-top:0px;
+  margin-bottom:0px;
+}
+
+#headerbuttons .button:hover {
+  background-image:url(/images/headerbover.png); 
+  background-repeat:repeat-x;
+  background-position:right;
+  background-color:transparent;
+  padding-left:2px;
+  padding-right:3px;
+  float:left;
+  height:22px;
+  margin-top:0px;
+  margin-bottom:0px;
+}
+
+#headerbuttons .button img {
+  margin-top:1px;
+}
+
+
 #lplcontent {
-  background-color: #fff;
+  background-color:#fff;
 }
 
 #lplcontainer {
-  position:relative;
-  float:left;
-  background-color:#f0f0f0;
+  background-image:url(/images/bgheader.png); 
+  background-repeat:repeat-x;
+  background-color:#fafafa;
 }
 
 #lpltemplatecontainer {
-  clear:both;
-  margin:25px;
+  margin:5px;
   padding:10px;
   padding-bottom:25px;
 }
 
 #lplsearchlist {
-  top: 0px;
-  right: 50px;
-  position: absolute;
-  z-index: 8000;
+  top:0px;
+  right:50px;
+  position:absolute;
+  z-index:8000;
   width:280px;
   float:left;
 }
@@ -359,11 +397,11 @@ div.progress-container > div {
 #lplinspector {
   background-color:#fff;
   background-image:url(/images/plastic.png); 
-  background-repeat: repeat-x;
-  position: absolute;
+  background-repeat:repeat-x;
+  position:absolute;
   top:0px;
   right:0px;
-  z-index: 1000;
+  z-index:1000;
   width:320px;
   float:right;
 }
@@ -371,15 +409,15 @@ div.progress-container > div {
   
   
 #tabs{
-  background: url(/images/plastic.png) repeat-x top;	
+  background:url(/images/plastic.png) repeat-x top;	
   padding:0;
   float:right;
   width:300px;
-  height:22px;
-  background: transparent;
-  voice-family: "\"}\"";
-  voice-family: inherit;
-  border-left:1px solid #bfbfbf;
+  height:26px;
+  background:transparent;
+  voice-family:"\"}\"";
+  voice-family:inherit;
+  border-left:1px solid #aaa;
 }
 #tabs ul{
   margin:0;
@@ -393,50 +431,49 @@ div.progress-container > div {
 #tabs a{
   float:left;
   margin:0;
-  height:22px;
+  height:26px;
   min-width:32px;
   text-decoration:none;
   border:0px;
-  background-color:transparent;
+  background:#d8d8d8 url(/images/header.jpg) repeat-x;
   border-right:1px solid #999;
 }
 #tabs a span{
   float:left;
   display:block;
   margin:0px;
-  padding-top:3px;
-  padding-left:5px;
-  padding-right:5px;
+  padding-top:5px;
+  padding-left:4px;
+  padding-right:4px;
   border:0px;
   text-align:center;
 }
 #tabs a span img {border:0px;}
 #tabs a span{float:none;}
 #tabs a:hover{
-  background-color: #fafafa; 
+  background-color:#fafafa; 
 }
 #tabs a:hover span{
 }
 #tabHeaderActive span { 
-  background: transparent;
+  background:transparent;
   border:0px;
 }
 #tabHeaderActive a { 
-  background: transparent;
+  background:transparent;
   background-image:url(/images/plasticg.png); 
-  background-repeat: repeat-x;
+  background-repeat:repeat-x;
   border-right:1px solid #999;
 }
 .tabContent {
   background-image:url(/images/container.png); 
-  background-repeat: repeat-x;
-  clear:both;
+  background-repeat:repeat-x;
   background-color:#fff;
+  overflow:auto;
 }
 .sidebar {
   background-image:url(/images/container.png); 
-  background-repeat: repeat-x;
-  position:absolute;
+  background-repeat:repeat-x;
   background-color:#fff;
   width:100%;
   overflow:visible;
@@ -453,32 +490,33 @@ div.progress-container > div {
 }
 
 #lplfooter {
-  position: fixed;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #f5f5f5;
-  background-image:url(/images/container.png); 
+  position:fixed;
+  border-top:1px solid #bbb;
+  border-bottom:1px solid #ccc;
+/*  background-image:url(/images/container.png); */
+  background-image:url(/images/plastic.png); 
   background-repeat:repeat-x;
   background-color:transparent;
-  left: 0px;
+  left:0px;
   width:100%;
   padding-left:10px;
   padding-top:4px;
   padding-bottom:2px;
 	margin-top:20px;
-  bottom: 0px;
+  bottom:0px;
   text-align:left;
-  color: #aaa;
-  font-size: 10px;
-  line-height: 14px;
+  color:#666;
+  font-size:10px;
+  line-height:14px;
   z-index:10000;
 }
 
 #dropzone {
-  background-image:url(/images/container.png); 
-  background-repeat: repeat-x;
-  width:150px;
+  border:5px solid transparent;
   float:right;
-  margin-right:10px;
+  margin-right:5px;
+  padding:5px;
+  z-index:150;
 }
 
 .dropzone-active {
@@ -486,28 +524,28 @@ div.progress-container > div {
 }
 
 .templatebox {
-  min-height: 50px;
-  min-width: 50px;
-  border: 1px dashed #7d7d7d;
-  background-color: #fff;
-  float: left;
-  overflow: visible;
+  min-height:50px;
+  min-width:50px;
+  border:1px dashed #7d7d7d;
+  background-color:#fff;
+  float:left;
+  overflow:visible;
 }
 
 .templateboxover {
-  min-height: 50px;
-  min-width: 50px;
-  border: 1px dashed #a1ff2a;
-  float: left;
-  overflow: visible;
-  background: #7d7d7d url(/images/dropzone.png) no-repeat 10px 10px;
+  min-height:50px;
+  min-width:50px;
+  border:1px dashed #a1ff2a;
+  float:left;
+  overflow:visible;
+  background:#7d7d7d url(/images/dropzone.png) no-repeat 10px 10px;
 }
 
 #block-list {
   margin:0px;
 }
 
-#lpltopic-list {
+.lpltopic-list {
   background:#fafafa;
   font-size:13px;
   padding:0px;
@@ -522,14 +560,14 @@ div.progress-container > div {
   float:left;
   font-size:13px;
   padding:0px;
-  margin-left:1px;
-  margin-bottom:1px;
+  margin-left:5px;
+  margin-bottom:5px;
   list-style-type:none;
   width:220px;
   min-height:350px;
 }
 
-#lpltopic-list > li {
+.lpltopic-list > li {
   background-image:url(/images/gradientmini.png); 
   background-repeat:repeat-x;
   margin:0px;
@@ -541,8 +579,8 @@ div.progress-container > div {
   border-top:1px solid #ddd;
 }
 
-#lpltopic-list li:hover {
-  background-image:url(/images/gradientg.png); 
+.lpltopic-list li:hover {
+  background-image:url(/images/gradientd.png); 
   background-repeat:repeat-x;
   margin:0px;
   padding:0px;
@@ -553,12 +591,11 @@ div.progress-container > div {
   border-top:1px solid #ddd;
 }
 
-#lpltopic-list a {
+.lpltopic-list a {
   cursor:pointer;
-  border:none;
 }
 
-#lpltopic-list-top {
+.lpltopic-list-top {
   padding-top:6px;
   height:26px;
   text-align:center;
@@ -573,12 +610,12 @@ div.progress-container > div {
   top:0px;
   left:0px;
   border:1px solid #bfbfbf;
-  background: #bfbfbf url(/images/container.png);
+  background:#bfbfbf url(/images/container.png);
   float:left;
 }
 
 #lpltopic-select > .gray {
-  background: url(/images/navg.png) no-repeat center left;
+  background:url(/images/navg.png) no-repeat center left;
   margin:0px;
   padding:0px;
   padding-left:5px;
@@ -588,7 +625,7 @@ div.progress-container > div {
 }
 
 #lpltopic-select > .graywhite {
-  background: url(/images/navgw.png) no-repeat center left;
+  background:url(/images/navgw.png) no-repeat center left;
   margin:0px;
   padding:0px;
   padding-left:25px;
@@ -597,7 +634,7 @@ div.progress-container > div {
 }
 
 #lpltopic-select > .graygreen {
-  background: url(/images/navgg.png) no-repeat center left;
+  background:url(/images/navgg.png) no-repeat center left;
   margin:0px;
   padding:0px;
   padding-left:25px;
@@ -606,7 +643,7 @@ div.progress-container > div {
 }
 
 #lpltopic-select > .whitewhite {
-  background: url(/images/navww.png) no-repeat center left;
+  background:url(/images/navww.png) no-repeat center left;
   margin:0px;
   padding:0px;
   padding-left:25px;
@@ -615,7 +652,7 @@ div.progress-container > div {
 }
 
 #lpltopic-select > .whitegreen {
-  background: url(/images/navwg.png) no-repeat center left;
+  background:url(/images/navwg.png) no-repeat center left;
   margin:0px;
   padding:0px;
   padding-left:25px;
@@ -624,7 +661,7 @@ div.progress-container > div {
 }
 
 #lpltopic-select > .greenwhite {
-  background: url(/images/navw.png) no-repeat center left;
+  background:url(/images/navw.png) no-repeat center left;
   margin:0px;
   padding:0px;
   padding-left:25px;
@@ -669,22 +706,24 @@ td {
 How to get Safari-specific CSS
 
 html>body:not(:-safari-only) h1 {
-  font-family: "HelveticaNeue-Light";
+  font-family:"HelveticaNeue-Light";
 }
 */
 
 h1 {
-  font-family: "HelveticaNeue-UltraLight", "Helvetica Neue UltraLight", "Arial", sans-serif;
+  font-family:"HelveticaNeue-UltraLight", "Helvetica Neue UltraLight", "Arial", sans-serif;
   color:#81bc00;
   font-size:2em;
   font-weight:normal;
   line-height:1.2em;
+  display:inline;
   padding:0;
+  padding-right:0.5em;
   margin:0;
 }
 
 h2 {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica", "Arial", sans-serif;
+  font-family:"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica", "Arial", sans-serif;
   color:#4d5659;
   font-size:16px;
   font-weight:normal;
@@ -693,61 +732,61 @@ h2 {
 }
 
 h3 {
-  font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family:"HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   color:#81bc00;
   height:10px;
   font-size:12px;
   font-weight:normal;
   line-height:1.5em;
-  display: inline;
+  display:inline;
   padding:0;
   margin:0;
 }
 
 h4 {
-  font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family:"HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   color:#81bc00;
-  font-size:14px;
+  font-size:1.4em;
   font-weight:normal;
-  line-height:1.6em;
+  line-height:1.8em;
   margin:5px;
-  display: inline;
+  display:inline;
   border:0;
   padding:0;
   margin:0;
 }
 
 h5, h5.gray {
-  font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family:"HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   color:#4d5659;
   font-size:10px;
   font-weight:normal;
   line-height:1.5em;
   margin:5px;
   padding:0;
-  display: inline;
+  display:inline;
 }
 
 h5.green {
-  font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family:"HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   color:#81bc00; 
   font-size:10px;
   font-weight:normal;
   line-height:1.5em;
   margin:5px;
   padding:0;
-  display: inline;
+  display:inline;
 }
 
 code {
-  background-image:url(/images/gradientg.png); 
-  background-repeat:repeat-x;
   font-size:14px;
-  font-weight:bold;
-  color:#fff;
+  font-weight:normal;
+  color:#000;
   padding:2px;
+  padding-left:5px;
+  padding-right:5px;
   margin-right:2px;
-  background-color:#f8ffe7;
+  background-color:#d1f194;
 }
 
 .lplblock {
@@ -758,8 +797,10 @@ code {
 }
 
 .articlemedia {
-  max-width:250px;
-  height:auto;
+  max-width:350px;
+  max-height:350px;
+  margin:0;
+  padding:0;
 }
 
 .imagepreview {
@@ -791,7 +832,7 @@ code {
 div.ipmtitle {
   background-image:url(/images/iconblack.png); 
   background-repeat:repeat-y;
-  font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family:"HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   color:#fff;
   height:25px;
   font-size:10px;
@@ -806,7 +847,7 @@ div.ipmtitle {
   background-repeat:repeat-y;
   padding-left:5px;
   padding-right:5px;
-  overflow: auto;
+  overflow:auto;
 }
 
 #searchResultsCollections {
@@ -814,7 +855,7 @@ div.ipmtitle {
   background-repeat:repeat-y;
   padding-left:5px;
   padding-right:5px;
-  overflow: auto;
+  overflow:auto;
 }
 
 #searchResultsArticles {
@@ -822,7 +863,7 @@ div.ipmtitle {
   background-repeat:repeat-y;
   padding-left:5px;
   padding-right:5px;
-  overflow: auto;
+  overflow:auto;
 }
 
 .searchblock {
@@ -836,17 +877,17 @@ div.ipmtitle {
 }
 
 .searchblock img {
-  vertical-align: text-top;
+  vertical-align:text-top;
 }
 
 .sortableblock {
   margin-right:5px;
   margin-bottom:5px;
   overflow:hidden;
+  width:300px;
   float:left;
   background-color:#fff;
-  border: 5px solid #fff;
-  clear:both;
+  border:5px solid #fff;
 }
 
 .listblock {
@@ -858,14 +899,14 @@ div.ipmtitle {
   width:250px;
   height:90px;
   overflow:hidden;
-  border: 1px solid #eee;
+  border:1px solid #eee;
   float:left;
 }
 
 .listblock:hover {
   background-image:url(/images/container.png); 
   background-repeat:repeat-x;
-  border: 1px solid #fff;
+  border:1px solid #fff;
 }
 
 .previewblock {
@@ -877,14 +918,14 @@ div.ipmtitle {
   width:125px;
   height:125px;
   overflow:hidden;
-  border: 1px solid #333;
+  border:1px solid #333;
   float:left;
 }
 
 .previewblock:hover {
   background-image:url(/images/container.png); 
   background-repeat:repeat-x;
-  border: 1px solid #81bc00;
+  border:1px solid #81bc00;
 }
 
 
@@ -954,14 +995,23 @@ div.block128x128:hover {
   overflow:hidden;
 }
 
+.dragline:hover {
+  font-size:11px;
+  line-height:1.5em;
+  padding-left:25px;
+  border-bottom:1px solid #bfbfbf;
+  background-color:#e5f4d7;
+  overflow:hidden;
+}
+
 .articlethumbnail {
   border:1px solid #f7f8f5;
   width:100px;
   height:auto;
   max-height:100px;
-  margin-left:20px;
-  margin-top:10px;
-  margin-bottom:10px;
+  margin-left:2px;
+  margin-top:2px;
+  margin-bottom:2px;
 }
 
 .description {
@@ -976,7 +1026,7 @@ div.block128x128:hover {
 }
 
 .articledescription {
-  font-family: "Quadraat-Regular", "Quadraat Regular", "Garamons", serif;
+  font-family:"Quadraat-Regular", "Quadraat Regular", "Garamons", serif;
   border:1px solid #f7f8f5;
   font-size:12px;
   font-weight:normal;
@@ -1004,6 +1054,13 @@ div.block128x128:hover {
 .icon16 {
   margin-left:3px;
   width:16px;
+  vertical-align:top;
+}
+
+.titleicon {
+  margin-top:4px;
+  margin-left:4px;
+  margin-right:4px;
   vertical-align:top;
 }
 
@@ -1080,12 +1137,16 @@ div.block128x128:hover {
 }
 
 .smalltext {
-  font-size: 10px;
+  font-size:10px;
+  padding:0px;
+  padding-left:5px;
+  margin-top:-5px;
+  margin-bottom:-5px;
 }
 
 .textbutton {
   font-size:10px;
-  height: 20px;
+  height:20px;
   color:#4d5659;
   padding:2px;
   padding-left:10px;
@@ -1107,11 +1168,111 @@ div.block128x128:hover {
   background-image:url(/images/gradientedit.png); 
   background-repeat:repeat-x;
   background-color:#d1d1d1;
-  padding-left:10px;
   padding-top:10px;
   padding-bottom:10px;
-  overflow:auto;
+  clear:none;
   border-bottom:1px solid #ddd;
+}
+
+.dashboardtitle {
+  background-image:url(/images/gradientd.png); 
+  background-repeat:repeat-x;
+  padding:0;
+  overflow:auto;
+  font-size:0.85em;
+  font-weight:bold;
+  border-top:1px solid #ccc;
+  border-bottom:1px solid #fff;
+  color:#444;
+  text-decoration:none;
+	text-shadow:#fff 2px 2px 2px;
+}
+
+.dashboardtitle:hover {
+  cursor:s-resize;
+}
+
+.dashboardtitleactive {
+  background-image:url(/images/containerb.png); 
+  background-repeat:repeat-x;
+  padding:0;
+  overflow:auto;
+  font-size:0.85em;
+  font-weight:bold;
+  border-top:1px solid #ccc;
+  border-bottom:1px solid #fff;
+  color:#444;
+  text-decoration:none;
+	text-shadow:#fff 2px 2px 2px;
+}
+
+.dashboard {
+  background-color:#444;
+  padding: 0px 5px 0px 5px;
+  overflow:hidden;
+  font-weight:bold;
+}
+
+.dashboard > div {
+  height:25px;
+  color:#fff;
+	text-shadow:#000 2px 2px 2px;
+  margin-left:10px;
+  padding-left:20px;
+  margin-bottom:2px;
+}
+
+.dashboard > div.active {
+  height:25px;
+  color:#cbe845;
+	text-shadow:#000 2px 2px 2px;
+  margin-left:10px;
+  padding-left:20px;
+  background-repeat:no-repeat;
+  background-image:url(/images/rounded25x210b.png);
+}
+
+.dashboard > div.active > a {
+  color:#cbe845;
+}
+
+.dashboard > div:hover{
+  background-repeat:no-repeat;
+  background-image:url(/images/rounded25x210b.png);
+}
+
+.dashboard > div > a {
+  color:#fff;
+  text-decoration:none;
+  border:0px;
+}
+
+.dashboard > strong {
+  color:#fff;
+	text-shadow:#000 2px 2px 2px;
+}
+
+div.tags, div.tags:hover {
+  background-repeat:no-repeat;
+  background-image:url(/images/tag.png);
+  float:left;
+  min-width:25px;
+  height:25px;
+  color:#fff;
+	text-shadow:#243 2px 2px 2px;
+	line-height:8px;
+  margin-right:10px;
+  margin-top:5px;
+  padding-left:10px;
+}
+
+.tags > img {
+  position:relative;
+  vertical-align:middle;
+  right:0px;
+  top:0px;
+  margin-left:2px;
+  margin-right:-10px;
 }
 
 .centered {
@@ -1125,16 +1286,25 @@ div.block128x128:hover {
 }
 
 .orange {
-  color: #FF810D;
+  color:#FF810D;
 }
 
 .green {
-  color: #81bc00;
+  color:#81bc00;
 }
 
-.greenbox {
-  background-color:#fafafa;
-  border:1px solid #b5dd45;
+.shadedwhite {
+  float:left;
+  margin-left:10px;
+  margin-right:1  0px;
+  color:#fff;
+  font-weight:bold;
+	text-shadow:#333 2px 2px 1px;
+}
+
+.box {
+  border-top:1px solid #ccc;
+  background-color:#f8f8f8;
   padding:4px;
-  margin:2px;
+  margin:0px;
 }

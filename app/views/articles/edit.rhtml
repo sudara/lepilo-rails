@@ -1,28 +1,41 @@
+<%  session[:current_article] = params[:id] %>  
+<%  session[:current_collection] = nil %>  
+<%  
+  if params[:page]
+    session[:current_page] = params[:page] 
+  else
+    session[:current_page] = 1
+  end 
+%>
+
 
 <div id="lplcontainer">
-  <div id="lpltopic-select">
-    <% article_topic = Topic.find(@article.topic_id) %>
-    <%= render_partial 'topics/selector', nil, 'current_topic' => article_topic %>
-  </div><br style="clear:both">
-  <div id="lplinspector">
-        
+  <div id="dropzone">
+    <%  thumbnail = Mediablock.find_by_id(@article.thumbnail_id) %>
+    <div id="thumbnaildrop">
+      <% if thumbnail %>
+        <%= image_tag "/data/thumbnails/#{thumbnail.filename}",
+            :alt => thumbnail.title, 
+            :title => thumbnail.title, 
+            :class => "articlethumbnail"  %>
+      <% else %>
+        <%= image_tag "/images/rails.png",
+            :class => "articlethumbnail" %>
+      <% end %>
+    </div>
+  <%= drop_receiving_element "dropzone", 
+        :update => "thumbnaildrop", :url => { :action => "thumbnail" },
+        :accept => "dragblock", :hoverclass => "dropzone-active" %>
+  <%= drop_receiving_element "dropzone", 
+        :update => "thumbnaildrop", :url => { :action => "thumbnail" },
+        :accept => "sortableblock", :hoverclass => "dropzone-active" %>
   </div>
 
-  <div id="lplheader">
-  <%= content_tag 'div', '<img src="/images/opentray.png" />', :style => 'width:63px;float:left',
-    :onclick => visual_effect(:blindDown, 'lploptions')  %>
-  <%= content_tag 'div', '<img src="/images/closetray.png" />', :style => 'width:80px;float:left',
-    :onclick => visual_effect(:blindUp, 'lploptions') %>
-  </div>
-  <div id="lploptions" style="display:none">
-    <div id="entrySettings" >
-        <%= start_form_tag :action => 'update', :id => @article %>
-          <%= render :partial => 'form' %>
-          <br style="clear:both;"/>
-          <%= submit_tag 'Speichern' %>
-        <%= end_form_tag %>
-    </div>
-  </div>
+  <div id="lpltopic-select">
+    <%# article_topic = Topic.find(@article.topic_id) %>
+    <% article_topic = Topic.find(2) %>
+    <%= render :partial => 'topics/selector', :locals => { :current_topic => article_topic } %>
+  </div><br>
 
   <%  if params[:fragment] == "print"
         newinfragment = @article.fragments.find_by_content("print").id 
@@ -30,38 +43,37 @@
         newinfragment = @article.fragments.find_by_content("web").id 
       end %>
 
-  <% #link_to "Flash Vorschau", { :controller => "articles",
-    #                                :action => "showswf", 
-     #                               :id => @article.id }, 
-      #                              :popup => ['swf_preview', 'height=700,width=980,scrollbars=0'] 
-      %>
+  <%#link_to "Flash Vorschau", { :controller => "articles",
+                                 :action => "showswf", 
+                                 :id => @article.id }, 
+                                 :popup => ['swf_preview', 'height=700,width=980,scrollbars=0'] -%>
 
-  <%= link_to image_tag("/images/back.png", :alt => "back", :title => "back", :class => "linkicon"), 
-  { :action => 'list', :page => params[:page] }, :class => "linkicon" -%>
-  <%= link_to image_tag("/images/textblock-add.png", :alt => "add textblock", :title => "add textblock", :class => "linkicon"), 
-  { :controller => "textblocks", 
-    :action => "new",
-    :article_id => @article.id, 
-    :fragment_id => newinfragment },
-    :class => "linkicon", 
-    :popup => ['new_window', 'height=600,width=600,scrollbars=1'] -%>
-  <%= link_to image_tag("/images/mediablock-add.png", :alt => "add mediablock", :title => "add mediablock", :class => "linkicon"), 
-  { :controller => "mediablocks", 
-    :action => "new",
-    :article_id => @article.id, 
-    :fragment_id => newinfragment },
-    :class => "linkicon",  
-    :popup => ['new_window', 'height=600,width=600,scrollbars=1'] -%>
-
-  <div id="lpltemplatecontainer">  
-  <% if params[:fragment] == "print" %>
-  <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.find_by_content("print") }) -%>  
-    <%# render :partial => "templates/dina4print" %>
-  <% else %>
-    <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.find_by_content("web") }) -%>  
-  <% end %>
-  <br style="clear:both"/>
+  <div id="lpltemplatecontainer"> 
+    <div style="height:50px">
+    <%= link_to image_tag("/images/back.png", :alt => "back", :title => "back", :class => "linkicon"), 
+    { :action => 'list', :page => params[:page] }, :class => "linkicon" -%>
+    <%= link_to image_tag("/images/textblock-add.png", :alt => "add textblock", :title => "add textblock", :class => "linkicon"), 
+    { :controller => "textblocks", 
+      :action => "new",
+      :article_id => @article.id, 
+      :fragment_id => newinfragment },
+      :class => "linkicon", 
+      :popup => ['new_window', 'height=600,width=600,scrollbars=1'] -%>
+    <%= link_to image_tag("/images/mediablock-add.png", :alt => "add mediablock", :title => "add mediablock", :class => "linkicon"), 
+    { :controller => "mediablocks", 
+      :action => "new",
+      :article_id => @article.id, 
+      :fragment_id => newinfragment },
+      :class => "linkicon",  
+      :popup => ['new_window', 'height=600,width=600,scrollbars=1'] -%>
+    </div>
+    <% if params[:fragment] == "print" %>
+      <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.find_by_content("print") }) -%>  
+      <%# render :partial => "templates/dina4print" %>
+    <% else %>
+      <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.find_by_content("web") }) -%>  
+    <% end %>
+    <br style="clear:both">
   </div>
-
 </div>
 

@@ -59,14 +59,17 @@ class TopicsController < ApplicationController
 
   def edit
     @topic = Topic.find(params[:id])
+    @topic.description.length < 2
+      @topic.description = '...'
     if params[:rendersimple]  
       render :layout => 'simple'
     end
   end
   
   def topic_changed
-    @current_topic = Topic.find_by_topic_id(params[:id])
-    render :partial => "selector", :locals => { :current_topic => @current_topic }
+    current_topic  = Topic.find(params[:id])
+    current_parent = Topic.find_by_topic_id(params[:id])
+    render :partial => "selector", :locals => { :current_topic => current_topic, :current_parent => current_parent }
   end   
   
   def sort 
