@@ -274,8 +274,8 @@
     <%
       article_counter = Article.count
       collection_counter = Collection.count
-      text_counter = BlockLink.count(:conditions => "textblock_id")
-      media_counter = BlockLink.count(:conditions => "mediablock_id") -%>  
+      text_counter = Textblock.count
+      media_counter = Mediablock.count -%>  
     <%= image_tag "/images/16article.png",
         :alt => "anzahl der seiten", 
         :title => "anzahl der seiten", 

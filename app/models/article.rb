@@ -20,12 +20,12 @@ class Article < ActiveRecord::Base
   end
   
   def count_media
-    media_counter = BlockLink.count(:all, :conditions => "mediablock_id AND fragment_id = #{self.fragments.first.id}")
+    media_counter = BlockLink.count(:all, :conditions => "linked_type = 'Mediablock' AND fragment_id = #{self.fragments.first.id}")
     return media_counter
   end
 
   def count_text
-    text_counter = BlockLink.count(:all, :conditions => "textblock_id AND fragment_id = #{self.fragments.first.id}")
+    text_counter = BlockLink.count(:all, :conditions => "linked_type = 'Textblock' AND fragment_id = #{self.fragments.first.id}")
     return text_counter
   end
 

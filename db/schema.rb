@@ -18,57 +18,17 @@ ActiveRecord::Schema.define(:version => 9) do
     t.column "description",  :text
   end
 
-  create_table "articles_fragments", :id => false, :force => true do |t|
-    t.column "article_id",  :integer
-    t.column "fragment_id", :integer
-  end
-
   create_table "articles_tags", :id => false, :force => true do |t|
     t.column "article_id", :integer
     t.column "tag_id",     :integer
   end
 
   create_table "block_links", :force => true do |t|
-    t.column "article_id",    :integer
-    t.column "mediablock_id", :integer
-    t.column "textblock_id",  :integer
+    t.column "linked_id",     :integer
+    t.column "linked_type",   :string,  :limit => 36
     t.column "position",      :integer
     t.column "fragment_id",   :integer
-    t.column "collection_id",    :integer
-  end
-
-  create_table "block_links_fragments", :id => false, :force => true do |t|
-    t.column "block_link_id", :integer
-    t.column "fragment_id",   :integer
-  end
-
-  create_table "block_links_mediablocks", :id => false, :force => true do |t|
-    t.column "block_link_id", :integer
-    t.column "mediablock_id", :integer
-  end
-
-  create_table "block_links_textblocks", :id => false, :force => true do |t|
-    t.column "block_link_id", :integer
-    t.column "textblock_id",  :integer
-  end
-
-  create_table "comments", :force => true do |t|
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
-    t.column "name",       :string,   :limit => 250
-    t.column "email",      :string,   :limit => 250
-    t.column "webpage",    :string,   :limit => 250
-    t.column "content",    :text
-  end
-
-  create_table "fragments", :force => true do |t|
-    t.column "article_id", :integer
-    t.column "content",    :string,   :limit => 64
-    t.column "position",   :integer
-    t.column "user_id",    :integer
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
-    t.column "info",       :string,   :limit => 250
+    t.column "collection_id", :integer
   end
 
   create_table "collections", :force => true do |t|
@@ -80,6 +40,16 @@ ActiveRecord::Schema.define(:version => 9) do
     t.column "updated_at",   :datetime
     t.column "title",        :string,   :limit => 250
     t.column "description",  :text
+  end
+
+  create_table "fragments", :force => true do |t|
+    t.column "article_id", :integer
+    t.column "content",    :string,   :limit => 64
+    t.column "position",   :integer
+    t.column "user_id",    :integer
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
+    t.column "info",       :string,   :limit => 250
   end
 
   create_table "mediablocks", :force => true do |t|
@@ -95,15 +65,6 @@ ActiveRecord::Schema.define(:version => 9) do
     t.column "description",   :string
   end
 
-  create_table "notes", :force => true do |t|
-    t.column "released",    :boolean
-    t.column "user_id",     :integer
-    t.column "created_at",  :datetime
-    t.column "updated_at",  :datetime
-    t.column "title",       :string,   :limit => 250
-    t.column "description", :text
-  end
-
   create_table "settings", :force => true do |t|
     t.column "setting_id",  :integer, :default => 0
     t.column "position",    :integer
@@ -114,9 +75,6 @@ ActiveRecord::Schema.define(:version => 9) do
 
   create_table "tags", :force => true do |t|
     t.column "name", :string, :limit => 250
-  end
-
-  create_table "templates", :force => true do |t|
   end
 
   create_table "textblocks", :force => true do |t|
