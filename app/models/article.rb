@@ -2,7 +2,7 @@ class Article < ActiveRecord::Base
   belongs_to :topic
   has_many :fragments, :order => :position
   has_many :block_links, :order => :position, :as => :linked
-
+  
   def after_create    
     @articleWebFragment = Fragment.new
     @articleWebFragment.article_id = self.id

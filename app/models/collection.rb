@@ -7,7 +7,7 @@ class Collection < ActiveRecord::Base
     mediablocks = BlockLink.find_all_by_collection_id(self.id) 
     
     for block in mediablocks
-      if block.mediablock_id
+      if block.linked_type == "Mediablock"
         media_counter = media_counter + 1
       end
     end
@@ -21,7 +21,7 @@ class Collection < ActiveRecord::Base
     articleblocks = BlockLink.find_all_by_collection_id(self.id) 
     
     for block in articleblocks
-      if block.article_id
+      if block.linked_type == "Article"
         article_counter = article_counter + 1
       end
     end

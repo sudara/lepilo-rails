@@ -8,7 +8,7 @@
 #col2 { 
   background-image:url(/images/container.png); 
   background-repeat:repeat-x;
-  margin:0; padding:0; width:300px; } 
+  margin:0; padding:0; width:300px; overflow:visible;} 
 
 #col3 { 
   background-color:#fafafa;
@@ -469,7 +469,7 @@ div.progress-container > div {
   background-image:url(/images/container.png); 
   background-repeat:repeat-x;
   background-color:#fff;
-  overflow:auto;
+  overflow:visible;
 }
 .sidebar {
   background-image:url(/images/container.png); 
@@ -515,6 +515,7 @@ div.progress-container > div {
   border:5px solid transparent;
   float:right;
   margin-right:5px;
+  margin-bottom:-150px;
   padding:5px;
   z-index:150;
 }
