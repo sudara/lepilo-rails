@@ -11,7 +11,8 @@ development:
   username: samo
   password: xype
   socket: /tmp/mysql.sock
-
+  encoding: UTF8
+  
 #development:
 #  adapter: mysql
 #  database: lpl
@@ -48,6 +49,7 @@ production:
   username: samo
   password: xype
   socket: /tmp/mysql.sock
+  encoding: UTF8
 
 #production:
 #  adapter: mysql

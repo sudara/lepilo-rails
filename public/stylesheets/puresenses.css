@@ -1,0 +1,129 @@
+body {
+	background-color: #fff;
+	background-repeat: no-repeat;
+	background-position: center top;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 17px;
+	color: #151515;
+	text-decoration: none;
+}
+
+* { behavior: url(/iepng.htc); }
+
+h1 {
+  font-family: "Arial", sans-serif;
+  font-size:1.7em;
+  font-weight:normal;
+  line-height:1.4em;
+  color:#256;
+  display: block;
+}
+
+h2 {
+  font-family: "Arial", sans-serif;
+  font-size:1.5em;
+  font-weight:normal;
+  line-height:1.2em;
+  color:#478;
+  display: block;
+}
+
+
+#header {
+	background-image: url(/ps/header.png);
+	background-repeat: no-repeat;
+	background-position: center top;
+	margin-top:20px;
+	margin-left:auto;
+	margin-right:auto;
+	height:285px;
+	width:960px;
+  position:relative;
+}
+
+#header div {
+  position:absolute;
+  margin-bottom:-5px;
+  width:50%;
+  text-align:right;
+  right:0px;
+  bottom:0px;
+}
+
+#content {
+	background-image: url(/ps/content.png);
+	background-repeat: no-repeat;
+	background-position: center top;
+	margin-left:auto;
+	margin-right:auto;
+	height:450px;
+	width:960px;
+  z-index:100;
+}
+
+#footer {
+	background-image: url(/ps/footer.png);
+	margin-bottom:20px;
+	margin-left:auto;
+	margin-right:auto;
+	height:45px;
+	width:960px;
+  position:relative;
+  text-align: right;
+}
+
+#navigation {
+	height:450px;
+	width:260px;
+	overflow:visible;
+	float:left;
+  z-index:1000;
+}
+
+#aktuelles {
+  position:relative;
+  top:10px;
+	left:0px;
+	bottom:0px;
+	width:260px;
+}
+
+#aktuell {
+  position:relative;
+  top:20px;
+	left:0px;
+	width:220px;
+	height:100px;
+	padding: 5px 5px 5px 20px;
+	background-color: #eee;
+}
+
+#page {
+	height:450px;
+	width:350px;
+	overflow:auto;
+	float:left;
+  z-index:101;
+}
+
+#subpage {
+	height:450px;
+	width:350px;
+	overflow:auto;
+	float:left;
+  z-index:102;
+}
+
+.container {
+	margin:15px;
+  z-index:200;
+}
+
+a.linkimage, a img.linkimage, a img {
+  background-color:transparent;
+  text-decoration: none;
+  margin:0px;
+  padding:0px;
+  border:0px;
+}

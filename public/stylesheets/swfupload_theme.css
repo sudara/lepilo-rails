@@ -1,0 +1,45 @@
+/* SWFUpload CSS */
+
+.cancelbtn {
+        display: block;
+        width: 16px;
+        height: 16px;
+        float: right;
+}
+
+.swfuploadbtn {
+        display: block;
+        width: 100px;
+        padding: 0 0 0 20px;
+}
+
+#SWFUploadFileListingFiles ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+}
+
+.SWFUploadFileItem {
+        display: block;
+        width: 230px;
+        height: 70px;
+        float: left;
+        background: #eaefea;
+        margin: 0 10px 10px 0;
+        padding: 5px;
+
+}
+
+.fileUploading { background: #fee727; }
+.uploadCompleted { background: #d2fa7c; }
+.uploadCancelled { background: #f77c7c; }
+
+span.progressBar {
+        width: 200px;
+        display: block;
+        font-size: 10px;
+        height: 4px;
+        margin-top: 2px;
+        margin-bottom: 10px;
+        background-color: #CCC;
+}

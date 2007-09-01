@@ -1,0 +1,21 @@
+<%= link_to 'Web', {  :action => "edit", :id => @article.id, :fragment => "web" } -%> | <%= link_to 'Print', {  :action => "edit", :id => @article.id, :fragment => "print" } -%> | <%= link_to 'XML', {  :action => "writeindesignxml", :id => @article.id, :fragment => "print" } -%> | <%= link_to 'Din A4', {  :action => "getindesignfile", :format => "A4" } -%> | <%= link_to 'A5', {  :action => "getindesignfile", :format => "A5" } -%> | <%= link_to 'A4/3', {  :action => "getindesignfile", :format => "A4-3" } -%>
+<div class="editdata">
+  <div class="smalltext">title</div>
+  <div class="box"><%= in_place_editor_field :article, :title, tag_options = {}, in_place_editor_options = { :cols => 32, :rows => 2, :cancel_text => 'abbrechen'} -%></div>
+  <div class="smalltext">description</div>
+  <div class="box"><%= in_place_editor_field :article, :description, tag_options = {}, in_place_editor_options = { :cols => 32, :rows => 10, :cancel_text => 'abbrechen'} -%></div>
+  <div class="smalltext">settings</div>
+  <div class="box">Typ: <h3><%= @article.type -%></h3>, Freigegeben: <h3><%= @article.released -%></h3></div>
+  <div class="smalltext">reference</div>
+  <div class="box"><%= in_place_editor_field :article, :reference, tag_options = {}, in_place_editor_options = { :cols => 24, :rows => 1, :cancel_text => 'abbrechen'} -%></div>
+</div>
+ 
+<div class="editdata">
+  <div class="box">
+    <%= start_form_tag :action => 'imagedescriptions', :id => @article -%>
+    Copyright Vermerk für Bilder: 
+    <input name="description" size="30" type="text" />
+      <%= submit_tag 'Anwenden' -%>
+    <%= end_form_tag -%>
+  </div>
+</div>

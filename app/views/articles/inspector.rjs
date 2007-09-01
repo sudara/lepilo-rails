@@ -1,0 +1,2 @@
+page.replace_html 'footer', "new_item"
+page.visual_effect :highlight, "footer", :duration => 1
