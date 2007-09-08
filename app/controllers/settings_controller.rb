@@ -50,12 +50,10 @@ class SettingsController < ApplicationController
   end
   
   def changeblocklinks
-    
     @allblocklinks = BlockLink.find(:all)
     blockcounter = 0
     
     @allblocklinks.each do |blocklink|
-      
       unless blocklink.linked
         if blocklink.textblock_id
           @link_to = Textblock.find(blocklink.textblock_id)
@@ -71,6 +69,35 @@ class SettingsController < ApplicationController
       end
     end
     
+    flash[:ok] = blockcounter.to_s + ' BlockLinks aktualisiert'
+    redirect_to :action => 'index'
+  end
+
+  def cleanupblocklinks
+    @allblocklinks = BlockLink.find(:all)
+    blockcounter = 0
+    
+    @allblocklinks.each do |blocklink|
+        
+      if blocklink.fragment_id && !blocklink.fragment
+        blocklink.destroy
+      end
+      
+      if blocklink.linked_type == "Textblock"
+        if Textblock.find_all_by_id(blocklink.linked_id).empty?          
+          blocklink.destroy
+        end
+      elsif blocklink.linked_type == "Mediablock"
+        if !Mediablock.find_all_by_id(blocklink.linked_id).empty?
+          blocklink.destroy
+        end
+      elsif blocklink.linked_type == "Article"
+        if !Article.find_all_by_id(blocklink.linked_id).empty?
+          blocklink.destroy
+        end
+      end
+    end
+
     flash[:ok] = blockcounter.to_s + ' BlockLinks aktualisiert'
     redirect_to :action => 'index'
   end

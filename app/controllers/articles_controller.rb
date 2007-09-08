@@ -197,7 +197,7 @@ class ArticlesController < ApplicationController
     @article.description = '...' unless @article.description
 
     render :update do |page| 
-      page.replace_html "sidebarSettings",  :partial => "inspector"
+      page.replace_html "sidebarSettings", :partial => "inspector"
       page.visual_effect :highlight, "sidebarSettings", :duration => 1
     end
     return if request.xhr? 

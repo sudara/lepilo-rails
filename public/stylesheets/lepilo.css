@@ -905,7 +905,7 @@ div.ipmtitle {
 }
 
 .listblock:hover {
-  background-image:url(/images/container.png); 
+  background-image:url(/images/gradient-big.png); 
   background-repeat:repeat-x;
   border:1px solid #fff;
 }

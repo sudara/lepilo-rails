@@ -1,6 +1,10 @@
 <div id="lploptions">
   <div>
-  <h1>Mediablockliste</h1> | <%= link_to 'Neuer mediablock', :action => 'new' %> | 
+  <h1>Mediablockliste</h1> |  
+  <%= link_to "New Mediablock", 
+    { :action => "new",
+      :rendersimple => "true" }, 
+      :popup => ['new_window', 'height=400,width=600,scrollbars=1'] -%> | 
   <%= link_to 'Vorherige Seite', { :page => @mediablock_pages.current.previous } if @mediablock_pages.current.previous %> |
   Seite: <%= pagination_links(@mediablock_pages) %> |
   <%= link_to 'N&auml;chste Seite', { :page => @mediablock_pages.current.next } if @mediablock_pages.current.next %> 
@@ -37,6 +41,7 @@
 
   <% end %>
 
+  <br style="clear:both" />
   <br style="clear:both" />
 </div>
 <script type="text/javascript">

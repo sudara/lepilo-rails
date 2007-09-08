@@ -9,6 +9,9 @@ class MediablocksController < ApplicationController
   end
 
   def list
+    session[:current_fragment] = nil
+    session[:current_collection] = nil
+    
     @mediablock_pages, @mediablocks = paginate :mediablocks, :order => 'created_at DESC', :per_page => 25
     if params[:rendersimple]  
       render :layout => 'simple'
@@ -89,11 +92,11 @@ class MediablocksController < ApplicationController
       addLink.save
 
       flash[:ok] = 'Mediablock was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to :controller=>"/block_links", :action => "close_reload"
     else
       flash[:error] = 'Unable to create Mediablock.'
       render :action => 'new'
-    end
+    end    
   end
 
   def edit

@@ -55,7 +55,9 @@ class TextblocksController < ApplicationController
 
   def new
     @textblock = Textblock.new
-    render :layout => 'simple'
+    if params[:rendersimple]  
+      render :layout => 'simple'
+    end
   end
 
   def create

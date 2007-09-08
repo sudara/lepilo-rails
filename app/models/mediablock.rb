@@ -3,7 +3,7 @@ class Mediablock < ActiveRecord::Base
   #validates_presence_of   :image, :on => :create
   #validates_presence_of   :title,
   #                        :description
-  has_many :block_links, :order => :position, :as => :linked
+  has_many :block_links, :order => :position, :as => :linked, :dependent => :destroy
   
   def resize
     @format
@@ -48,11 +48,6 @@ class Mediablock < ActiveRecord::Base
     delete_img path
     path = "#{RAILS_ROOT}/public/data/originals/#{self.original}"
     delete_img path
-    
-    @blocks = BlockLink.find_all_by_mediablock_id(self.id)
-    for block in @blocks
-      block.destroy
-    end
   end
   
 private
