@@ -7,25 +7,18 @@ class TopicsController < ApplicationController
   end 
 
   def index
-    if params[:topic_id]
-      by_id = params[:topic_id]
-    else
-      by_id = '1'
-    end
-    
-    @topics = Topic.find_all_by_topic_id(by_id)
+    list
   end
 
   def list
-    if params[:topic_id]
-      by_id = params[:topic_id]
-    else
-      by_id = '1'
-    end
+    @topics = Topic.find_all_by_topic_id(params[:topic_id] || 1) 
+    @parent = Topic.find(params[:topic_id] || 1) 
+    @level = @parent.level 
     
-    level = params[:level]
-    @topics = Topic.find_all_by_topic_id(by_id)
-    render_without_layout
+    respond_to do |format|
+      format.html
+      format.js 
+    end
   end
 
   def show
@@ -48,12 +41,12 @@ class TopicsController < ApplicationController
   end
 
   def create
-    @topic = Topic.new(params[:topic])
-    if @topic.save
-      flash[:ok] = 'Topic was successfully created.'
-      redirect_to :action => 'index'
-    else
-      render :action => 'new'
+    @topic = Topic.new(:topic_id => params[:topic_id])
+    flash[:ok] = 'Topic was successfully created.' if @topic.save
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

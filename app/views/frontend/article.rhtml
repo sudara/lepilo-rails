@@ -1,0 +1,92 @@
+
+<!--[if gt IE 5.0]><![if lt IE 7]>
+<style type="text/css">
+/* that IE 5+ conditional comment makes this only visible in IE 5+ */
+ul.lplCSSMenu li {  /* the behaviour to mimic the li:hover rules in IE 5+ */
+  behavior: url( /iemenu.htc );
+}
+ul.lplCSSMenu ul {  /* copy of above declaration without the > selector, except left position is wrong */
+  display: none; position: absolute; top: 2px; left: 160px;
+}
+</style>
+<![endif]><![endif]-->
+
+<%
+    if @psarticle
+      @psblocks = BlockLink.find_all_by_fragment_id(@psarticle.fragments.first.id, :order => :position)
+
+      if @psblocks[0]
+        if @psblocks[0].textblock_id != nil
+          @page = Textblock.find_by_id(@psblocks[0].textblock_id) 
+        elsif @psblocks[0].mediablock_id != nil
+          @page = Mediablock.find_by_id(@psblocks[0].mediablock_id)
+        end
+      end
+
+      if @psblocks[1]
+        if @psblocks[1].textblock_id != nil
+          @subpage = Textblock.find_by_id(@psblocks[1].textblock_id) 
+        elsif @psblocks[1].mediablock_id != nil
+          @subpage = Mediablock.find_by_id(@psblocks[1].mediablock_id)
+        end
+      end
+
+    end
+%>
+  
+<div id="header"><div>
+  <%= link_to image_tag("/ps/n-puresenses.png", :alt => "über puresenses", :title => "über puresenses", :class => "linkimage"), 
+  { :controller => "ps", 
+    :action => "article",
+    :id => 16 },
+    :class => "linkimage" -%>
+  <%= image_tag "/ps/n-termine.png",
+      :alt => "die Termine", 
+      :title => "die Termine" -%>
+  <%= image_tag "/ps/n-services.png",
+      :alt => "unser Service", 
+      :title => "unser Service" -%></div>
+</div>
+
+<div id="content">
+	<div id="navigation">
+    <div id="aktuelles">
+      <%= link_to_function('<img src="/ps/t-aktuelles.png" />', "Effect.toggle('aktuell', 'blind', {duration: 0.5})") %>
+      
+      <%# content_tag 'div', '<img src="/ps/t-aktuelles.png" />', :onclick => toggle('aktuell')  -%>      
+    </div>
+	  <%= image_tag "/ps/t-angebot.png",
+        :alt => "unser Angebot", 
+        :title => "unser Angebot" -%>
+    <%= render :partial => "topics/accordion", :locals => { :menuwidth => "200"} %>
+    <div id="aktuell" style="display:none">
+      aktuell
+    </div>
+  </div>
+	<div id="page" style="background-repeat:no-repeat;background-image:url(/data/images/<% if @psblocks && @psblocks[0] && @psblocks[0].mediablock_id != nil -%><%= @page.filename -%><% end -%>)">
+		<div id="fragment_1" class="container">
+
+
+
+		</div>
+	</div>
+
+
+	<div id="subpage" style="background-repeat:no-repeat;background-image:url(/data/images/<% if @psblocks && @psblocks[1] && @psblocks[1].mediablock_id != nil -%><%= @subpage.filename -%><% end -%>)">
+		<div class="container">
+      <% if @psblocks && @psblocks[1] && @psblocks[1].textblock_id != nil %>
+      <h2><%= @subpage.title %></h2>
+      <%= textilize(@subpage.content) %>
+      <% end %>
+		</div>
+	</div>
+
+&nbsp;
+</div>
+
+<div id="footer">
+  <%= image_tag "/ps/n-impressum.png",
+      :alt => "impressum", 
+      :title => "impressum" -%>
+  
+</div>

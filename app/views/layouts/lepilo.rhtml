@@ -269,7 +269,7 @@
 
 
   <div id="lplfooter">
-  <strong>LEPILO</strong> 0.10beta &nbsp;&nbsp;|&nbsp;&nbsp;  
+  <strong>LEPILO</strong> Statistik
     <strong><span class="green">
     <%
       article_counter = Article.count
@@ -298,11 +298,13 @@
     <%= text_counter -%>
       </span></strong>
       <% if @session['user'] -%>
-      &nbsp;&nbsp;|&nbsp;&nbsp; User:
+      &nbsp;&nbsp;|&nbsp;&nbsp; Angemeldet als
       <strong><span class="green"><%= @session['user'].login -%></span></strong>
       &nbsp;&nbsp;|&nbsp;&nbsp;
       <% end -%>
-      Layout based on <a href="http://www.yaml.de/">YAML</a>       
+      Dieses Layout basiert auf <a href="http://www.yaml.de/">YAML</a> 
+      &copy; 2005-2006 by <a href="http://www.highresolution.info">Dirk Jesse</a>
+      
   </div>
 
   <!-- #footer: Beginn Fußzeile -->

@@ -1,0 +1,21 @@
+#
+# TODO: create rake install to promt users for these items
+#
+
+development:
+  adapter: mysql
+  database: lepilo_sudara_dev
+  username: root
+  password: 
+
+production:
+  adapter: mysql
+  database: lepilo_sudara_prod
+  username: root
+  password: 
+
+test:
+  adapter: mysql
+  database: lepilo_sudara_test
+  username: root
+  password: 

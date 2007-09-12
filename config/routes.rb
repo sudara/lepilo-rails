@@ -11,11 +11,16 @@ ActionController::Routing::Routes.draw do |map|
 
   # You can have the root of your site routed by hooking up '' 
   # -- just remember to delete public/index.html.
-  map.connect '', :controller => "ps"
+  map.connect '', :controller => "frontend"
+  
 
   # Allow downloading Web Service WSDL as a file with an extension
   # instead of a file named 'wsdl'
   map.connect ':controller/service.wsdl', :action => 'wsdl'
+
+
+  # TODO: go a step further and push all admin controllers to display under /admin
+  # While allowing 
 
   # allow neat perma urls
   map.connect 'articles',

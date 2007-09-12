@@ -1,23 +1,18 @@
-<span class="shadedwhite">Navigation » root</span><br style="clear:both">
-<ul id="lpltopic-list" class="lpltopic-list"> 
-<% 
-unless @topics
-  @topics = Topic.find_all_by_topic_id('1')
-end -%>
-<% @topics.each do |subtopic| %> 
-<% subtopic.level = 2 unless subtopic.level %>
-<li id="item_<%= subtopic.id %>">   
-  <%= link_to_remote '<img src="/images/16trileft.png" style="cursor:pointer;padding-right:5px;padding-top:2px;border:0px;float:right"/>', 
-  :url => {:action => 'list', :params => {:level => subtopic.level, :topic_id => subtopic.id, :title => subtopic.title} }, 
-  :update => 'lpltopiclevel' + level -%>
-  <%= link_to subtopic.title, :action => 'edit', :id => subtopic.id %><br/>
-</li> 
-<% end %> 
-</ul> 
+<span class="shadedwhite">Navigation » <%=@parent.title %></span><br style="clear:both">
+	<% if @topics %>
+		<ul id="level-<%= @level %>-list" class="lpltopic-list"> 
+		<% @topics.each do |topic| %> 
+			<li id="item_<%= topic.id %>">   
+			  <%= link_to_remote '<img src="/images/16trileft.png" style="cursor:pointer;padding-right:5px;padding-top:2px;border:0px;float:right"/>', 
+			  :url => {:action => 'list', :params => {:level => topic.level, :topic_id => topic.id, :title => topic.title} }-%>
+			  <%= link_to topic.title, :action => 'edit', :id => topic.id %><br/>
+			</li> 
+		<% end %> 
+		</ul> 
+	<% else%>
+		No Pages yet.
+	<% end %> 
+		
 
-<%= link_to image_tag("/images/b24add.png", :title => 'add topic', :alt => 'add topic'), { :action => 'new', :topic_id => '1', :title => 'New Topic' }, :class => 'linkicon',:style => 'float:right;margin-top:5px;' %>
+	<%= link_to_remote image_tag("/images/b24add.png", :title => 'add topic', :alt => 'add topic'), { :action => 'create', :topic_id => @parent.id, :title => 'New Topic' }, :class => 'linkicon',:style => 'float:right;margin-top:5px;' %>
 
-<%= sortable_element 'lpltopic-list' , 
-  :url => { :action => "sort", :id => @topic }, 
-  :complete => visual_effect(:highlight, 'lpltopic-list' ) 
-%>
