@@ -8,6 +8,7 @@ class ArticlesController < ApplicationController
   end 
 
   def index
+    # use respond_to for XML
     list
     render :action => 'list'
   end
