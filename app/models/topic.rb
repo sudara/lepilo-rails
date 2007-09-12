@@ -19,6 +19,16 @@ class Topic < ActiveRecord::Base
     end
   end
   
+  
+  def self.root
+    if Topic.count == 0
+      root = Topic.new(:title=>"root").save_with_validation(false)
+      root.id
+    else 
+      Topic.find_by_topic_id(nil)
+    end
+  end
+  
   protected
   
   def set_name

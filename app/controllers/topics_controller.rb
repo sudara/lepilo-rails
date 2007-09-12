@@ -11,8 +11,8 @@ class TopicsController < ApplicationController
   end
 
   def list
-    @topics = Topic.find_all_by_topic_id(params[:topic_id] || 1) 
-    @parent = Topic.find(params[:topic_id] || 1) 
+    @topics = Topic.find_all_by_topic_id(params[:topic_id] || Topic.root) 
+    @parent = Topic.find(params[:topic_id] || Topic.root) 
     @level = @parent.level 
     
     respond_to do |format|
