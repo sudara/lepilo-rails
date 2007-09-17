@@ -1,19 +1,24 @@
 # Filters added to this controller will be run for all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 
-require 'login_system'
+# require 'login_system'
 require 'rand'
 require 'redcloth' 
 require 'mini_magick'
  
 class ApplicationController < ActionController::Base
-  include LoginSystem
+  
+  # include LoginSystem
   include NavigationSystem
+  include AuthenticatedSystem
   
   layout 'lepilo'
 
   before_filter :configure_charsets
 
+
+
+  protected
   def configure_charsets
     @response.headers["Content-Type"] = "text/html; charset=utf-8"
     # Set connection charset. MySQL 4.0 doesn't support this so it

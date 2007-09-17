@@ -1,0 +1,24 @@
+<% # Is this redundant? Maybe we should create some list helpers. %>
+
+<div class="listblock" id="<%= user.id %>">
+
+    <%= image_tag "/images/rails.png", :class => "listthumbnail" %>
+	<div class="iconwhite" id="plastic_<%= user.id %>">
+    <div class="icontainer">
+      <div class="icontainer" style="margin-right:5px">
+
+        <%= image_tag "/images/16locked.png",
+            :alt => "nicht freigegeben", 
+            :title => "nicht freigegeben", 
+            :class => "linkicon"  %>
+      </div>
+      <%= link_to image_tag("/images/w24edit.png", :title => 'bearbeiten', :alt => 'bearbeiten'), edit_user_path(user), :class => 'linkicon' %>
+      <%= link_to image_tag("/images/w24delete.png", :title => 'löschen', :alt => 'löschen'), user_path(user), :method=>:delete, :class => 'linkicon', :confirm => 'Artikel »' + user.login + '« löschen — sind Sie sicher?' %>          	    
+		</div>
+	</div>
+  <div class="listdescription">
+  <h3><%= user.login %></h3><br/>
+  <span class="smalltext">
+  <strong></strong>
+</div>
+</div>

@@ -13,6 +13,11 @@ ActionController::Routing::Routes.draw do |map|
   # -- just remember to delete public/index.html.
   map.connect '', :controller => "frontend"
   
+  map.resources :users
+  map.resource  :session, :controller => 'sessions'
+  map.login  '/login', :controller => 'sessions', :action => 'new'
+  map.logout '/logout', :controller => 'sessions', :action => 'destroy'
+  
 
   # Allow downloading Web Service WSDL as a file with an extension
   # instead of a file named 'wsdl'

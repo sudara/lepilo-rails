@@ -1,0 +1,9 @@
+<div id="lploptions">
+	<div>
+		<h1>Accounts</h1> |
+		<%= link_to "New User", new_user_path %>
+	</div>
+<div id="entrysettings">
+	<%= render :partial => 'user', :collection => @users %>
+</div>
+</div>

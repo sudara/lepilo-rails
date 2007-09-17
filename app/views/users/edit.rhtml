@@ -1,0 +1,30 @@
+<div id="lploptions">
+	<div>
+		<h1>Edit User Information</h1>
+	</div>
+
+<%= error_messages_for :user %>
+<div id="entrysettings">
+<% form_for :user, :url => user_path(@user), :html => { :method => :put } do |f| %>
+
+	<div class="row"><span class="label"><span class="required">*</span>Login</span><span class="formw"><%= f.text_field :login %></span></div>
+	<div class="row"><span class="label"><span class="required">*</span>Email</span><span class="formw"><%= f.text_field :email %></span></div>
+ 	
+ 	
+	<div class="row"><span class="label"></span><span class="formw">
+	<%= link_to_function("Change your password", nil, :id => "more_link") do |page|
+	    page[:edit_password].toggle
+	  end %></span></div>
+	
+	<div id="edit_password" style="display:none">
+ 		<div class="row"><span class="label"><span class="required">*</span>Password</span><span class="formw"><%= f.password_field :password, :value => '' %></span></div>
+ 		<div class="row"><span class="label"><span class="required">*</span>Confirm Password</span><span class="formw"><%= f.password_field :password_confirmation %></span></div>
+	</div>
+	
+
+	<div class="row"><span class="label"></span><span class="formw"><%= submit_tag "Update" %></span></div>
+
+<% end %>
+</div>
+
+</div>
