@@ -8,7 +8,8 @@ require 'mini_magick'
  
 class ApplicationController < ActionController::Base
   include LoginSystem
-  model :user
+  include NavigationSystem
+  
   layout 'lepilo'
 
   before_filter :configure_charsets
