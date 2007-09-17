@@ -297,9 +297,9 @@
         :class => "icon16"  -%>
     <%= text_counter -%>
       </span></strong>
-      <% if @session['user'] -%>
+      <% if session['user'] -%>
       &nbsp;&nbsp;|&nbsp;&nbsp; Angemeldet als
-      <strong><span class="green"><%= @session['user'].login -%></span></strong>
+      <strong><span class="green"><%= session['user'].login -%></span></strong>
       &nbsp;&nbsp;|&nbsp;&nbsp;
       <% end -%>
       Dieses Layout basiert auf <a href="http://www.yaml.de/">YAML</a> 

@@ -1,6 +1,6 @@
 <%  article = Article.find(article_id) %>
-<% # && @session['user'].role == "admin" 
-  if @session['user'] %>
+<% # && session['user'].role == "admin" 
+  if session['user'] %>
   <span class="smalltext">
   <%= link_to 'Bearbeiten', {   :controller => "articles",
                                 :action => "edit",

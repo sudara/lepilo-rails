@@ -8,10 +8,10 @@ class AccountController < ApplicationController
   end
 
   def login
-    redirect_to :action => "signup" if @session[:user].nil? && User.count == 0
+    redirect_to :action => "signup" if session[:user].nil? && User.count == 0
     case @request.method
       when :post
-        if @session['user'] = User.authenticate(params['user_login'], params['user_password'])
+        if session['user'] = User.authenticate(params['user_login'], params['user_password'])
 
           flash[:ok]  = "Login successful"
           redirect_back_or_default :action => "welcome"
@@ -23,13 +23,13 @@ class AccountController < ApplicationController
   end
   
   def signup
-    redirect_to :action => "login" if @session[:user].nil? && User.count != 0
+    redirect_to :action => "login" if session[:user].nil? && User.count != 0
     case @request.method
       when :post
         @user = User.new(params['user'])
       
         if @user.save      
-          @session['user'] = User.authenticate(@user.login, params['user']['password'])
+          session['user'] = User.authenticate(@user.login, params['user']['password'])
           flash[:ok]  = "Signup successful"
           # redirect_back_or_default :action => "welcome"          
           redirect_to :controller=>"/articles", :action =>"index"
@@ -40,7 +40,7 @@ class AccountController < ApplicationController
   end  
   
   def delete
-    if @session[:user].nil? && usercount != 0
+    if session[:user].nil? && usercount != 0
       redirect_to :action => "login" 
     else
       if params['id']
@@ -52,7 +52,7 @@ class AccountController < ApplicationController
   end  
     
   def logout
-    @session['user'] = nil
+    session['user'] = nil
   end
     
   def welcome

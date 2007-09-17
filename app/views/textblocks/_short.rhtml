@@ -1,6 +1,6 @@
 <%  textblock = Textblock.find(textblock_id) %>
-<% # && @session['user'].role == "admin" 
-if @session['user'] %>
+<% # && session['user'].role == "admin" 
+if session['user'] %>
 	<span class="smalltext">
 	<%= link_to 'Bearbeiten', {   :controller => "textblocks",
 	                              :action => "edit",

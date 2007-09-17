@@ -20,7 +20,7 @@
 #
 #   class UploadController < ApplicationController
 #     def upload_status
-#       render :text => "Percent complete: " + @session[:uploads]['SOMEIDYOUSET'].completed_percent"
+#       render :text => "Percent complete: " + session[:uploads]['SOMEIDYOUSET'].completed_percent"
 #     end
 #   end
 #
@@ -50,7 +50,7 @@ class CGI #:nodoc:
     attr_reader :progress, :session
 
     def initialize(orig_io, progress, session)
-      @session = session
+      session = session
       @progress = progress
       
       @start_time = Time.now
@@ -83,11 +83,11 @@ class CGI #:nodoc:
     end
 
     def save_progress
-      @session.update 
+      session.update 
     end
 
     def finish
-      @session.update
+      session.update
       ActionController::Base.logger.debug("Finished processing multipart upload in #{@progress.elapsed_seconds.to_s}s")
     end
   end

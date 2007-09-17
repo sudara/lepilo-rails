@@ -22,7 +22,7 @@ module Controllers
   class MockController < ActionController::Base
     def initialize
       super
-      @session = {:uploads => {}}
+      session = {:uploads => {}}
       @params = {}
     end
   end
@@ -158,11 +158,11 @@ class MockCGI < CGI
     @env['CONTENT_TYPE'] = "multipart/form-data; boundary=#{BOUNDARY}"
     @env['CONTENT_LENGTH'] = @sio.tell - EOL.size
 
-    @session_options = ActionController::CgiRequest::DEFAULT_SESSION_OPTIONS.inject({}) { |options, pair| 
+    session_options = ActionController::CgiRequest::DEFAULT_SESSION_OPTIONS.inject({}) { |options, pair| 
       options[pair.first.to_s] = pair.last; options 
     }
-    session = CGI::Session.new({}, @session_options.merge({'new_session' => true}))
-    @session_id = session.session_id
+    session = CGI::Session.new({}, session_options.merge({'new_session' => true}))
+    session_id = session.session_id
     @env['COOKIE'] = "_session_id=#{session.session_id}"
     session.close
   end
