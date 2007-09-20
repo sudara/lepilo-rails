@@ -41,19 +41,29 @@ class TopicsController < ApplicationController
   end
 
   def create
-    @topic = Topic.new(:topic_id => params[:topic_id])
-    flash[:ok] = 'Topic was successfully created.' if @topic.save
-
-    respond_to do |format|
-      format.html
-      format.js
+    @topic = Topic.new(:topic_id => params[:topic_id], :title => params[:title])
+    if @topic.save
+      flash[:ok] = 'Topic successfully created.'
+      respond_to do |format|
+        format.html
+        format.js 
+      end
+    else
+      flash[:error] = "#{@topic.class} #{action_name} failed!"
+      respond_to do |format|
+        format.js do 
+          render :update do |page|
+              page.insert_html :top, 'main', :partial => 'shared/flash'
+          end
+        end
+        format.html { redirect_back_or_default }
+      end
     end
   end
 
   def edit
     @topic = Topic.find(params[:id])
-    @topic.description.length < 2
-      @topic.description = '...'
+
     if params[:rendersimple]  
       render :layout => 'simple'
     end
@@ -91,4 +101,5 @@ class TopicsController < ApplicationController
     flash[:warning] = 'Topic ' + killedtopic + ' was destroyed!'
     redirect_to :action => 'index'
   end
+
 end

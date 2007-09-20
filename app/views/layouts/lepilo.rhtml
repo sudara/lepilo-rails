@@ -141,29 +141,7 @@
 
   <!-- #main: Beginn Inhaltsbereich -->
   <div id="main">
-    <% 
-      flashimg = '...'
-
-      flash.each do |key, msg|
-       case key
-          when :ok
-            flashimg = '<img src="/images/railsflash-ok.png"/>'
-          when :info
-            flashimg = '<img src="/images/railsflash-info.png"/>'
-          when :warning
-            flashimg = '<img src="/images/railsflash-warning.png"/>'
-          when :error
-            flashimg = '<img src="/images/railsflash-error.png"/>'
-        end -%>
-
-      <%= content_tag :div, flashimg + '<div>' + msg + '</div>', :id => key -%>
-      <script type="text/javascript" charset="utf-8">
-        setTimeout( function() {
-          new Effect.BlindUp('<%= key -%>', 500);
-        }, 3000)
-      </script>
-    <% end -%>
-
+   <%= render :partial => 'shared/flash' %>
   <!-- #col1: Erste Float-Spalte des Inhaltsbereiches -->
       <div id="col1">
         <div id="col1_content" class="clearfix">
