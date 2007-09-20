@@ -1,0 +1,5 @@
+<li id="item_<%= topic.id %>">   
+	  <%= link_to_remote '<img src="/images/16trileft.png" style="cursor:pointer;padding-right:5px;padding-top:2px;border:0px;float:right"/>', 
+	  :url => {:action => 'list', :params => {:level => topic.level, :topic_id => topic.id, :title => topic.title} }-%>
+	  <%= link_to topic.title, :action => 'edit', :id => topic.id %><br/>
+</li>

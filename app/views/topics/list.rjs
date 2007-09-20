@@ -1,0 +1,7 @@
+@level.upto(5) do |level|
+  if @level == level
+    page.replace "lpltopiclevel#{level}", :partial => 'list'
+  else
+    page.replace_html "lpltopiclevel#{level}", " "
+  end
+end

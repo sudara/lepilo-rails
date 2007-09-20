@@ -41837,3 +41837,20 @@ DEPRECATION WARNING: @flash is deprecated! Call flash.keys instead of @flash.key
 DEPRECATION WARNING: @flash is deprecated! Call flash.keys instead of @flash.keys. Args: []  See http://www.rubyonrails.org/deprecation for details. (called from _run_rhtml_47app47views47shared47_flash46rhtml at script/../config/../app/views/shared/_flash.rhtml:7)
 Rendered shared/_flash (0.00189)
 Completed in 0.02825 (35 reqs/sec) | Rendering: 0.00685 (24%) | DB: 0.00935 (33%) | 200 OK [http://localhost/topics?title=New+Topic]
+  [4;35;1mTopic Columns (0.002965)[0m   [0mSHOW FIELDS FROM topics[0m
+
+
+Processing TopicsController#list (for 127.0.0.1 at 2007-09-20 16:05:34) [POST]
+  Session ID: a47a580e747b250e0df51460c16c3c61
+  Parameters: {"topic_id"=>"6", "title"=>"New Topic", "level"=>"3", "action"=>"list", "controller"=>"topics"}
+DEPRECATION WARNING: @response is deprecated! Call response.headers instead of @response.headers. Args: []  See http://www.rubyonrails.org/deprecation for details. (called from configure_charsets at ./script/../config/../app/controllers/application.rb:23)
+  [4;36;1mSQL (0.000605)[0m   [0;1mSET NAMES UTF8[0m
+  [4;35;1mUser Columns (0.004513)[0m   [0mSHOW FIELDS FROM users[0m
+  [4;36;1mUser Load (0.001505)[0m   [0;1mSELECT * FROM users WHERE (users.`id` = 1) LIMIT 1[0m
+  [4;35;1mTopic Load (0.000879)[0m   [0mSELECT * FROM topics WHERE (topics.`topic_id` = '6') [0m
+  [4;36;1mTopic Load (0.000801)[0m   [0;1mSELECT * FROM topics WHERE (topics.`id` = 6) [0m
+  [4;35;1mTopic Load (0.000797)[0m   [0mSELECT * FROM topics WHERE (topics.`id` = 3) [0m
+  [4;36;1mTopic Load (0.000793)[0m   [0;1mSELECT * FROM topics WHERE (topics.`id` = 1) [0m
+Rendering topics/list.rjs
+Rendered topics/_list (0.00276)
+Completed in 0.07670 (13 reqs/sec) | Rendering: 0.01060 (13%) | DB: 0.01286 (16%) | 200 OK [http://localhost/topics/list?topic_id=6&level=3&title=New+Topic]

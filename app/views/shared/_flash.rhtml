@@ -1,0 +1,11 @@
+<% if flash && flash.keys.first %>
+
+	<%= content_tag :div, (image_tag "railsflash-#{flash.keys.first}.png") + '<div>' + flash[flash.keys.first.to_sym] + '</div>', :id => flash.keys.first, :class => 'flash' -%>
+ 
+	<script type="text/javascript" charset="utf-8">
+	   setTimeout( function() {
+	     new Effect.BlindUp('<%= flash.keys.first -%>', 500);
+	   }, 3000)
+	 </script>
+
+<% end %>
