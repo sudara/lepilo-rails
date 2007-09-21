@@ -1,9 +1,9 @@
-// accordion.js v1.0
+// accordion.js v2.0
 //
 // Copyright (c) 2007 stickmanlabs
 // Author: Kevin P Miller | http://www.stickmanlabs.com
 // 
-// ListScroller is freely distributable under the terms of an MIT-style license.
+// Accordion is freely distributable under the terms of an MIT-style license.
 //
 // I don't care what you think about the file size...
 //   Be a pro: 
@@ -13,11 +13,12 @@
 
 /*-----------------------------------------------------------------------------------------------*/
 
-if (typeof Effect == 'undefined')
+if (typeof Effect == 'undefined') 
 	throw("accordion.js requires including script.aculo.us' effects.js library!");
 
 var accordion = Class.create();
 accordion.prototype = {
+
 	//
 	//  Setup the Variables
 	//
@@ -26,10 +27,16 @@ accordion.prototype = {
 	duration : null,
 	effects : [],
 	animating : false,
+	
 	//  
 	//  Initialize the accordions
 	//
 	initialize: function(container, options) {
+	  if (!$(container)) {
+	    throw(container+" doesn't exist!");
+	    return false;
+	  }
+	  
 		this.options = Object.extend({
 			resizeSpeed : 8,
 			classNames : {
@@ -47,20 +54,24 @@ accordion.prototype = {
 		
 		this.duration = ((11-this.options.resizeSpeed)*0.15);
 
-		var accordions = $$(container+' .'+this.options.classNames.toggle);
+		var accordions = $$('#'+container+' .'+this.options.classNames.toggle);
 		accordions.each(function(accordion) {
 			Event.observe(accordion, this.options.onEvent, this.activate.bind(this, accordion), false);
-			accordion.onclick = function() {return false;};
+			if (this.options.onEvent == 'click') {
+			  accordion.onclick = function() {return false;};
+			}
 			
 			if (this.options.direction == 'horizontal') {
 				var options = $H({width: '0px'});
 			} else {
 				var options = $H({height: '0px'});			
-			}			
-			this.currentAccordion = $(accordion.next(0)).setStyle(options);			
+			}
+			options.merge({display: 'none'});			
 			
+			this.currentAccordion = $(accordion.next(0)).setStyle(options);			
 		}.bind(this));
 	},
+	
 	//
 	//  Activate an accordion
 	//
@@ -71,25 +82,67 @@ accordion.prototype = {
 		
 		this.effects = [];
 	
-		this.currentAccordion = $(accordion.next(0));	
-		if (this.currentAccordion == this.showAccordion) {
-			return false;
-		}
+		this.currentAccordion = $(accordion.next(0));
+		this.currentAccordion.setStyle({
+			display: 'block'
+		});		
 		
 		this.currentAccordion.previous(0).addClassName(this.options.classNames.toggleActive);
 
 		if (this.options.direction == 'horizontal') {
-			var adjustments = $H({
+			this.scaling = $H({
 				scaleX: true,
 				scaleY: false
 			});
 		} else {
-			var adjustments = $H({
+			this.scaling = $H({
 				scaleX: false,
 				scaleY: true
 			});			
 		}
 			
+		if (this.currentAccordion == this.showAccordion) {
+		  this.deactivate();
+		} else {
+		  this._handleAccordion();
+		}
+	},
+	// 
+	// Deactivate an active accordion
+	//
+	deactivate : function() {
+		var options = $H({
+		  duration: this.duration,
+			scaleContent: false,
+			transition: Effect.Transitions.sinoidal,
+			queue: {
+				position: 'end', 
+				scope: 'accordionAnimation'
+			},
+			scaleMode: { 
+				originalHeight: this.options.defaultSize.height ? this.options.defaultSize.height : this.currentAccordion.scrollHeight,
+				originalWidth: this.options.defaultSize.width ? this.options.defaultSize.width : this.currentAccordion.scrollWidth
+			},
+			afterFinish: function() {
+				this.showAccordion.setStyle({
+          height: 'auto',
+					display: 'none'
+				});				
+				this.showAccordion = null;
+				this.animating = false;
+			}.bind(this)
+		});    
+    options.merge(this.scaling);
+
+    this.showAccordion.previous(0).removeClassName(this.options.classNames.toggleActive);
+    
+		new Effect.Scale(this.showAccordion, 0, options);
+	},
+
+  //
+  // Handle the open/close actions of the accordion
+  //
+	_handleAccordion : function() {
 		var options = $H({
 			sync: true,
 			scaleFrom: 0,
@@ -100,7 +153,7 @@ accordion.prototype = {
 				originalWidth: this.options.defaultSize.width ? this.options.defaultSize.width : this.currentAccordion.scrollWidth
 			}
 		});
-		options.merge(adjustments);
+		options.merge(this.scaling);
 		
 		this.effects.push(
 			new Effect.Scale(this.currentAccordion, 100, options)
@@ -114,14 +167,14 @@ accordion.prototype = {
 				scaleContent: false,
 				transition: Effect.Transitions.sinoidal
 			});
-			options.merge(adjustments);
+			options.merge(this.scaling);
 			
 			this.effects.push(
 				new Effect.Scale(this.showAccordion, 0, options)
 			);				
 		}
 		
-		new Effect.Parallel(this.effects, {
+    new Effect.Parallel(this.effects, {
 			duration: this.duration, 
 			queue: {
 				position: 'end', 
@@ -131,6 +184,14 @@ accordion.prototype = {
 				this.animating = true;
 			}.bind(this),
 			afterFinish: function() {
+				if (this.showAccordion) {
+					this.showAccordion.setStyle({
+						display: 'none'
+					});				
+				}
+				$(this.currentAccordion).setStyle({
+				  height: 'auto'
+				});
 				this.showAccordion = this.currentAccordion;
 				this.animating = false;
 			}.bind(this)
