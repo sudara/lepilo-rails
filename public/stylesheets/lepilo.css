@@ -497,7 +497,7 @@ div.progress-container > div {
   background-image:url(/images/plastic.png); 
   background-repeat:repeat-x;
   background-color:transparent;
-  left:0px;
+  left:0px;       
   width:100%;
   padding-left:10px;
   padding-top:4px;
@@ -547,14 +547,10 @@ div.progress-container > div {
 }
 
 .lpltopic-list {
-  background:#fafafa;
   font-size:13px;
   padding:0px;
   margin:0px;
   list-style-type:none;
-  border-bottom:1px solid #ddd;
-  border-left:1px solid #ddd;
-  border-right:1px solid #ddd;
 }
 
 .lpltopiccontaier {
@@ -564,32 +560,65 @@ div.progress-container > div {
   margin-left:5px;
   margin-bottom:5px;
   list-style-type:none;
-  width:220px;
+  width:290px;
   min-height:350px;
 }
 
 .lpltopic-list > li {
-  background-image:url(/images/gradientmini.png); 
-  background-repeat:repeat-x;
+  background-image:url(/images/topic-normal.png); 
+  background-repeat:no-repeat;
+  background-color:transparent;
+  font-size:1.4em;
+  height:28px;
+  width:265px;
   margin:0px;
   padding:0px;
   padding-top:2px;
   padding-bottom:2px;
-  padding-left:4px;
+  padding-left:25px;
   /*cursor:move;*/
-  border-top:1px solid #ddd;
 }
 
 .lpltopic-list li:hover {
-  background-image:url(/images/gradientd.png); 
-  background-repeat:repeat-x;
+  background-image:url(/images/topic-active.png); 
+  background-repeat:no-repeat;
+  background-color:transparent;
+  font-size:1.4em;
+  height:28px;
+  width:265px;
   margin:0px;
   padding:0px;
   padding-top:2px;
   padding-bottom:2px;
-  padding-left:4px;
-  overflow:hidden;
-  border-top:1px solid #ddd;
+  padding-left:25px;
+}
+
+.lpltopic-list li .selected {
+  background-image:url(/images/topic-selected.png); 
+  background-repeat:no-repeat;
+  background-color:transparent;
+  font-size:1.4em;
+  height:28px;
+  width:265px;
+  margin:0px;
+  padding:0px;
+  padding-top:2px;
+  padding-bottom:2px;
+  padding-left:25px;
+}
+
+.lpltopic-list li .unlinked {
+  background-image:url(/images/topic-unlinked.png); 
+  background-repeat:no-repeat;
+  background-color:transparent;
+  font-size:1.4em;
+  height:28px;
+  width:265px;
+  margin:0px;
+  padding:0px;
+  padding-top:2px;
+  padding-bottom:2px;
+  padding-left:25px;
 }
 
 .lpltopic-list a {
