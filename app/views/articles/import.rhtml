@@ -50,18 +50,20 @@
         path = "#{RAILS_ROOT}/public/data/import/#{params[:importdir]}/#{file}"
         @importmediablock = Mediablock.new
         @importmediablock.original_name = "#{@article.reference} - #{file}"
+        @importmediablock.resize = "600x500"
         @importmediablock.importfile = path
         @importmediablock.uploaded_at = DateTime.new(1970, 01, 01, 01, 01).to_s(:db)
-		@importmediablock.description = @article.title
+		    @importmediablock.description = @article.title
 
         @importmediablock.save!
 
         @importmediablock.update
 
         addLink = BlockLink.new
-        addLink.mediablock_id = @importmediablock.id
+        addLink.linked_id = @importmediablock.id
+        addLink.linked_type = "Mediablock"
 
-	      @fragment = Fragment.find_by_article_id_and_position(@article.id, 1)
+	      @fragment = Fragment.find_by_article_id_and_content(@article.id, "web")
 
         addLink.fragment_id = @fragment.id
         addLink.save

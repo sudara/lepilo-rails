@@ -377,6 +377,7 @@ div.progress-container > div {
   background-image:url(/images/bgheader.png); 
   background-repeat:repeat-x;
   background-color:#fafafa;
+  padding:10px;
 }
 
 #lpltemplatecontainer {
@@ -546,6 +547,39 @@ div.progress-container > div {
   margin:0px;
 }
 
+.lpltopic-header {
+  background-image:url(/images/topic-header.png); 
+  background-repeat:no-repeat;
+  background-color:transparent;
+  font-size:1em;
+  height:28px;
+  width:250px;
+  margin:0px;
+  margin-top:5px;
+  padding:0px;
+  padding-top:2px;
+  padding-bottom:2px;
+  color:#fff;
+  font-weight:bold;
+  text-shadow:#333 2px 2px 1px;
+  text-align:center;
+}
+
+.lpltopic-add {
+  background-image:url(/images/header.jpg); 
+  background-repeat:repeat-x;
+  background-color:transparent;
+  font-size:1em;
+  height:50px;
+  width:240px;
+  margin:0px;
+  margin-top:1px;
+  margin-bottom:0px;
+  padding:5px;
+  border-bottom:1px solid #222;
+}
+
+
 .lpltopic-list {
   font-size:13px;
   padding:0px;
@@ -556,12 +590,30 @@ div.progress-container > div {
 .lpltopiccontaier {
   float:left;
   font-size:13px;
-  padding:0px;
-  margin-left:5px;
+  margin-left:2px;
   margin-bottom:5px;
   list-style-type:none;
-  width:290px;
-  min-height:350px;
+  width:260px;
+}
+
+.lpltopicshadow {
+  background-image:url(/images/topics-bg.png); 
+  background-repeat:no-repeat;
+  background-color:transparent;
+  margin:0px;
+  padding:0px;
+  padding-left:5px;
+  padding-right:5px;
+}
+
+.lpltopicshadowend {
+  background-image:url(/images/topics-bg-end.png); 
+  background-repeat:no-repeat;
+  background-color:transparent;
+  margin:0px;
+  padding:0px;
+  height:4px;
+  width:260px;
 }
 
 .lpltopic-list > li {
@@ -570,55 +622,53 @@ div.progress-container > div {
   background-color:transparent;
   font-size:1.4em;
   height:28px;
-  width:265px;
+  width:245px;
   margin:0px;
   padding:0px;
   padding-top:2px;
   padding-bottom:2px;
-  padding-left:25px;
+  padding-left:5px;
+  text-shadow:#fff 2px 2px 1px;
   /*cursor:move;*/
+}
+
+.lpltopic-list > li > a {
+  border:0px;
 }
 
 .lpltopic-list li:hover {
   background-image:url(/images/topic-active.png); 
   background-repeat:no-repeat;
   background-color:transparent;
-  font-size:1.4em;
-  height:28px;
-  width:265px;
-  margin:0px;
-  padding:0px;
-  padding-top:2px;
-  padding-bottom:2px;
-  padding-left:25px;
+  color:white;
+  font-weight:bold;
+  text-shadow:#8bb700 2px 2px 2px;
+}
+
+.lpltopic-list li:hover a, .lpltopic-list li a:hover  {
+  color:white;  
 }
 
 .lpltopic-list li .selected {
   background-image:url(/images/topic-selected.png); 
   background-repeat:no-repeat;
   background-color:transparent;
-  font-size:1.4em;
-  height:28px;
-  width:265px;
-  margin:0px;
-  padding:0px;
-  padding-top:2px;
-  padding-bottom:2px;
-  padding-left:25px;
+  color:white;
+  font-weight:bold;
+  text-shadow:#8bb700 2px 2px 2px;
 }
 
 .lpltopic-list li .unlinked {
   background-image:url(/images/topic-unlinked.png); 
   background-repeat:no-repeat;
   background-color:transparent;
-  font-size:1.4em;
-  height:28px;
-  width:265px;
-  margin:0px;
-  padding:0px;
-  padding-top:2px;
-  padding-bottom:2px;
-  padding-left:25px;
+  color:#444;
+  font-weight:bold;
+  text-shadow:#fff 2px 2px 1px;
+}
+
+.lpltopic-list li:hover .unlinked a, .lpltopic-list li .unlinked a:hover  {
+  color:#444;  
 }
 
 .lpltopic-list a {
@@ -940,8 +990,7 @@ div.ipmtitle {
 }
 
 .previewblock {
-  background-image:url(/images/gradientd.png); 
-  background-repeat:repeat-x;
+  background-color:#000;
   line-height:1.5em;
   margin-top:5px;
   margin-left:5px;
@@ -953,8 +1002,6 @@ div.ipmtitle {
 }
 
 .previewblock:hover {
-  background-image:url(/images/container.png); 
-  background-repeat:repeat-x;
   border:1px solid #81bc00;
 }
 
@@ -1326,7 +1373,7 @@ div.tags, div.tags:hover {
 .shadedwhite {
   float:left;
   margin-left:10px;
-  margin-right:1  0px;
+  margin-right:10px;
   color:#fff;
   font-weight:bold;
 	text-shadow:#333 2px 2px 1px;

@@ -15,7 +15,6 @@ class Mediablock < ActiveRecord::Base
   
   def file=(incoming_file)
     @tmp_file = incoming_file
-    
     self.original_name = base_part_of(incoming_file.original_filename)
     self.content_type = incoming_file.content_type.chomp
     self.title = self.original_name
@@ -29,7 +28,6 @@ class Mediablock < ActiveRecord::Base
     imported_file = generate_title.last
     self.title = imported_file
     manage_img original_name
-
   end
   
   def after_save
@@ -70,8 +68,8 @@ private
   
   def do_mini_magick(path)
     @image = MiniMagick::Image.from_file(path)
-    if self.resize == "true"
-      @image.resize "x350"
+    if self.resize != "false"
+      @image.resize self.resize
     end
     @image.format "jpg"
     jpgname = "#{RAILS_ROOT}/public/data/images/#{self.filename}"
