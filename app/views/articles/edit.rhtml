@@ -32,9 +32,7 @@
   </div>
 
   <div id="lpltopic-select">
-    <%# article_topic = Topic.find(@article.topic_id) %>
-    <% article_topic = Topic.find(2) %>
-    <%= render :partial => 'topics/selector', :locals => { :current_topic => article_topic } %>
+    <%= render :partial => 'topics/selector', :locals => { :current_topic => @article.topic } %>
   </div><br>
 
   <%  if params[:fragment] == "print"

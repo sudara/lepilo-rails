@@ -41,6 +41,7 @@ ActionController::Routing::Routes.draw do |map|
 
 
   map.resources :topics
+  map.resources :articles
   # Install the default route as the lowest priority.
   map.connect ':controller/:action/:id'
     

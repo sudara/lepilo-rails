@@ -1,5 +1,5 @@
 class Article < ActiveRecord::Base
-  belongs_to :topic
+  has_many :topics
   has_many :fragments, :order => :position, :dependent => :destroy
   has_many :block_links, :order => :position, :as => :linked
   
@@ -28,4 +28,8 @@ class Article < ActiveRecord::Base
     text_counter = BlockLink.count(:all, :conditions => "linked_type = 'Textblock' AND fragment_id = #{self.fragments.first.id}")
     return text_counter
   end  
+  
+  def topic
+    topics.first
+  end
 end

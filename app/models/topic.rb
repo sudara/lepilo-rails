@@ -1,18 +1,18 @@
 class Topic < ActiveRecord::Base
   belongs_to :topic
+  validates_presence_of :topic_id
+
+  belongs_to :article
+  validates_presence_of :article_id
+  
   has_many :topics, :order => :position
-  has_one :article
   acts_as_tree  :order => :position, :foreign_key => 'topic_id'  
   acts_as_list  :scope => :topic_id  
   
+  before_validation_on_create :set_title, :make_article
+  
   # Permalink converts "Hello World!" How are you? into url friendly hello_world_how_are_you
   has_permalink :title
-  validates_presence_of :title
-  
-  
-  validates_presence_of :topic_id
-  
-  before_create :set_title
   
   #attr_accessor :level
   
@@ -41,6 +41,10 @@ class Topic < ActiveRecord::Base
   protected
   
   def set_title
-    self.title = "New Page" unless self.title
+    title = "New Page" unless title
+  end
+
+  def make_article
+    self.create_article(:title => title)
   end
 end
