@@ -3,13 +3,8 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8">
   <title>Lepilo Admin: <%= controller.controller_name -%> &raquo; <%= controller.action_name -%></title>
-  <%= javascript_include_tag :defaults -%>
-  <%= javascript_include_tag "scriptaculous" -%> 
-  <%= javascript_include_tag "lightbox" -%> 
-  <%= javascript_include_tag "slider" -%> 
-  <%= javascript_include_tag "tabs" -%> 
-  <%= javascript_include_tag "inspectors" -%> 
-  <%= javascript_include_tag "accordion"%> 
+  <%= javascript_include_tag :defaults, 'lowpro', 'lightbox', 'slider', 'tabs', 'inspectors', 'accordion', 'lepilo-behaviours' %>
+
   <%= stylesheet_link_tag 'layout_3col'%>
   <!--[if lte IE 7]>
   <link href="/stylesheets/patches/patch_3col_column_backgrounds.css" rel="stylesheet" type="text/css" />

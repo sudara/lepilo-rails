@@ -41,11 +41,10 @@ class TopicsController < ApplicationController
   end
 
   def create
-    @topic = Topic.new(:topic_id => params[:topic_id], :title => params[:title])
+    @topic = Topic.new(params[:topic])
     if @topic.save
-      flash[:ok] = 'Topic successfully created.'
       respond_to do |format|
-        format.html
+        format.html { flash[:ok] = 'Topic successfully created.' }
         format.js 
       end
     else

@@ -649,7 +649,7 @@ div.progress-container > div {
   color:white;  
 }
 
-.lpltopic-list li .selected {
+.lpltopic-list li.selected {
   background-image:url(/images/topic-selected.png); 
   background-repeat:no-repeat;
   background-color:transparent;
