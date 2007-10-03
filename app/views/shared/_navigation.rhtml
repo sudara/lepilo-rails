@@ -1,0 +1,9 @@
+<div id="lplnavigation">
+  <img src="/images/lepilo.png" class="lepilo" alt="lepilo version" />
+	<%= render_tabs lepilo_tabs %>
+	
+	<%= render_tabs lepilo_admin_tabs if admin? %>
+	
+	<%= render_tabs [['logout.png',logout_path]] %>
+
+</div>

@@ -1,31 +1,44 @@
 module NavigationSystem
-   
-   # <a href="/settings/" <%= 'class="active"' if params[:controller] == "settings"%>><img src="/images/overview.png" alt="overview" /></a>
-   # <a href="/topics/" <%= 'class="active"' if params[:controller] == "topics"%>><img src="/images/navigation.png" alt="navigation"/></a>
-   # <a href="/articles/" <%= 'class="active"' if params[:controller] == "articles"%>><img src="/images/articles.png" alt="articles" /></a>
-   # <a href="/collections/" <%= 'class="active"' if params[:controller] == "collections"%>><img src="/images/collections.png" alt="collections"/></a>
-   # <a href="/mediablocks/" <%= 'class="active"' if params[:controller] == "mediablocks"%>><img src="/images/media.png" alt="media"/></a>
-   # <a href="/textblocks/" <%= 'class="active"' if params[:controller] == "textblocks"%>><img src="/images/textblocks.png" alt="textblocks"/></a>
-   # <a href="/account/" <%= 'class="active"' if params[:controller] == "account"%>><img src="/images/accounts.png" alt="accounts"/></a>
-   # <a href="/account/logout" ><img src="/images/logout.png" alt="log out of lepilo"/></a> 
-   
-   
   
+   # Inspired (and some code straight lifted) by mephisto's half-built plugin system
+      
+   # These variables contain all navigation and route related information for lepilo
+   @@custom_routes = []
+   @@tabs          = []
+   @@admin_tabs    = []
 
-  def load_navigation
-    # cache it, baby
-    @@navigation ||= nil 
+   def lepilo_tabs
+     @@tabs
+   end
+   
+   def lepilo_admin_tabs
+     @@admin_tabs
+   end
+
+   # hook into ActionView to make these tabs avalible in views
+   def self.included(base)
+     base.send :helper_method, :lepilo_tabs, :lepilo_admin_tabs
+   end
+   
+  
+  # This function can be used to add a tab to lepilo's menu
+  # Each item has an image as the first argument, and then an array to be passed to link_to
+  # add_tab 'path/to/image.png', :controller => 'foo'
+  def add_lepilo_tab(*args)
+    @@tabs << args
   end
   
-  def update_navigation
-    @@navigation = nil
-    load_navigation
+  # Keeps track of custom adminstration tabs for ADMIN users only.  
+  # Each item is an array of arguments to be passed to tab_for.
+  def add_lepilo_admin_tab(*args)
+    @@admin_tabs << args
   end
   
-  protected
-  
-  def add_navigation_item(path = nil)
-    
+ # Adds a custom route to Mephisto from a plugin.  These routes are created in the order they are added.  
+  # They will be the last routes before the Mephisto Dispatcher catch-all route.
+  def add_route(*args)
+    @@custom_routes << args
   end
-  
+
+
 end

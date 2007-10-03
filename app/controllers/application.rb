@@ -14,11 +14,10 @@ class ApplicationController < ActionController::Base
   
   layout 'lepilo'
 
-  before_filter :configure_charsets
+  before_filter :configure_charsets, :add_default_tabs
+  
 
-
-
-  protected
+  
   def configure_charsets
     @response.headers["Content-Type"] = "text/html; charset=utf-8"
     # Set connection charset. MySQL 4.0 doesn't support this so it
@@ -26,6 +25,17 @@ class ApplicationController < ActionController::Base
     suppress(ActiveRecord::StatementInvalid) do
       ActiveRecord::Base.connection.execute 'SET NAMES UTF8'
     end
+  end
+  
+  def add_default_tabs
+    add_lepilo_tab 'overview.png',          :controller => :settings  
+    add_lepilo_tab 'navigation.png',        :controller => :topics    
+    add_lepilo_tab 'articles.png',          :controller => :articles  
+    add_lepilo_tab 'collections.png',       :controller => :collections  
+    add_lepilo_tab 'textblocks.png',        :controller => :textblocks
+    add_lepilo_tab 'media.png',             :controller => :mediablocks
+
+    add_lepilo_admin_tab 'accounts.png',    :controller => :users
   end
 
 end

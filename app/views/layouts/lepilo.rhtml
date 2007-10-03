@@ -20,17 +20,7 @@
   <div id="page" class="hold_floats">
 
   <div id="header">
-    <div id="lplnavigation">
-      <img src="/images/lepilo.png" class="lepilo" alt="lepilo version" />
-      <a href="/settings/" <%= 'class="active"' if params[:controller] == "settings"%>><img src="/images/overview.png" alt="overview" /></a>
-      <a href="/topics/" <%= 'class="active"' if params[:controller] == "topics"%>><img src="/images/navigation.png" alt="navigation"/></a>
-      <a href="/articles/" <%= 'class="active"' if params[:controller] == "articles"%>><img src="/images/articles.png" alt="articles" /></a>
-      <a href="/collections/" <%= 'class="active"' if params[:controller] == "collections"%>><img src="/images/collections.png" alt="collections"/></a>
-      <a href="/mediablocks/" <%= 'class="active"' if params[:controller] == "mediablocks"%>><img src="/images/media.png" alt="media"/></a>
-      <a href="/textblocks/" <%= 'class="active"' if params[:controller] == "textblocks"%>><img src="/images/textblocks.png" alt="textblocks"/></a>
-      <a href="/users/" <%= 'class="active"' if params[:controller] == "users"%>><img src="/images/accounts.png" alt="accounts"/></a>
-      <a href="/logout" ><img src="/images/logout.png" alt="log out of lepilo"/></a>
-    </div>
+    <%= render :partial => 'shared/navigation' %>
   </div>
 
   <!-- #nav: Hauptnavigation -->
