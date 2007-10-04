@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   
   # render new.rhtml
   def new
+    redirect_to new_user_path if User.count < 1
   end
 
   def create
@@ -14,7 +15,7 @@ class SessionsController < ApplicationController
         self.current_user.remember_me
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
-      redirect_back_or_default('/settings')
+      redirect_back_or_default('settings')
       flash[:ok] = "Logged in successfully"
     else
       render :action => 'new'

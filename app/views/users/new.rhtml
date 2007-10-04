@@ -1,9 +1,9 @@
 <div id="lploptions">
-	<div>
-	  <h1>Create A New User</h1>
+	<div>  
+		<h1>Create A New User</h1>
 	</div>
 <div id="entrysettings">
-<% form_for :user, :url => users_path do |f| -%>
+<% form_for :user, :url => users_path  do |f| -%>
 
 <div title="Account signup" id="signupform" class="form">
   <%= error_messages_for 'user' %><br/>
@@ -16,7 +16,9 @@
   <label for="user_password_confirmation">Confirm password:</label><br/>
   <%= f.password_field  "password_confirmation", :size => 30 %><br/>
 
-	<%= f.hidden_field "admin", "1" if User.count == 0 %>
+	<% if User.count == 0 %>
+		<%= f.hidden_field  "admin", :value => 1 %>
+	<% end %>
 
 	<%= submit_tag 'Sign up' %>
 
