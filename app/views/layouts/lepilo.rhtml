@@ -13,6 +13,8 @@
   <%= stylesheet_link_tag 'lightbox'%>
   <%= stylesheet_link_tag 'lplaccordionmenu'%>
   <%= stylesheet_link_tag 'lplcssmenu'%>
+	<%= yield :header %>
+  
 </head>
 <body onload="new Ajax.Request('/<%= controller.controller_name-%>/inspector/<%=params[:id]-%>', {asynchronous:true, evalScripts:true}); return false;">
 

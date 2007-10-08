@@ -57,7 +57,7 @@
       :article_id => @article.id, 
       :fragment_id => newinfragment },
       :class => "linkicon", 
-      :popup => ['new_text', 'height=600,width=600,scrollbars=1,resize=1'] -%>
+      :popup => ['new_text', 'height=750,width=750,scrollbars=1,resizable=1'] -%>
     <%= link_to image_tag("/images/mediablock-add.png", :alt => "add mediablock", :title => "add mediablock", :class => "linkicon"), 
     { :controller => "mediablocks", 
       :action => "new",
@@ -65,7 +65,7 @@
       :article_id => @article.id, 
       :fragment_id => newinfragment },
       :class => "linkicon",  
-      :popup => ['new_media', 'height=500,width=700,scrollbars=0,resize=1'] -%>
+      :popup => ['new_media', 'height=500,width=700,scrollbars=0,resizable=1'] -%>
     </div>
     <% if params[:fragment] == "print" %>
       <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.find_by_content("print") }) -%>  

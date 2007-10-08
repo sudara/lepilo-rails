@@ -2,11 +2,11 @@
 
 <div id="lploptions">
   <div id="entrySettings" >
-    <%= start_form_tag :action => 'create' %>
+    <% form_tag :action => 'create' %>
       <%= render :partial => 'form' %>
       <br style="clear:both;"/>
       <%= submit_tag "Anlegen" %>
-    <%= end_form_tag %>
+    <% end %>
   </div>
 </div>
 <div id="lplheader">
