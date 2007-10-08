@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
 
-  before_filter :login_required, :except => [:new]
-  before_filter :find_user,      :only =>   [:edit, :update, :destroy, :admin]
+  before_filter :login_required, :except  => [:new]
+  before_filter :find_user,      :only    => [:edit, :update, :destroy, :admin]
+  before_filter :count_users,    :only    => [:index, :new, :edit]
+  
+  layout 'login' unless User.count > 0
   
   def index
     respond_to do |format|
@@ -34,9 +37,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user.save!
-    self.current_user = @user
-    redirect_back_or_default(users_path)
-    flash[:notice] = "Thanks for signing up!"
+    self.current_user = @user unless logged_in
+    redirect_to settings_path
+    flash[:ok] = "Thanks for signing up!"
   rescue ActiveRecord::RecordInvalid
     render :action => 'new'
   end
@@ -53,7 +56,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(params[:user])
-      flash[:notice] = 'User was successfully updated.'
+      flash[:ok] = 'User was successfully updated.'
       redirect_to users_path
     else
       render :action => "edit" 
@@ -77,6 +80,10 @@ class UsersController < ApplicationController
       admin? || (!%w(destroy admin index).include?(action_name) && (params[:id].nil? || params[:id] == current_user.id.to_s))
     end
     
+    def count_users
+      @user_count = User.count
+    end
+
     def find_user
       @user = User.find_by_id(params[:id]) 
     end

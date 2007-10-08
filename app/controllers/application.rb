@@ -8,7 +8,6 @@ require 'mini_magick'
  
 class ApplicationController < ActionController::Base
   
-  # include LoginSystem
   include NavigationSystem
   include AuthenticatedSystem
   
@@ -16,10 +15,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_charsets, :ensure_default_tabs
   
-
-  
   def configure_charsets
-    @response.headers["Content-Type"] = "text/html; charset=utf-8"
+    response.headers["Content-Type"] = "text/html; charset=utf-8"
     # Set connection charset. MySQL 4.0 doesn't support this so it
     # will throw an error, MySQL 4.1 needs this
     suppress(ActiveRecord::StatementInvalid) do
@@ -40,5 +37,7 @@ class ApplicationController < ActionController::Base
       add_lepilo_admin_tab 'accounts.png',    :controller => :users
     end
   end
-
+  
+  # TODO: catch the error if the db is emtpy
+  # rescue  ActiveRecord::StatementInvalid
 end

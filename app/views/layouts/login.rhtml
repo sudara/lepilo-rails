@@ -14,7 +14,7 @@
     <img src="/images/lepilo-title.png" alt="title image"/>
     <div class="loginwindow">
       <div style="width:450px;margin-right:20px;margin-left:auto;padding-top:10px">
-      <%= flash[:ok] %>
+		   <%= render :partial => 'shared/flash' %>
       <%= yield  %>
       </div>
     </div>

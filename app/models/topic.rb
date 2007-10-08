@@ -13,9 +13,8 @@ class Topic < ActiveRecord::Base
   
   # Permalink converts "Hello World!" How are you? into url friendly hello_world_how_are_you
   has_permalink :title
-  
-  #attr_accessor :level
-  
+  # validates_uniqueness_of :title
+    
   def level
     if !self.parent 
       return 1

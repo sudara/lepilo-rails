@@ -1,6 +1,11 @@
 <div id="lploptions">
 	<div>  
-		<h1>Create A New User</h1>
+		<% if @user_count > 0 %>
+			<h1>Create A New User</h1>
+		<% else %>
+			<h1>Welcome to Lepilo!</h1>
+			<h2>Please create your first user account</h2>
+		<% end %>
 	</div>
 <div id="entrysettings">
 <% form_for :user, :url => users_path  do |f| -%>

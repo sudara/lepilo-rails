@@ -46,7 +46,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id'
     
   # PUBLIC ROUTES
-  map.connect '', :controller => 'frontend', :permalink => 'root'
+  map.connect '', :controller => 'frontend'
   
   map.connect ':permalink',     :controller => 'frontend'
   map.connect '*/:permalink',   :controller => 'frontend'
