@@ -1,0 +1,42 @@
+<div id="lpltemplatecontainer"> 
+   <div style="height:50px">
+   <%= link_to image_tag("/images/back.png", :alt => "back", :title => "back", :class => "linkicon"), 
+   { :action => 'list', :page => params[:page] }, :class => "linkicon" -%>
+   <%= link_to image_tag("/images/textblock-add.png", :alt => "add textblock", :title => "add textblock", :class => "linkicon"), 
+   { :controller => "textblocks", 
+     :action => "new",
+     :simple_layout => "true",
+     :article_id => fragment.article.id, 
+     :fragment_id => fragment },
+     :class => "linkicon", 
+     :popup => ['new_text', 'height=750,width=750,scrollbars=1,resizable=1'] -%>
+   <%= link_to image_tag("/images/mediablock-add.png", :alt => "add mediablock", :title => "add mediablock", :class => "linkicon"), 
+   { :controller => "mediablocks", 
+     :action => "new",
+     :simple_layout => "true",
+     :article_id => fragment.article.id, 
+     :fragment_id => fragment },
+     :class => "linkicon",  
+     :popup => ['new_media', 'height=500,width=700,scrollbars=0,resizable=1'] -%>
+   </div>
+  
+   <br style="clear:both">
+ </div>
+
+
+<%= drop_receiving_element "lpltemplatecontainer", 
+      :update => "lplcontent", :url => { :controller => 'block_links', :action => "create", :dropfragment_id => params['fragment_id'] },
+      :accept => "dragblock", :hoverclass => "dropzone-active" %>
+
+<%= drop_receiving_element "lpltemplatecontainer", 
+      :update => "lplcontent", :url => { :controller => 'block_links',  :action => "create", :dropfragment_id => params['fragment_id'] },
+      :accept => "dragline", :hoverclass => "dropzone-active" %>
+
+<%= sortable_element 'block-list' ,
+      :tag => "div",
+      :constraint => false,
+      :url => { :action => "sort", :id => @article, :sortfragment_id => params['fragment_id'] }, 
+      :complete => visual_effect(:highlight, 'block-list' ) %>
+
+
+<%= render :partial => 'block_links/article', :locals => { :block_links => fragment.block_links } %>

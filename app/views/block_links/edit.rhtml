@@ -13,10 +13,10 @@
 
 %>
 
-<%= start_form_tag :action => 'update', :id => @block_link %>
+<% form_tag :action => 'update', :id => @block_link do %>
   <%= render :partial => 'form' %>
   <%= submit_tag 'Speichern' %>
-<%= end_form_tag %>
+<%end %>
 
 <%= link_to 'Anzeigen', :action => 'show', :id => @block_link %> |
 <%= link_to 'Zur&uuml;ck', :action => 'list' %>

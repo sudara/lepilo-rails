@@ -1,12 +1,5 @@
 <%  session[:current_article] = params[:id] %>  
 <%  session[:current_collection] = nil %>  
-<%  
-  if params[:page]
-    session[:current_page] = params[:page] 
-  else
-    session[:current_page] = 1
-  end 
-%>
 
 
 <div id="lplcontainer">
@@ -35,45 +28,7 @@
     <%= render :partial => 'topics/selector', :locals => { :current_topic => @article.topic } %>
   </div><br>
 
-  <%  if params[:fragment] == "print"
-        newinfragment = @article.fragments.find_by_content("print").id 
-      else
-        newinfragment = @article.fragments.find_by_content("web").id 
-      end %>
-
-  <%#link_to "Flash Vorschau", { :controller => "articles",
-                                 :action => "showswf", 
-                                 :id => @article.id }, 
-                                 :popup => ['swf_preview', 'height=700,width=980,scrollbars=0'] -%>
-
-  <div id="lpltemplatecontainer"> 
-    <div style="height:50px">
-    <%= link_to image_tag("/images/back.png", :alt => "back", :title => "back", :class => "linkicon"), 
-    { :action => 'list', :page => params[:page] }, :class => "linkicon" -%>
-    <%= link_to image_tag("/images/textblock-add.png", :alt => "add textblock", :title => "add textblock", :class => "linkicon"), 
-    { :controller => "textblocks", 
-      :action => "new",
-      :rendersimple => "true",
-      :article_id => @article.id, 
-      :fragment_id => newinfragment },
-      :class => "linkicon", 
-      :popup => ['new_text', 'height=750,width=750,scrollbars=1,resizable=1'] -%>
-    <%= link_to image_tag("/images/mediablock-add.png", :alt => "add mediablock", :title => "add mediablock", :class => "linkicon"), 
-    { :controller => "mediablocks", 
-      :action => "new",
-      :rendersimple => "true",
-      :article_id => @article.id, 
-      :fragment_id => newinfragment },
-      :class => "linkicon",  
-      :popup => ['new_media', 'height=500,width=700,scrollbars=0,resizable=1'] -%>
-    </div>
-    <% if params[:fragment] == "print" %>
-      <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.find_by_content("print") }) -%>  
-      <%# render :partial => "templates/dina4print" %>
-    <% else %>
-      <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.find_by_content("web") }) -%>  
-    <% end %>
-    <br style="clear:both">
-  </div>
+	<%= render :partial => 'fragments/fragment', :collection => @fragments %>
+	 
 </div>
 

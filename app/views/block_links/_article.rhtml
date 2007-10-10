@@ -1,6 +1,6 @@
 
   <div id="block-list"> 
-<% for link in @blocks %>
+<% for link in block_links %>
   <%  if link.linked_type == "Textblock" %>
   <div id="item_<%= link.id %>" class="sortableblock"> 
     <%= render_partial 'textblocks/short', nil, 'textblock_id' => link.linked_id, 'link_id' => link.id %>

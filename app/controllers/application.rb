@@ -13,8 +13,9 @@ class ApplicationController < ActionController::Base
   
   layout 'lepilo'
 
-  before_filter :configure_charsets, :ensure_default_tabs
+  before_filter :configure_charsets, :ensure_default_tabs, :simple_layout?
   
+  # TODO: Make sure this is only called when needed
   def configure_charsets
     response.headers["Content-Type"] = "text/html; charset=utf-8"
     # Set connection charset. MySQL 4.0 doesn't support this so it
@@ -27,17 +28,24 @@ class ApplicationController < ActionController::Base
   def ensure_default_tabs
     # hack to protect production mode
     if @@tabs.empty? 
-      add_lepilo_tab 'overview.png',          :controller => :settings  
-      add_lepilo_tab 'navigation.png',        :controller => :topics    
-      add_lepilo_tab 'articles.png',          :controller => :articles  
-      add_lepilo_tab 'collections.png',       :controller => :collections  
-      add_lepilo_tab 'textblocks.png',        :controller => :textblocks
-      add_lepilo_tab 'media.png',             :controller => :mediablocks
+      add_lepilo_tab 'overview.png',          settings_path
+      add_lepilo_tab 'navigation.png',        topics_path  
+      add_lepilo_tab 'articles.png',          articles_path 
+      add_lepilo_tab 'collections.png',       '/collections' 
+      add_lepilo_tab 'textblocks.png',        textblocks_path
+      add_lepilo_tab 'media.png',             mediablocks_path
 
-      add_lepilo_admin_tab 'accounts.png',    :controller => :users
+      add_lepilo_admin_tab 'accounts.png',    users_path
     end
   end
   
   # TODO: catch the error if the db is emtpy
   # rescue  ActiveRecord::StatementInvalid
+  
+  protected
+  
+  # layout used for popups and such
+  def simple_layout?
+    render :layout => 'simple' if params[:simple_layout]
+  end
 end

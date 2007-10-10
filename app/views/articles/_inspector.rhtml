@@ -12,10 +12,10 @@
  
 <div class="editdata">
   <div class="box">
-    <%= start_form_tag :action => 'imagedescriptions', :id => @article -%>
+    <% form_tag :action => 'imagedescriptions', :id => @article do -%>
     Copyright Vermerk für Bilder: 
     <input name="description" size="30" type="text" />
       <%= submit_tag 'Anwenden' -%>
-    <%= end_form_tag -%>
+    <%end -%>
   </div>
 </div>

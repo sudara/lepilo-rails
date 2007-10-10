@@ -2,112 +2,122 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 8) do
+ActiveRecord::Schema.define(:version => 11) do
 
   create_table "articles", :force => true do |t|
-    t.column "thumbnail_id", :integer
-    t.column "released",     :boolean
-    t.column "release_date", :date
-    t.column "user_id",      :integer
-    t.column "created_at",   :datetime
-    t.column "updated_at",   :datetime
-    t.column "reference",    :string,   :limit => 25
-    t.column "type",         :string,   :limit => 25
-    t.column "title",        :string,   :limit => 250
-    t.column "description",  :text
+    t.integer  "thumbnail_id"
+    t.boolean  "released"
+    t.date     "release_date"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "reference",    :limit => 25
+    t.string   "type",         :limit => 25
+    t.string   "title",        :limit => 250
+    t.text     "description"
   end
 
   create_table "articles_tags", :id => false, :force => true do |t|
-    t.column "article_id", :integer
-    t.column "tag_id",     :integer
+    t.integer "article_id"
+    t.integer "tag_id"
   end
 
   create_table "block_links", :force => true do |t|
-    t.column "linked_id",     :integer
-    t.column "linked_type",   :string,  :limit => 36
-    t.column "position",      :integer
-    t.column "fragment_id",   :integer
-    t.column "collection_id", :integer
+    t.integer "linked_id"
+    t.string  "linked_type",   :limit => 36
+    t.integer "position"
+    t.integer "fragment_id"
+    t.integer "collection_id"
   end
 
   create_table "collections", :force => true do |t|
-    t.column "topic_id",     :integer
-    t.column "thumbnail_id", :integer
-    t.column "released",     :boolean
-    t.column "user_id",      :integer
-    t.column "created_at",   :datetime
-    t.column "updated_at",   :datetime
-    t.column "title",        :string,   :limit => 250
-    t.column "description",  :text
+    t.integer  "topic_id"
+    t.integer  "thumbnail_id"
+    t.boolean  "released"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title",        :limit => 250
+    t.text     "description"
   end
 
   create_table "fragments", :force => true do |t|
-    t.column "article_id",  :integer
-    t.column "content",     :string,   :limit => 64
-    t.column "position",    :integer
-    t.column "user_id",     :integer
-    t.column "created_at",  :datetime
-    t.column "updated_at",  :datetime
-    t.column "info",        :string,   :limit => 250
-    t.column "fragment_id", :integer
+    t.integer  "article_id"
+    t.string   "content",     :limit => 64
+    t.integer  "position"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "info",        :limit => 250
+    t.integer  "fragment_id"
   end
 
   create_table "mediablocks", :force => true do |t|
-    t.column "created_at",    :datetime
-    t.column "updated_at",    :datetime
-    t.column "uploaded_at",   :datetime
-    t.column "original_name", :string
-    t.column "content_type",  :string,   :limit => 100
-    t.column "filename",      :string
-    t.column "thumbnail",     :string
-    t.column "original",      :string
-    t.column "title",         :string
-    t.column "description",   :string
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "uploaded_at"
+    t.string   "original_name"
+    t.string   "content_type",  :limit => 100
+    t.string   "filename"
+    t.string   "thumbnail"
+    t.string   "original"
+    t.string   "title"
+    t.string   "description"
   end
 
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :default => "", :null => false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
   create_table "settings", :force => true do |t|
-    t.column "setting_id",  :integer, :default => 0
-    t.column "position",    :integer
-    t.column "key",         :string
-    t.column "value",       :string
-    t.column "description", :text
+    t.integer "setting_id",  :default => 0
+    t.integer "position"
+    t.string  "key"
+    t.string  "value"
+    t.text    "description"
   end
 
   create_table "tags", :force => true do |t|
-    t.column "name", :string, :limit => 250
+    t.string "name", :limit => 250
   end
 
   create_table "textblocks", :force => true do |t|
-    t.column "user_id",    :integer
-    t.column "created_at", :datetime
-    t.column "updated_at", :datetime
-    t.column "title",      :string,   :limit => 250
-    t.column "content",    :text
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title",      :limit => 250
+    t.text     "content"
   end
 
   create_table "topics", :force => true do |t|
-    t.column "topic_id",    :integer
-    t.column "position",    :integer
-    t.column "title",       :string,  :limit => 250
-    t.column "description", :text
-    t.column "permalink",   :string
-    t.column "article_id",  :integer
+    t.integer "topic_id"
+    t.integer "position"
+    t.string  "title",       :limit => 250
+    t.text    "description"
+    t.string  "permalink"
+    t.integer "article_id"
   end
 
   create_table "users", :force => true do |t|
-    t.column "created_at",                :datetime
-    t.column "login",                     :string,   :limit => 80
-    t.column "password",                  :string,   :limit => 40
-    t.column "role",                      :string,   :limit => 30
-    t.column "name",                      :string,   :limit => 150
-    t.column "email",                     :string,   :limit => 250
-    t.column "description",               :string,   :limit => 250
-    t.column "crypted_password",          :string,   :limit => 40
-    t.column "salt",                      :string,   :limit => 40
-    t.column "updated_at",                :datetime
-    t.column "remember_token",            :string
-    t.column "remember_token_expires_at", :datetime
-    t.column "admin",                     :boolean
+    t.datetime "created_at"
+    t.string   "login",                     :limit => 80
+    t.string   "password",                  :limit => 40
+    t.string   "role",                      :limit => 30
+    t.string   "name",                      :limit => 150
+    t.string   "email",                     :limit => 250
+    t.string   "description",               :limit => 250
+    t.string   "crypted_password",          :limit => 40
+    t.string   "salt",                      :limit => 40
+    t.datetime "updated_at"
+    t.string   "remember_token"
+    t.datetime "remember_token_expires_at"
+    t.boolean  "admin"
   end
 
 end

@@ -9,38 +9,34 @@ class TextblocksController < ApplicationController
 
   def list
     @textblock_pages, @textblocks = paginate :textblocks, :per_page => 25
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
+
   end
 
   def search
     if !params['criteria'] || 0 == params['criteria'].length
       @items = nil
-      render_without_layout
+      render :layout => false
     else
       @items = Textblock.find(:all, :order => 'updated_at DESC',
         :conditions => [ 'LOWER(title) OR LOWER(content) LIKE ?', 
         '%' + params['criteria'].downcase + '%' ])
       @mark_term = params['criteria']
-      render_without_layout
+      render :layout => false
     end
   end
 
   def show
     @textblock = Textblock.find(params[:id])
-    if params[:rendersimple]  
+    if params[:simple_layout]  
       render :layout => 'simple'
     else
-      render_without_layout
+      render :layout => false
     end
   end
 
   def flashpreview
     @textblock = Textblock.find(params[:id])
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
+
   end
 
   def short
@@ -55,25 +51,15 @@ class TextblocksController < ApplicationController
 
   def new
     @textblock = Textblock.new
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
+
   end
 
   def create
-    
     @textblock = Textblock.new(params[:textblock])
-    if @textblock.save
-
-      @textblock.update
-      
-      addLink = BlockLink.new
-      addLink.linked = @textblock
-      addLink.fragment_id = session[:current_fragment]
-      addLink.save
-      
+    if @textblock.save      
+      @textblock.block_links.create(params[:block_link])      
       flash[:ok] = 'Textblock was successfully created.'
-      redirect_to :controller=>"/block_links", :action => "close_reload"
+      redirect_to :controller=>"block_links", :action => "close_reload"
     else
       flash[:error] = 'Unable to create Textblock.'
       render :action => 'new'

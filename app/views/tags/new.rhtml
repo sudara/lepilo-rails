@@ -1,8 +1,8 @@
 <h1>New tag</h1>
 
-<%= start_form_tag :action => 'create' %>
+<% :action => 'create' do %>
   <%= render :partial => 'form' %>
   <%= submit_tag "Anlegen" %>
-<%= end_form_tag %>
+<%end %>
 
 <%= link_to 'Zur&uuml;ck', :action => 'list' %>

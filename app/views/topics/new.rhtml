@@ -4,10 +4,10 @@ toggleRight();
 <h1>Neuer Navigationspunkt</h1>
 <div id="lploptions">
   <div id="entrySettings" >
-    <%= start_form_tag :action => 'create' %>
+    <% :action => 'create' do %>
       <%= render :partial => 'new' %>
       <%= submit_tag "Anlegen" %>
-    <%= end_form_tag %>
+    <% end %>
   </div>
 </div>
 <div id="lplheader">

@@ -3,11 +3,9 @@
   <h1>Mediablockliste</h1> |  
   <%= link_to "New Mediablock", 
     { :action => "new",
-      :rendersimple => "true" }, 
+      :simple_layout => "true" }, 
       :popup => ['new_window', 'height=400,width=600,scrollbars=1'] -%> | 
-  <%= link_to 'Vorherige Seite', { :page => @mediablock_pages.current.previous } if @mediablock_pages.current.previous %> |
-  Seite: <%= pagination_links(@mediablock_pages) %> |
-  <%= link_to 'N&auml;chste Seite', { :page => @mediablock_pages.current.next } if @mediablock_pages.current.next %> 
+ <%= will_paginate @media_blocks %>
   </div>  
 </div> 
 

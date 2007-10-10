@@ -2,9 +2,6 @@ class BlockLinksController < ApplicationController
 
   before_filter :login_required, :except => [ :show, :dhn_article, :show_article ]
 
-  model :mediablock
-  model :textblock
-  
   def index
     list
     render :action => 'list'
@@ -12,16 +9,12 @@ class BlockLinksController < ApplicationController
 
   def list
     @block_link_pages, @block_links = paginate :block_links, :per_page => 25
-    if params[:rendersimple] == "true" 
-      render :layout => 'simple'
-    end
+
   end
 
   def show
     @block_link = BlockLink.find(params[:id])
-    if params[:rendersimple] == "true" 
-      render :layout => 'simple'
-    end
+
   end
   
   def show_article
@@ -40,9 +33,7 @@ class BlockLinksController < ApplicationController
 
   def new
     @block_link = BlockLink.new
-    if params[:rendersimple] == "true" 
-      render :layout => 'simple'
-    end
+
   end
 
   def create
@@ -90,9 +81,7 @@ class BlockLinksController < ApplicationController
 
   def edit
     @block_link = BlockLink.find(params[:id])
-    if params[:rendersimple] == "true" 
-      render :layout => 'simple'
-    end
+
   end
 
   def update

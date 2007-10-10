@@ -23,9 +23,6 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
   end
 
   def simple
@@ -35,9 +32,6 @@ class TopicsController < ApplicationController
 
   def new
     @topic = Topic.new
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
   end
 
   def create
@@ -62,10 +56,6 @@ class TopicsController < ApplicationController
 
   def edit
     @topic = Topic.find(params[:id])
-
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
   end
   
   def topic_changed

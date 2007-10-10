@@ -1,7 +1,7 @@
 class FrontendController < ApplicationController
 
   layout 'frontend'
-
+  skip_before_filter :ensure_default_tabs, :simple_layout
   before_filter :first_timer?, :is_root?, :find_topic
   def index
     @content_groups = @topic.article

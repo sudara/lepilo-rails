@@ -4,10 +4,10 @@ toggleRight();
 <%= error_messages_for 'topic' %>
 <div id="lploptions">
   <div id="entrySettings" >
-    <%= start_form_tag :action => 'update', :id => @topic %>
+    <% form_tag :action => 'update', :id => @topic do%>
       <%= render :partial => 'edit' %><br style="clear:both">
       <%= submit_tag 'Speichern' %><br/>
-    <%= end_form_tag %>
+    <%end %>
   </div>
 </div>
 <div id="lplheader">

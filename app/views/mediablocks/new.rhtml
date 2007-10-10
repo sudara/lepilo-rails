@@ -3,9 +3,9 @@
 <%#  session[:current_article] = params[:article_id] %>  
 <div id="lplcontainer">
   <%
-  # start_form_tag ( {:action => 'create' }, :multipart => true) 
+  # form_tag ( {:action => 'create' }, :multipart => true) 
   # For your edit screens use:
-  # start_form_tag ( {:action => 'update', :id => @product }, :multipart => true ) 
+  # form_tag ( {:action => 'update', :id => @product }, :multipart => true ) 
   %>
 
   <div class="editdata">
@@ -15,7 +15,7 @@
     <br/>
   </div>
   <div id="lpltemplatecontainer">
-    <%= form_tag ({:action => 'create' }, :multipart => true)  %>
+    <% form_tag ({:action => 'create' }, :multipart => true) do %>
       <%= render :partial => 'form' %><br>
       <%= submit_tag "Anlegen" %>
     <% end_form_tag %>

@@ -42,9 +42,14 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :topics
   map.resources :articles
+  map.resources :settings
+  map.resources :textblocks
+  map.resources :mediablocks
+
   # Install the default route as the lowest priority.
   map.connect ':controller/:action/:id'
-    
+    map.resources :block_links
+  
   # PUBLIC ROUTES
   map.connect '', :controller => 'frontend'
   

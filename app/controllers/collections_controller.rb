@@ -13,22 +13,20 @@ class CollectionsController < ApplicationController
 
   def list
     @collection_pages, @collections = paginate :collections, :per_page => 12
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
+
   end
 
   def search
     if !params['criteria'] || 0 == params['criteria'].length
       @items = nil
-      render_without_layout
+      render :layout => false
     else
       #@items = Collection.find(:all, :order => 'updated_at DESC',
       @items = Collection.find(:all, :order => 'created_at DESC',
         :conditions => [ 'LOWER(title) LIKE ?', 
         '%' + params['criteria'].downcase + '%' ])
       @mark_term = params['criteria']
-      render_without_layout
+      render :layout => false
     end
   end
 
@@ -66,9 +64,7 @@ class CollectionsController < ApplicationController
 
   def show
     @collection = Collection.find(params[:id])
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
+
   end
   
   def showdina4
@@ -88,9 +84,7 @@ class CollectionsController < ApplicationController
 
   def new
     @collection = Collection.new
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
+
   end
 
   def create
@@ -136,10 +130,10 @@ class CollectionsController < ApplicationController
 
   def edit
     @collection = Collection.find(params[:id])
-    if params[:rendersimple]  
+    if params[:simple_layout]  
       render :layout => 'simple'
     elsif params[:nolayout]
-      render_without_layout
+      render :layout => false
     end
   end
 

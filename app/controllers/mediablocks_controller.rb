@@ -13,50 +13,40 @@ class MediablocksController < ApplicationController
     session[:current_collection] = nil
     
     @mediablock_pages, @mediablocks = paginate :mediablocks, :order => 'created_at DESC', :per_page => 25
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
+
   end
 
   def search
     if !params['criteria'] || 0 == params['criteria'].length
       @mediaitems = nil
-      render_without_layout
+      render :layout => false
     else
       @mediaitems = Mediablock.find(:all, :order => 'updated_at DESC',
         :conditions => [ 'LOWER(title) OR LOWER(description) LIKE ?', 
         '%' + params['criteria'].downcase + '%' ], :limit => 18)
       @mark_term = params['criteria']
-      render_without_layout
+      render :layout => false
     end
   end
 
   def selectmedia
     @mediablock_pages, @mediablocks = paginate :mediablocks, :per_page => 25
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
+
   end
 
   def show
     @mediablock = Mediablock.find(params[:id])
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
+
   end
 
   def show_search
     @mediablocks = Mediablock.find(:all)
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
+
   end
 
   def new
     @mediablock = Mediablock.new
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
+
   end
 
   def create
@@ -85,9 +75,7 @@ class MediablocksController < ApplicationController
 
   def edit
     @mediablock = Mediablock.find(params[:id])
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
+
   end
 
   def update

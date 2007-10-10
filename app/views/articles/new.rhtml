@@ -2,7 +2,7 @@
 
 <div id="lploptions">
   <div id="entrySettings" >
-    <% form_tag :action => 'create' %>
+    <% form_tag :action => 'create' do %>
       <%= render :partial => 'form' %>
       <br style="clear:both;"/>
       <%= submit_tag "Anlegen" %>

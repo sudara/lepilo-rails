@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
   helper :blocks
   before_filter :login_required, :except => [ :show, :showswf, :showdina4, :simple ]
 
+  # OPTIMIZE: Why is this here?
   Article.content_columns.each do |column| 
     in_place_edit_for :article, column.name 
   end 
@@ -18,26 +19,23 @@ class ArticlesController < ApplicationController
   #       :redirect_to => { :action => :list }
 
   def list
-    @article_pages, @articles = paginate :articles, :order => 'release_date DESC, reference DESC', :per_page => 25
-    
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
+    @articles = Article.paginate(:all, :order => 'release_date DESC, reference DESC', :page => params[:page])
   end
 
   def search
     if !params['criteria'] || 0 == params['criteria'].length
       @items = nil
-      render_without_layout
+      render :layout => false
     else
       @items = Article.find(:all, :order => 'updated_at DESC',
         :conditions => [ 'LOWER(title) LIKE ?', 
         '%' + params['criteria'].downcase + '%' ])
       @mark_term = params['criteria']
-      render_without_layout
+      render :layout => false
     end
   end
 
+  # OPTIMIZE: clarify with samo what this is doing
   def thumbnail
     drop_type = params[:id].split('_')[0]  
     drop_id = params[:id].split('_')[1]  
@@ -55,17 +53,14 @@ class ArticlesController < ApplicationController
       updatethumb.save
       @thumbnail = Mediablock.find(drop_id)
     end
-        
-    render_without_layout
+    render :layout => false
   end
 
   def show
     @article = Article.find(params[:id])
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
   end
 
+  # OPTIMIZE: talk with samo about using respond_to .swf
   def showswf
     @article = Article.find(params[:id])
     render :layout => 'simple'
@@ -124,11 +119,13 @@ class ArticlesController < ApplicationController
       end
   end
   
+  # OPTIMIZE: merge with show
   def simple
     @article = Article.find_by_topic_id(params[:id])
     render :layout => false
   end
 
+  # OPTIMIZE: relocate
   def import
     if params[:importdir]  
       @article = Article.new
@@ -155,19 +152,10 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
   end
 
   def create
     @article = Article.new(params[:article])
-    if params[:article][:title] == ''
-      @article.title = 'Noname'
-    end
-    
-    @article.release_date = Date.today
-    @article.released = 0
     
     if @article.save
       flash[:ok] = 'Article was successfully created.'
@@ -207,21 +195,28 @@ class ArticlesController < ApplicationController
   def edit
     @article = Article.find(params[:id])
     
-    if !test = Fragment.find_by_article_id_and_content(params[:id], 'print')
-      @articlePrintFragment = Fragment.new
-      @articlePrintFragment.article_id = @article.id
-      @articlePrintFragment.info = 'Print PDF for #{@article.title}'
-      @articlePrintFragment.content = 'print'
-      @articlePrintFragment.save
-      @articlePrintFragment.update
-    end
+    # TODO: Get rid of this or figure out what it's doing.
     
-    @article.description = '...' unless @article.description
+    # if !test = Fragment.find_by_article_id_and_content(params[:id], 'print')
+    #   @articlePrintFragment = Fragment.new
+    #   @articlePrintFragment.article_id = @article.id
+    #   @articlePrintFragment.info = 'Print PDF for #{@article.title}'
+    #   @articlePrintFragment.content = 'print'
+    #   @articlePrintFragment.save
+    #   @articlePrintFragment.update
+    # end
     
-    if params[:rendersimple]  
+    # <% if params[:fragment] == "print" %>
+    #    <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.find_by_content("print") }) -%>  
+    #  <% else %>
+    #    <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.find_by_content("web") }) -%>  
+    #  <% end %>
+    @fragments = @article.fragments.find_all_by_content('web')
+    
+    if params[:simple_layout]  
       render :layout => 'simple'
     elsif params[:nolayout]
-      render_without_layout
+      render :layout => false
     elsif params[:dropfragment_id]
       redirect_to :action => 'edit', :id => @article, :fragment => Fragment.find(params['dropfragment_id']).content, :nolayout => true 
     elsif params[:fragment]
@@ -263,4 +258,6 @@ class ArticlesController < ApplicationController
     BlockLink.find(params[:id]).destroy
     redirect_to :controller => '/collections', :action => 'edit', :id => session[:current_collection]
   end
+  
+  protected
 end

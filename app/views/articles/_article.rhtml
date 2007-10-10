@@ -1,0 +1,48 @@
+	<div class="listblock" id="<%= article.id %>">
+    <%  thumbnail = Mediablock.find_by_id(article.thumbnail_id) %>
+    <% if thumbnail %>
+      <%= image_tag "/data/thumbnails/#{thumbnail.filename}",
+          :alt => thumbnail.title, 
+          :title => thumbnail.title, 
+          :class => "listthumbnail"  %>
+    <% else %>
+      <%= image_tag "/images/rails.png",
+          :class => "listthumbnail" %>
+    <% end %>
+  	<div class="iconwhite" id="plastic_<%= article.id %>">
+      <div class="icontainer">
+        <div class="icontainer" style="margin-right:5px">
+          <% if article.released %>
+          <%= image_tag "/images/16unlocked.png",
+              :alt => "freigegeben", 
+              :title => "freigegeben", 
+              :class => "linkicon"  %>
+          <% else %>
+          <%= image_tag "/images/16locked.png",
+              :alt => "nicht freigegeben", 
+              :title => "nicht freigegeben", 
+              :class => "linkicon"  %>
+          <% end %>
+        </div>
+        <%= link_to image_tag("/images/w24edit.png", :title => 'bearbeiten', :alt => 'bearbeiten'), { :action => 'edit', :id => article }, :class => 'linkicon' %>
+        <%= link_to image_tag("/images/w24delete.png", :title => 'löschen', :alt => 'löschen'), { :action => 'destroy', :id => article }, :class => 'linkicon', :confirm => 'Artikel »' + article.title + '« löschen — sind Sie sicher?' %>          
+      </div>
+  	</div>
+	  <div class="listdescription">
+    <h3><%= article.title %></h3><br/>
+    <span class="smalltext">
+	  <strong><%= article.reference %></strong>,
+      <%= image_tag "/images/16image.png",
+          :alt => "anzahl der medienblocks", 
+          :title => "anzahl der medienblocks", 
+          :class => "icon16"  %>
+      <%= article.count_media %>,    
+      <%= image_tag "/images/16text.png",
+          :alt => "anzahl der textblocks", 
+          :title => "anzahl der textblocks", 
+          :class => "icon16"  %>
+      <%= article.count_text %>
+    </span><br/>
+	  <%=h article.description %>
+	</div>
+</div>

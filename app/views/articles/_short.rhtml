@@ -4,7 +4,7 @@
   <span class="smalltext">
   <%= link_to 'Bearbeiten', {   :controller => "articles",
                                 :action => "edit",
-                                :rendersimple => "true",
+                                :simple_layout => "true",
                                 :id => article.id } %> |
   <%= link_to 'Verknüpfung Löschen', {  :controller => "articles",
                                         :action => "destroylink", 

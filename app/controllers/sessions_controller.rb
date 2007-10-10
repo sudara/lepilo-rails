@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
         self.current_user.remember_me
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
-      redirect_to :controller => :settings
+      redirect_to topics_path
       flash[:ok] = "Logged in successfully"
     else
       flash[:error] = "Login or Password incorrect!"

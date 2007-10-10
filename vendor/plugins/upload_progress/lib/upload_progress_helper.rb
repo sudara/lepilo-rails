@@ -14,11 +14,11 @@ module UploadProgress
   #
   # In your upload view:
   #
-  #   <%= form_tag_with_upload_progress({ :action => 'create' }) %>
+  #   <%_with_upload_progress({ :action => 'create' }) %>
   #     <%= file_field "document", "file" %>
   #     <%= submit_tag "Upload" %>
   #     <%= upload_status_tag %>
-  #   <%= end_form_tag %>
+  #   <%end %>
   #
   # In your controller:
   #
@@ -34,13 +34,13 @@ module UploadProgress
   #
   # In your upload view:
   #
-  #   <%= form_tag_with_upload_progress({ :action => 'create' }, {
+  #   <%_with_upload_progress({ :action => 'create' }, {
   #       :begin => "alert('upload beginning'), 
   #       :finish => "alert('upload finished')}) %>
   #     <%= file_field "document", "file" %>
   #     <%= submit_tag "Upload" %>
   #     <%= upload_status_tag %>
-  #   <%= end_form_tag %>
+  #   <%end %>
   #
   #
   # == CSS Styling of the status text and progress bar
@@ -100,8 +100,8 @@ module UploadProgress
     #
     # Status container after the form:
     #
-    #   <%= form_tag_with_upload_progress %>
-    #   <%= end_form_tag %>
+    #   <%_with_upload_progress %>
+    #   <%end %>
     #
     #   <%= upload_status_tag %>
     #
@@ -111,8 +111,8 @@ module UploadProgress
     #
     #   <%= upload_status_tag %>
     #
-    #   <%= form_tag_with_upload_progress :upload_id => my_upload_id %>
-    #   <%= end_form_tag %>
+    #   <%_with_upload_progress :upload_id => my_upload_id %>
+    #   <%end %>
     #
     # It is recommended that the helpers manage the +upload_id+ parameter.
     #
@@ -207,7 +207,7 @@ module UploadProgress
       ## Create the tags
       ## If a target for the form is given then avoid creating the hidden IFRAME
 
-      tag = form_tag(upload_action_url, options, *parameters_for_url_method)
+      tag (upload_action_url, options, *parameters_for_url_method)
 
       unless options[:target]
         tag << content_tag('iframe', '', { 
@@ -248,7 +248,7 @@ module UploadProgress
     #   }
     #  </script>
     #
-    #  <%= form_tag_with_upload_progress {:action => 'create'}, {finish => 'do_finish(arguments[0])'} %>
+    #  <%_with_upload_progress {:action => 'create'}, {finish => 'do_finish(arguments[0])'} %>
     #
     def finish_upload_status(options = {})
       # Always trigger the stop/finish callback

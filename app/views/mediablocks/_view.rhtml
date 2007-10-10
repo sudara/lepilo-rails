@@ -2,7 +2,7 @@
   <img src="/data/images/<%= @mediablock.filename %>" class="imagepreview"><br/>
   <%= link_to 'Bearbeiten', {   :controller => "mediablocks",
                                 :action => "edit",
-                                :rendersimple => "true",
+                                :simple_layout => "true",
                                 :id => @mediablock.id }, 
                                 :popup => ['new_window', 'height=600,width=600'] %> |
   <%= link_to 'L&ouml;schen', { :controller => "mediablocks",

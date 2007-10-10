@@ -4,7 +4,7 @@
 
   <%= link_to "Neues Bild", { :controller => "mediablocks",
                             :action => "new", 
-                            :rendersimple => "true",
+                            :simple_layout => "true",
                             :collection_id => @collection.id }, 
                             :popup => ['new_window', 'height=600,width=600,scrollbars=1'] %> |
   <%= link_to 'Anzeigen', :action => 'show', :id => @collection %> |

@@ -6,23 +6,17 @@ class TagsController < ApplicationController
 
   def list
     @tag_pages, @tags = paginate :tags, :per_page => 25
-    if params[:rendersimple] == "true" 
-      render :layout => 'simple'
-    end
+
   end
 
   def show
     @tag = Tag.find(params[:id])
-    if params[:rendersimple] == "true" 
-      render :layout => 'simple'
-    end
+
   end
 
   def new
     @tag = Tag.new
-    if params[:rendersimple] == "true" 
-      render :layout => 'simple'
-    end
+
   end
 
   def create
@@ -37,9 +31,7 @@ class TagsController < ApplicationController
 
   def edit
     @tag = Tag.find(params[:id])
-    if params[:rendersimple] == "true" 
-      render :layout => 'simple'
-    end
+
   end
 
   def update

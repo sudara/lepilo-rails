@@ -66,10 +66,10 @@ module UploadProgress
   #
   # ==== Basic Example (View):
   #
-  #  <%= form_tag_with_upload_progress({:action => 'create'}, {:finish => 'alert("Document Uploaded")'}) %>
+  #  <%_with_upload_progress({:action => 'create'}, {:finish => 'alert("Document Uploaded")'}) %>
   #  <%= upload_status_tag %>
   #  <%= file_field 'document', 'file' %>
-  #  <%= end_form_tag %>
+  #  <%end %>
   #
   # ==== Basic Example (Controller):
   #
@@ -83,17 +83,17 @@ module UploadProgress
   #
   # ==== Extended Example (View):
   #
-  #  <%= form_tag_with_upload_progress({:action => 'create'}, {}, {:action => :custom_status}) %>
+  #  <%_with_upload_progress({:action => 'create'}, {}, {:action => :custom_status}) %>
   #  <%= upload_status_tag %>
   #  <%= file_field 'document', 'file' %>
   #  <%= submit_tag "Upload" %>
-  #  <%= end_form_tag %>
+  #  <%end %>
   #
-  #  <%= form_tag_with_upload_progress({:action => 'add_preview'}, {:finish => 'alert(arguments[0])'}, {:action => :custom_status})  %>
+  #  <%_with_upload_progress({:action => 'add_preview'}, {:finish => 'alert(arguments[0])'}, {:action => :custom_status})  %>
   #  <%= upload_status_tag %>
   #  <%= submit_tag "Upload" %>
   #  <%= file_field 'preview', 'file' %>
-  #  <%= end_form_tag %>
+  #  <%end %>
   #
   # ==== Extended Example (Controller):
   #

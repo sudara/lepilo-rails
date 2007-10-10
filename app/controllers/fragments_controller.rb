@@ -9,23 +9,17 @@ class FragmentsController < ApplicationController
 
   def list
     @fragment_pages, @fragments = paginate :fragments, :per_page => 25
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
+
   end
 
   def show
     @fragment = Fragment.find(params[:id])
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
+
   end
 
   def new
     @fragment = Fragment.new
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
+
   end
 
   def create
@@ -40,9 +34,7 @@ class FragmentsController < ApplicationController
 
   def edit
     @fragment = Fragment.find(params[:id])
-    if params[:rendersimple]  
-      render :layout => 'simple'
-    end
+
   end
 
   def update

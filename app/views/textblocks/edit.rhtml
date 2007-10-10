@@ -17,9 +17,9 @@
   </div>
   
   <div class="editdata">
-  <%= start_form_tag :action => 'update', :id => @textblock %>
+  <% form_tag :action => 'update', :id => @textblock do %>
     <%= render :partial => 'form' %>
     <%= submit_tag 'Speichern' %>
-  <%= end_form_tag %>
+  <% end %>
   
   </div>
