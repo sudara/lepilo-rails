@@ -5,17 +5,6 @@
 #
 # Inspired from, and chunks of code stolen from "Rake Install Tasks for RAM" by Garry Dolley
 
-require "#{RAILS_ROOT}/lib/installer"
-require "#{RAILS_ROOT}/lib/tasks/rake_tools"
-include RakeTools
-
-begin
-  require File.expand_path(File.dirname(__FILE__) + "/../../config/environment")
-rescue
-  Installer.ensure_database_file
-  require File.expand_path(File.dirname(__FILE__) + "/../../config/environment")
-end
-
 
 DEFAULT_ENVIRONMENTS = ['production', 'development', 'test']
 DB_ADAPTERS = [
@@ -33,6 +22,16 @@ DB_ADAPTERS = [
 ]
 
 namespace :lepilo do
+  
+  
+  require "#{RAILS_ROOT}/lib/installer"
+  require "#{RAILS_ROOT}/lib/tasks/rake_tools"
+  include RakeTools
+  
+  Installer.ensure_database_file
+  
+  #require File.expand_path(File.dirname(__FILE__) + "/../../config/environment")
+
   
   @new_db_entries = {}  # For adding new sites/database.yml entries
   
