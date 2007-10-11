@@ -30,7 +30,7 @@ namespace :lepilo do
   
   Installer.ensure_database_file
   
-  #require File.expand_path(File.dirname(__FILE__) + "/../../config/environment")
+  require File.expand_path(File.dirname(__FILE__) + "/../../config/environment")
 
   
   @new_db_entries = {}  # For adding new sites/database.yml entries
@@ -202,13 +202,13 @@ namespace :lepilo do
       break if (ch = STDIN.gets) =~ /^[1-9][0-9]*$/ and !DB_ADAPTERS[ch.to_i - 1].nil?
     end
 
-    entry['adapter'] = DB_ADAPTERS[ch.to_i - 1].to_a[0][0]
+    entry['adapter'] = DB_ADAPTERS[ch.to_i - 1].to_a[0][0].to_s
     
     entry['database'] = request "Please enter the database name you wish to create", :default => entry['environment']
 
     entry['username'] = request "Please enter the database username you wish to use", :default => 'root'
 
-    entry['password'] = request "Please enter the database password you wish to use", :default => String.new
+    entry['password'] = request "Please enter the database password you wish to use", :default => ''
 
     entry['hostname'] = 'localhost' 
     

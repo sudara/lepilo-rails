@@ -33,11 +33,11 @@ module RakeTools
   end
   
   def request(text, options={})
-    if options[:default]
-      text << " or hit enter to use '#{options[:default]}'"
+    if (default = options[:default])
+      text << " or hit enter to use '#{default}'"
     end
     puts text + " : "
-    (((response = STDIN.gets.chomp) == '') && options[:default]) ? options[:default] : response
+    (((response = STDIN.gets.chomp) == '') && default) ? default : response
   end
   
   def set_flash(type, msg)
