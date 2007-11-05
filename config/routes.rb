@@ -48,10 +48,10 @@ ActionController::Routing::Routes.draw do |map|
 
   # Install the default route as the lowest priority.
   map.connect ':controller/:action/:id'
-    map.resources :block_links
+  map.resources :block_links
   
   # PUBLIC ROUTES
-  map.connect '', :controller => 'frontend'
+  map.root :controller => 'frontend'
   
   map.connect ':permalink',     :controller => 'frontend'
   map.connect '*/:permalink',   :controller => 'frontend'

@@ -2,10 +2,9 @@ class FrontendController < ApplicationController
 
   layout 'frontend'
   skip_before_filter :ensure_default_tabs, :simple_layout
-  before_filter :first_timer?, :is_root?, :find_topic
+  before_filter :first_timer?, :is_root?, :find_topic, :set_root
   def index
     @content_groups = @topic.article
-    
   end
 
  # def article
@@ -37,6 +36,10 @@ class FrontendController < ApplicationController
    @menu ||= Topic.find_by_released(true, :include => :article)
  end
  
+ def set_root
+   @root_topic  = Topic.root
+   @root_topics = @root_topic.children
+ end
  
  # Handles user when they try and view the front end without content
  def first_timer?

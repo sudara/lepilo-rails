@@ -1,5 +1,5 @@
 <li class="topic-item" id="item_<%= topic.id %>">   
 	  <%= link_to_remote '<img src="/images/16trileft.png" style="cursor:pointer;padding-right:5px;padding-top:5px;border:0px;float:right"/>', 
 	  :url => {:action => 'list', :params => {:level => topic.level, :topic_id => topic.id, :title => topic.title} }-%>
-	  <%= link_to topic.title, edit_article_path(topic.article), :id => topic.id %><br/>
+	  <%= link_to shorten(topic.title,25), edit_article_path(topic.article), :id => topic.id %><br/>
 </li>

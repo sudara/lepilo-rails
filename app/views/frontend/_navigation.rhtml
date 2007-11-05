@@ -1,16 +1,3 @@
-<% for topic in language_topics 
-    if icanhasarticle = Article.find(topic.article_id) %>
-      <li <%= 'id="active"' if params[:id] == topic.id.to_s -%>>
-      <%= link_to topic.title, { :controller => "dhn",
-                                 :language => params[:language],
-                                 :id => topic } -%>
-   <% if caller_topic = Topic.find(params[:id])
-        if caller_topic.ancestors.include?(topic) || topic == caller_topic  %>
-        <ul>
-          <%= render_partial 'navigation', nil, 'language_topics' => topic.children %>
-        </ul>
-     <% end
-      end %>
-</li>
-<% end 
-end %>
+<% list_for @root_topic, :recursive => true do |item| %>
+ 	<%= link_to item.title, :permalink => item.permalink  %>
+<% end %>
