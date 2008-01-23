@@ -81,7 +81,6 @@ class BlockLinksController < ApplicationController
 
   def edit
     @block_link = BlockLink.find(params[:id])
-
   end
 
   def update

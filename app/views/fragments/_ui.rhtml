@@ -1,0 +1,31 @@
+<% @article.fragments.each do |frg| %>
+Fragment: <%= frg.id %><br/>
+
+<div class="fragmentui">
+  <%= link_to image_tag("/images/textblock-add.png", :alt => "add textblock", :title => "add textblock"), 
+  { :controller => "textblocks", 
+    :action => "new",
+    :rendersimple => "true",
+    :article_id => @article.id, 
+    #:fragment_id => newinfragment 
+    },
+    :class => "linkicon", 
+    :popup => ['new_text', 'height=600,width=600,scrollbars=1'] -%>
+  <%= link_to image_tag("/images/mediablock-add.png", :alt => "add mediablock", :title => "add mediablock"), 
+  { :controller => "mediablocks", 
+    :action => "new",
+    :rendersimple => "true",
+    :article_id => @article.id, 
+    #:fragment_id => newinfragment 
+    },
+    :class => "linkicon",  
+    :popup => ['new_media', 'height=500,width=700,scrollbars=0'] -%>
+  
+  <br>Here Comes A Fragment <br>
+  
+  <% frg.block_links.each do |bl| %>
+    Block Link ID: <%= bl.id %><br/ >
+  <% end %>
+  
+</div>
+<% end %>

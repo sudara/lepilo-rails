@@ -1,24 +1,29 @@
 
   <div id="block-list"> 
-<% for link in block_links %>
-  <%  if link.linked_type == "Textblock" %>
-  <div id="item_<%= link.id %>" class="sortableblock"> 
-    <%= render_partial 'textblocks/short', nil, 'textblock_id' => link.linked_id, 'link_id' => link.id %>
-  </div> 
-  <% end %>
 
-  <%  if link.linked_type == "Mediablock" %>
-  <div id="item_<%= link.id %>" class="sortableblock"> 
-    <%= render_partial 'mediablocks/short', nil, 'mediablock_id' => link.linked_id, 'link_id' => link.id %>
-  </div> 
-  <% end %>
+<% if @block_links %>    
+    
+  <% for link in block_links %>
+    <%  if link.linked_type == "Textblock" %>
+    <div id="item_<%= link.id %>" class="sortableblock"> 
+      <%= render_partial 'textblocks/short', nil, 'textblock_id' => link.linked_id, 'link_id' => link.id %>
+    </div> 
+    <% end %>
 
-  <%  if link.linked_type == "Article" %>
-  <div id="item_<%= link.id %>" class="sortableblock"> 
-    <%= render_partial 'articles/short', nil, 'article_id' => link.linked_id, 'link_id' => link.id %>
-  </div> 
-  <% end %>
+    <%  if link.linked_type == "Mediablock" %>
+    <div id="item_<%= link.id %>" class="sortableblock"> 
+      <%= render_partial 'mediablocks/short', nil, 'mediablock_id' => link.linked_id, 'link_id' => link.id %>
+    </div> 
+    <% end %>
+
+    <%  if link.linked_type == "Article" %>
+    <div id="item_<%= link.id %>" class="sortableblock"> 
+      <%= render_partial 'articles/short', nil, 'article_id' => link.linked_id, 'link_id' => link.id %>
+    </div> 
+    <% end %>
   
+  <% end %>
+
 <% end %>
   </div> 
   &nbsp;

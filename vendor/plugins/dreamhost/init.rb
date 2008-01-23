@@ -1,0 +1,1 @@
+require 'dreamhost_fcgihandler'

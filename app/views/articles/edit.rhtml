@@ -1,8 +1,16 @@
 <%  session[:current_article] = params[:id] %>  
 <%  session[:current_collection] = nil %>  
+<%  
+  if params[:page]
+    session[:current_page] = params[:page] 
+  else
+    session[:current_page] = 1
+  end 
+%>
 
 
 <div id="lplcontainer">
+    
   <div id="dropzone">
     <%  thumbnail = Mediablock.find_by_id(@article.thumbnail_id) %>
     <div id="thumbnaildrop">
@@ -26,9 +34,28 @@
 
   <div id="lpltopic-select">
     <%= render :partial => 'topics/selector', :locals => { :current_topic => @article.topic } %>
-  </div><br>
+  </div><br><br>
 
-	<%= render :partial => 'fragments/fragment', :collection => @fragments %>
-	 
+  <%= render :partial => 'fragments/ui' %>
+
+  <%  if params[:fragment] == "print"
+        newinfragment = @article.fragments.find_by_content("print").id 
+      else
+        newinfragment = @article.fragments.find_by_content("web").id 
+      end %>
+
+  <%#link_to "Flash Vorschau", { :controller => "articles",
+                                 :action => "showswf", 
+                                 :id => @article.id }, 
+                                 :popup => ['swf_preview', 'height=700,width=980,scrollbars=0'] -%>
+
+  <div id="lpltemplatecontainer"> 
+    <% if params[:fragment] == "print" %>
+      <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.find_by_content("print") }) -%>  
+    <% else %>
+      <%= render_component(:controller => "block_links", :action => "show_article", :params => {:fragment_id => @article.fragments.find_by_content("web") }) -%>  
+    <% end %>
+    <br style="clear:both">
+  </div>
 </div>
 

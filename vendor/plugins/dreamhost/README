@@ -1,0 +1,15 @@
+Dreamhost FCGIHandler
+=====================
+
+Installation: 
+
+script/plugin install http://gabrito.com/svn/plugins/dreamhost
+
+Dreamhost will manage your dispatch.fcgi processes by sending them a TERM signal occasionally.  
+In general you want to let Dreamhost manage your processes because otherwise their process 
+monitor gets angry. However, receiving a TERM signal while a request is being handled 
+results in a 500 error so we need custom TERM handling for Dreamhost which is what this 
+plugin does. 
+
+If your dispatch.fcgi is in the middle of handling a request and receives a 
+TERM signal this plugin will defer exiting until the request is completed.

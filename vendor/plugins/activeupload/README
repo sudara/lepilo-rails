@@ -1,0 +1,60 @@
+ActiveUpload
+==========
+
+The activeupload plugin is a rails plugin that enables simple AJAX style uploading of files to a web server. The plugin achieves this by using a slightly modified version of SWFUpload (http://swfupload.mammon.se/) in conjunction with a rails controller to upload the files and populate a database table. Then a custom form helper populates a polymophic association connecting those attachments to any object in your application.
+
+To use this plugin first you must generate the migration, model and controller:
+
+./script/generate activeupload
+
+add the following line to any model to define the polymorphic association to attachments:
+
+  has_many :attachments, :as => :attachable
+
+  def attachment_id=(attachment_id)
+    unless attachment_id.blank?
+      attachment.clear
+      attachment_ids = attachment_id.split(",")
+      attachment_ids.each do |a_id|
+        unless a_id.blank?
+          attachment = Attachment.find(a_id)
+          attachments << attachment
+        end
+      end
+    end
+  end
+
+  def attachment_id
+    returning result = "" do
+      if attachments
+        attachments.each do |attachment|
+          result << ",#{attachment.id}"
+        end
+      end
+    end
+  end
+
+Then then to populate the association add the following to your models new and edit views:
+
+  <p>
+    <b>Attachments</b><br />
+    <%= f.attachments_field :attachment_id, { :add => "true", :edit =>"true", :filesize => 30720, :filetypes => [ "*.gif", "*.jpg", "*.png" ] } %>
+  </p>
+
+And add the following to your models show view:
+
+<p>
+  <b>Attachments</b>
+  <%= view_attachments_field(@bench, {})  %>
+</p>
+
+Next, make sure the view helper is accessible to all the views by adding the following line to your app/helpers/application_helper.rb:
+
+  include ActiveUploadHelper
+
+Finally, add the necessary javascript and css to your layout (This plugin uses the prototype library, so make sure you include the defaults javascript if you haven't already):
+
+  <%= javascript_include_tag :defaults %>
+  <%= stylesheet_link_tag 'swfupload_theme' %>
+  <%= javascript_include_tag "swfupload_callbacks.js" %>
+  <%= javascript_include_tag "SWFUpload.js" %>

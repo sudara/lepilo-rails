@@ -1,6 +1,5 @@
 <%  mediablock = Mediablock.find(mediablock_id) %>
-<% # && session['user'].role == "admin" 
-  if session['user'] %>
+<% if current_user.admin %>
   <span class="smalltext">
   <%= link_to 'Bearbeiten', {   :controller => "mediablocks",
                                 :action => "edit",

@@ -15,7 +15,7 @@
 
   <div class="lplblock" style="width:280px">
     Derzeit unter:<br/> 
-    <%= hidden_field 'article', 'topic_id', 'value'=>@article.topic_id %>
+    <%# hidden_field 'article', 'topic_id', 'value'=>@article.topic_id %>
       <h4>
       <% if @article.topic %>
         <% @article.topic.ancestors.reverse.each do |x| %> 

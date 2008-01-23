@@ -5,7 +5,6 @@
     { :action => "new",
       :simple_layout => "true" }, 
       :popup => ['new_window', 'height=400,width=600,scrollbars=1'] -%> | 
- <%= will_paginate @media_blocks %>
   </div>  
 </div> 
 
@@ -26,6 +25,7 @@
   <%
     #Time.now.strftime('%d-%m-%y -%R') 
   %>
+  <div class="previewcontainer">
     <div class="previewblock">
     	<div class="iconblack">
     	  <div class="icontainer">
@@ -36,15 +36,18 @@
       </div>
         <%= image_tag("/data/thumbnails/#{mediablock.filename}", :alt => mediablock.filename, :title => mediablock.title, :class => "imagepreviewmini") %>
     </div>
+    <br style="clear:both" />
+      <span class="medianame"><%= mediablock.title -%></span><br>
+      <div class="mediadescription"><%= mediablock.description if mediablock.description  -%></div>
+    </div>
 
   <% end %>
-
-  <br style="clear:both" />
   <br style="clear:both" />
 </div>
 <script type="text/javascript">
 
 function scaleIt(v) {
+  var scaleDescriptions = document.getElementsByClassName('mediadescription');
   var scalePhotos = document.getElementsByClassName('previewblock');
   floorSize = .40;
   ceilingSize = 1.0;
@@ -53,6 +56,7 @@ function scaleIt(v) {
   for (i=0; i < scalePhotos.length; i++) {
     scalePhotos[i].style.width = (v*200)+'px';
     scalePhotos[i].style.height = (v*200)+'px';
+    scaleDescriptions[i].style.width = (v*200)+'px';
   }
 }
 

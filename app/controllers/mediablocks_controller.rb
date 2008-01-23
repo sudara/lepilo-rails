@@ -3,6 +3,10 @@ class MediablocksController < ApplicationController
   before_filter :login_required, :except => [ :show, :show_search ]
   upload_status_for :create
 
+  Mediablock.content_columns.each do |column| 
+    in_place_edit_for :mediablock, column.name 
+  end 
+
   def index
     list
     render :action => 'list'
@@ -12,7 +16,7 @@ class MediablocksController < ApplicationController
     session[:current_fragment] = nil
     session[:current_collection] = nil
     
-    @mediablock_pages, @mediablocks = paginate :mediablocks, :order => 'created_at DESC', :per_page => 25
+    @mediablocks = Mediablock.find(:all)
 
   end
 
@@ -57,7 +61,7 @@ class MediablocksController < ApplicationController
     
     if @mediablock.save
 
-      @mediablock.update
+      # @mediablock.update
       
       addLink = BlockLink.new
       addLink.linked = @mediablock

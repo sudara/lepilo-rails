@@ -37,6 +37,17 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(params[:topic])
     if @topic.save
+      topic_article = new Article
+      if @topic.name 
+        topic_article.name = @topic.name
+      end
+      topic_article.save!
+      topic_article.update 
+      
+      @topic.update
+      @topic.article_id = topic_article.id
+      @topic.save
+
       respond_to do |format|
         format.html { flash[:ok] = 'Topic successfully created.' }
         format.js 

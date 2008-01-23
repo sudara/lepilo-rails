@@ -1,0 +1,8 @@
+Description:
+    ActiveUpload is a simple generator, it doesn't take a name or any options,
+    it simply generates an attachment migration and model as well as a
+    controller. The plugin also provides some helper functions and some 
+    support files.
+
+Example:
+    ./script/generate activeupload

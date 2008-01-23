@@ -12,13 +12,12 @@
     <div id="lplhelp">
       Skalierung angeben mit:  <code>200x300</code>,&nbsp;<code>x700</code>&nbsp;etc.
     </div>
-    <br/>
   </div>
   <div id="lpltemplatecontainer">
     <% form_tag ({:action => 'create' }, :multipart => true) do %>
       <%= render :partial => 'form' %><br>
       <%= submit_tag "Anlegen" %>
-    <% end_form_tag %>
+    <% end %>
     <%= error_messages_for 'mediablock' %>
   </div>
 </div>

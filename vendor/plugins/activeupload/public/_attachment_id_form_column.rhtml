@@ -1,0 +1,36 @@
+<h5>Attachments (<a class="visibility-toggle" onclick="e = $(this.parentNode).next(); e.toggle(); this.innerHTML = (e.style.display == 'none') ? 'show' : 'hide'; return false;" href="#">hide</a>)</h5>
+<div>
+	<div id="SWFUploadTarget">
+	</div>
+	<h4 id="queueinfo">The Queue is empty</h4>
+	<div id="SWFUploadFileListingFiles">
+		<input type="hidden" name="record[attachment_id]" id="_object_attachment_id" value=""/>
+	</div>
+</div>
+
+<script>
+	var swfu;
+	swfu = new SWFUpload({
+		upload_script : "/attachments/upload",
+		target : "SWFUploadTarget",
+		flash_path : "/flash/SWFUpload.swf",
+		allowed_filesize : 30720, // 30 MB
+		allowed_filetypes : "*.*",
+		allowed_filetypes_description : "All files...",
+		browse_link_innerhtml : "Browse",
+		upload_link_innerhtml : "Upload queue",
+		browse_link_class : "swfuploadbtn browsebtn",
+		upload_link_class : "swfuploadbtn uploadbtn",
+		flash_loaded_callback : "swfu.flashLoaded",
+		upload_file_queued_callback : "fileQueued",
+		upload_file_start_callback : 'uploadFileStart',
+		upload_progress_callback : 'uploadProgress',
+		upload_file_complete_callback : 'uploadFileComplete',
+		upload_file_cancel_callback : 'uploadFileCancelled',
+		upload_queue_complete_callback : 'uploadQueueComplete',
+		upload_error_callback : 'uploadError',
+		upload_cancel_callback : 'uploadCancel',
+		auto_upload : true
+	});
+	swfu.flashLoaded();
+</script>

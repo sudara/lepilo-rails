@@ -56,6 +56,49 @@ class ArticlesController < ApplicationController
     render :layout => false
   end
 
+  def addblock
+    @article = Article.find(session[:current_article])
+    
+    drop_type = params[:id].split('_')[0]  
+    drop_id = params[:id].split('_')[1]  
+    
+    if params[:dropfragment_id]
+      drop_into_fragment = params[:dropfragment_id]
+    elsif params[:fragment]
+      drop_into_fragment = @article.fragments.find_by_content(params[:fragment]).id
+    else
+      drop_into_fragment = @article.fragments.find_by_content('web').id
+    end
+            
+    addlink = BlockLink.new unless addlink = BlockLink.find_by_fragment_id_and_position(drop_into_fragment, params['position'])
+    addlink.fragment_id = drop_into_fragment
+
+    case drop_type
+      when 'dragtextblock'
+        addlink.textblock_id = drop_id
+      when 'dragmediablock'
+        addlink.mediablock_id = drop_id
+      when 'draggallery'
+      addlink.gallery_id = drop_id
+      when 'dragarticle'
+      addlink.article_id = drop_id
+    end
+
+    if params['position']
+      addlink.update
+      addlink.position = params['position']
+    end
+    addlink.save
+
+    if params[:dropfragment_id]
+      redirect_to :action => 'edit', :id => @article, :fragment => Fragment.find(params['dropfragment_id']).content
+    elsif params[:fragment]
+      redirect_to :action => 'edit', :id => @article, :fragment => params['fragment']                
+    else
+      redirect_to :action => 'edit', :id => @article                
+    end
+  end
+
   def show
     @article = Article.find(params[:id])
   end
